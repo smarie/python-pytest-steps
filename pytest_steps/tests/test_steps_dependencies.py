@@ -1,5 +1,4 @@
-from pytest_steps import test_steps
-from steps import depends_on
+from pytest_steps import test_steps, depends_on
 
 
 def step_a():
