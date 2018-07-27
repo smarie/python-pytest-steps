@@ -235,7 +235,7 @@ function filter_table(elem) {
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 27-Jul-2018 at 10:14:34 by<a href="https://pypi.python.org/pypi/pytest-html"> pytest-html</a> v1.19.0</p>
+    <p>Report generated on 27-Jul-2018 at 15:35:57 by<a href="https://pypi.python.org/pypi/pytest-html"> pytest-html</a> v1.19.0</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -246,7 +246,7 @@ function filter_table(elem) {
         <td>/usr/lib/jvm/java-8-oracle</td></tr>
       <tr>
         <td>Packages</td>
-        <td>{&apos;pluggy&apos;: &apos;0.6.0&apos;, &apos;pytest&apos;: &apos;3.4.0&apos;, &apos;py&apos;: &apos;1.5.2&apos;}</td></tr>
+        <td>{&apos;pluggy&apos;: &apos;0.6.0&apos;, &apos;py&apos;: &apos;1.5.2&apos;, &apos;pytest&apos;: &apos;3.4.0&apos;}</td></tr>
       <tr>
         <td>Platform</td>
         <td>Linux-4.4.0-101-generic-x86_64-with-debian-jessie-sid</td></tr>
@@ -258,28 +258,31 @@ function filter_table(elem) {
         <td>3.5.5</td></tr>
       <tr>
         <td>TRAVIS_BRANCH</td>
-        <td>0.5.0</td></tr>
+        <td>master</td></tr>
       <tr>
         <td>TRAVIS_BUILD_ID</td>
-        <td>408879715</td></tr>
+        <td>408995914</td></tr>
       <tr>
         <td>TRAVIS_BUILD_NUMBER</td>
-        <td>2</td></tr>
+        <td>5</td></tr>
       <tr>
         <td>TRAVIS_COMMIT</td>
-        <td>d2adcd116fe0c90a60c0b18f19cf69d92b64327f</td></tr>
+        <td>e68694fdedb5f9b6e7fa48ea239fbc3be18ed6b5</td></tr>
       <tr>
         <td>TRAVIS_COMMIT_MESSAGE</td>
-        <td>Fixed changelog</td></tr>
+        <td>Fixed import in test</td></tr>
+      <tr>
+        <td>TRAVIS_COMMIT_RANGE</td>
+        <td>96b5670d2190...e68694fdedb5</td></tr>
       <tr>
         <td>TRAVIS_EVENT_TYPE</td>
         <td>push</td></tr>
       <tr>
         <td>TRAVIS_JOB_ID</td>
-        <td>408879716</td></tr>
+        <td>408995915</td></tr>
       <tr>
         <td>TRAVIS_JOB_NUMBER</td>
-        <td>2.1</td></tr>
+        <td>5.1</td></tr>
       <tr>
         <td>TRAVIS_OS_NAME</td>
         <td>linux</td></tr>
@@ -291,13 +294,10 @@ function filter_table(elem) {
         <td>smarie/python-pytest-steps</td></tr>
       <tr>
         <td>TRAVIS_SUDO</td>
-        <td>true</td></tr>
-      <tr>
-        <td>TRAVIS_TAG</td>
-        <td>0.5.0</td></tr></table>
+        <td>true</td></tr></table>
     <h2>Summary</h2>
-    <p>36 tests ran in 0.36 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">36 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>39 tests ran in 0.33 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">39 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -475,6 +475,36 @@ some intermediate result created in step a for test 1b2AG ... augmented
           <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2BG
 some intermediate result created in step a for test 1b2BG ... augmented
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_no_results[step_a]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_no_results[step_b]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_no_results[step_c]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step c
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
