@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="0" name="pytest" skips="0" tests="36" time="0.335"><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1a-step_a-2A]" time="0.005326509475708008"><system-out>step a - 1a2AF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1a-step_a-2B]" time="0.0034325122833251953"><system-out>step a - 1a2BF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1a-step_b-2A]" time="0.0033729076385498047"><system-out>step b - 1a2AF
+some intermediate result created in step a for test 1a2AF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1a-step_b-2B]" time="0.004125356674194336"><system-out>step b - 1a2BF
+some intermediate result created in step a for test 1a2BF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1b-step_a-2A]" time="0.003371715545654297"><system-out>step a - 1b2AF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1b-step_a-2B]" time="0.003456592559814453"><system-out>step a - 1b2BF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1b-step_b-2A]" time="0.003384113311767578"><system-out>step b - 1b2AF
+some intermediate result created in step a for test 1b2AF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[F-1b-step_b-2B]" time="0.0031011104583740234"><system-out>step b - 1b2BF
+some intermediate result created in step a for test 1b2BF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1a-step_a-2A]" time="0.003543853759765625"><system-out>step a - 1a2AG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1a-step_a-2B]" time="0.003327608108520508"><system-out>step a - 1a2BG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1a-step_b-2A]" time="0.003286600112915039"><system-out>step b - 1a2AG
+some intermediate result created in step a for test 1a2AG ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1a-step_b-2B]" time="0.003210783004760742"><system-out>step b - 1a2BG
+some intermediate result created in step a for test 1a2BG ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1b-step_a-2A]" time="0.0029366016387939453"><system-out>step a - 1b2AG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1b-step_a-2B]" time="0.0037698745727539062"><system-out>step a - 1b2BG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1b-step_b-2A]" time="0.003407716751098633"><system-out>step b - 1b2AG
+some intermediate result created in step a for test 1b2AG ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_pytest_capabilities" file="pytest_steps/tests/test_pytest_capabilities.py" line="74" name="test_manual_pytest_equivalent[G-1b-step_b-2B]" time="0.003302335739135742"><system-out>step b - 1b2BG
+some intermediate result created in step a for test 1b2BG ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_no_results" file="pytest_steps/tests/test_steps_no_results.py" line="21" name="test_suite_no_results[step_a]" time="0.0015184879302978516"><system-out>step a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_no_results" file="pytest_steps/tests/test_steps_no_results.py" line="21" name="test_suite_no_results[step_b]" time="0.0017175674438476562"><system-out>step b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_basic" file="pytest_steps/tests/test_steps_with_results_basic.py" line="32" name="test_suite_with_steps_data[step_a]" time="0.002357006072998047"><system-out>step a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_basic" file="pytest_steps/tests/test_steps_with_results_basic.py" line="32" name="test_suite_with_steps_data[step_b]" time="0.0026891231536865234"><system-out>step b
+some intermediate result created in step a ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1a-step_a-2A]" time="0.003284931182861328"><system-out>step a - 1a2AF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1a-step_a-2B]" time="0.0030286312103271484"><system-out>step a - 1a2BF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1a-step_b-2A]" time="0.0034482479095458984"><system-out>step b - 1a2AF
+some intermediate result created in step a for test 1a2AF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1a-step_b-2B]" time="0.0034363269805908203"><system-out>step b - 1a2BF
+some intermediate result created in step a for test 1a2BF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1b-step_a-2A]" time="0.0037050247192382812"><system-out>step a - 1b2AF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1b-step_a-2B]" time="0.0029382705688476562"><system-out>step a - 1b2BF
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1b-step_b-2A]" time="0.0033507347106933594"><system-out>step b - 1b2AF
+some intermediate result created in step a for test 1b2AF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[F-1b-step_b-2B]" time="0.003312349319458008"><system-out>step b - 1b2BF
+some intermediate result created in step a for test 1b2BF ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1a-step_a-2A]" time="0.0032019615173339844"><system-out>step a - 1a2AG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1a-step_a-2B]" time="0.0031943321228027344"><system-out>step a - 1a2BG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1a-step_b-2A]" time="0.003288745880126953"><system-out>step b - 1a2AG
+some intermediate result created in step a for test 1a2AG ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1a-step_b-2B]" time="0.00327301025390625"><system-out>step b - 1a2BG
+some intermediate result created in step a for test 1a2BG ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1b-step_a-2A]" time="0.003286600112915039"><system-out>step a - 1b2AG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1b-step_a-2B]" time="0.0028810501098632812"><system-out>step a - 1b2BG
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1b-step_b-2A]" time="0.0037038326263427734"><system-out>step b - 1b2AG
+some intermediate result created in step a for test 1b2AG ... augmented
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_with_results_complex" file="pytest_steps/tests/test_steps_with_results_complex.py" line="44" name="test_suite_with_results[G-1b-step_b-2B]" time="0.003270864486694336"><system-out>step b - 1b2BG
+some intermediate result created in step a for test 1b2BG ... augmented
+</system-out></testcase></testsuite>
