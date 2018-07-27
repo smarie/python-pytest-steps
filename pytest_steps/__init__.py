@@ -1,8 +1,8 @@
 from pytest_steps.steps import test_steps, StepsDataHolder
 
 __all__ = [
-    # the submodule
-    'steps',
+    # the submodules
+    'steps', 'decorator_hack',
     # all symbols imported above
     'test_steps', 'StepsDataHolder'
 ]

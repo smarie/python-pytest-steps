@@ -3,3 +3,4 @@ pytest-runner
 setuptools_scm
 pandoc
 pypandoc
+decorator

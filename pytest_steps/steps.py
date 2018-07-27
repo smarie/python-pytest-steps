@@ -3,6 +3,8 @@ from inspect import signature, getmodule
 
 import pytest
 
+from pytest_steps.decorator_hack import my_decorate
+
 
 class StepsDataHolder:
     """
@@ -12,6 +14,14 @@ class StepsDataHolder:
     Note: you can use `vars(results)` to see the available results.
     """
     pass
+
+
+STEP_SUCCESS_FIELD = "__test_step_successful_for__"
+
+
+class HashableDict(dict):
+    def __hash__(self):
+        return hash(tuple(sorted(self.items())))
 
 
 def test_steps(*steps, test_step_name: str= 'test_step', steps_data_holder_name: str= 'steps_data'):
@@ -87,6 +97,7 @@ def test_steps(*steps, test_step_name: str= 'test_step', steps_data_holder_name:
         :param test_func:
         :return:
         """
+        # Step ids
         def get_id(f):
             if callable(f) and hasattr(f, '__name__'):
                 return f.__name__
@@ -95,8 +106,7 @@ def test_steps(*steps, test_step_name: str= 'test_step', steps_data_holder_name:
 
         step_ids = [get_id(f) for f in steps]
 
-        # Finally create the pytest decorator and apply it
-        # depending on the presence of steps_data_holder_name in signature
+        # Depending on the presence of steps_data_holder_name in signature, create a cached fixture for steps data
         s = signature(test_func)
         if steps_data_holder_name in s.parameters:
             # the user wishes to share results across test steps. Create a cached fixture
@@ -144,11 +154,107 @@ def test_steps(*steps, test_step_name: str= 'test_step', steps_data_holder_name:
                 raise ValueError("The {} fixture already exists in module {}: please specify a different "
                                  "`steps_data_holder_name` in `@test_steps`".format(steps_data_holder_name, module))
 
-        # Finally parametrize the function with the test steps
+        # Parametrize the function with the test steps
         parametrizer = pytest.mark.parametrize(test_step_name, steps, ids=step_ids)
-        return parametrizer(test_func)
+
+        # Finally, if there are some steps that are marked as having a dependency,
+        use_dependency = any(hasattr(step, DEPENDS_ON_FIELD) for step in steps)
+        if use_dependency:
+            # Create a test function wrapper that will replace the test steps with wrapped ones before injecting them
+            def dependency_mgr_wrapper(f, *args, **kwargs):
+                # first check the request
+                f_sig = signature(f)
+                if 'request' not in f_sig.parameters:
+                    # easy: that's the first positional arg since we have added it (see `my_decorate`)
+                    request = args[0]
+                    args = args[1:]
+                else:
+                    # harder: request is in the args and/or kwargs. Thanks, inspect package !
+                    request = f_sig.bind(*args, **kwargs).arguments['request']
+
+                # (a) retrieve the current step and parameters/fixtures combination
+                current_step = request.getfuncargvalue(test_step_name)
+                params = {n: request.getfuncargvalue(n)
+                          for n in request.funcargnames if n not in {test_step_name, steps_data_holder_name, 'request'}}
+                params = HashableDict(params)
+
+                # Make sure that all steps have a field indicating their execution success
+                if not hasattr(current_step, STEP_SUCCESS_FIELD):
+                    setattr(current_step, STEP_SUCCESS_FIELD, dict())
+
+                # (b) skip or fail it if needed
+                dependencies, should_fail = getattr(current_step, DEPENDS_ON_FIELD, ([], False))
+                if not all(hasattr(step, STEP_SUCCESS_FIELD) for step in dependencies):
+                    raise ValueError("Test step {} depends on another step that has not yet been executed. In current "
+                                     "version the steps execution order is manual, make sure it is correct."
+                                     "".format(current_step.__name__))
+                deps_successess = {step: getattr(step, STEP_SUCCESS_FIELD).get(params, False) for step in dependencies}
+                failed_deps = [d.__name__ for d, res in deps_successess.items() if res is False]
+                if not all(deps_successess.values()):
+                    msg = "This test step depends on other steps, and the following have failed: " + str(failed_deps)
+                    if should_fail:
+                        pytest.fail(msg)
+                    else:
+                        pytest.skip(msg)
+
+                # (c) execute the function as usual
+                res = f(*args, **kwargs)
+
+                getattr(current_step, STEP_SUCCESS_FIELD)[params] = True
+
+                return res
+
+            # wrap the test function
+            wrapped_test_function = my_decorate(test_func, dependency_mgr_wrapper, additional_args=['request'])
+
+            wrapped_parametrized_test_function = parametrizer(wrapped_test_function)
+            return wrapped_parametrized_test_function
+        else:
+            # no dependencies: no need to do complex things
+            parametrized_test_func = parametrizer(test_func)
+            return parametrized_test_func
 
     return steps_decorator
 
 
 test_steps.__test__ = False  # to prevent pytest to think that this is a test !
+
+
+def get_nonsuccessful_dependencies(step):
+    """
+
+    :param step:
+    :return:
+    """
+
+
+DEPENDS_ON_FIELD = '__depends_on__'
+
+
+def depends_on(*steps, fail_instead_of_skip: bool = False):
+    """
+    Decorates a test step object so as to automatically mark it as skipped or failed if the dependency has not
+    succeeded.
+
+    :param steps: a list of test steps that this step depends on. They can be anything, but typically they are non-test
+        (not prefixed with 'test') functions.
+    :param fail_instead_of_skip: if set to True, the test will be marked as failed instead of skipped when the
+        dependencies have not succeeded.
+    :return:
+    """
+    def depends_on_decorator(step_func):
+        """
+        The generated test function decorator.
+
+        :param step_func:
+        :return:
+        """
+        if not callable(step_func):
+            raise TypeError("@depends_on can only be used on test steps that are callables")
+
+        # Remember the dependencies so that @test_steps knows
+        setattr(step_func, DEPENDS_ON_FIELD, (steps, fail_instead_of_skip))
+
+        return step_func
+
+    return depends_on_decorator
