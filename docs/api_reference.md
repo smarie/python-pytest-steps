@@ -58,3 +58,15 @@ You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test 
  - `steps`: a list of test steps. They can be anything, but typically they are non-test (not prefixed with 'test') functions.
  - `test_step_argname`: the optional name of the function argument that will receive the test step object. Default is 'test_step'.
  - `test_results_argname`: the optional name of the function argument that will receive the shared `StepsDataHolder` object if present. Default is 'steps_data'.
+
+
+### `@depends_on`
+
+`@depends_on(*steps, fail_instead_of_skip: bool = False)`
+
+Decorates a test step object/function so as to automatically mark it as skipped (default) or failed if the dependency has not succeeded.
+
+**Parameters:**
+
+ - `steps`: a list of test steps that this step depends on. They can be anything, but typically they are non-test (not prefixed with 'test') functions.
+ - `fail_instead_of_skip`: if set to True, the test will be marked as failed instead of skipped when the dependencies have not succeeded.

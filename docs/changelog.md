@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.6.0 - `@depends_on` decorator
+
+ * Added a first version of `@depends_on` decorator. Fixes [#1](https://github.com/smarie/python-pytest-steps/issues/1)
+
 ### 0.5.0 - First public version
 
  * Initial fork from [pytest-cases](https://smarie.github.io/python-pytest-cases/)

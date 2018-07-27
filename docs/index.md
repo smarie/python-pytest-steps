@@ -81,14 +81,14 @@ def test_suite_with_shared_results(test_step, steps_data: StepsDataHolder):
 
 You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test suite function, it should work as expected: the steps_data object will be created everytime a new parameter/fixture combination is created, but will be shared across steps with the same parameters and fixtures.
 
-You can also check the [API Reference](./api_reference.md).
+Finally, you can mark a step as automatically skipped or failed if some other steps did not run successfully, using the `@depends_on` decorator. See the [API Reference](./api_reference.md) for details.
 
 
 ## Main features / benefits
 
  * **Split tests into steps**. Although the best practices in testing are very much in favor of having each test completely independent of the other ones (for example for distributed execution), there is definitely some value in results readability to break down tests into chained sub-tests (steps). The `@test_steps` decorator provides an intuitive way to do that without forcing any data model (steps can be functions, objects, etc.).
  * **Optional shared placeholder**: All steps in the same test share the same `StepsDataHolder` object. You simply have to add a `steps_data` parameter to your test function (name configurable).
-
+ * **Light step depenencies**: a `@depends_on` decorator allows you to specify that a given test step should be skipped or failed if its dependencies did not complete. Note that you can also do this manually in the step body, by simply checking the shared placeholder.
 
 ## See Also
 

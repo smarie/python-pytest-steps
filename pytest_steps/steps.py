@@ -233,8 +233,8 @@ DEPENDS_ON_FIELD = '__depends_on__'
 
 def depends_on(*steps, fail_instead_of_skip: bool = False):
     """
-    Decorates a test step object so as to automatically mark it as skipped or failed if the dependency has not
-    succeeded.
+    Decorates a test step object so as to automatically mark it as skipped (default) or failed if the dependency
+    has not succeeded.
 
     :param steps: a list of test steps that this step depends on. They can be anything, but typically they are non-test
         (not prefixed with 'test') functions.
