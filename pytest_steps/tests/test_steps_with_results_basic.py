@@ -1,7 +1,7 @@
-from pytest_steps import test_steps, StepsDataHolder
+from pytest_steps import test_steps
 
 
-def step_a(steps_data: StepsDataHolder):
+def step_a(steps_data):
     """ Step a of the test """
 
     # perform this step
@@ -15,7 +15,7 @@ def step_a(steps_data: StepsDataHolder):
     steps_data.intermediate_a = 'some intermediate result created in step a'
 
 
-def step_b(steps_data: StepsDataHolder):
+def step_b(steps_data):
     """ Step b of the test """
 
     # perform this step
@@ -31,7 +31,7 @@ def step_b(steps_data: StepsDataHolder):
 
 
 @test_steps(step_a, step_b)
-def test_suite_with_steps_data(test_step, steps_data: StepsDataHolder):
+def test_suite_with_steps_data(test_step, steps_data):
     """This test is extremely stupid but shows the extreme case where there are parameters and fixtures all over the
     place. It asserts that a new resultholder is created for all tests but that the same object is reused across steps
     """

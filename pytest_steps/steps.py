@@ -24,7 +24,7 @@ class HashableDict(dict):
         return hash(tuple(sorted(self.items())))
 
 
-def test_steps(*steps, test_step_name: str= 'test_step', steps_data_holder_name: str= 'steps_data'):
+def test_steps(*steps, test_step_name='test_step', steps_data_holder_name='steps_data'):
     """
     Decorates a test function so as to automatically parametrize it with all steps listed as arguments.
 
@@ -231,7 +231,7 @@ def get_nonsuccessful_dependencies(step):
 DEPENDS_ON_FIELD = '__depends_on__'
 
 
-def depends_on(*steps, fail_instead_of_skip: bool = False):
+def depends_on(*steps, fail_instead_of_skip=False):
     """
     Decorates a test step object so as to automatically mark it as skipped (default) or failed if the dependency
     has not succeeded.

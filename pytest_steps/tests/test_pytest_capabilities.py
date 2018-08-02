@@ -33,7 +33,7 @@ def results(request):
 # -------------------------------------
 
 
-def step_a(results: StepsDataHolder, stupid_param):
+def step_a(results, stupid_param):
     """ Step a of the test """
 
     # perform this step
@@ -50,7 +50,7 @@ def step_a(results: StepsDataHolder, stupid_param):
     results.p = stupid_param
 
 
-def step_b(results: StepsDataHolder, stupid_param):
+def step_b(results, stupid_param):
     """ Step b of the test """
 
     # perform this step
@@ -75,7 +75,7 @@ def fix(request):
 @pytest.mark.parametrize('really_stupid_param2', ["2A", "2B"])
 @pytest.mark.parametrize('test_step', [step_a, step_b])
 @pytest.mark.parametrize('stupid_param1', ["1a", "1b"])
-def test_manual_pytest_equivalent(test_step, stupid_param1, really_stupid_param2, fix, results: StepsDataHolder):
+def test_manual_pytest_equivalent(test_step, stupid_param1, really_stupid_param2, fix, results):
     """This test performs the same thing than @test_steps but manually.
     See the test_steps_with_results.py for details"""
 
