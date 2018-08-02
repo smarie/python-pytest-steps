@@ -1,4 +1,8 @@
-from functools import lru_cache
+try:  # python 3.2+
+    from functools import lru_cache
+except ImportError:
+    from functools32 import lru_cache
+
 from inspect import signature, getmodule
 
 import pytest
