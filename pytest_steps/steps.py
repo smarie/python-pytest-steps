@@ -3,7 +3,12 @@ try:  # python 3.2+
 except ImportError:
     from functools32 import lru_cache
 
-from inspect import signature, getmodule
+try:  # python 3.3+
+    from inspect import signature
+except ImportError:
+    from funcsigs import signature
+
+from inspect import getmodule
 
 import pytest
 
