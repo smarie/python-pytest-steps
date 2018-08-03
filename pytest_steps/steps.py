@@ -1,5 +1,14 @@
-from functools import lru_cache
-from inspect import signature, getmodule
+try:  # python 3.2+
+    from functools import lru_cache
+except ImportError:
+    from functools32 import lru_cache
+
+try:  # python 3.3+
+    from inspect import signature
+except ImportError:
+    from funcsigs import signature
+
+from inspect import getmodule
 
 import pytest
 
@@ -24,7 +33,7 @@ class HashableDict(dict):
         return hash(tuple(sorted(self.items())))
 
 
-def test_steps(*steps, test_step_name: str= 'test_step', steps_data_holder_name: str= 'steps_data'):
+def test_steps(*steps, **kwargs):
     """
     Decorates a test function so as to automatically parametrize it with all steps listed as arguments.
 
@@ -87,6 +96,9 @@ def test_steps(*steps, test_step_name: str= 'test_step', steps_data_holder_name:
         object if present. Default is 'results'.
     :return:
     """
+    test_step_name = kwargs.get('test_step_name', 'test_step')
+    steps_data_holder_name = kwargs.get('steps_data_holder_name', 'steps_data')
+
     def steps_decorator(test_func):
         """
         The generated test function decorator.
@@ -231,7 +243,7 @@ def get_nonsuccessful_dependencies(step):
 DEPENDS_ON_FIELD = '__depends_on__'
 
 
-def depends_on(*steps, fail_instead_of_skip: bool = False):
+def depends_on(*steps, **kwargs):
     """
     Decorates a test step object so as to automatically mark it as skipped (default) or failed if the dependency
     has not succeeded.
@@ -242,6 +254,7 @@ def depends_on(*steps, fail_instead_of_skip: bool = False):
         dependencies have not succeeded.
     :return:
     """
+    fail_instead_of_skip = kwargs.get('fail_instead_of_skip', False)
     def depends_on_decorator(step_func):
         """
         The generated test function decorator.
