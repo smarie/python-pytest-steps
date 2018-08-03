@@ -28,7 +28,9 @@ def step_a_works_with_b(steps_data):
 
 
 @test_steps(step_first, step_conversion, step_a_works_with_b)
-def test_suite_with_shared_results(test_step, steps_data):
+def test_suite_with_shared_results(test_step,
+                                   steps_data  # type: StepsDataHolder
+                                   ):
 
     # Execute the step with access to the steps_data holder
     test_step(steps_data)

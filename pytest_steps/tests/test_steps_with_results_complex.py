@@ -1,9 +1,10 @@
 import pytest
 
-from pytest_steps import test_steps
+from pytest_steps import test_steps, StepsDataHolder
 
 
-def step_a(steps_data, stupid_param):
+def step_a(steps_data,  # type: StepsDataHolder
+           stupid_param):
     """ Step a of the test """
 
     # perform this step
@@ -20,7 +21,8 @@ def step_a(steps_data, stupid_param):
     steps_data.p = stupid_param
 
 
-def step_b(steps_data, stupid_param):
+def step_b(steps_data,  # type: StepsDataHolder
+           stupid_param):
     """ Step b of the test """
 
     # perform this step
@@ -45,7 +47,9 @@ def fix(request):
 @pytest.mark.parametrize('really_stupid_param2', ["2A", "2B"])
 @test_steps(step_a, step_b, steps_data_holder_name='results')
 @pytest.mark.parametrize('stupid_param1', ["1a", "1b"])
-def test_suite_with_results(test_step, stupid_param1, really_stupid_param2, fix, results):
+def test_suite_with_results(test_step, stupid_param1, really_stupid_param2, fix,
+                            results  # type: StepsDataHolder
+                            ):
     """This test is extremely stupid but shows the extreme case where there are parameters and fixtures all over the
     place. It asserts that a new resultholder is created for all tests but that the same object is reused across steps
     """
