@@ -33,6 +33,10 @@ class HashableDict(dict):
         return hash(tuple(sorted(self.items())))
 
 
+_TEST_STEP_NAME_DEFAULT = 'test_step'
+_STEPS_DATA_HOLDER_NAME_DEFAULT = 'steps_data'
+
+
 def test_steps(*steps, **kwargs):
     """
     Decorates a test function so as to automatically parametrize it with all steps listed as arguments.
@@ -96,8 +100,11 @@ def test_steps(*steps, **kwargs):
         object if present. Default is 'results'.
     :return:
     """
-    test_step_name = kwargs.get('test_step_name', 'test_step')
-    steps_data_holder_name = kwargs.get('steps_data_holder_name', 'steps_data')
+    # python 2 compatibility: no keyword arguments can follow a *args.
+    test_step_name = kwargs.pop('test_step_name', _TEST_STEP_NAME_DEFAULT)
+    steps_data_holder_name = kwargs.pop('steps_data_holder_name', _STEPS_DATA_HOLDER_NAME_DEFAULT)
+    if len(kwargs) > 0:
+        raise ValueError("Invalid argument(s): " + str(kwargs.keys()))
 
     def steps_decorator(test_func):
         """
@@ -243,6 +250,9 @@ def get_nonsuccessful_dependencies(step):
 DEPENDS_ON_FIELD = '__depends_on__'
 
 
+_FAIL_INSTEAD_OF_SKIP_DEFAULT = False
+
+
 def depends_on(*steps, **kwargs):
     """
     Decorates a test step object so as to automatically mark it as skipped (default) or failed if the dependency
@@ -254,7 +264,11 @@ def depends_on(*steps, **kwargs):
         dependencies have not succeeded.
     :return:
     """
-    fail_instead_of_skip = kwargs.get('fail_instead_of_skip', False)
+    # python 2 compatibility: no keyword arguments can follow an *args.
+    fail_instead_of_skip = kwargs.pop('fail_instead_of_skip', _FAIL_INSTEAD_OF_SKIP_DEFAULT)
+    if len(kwargs) > 0:
+        raise ValueError("Invalid argument(s): " + str(kwargs.keys()))
+
     def depends_on_decorator(step_func):
         """
         The generated test function decorator.
