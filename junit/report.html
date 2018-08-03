@@ -235,7 +235,7 @@ function filter_table(elem) {
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 02-Aug-2018 at 17:45:51 by<a href="https://pypi.python.org/pypi/pytest-html"> pytest-html</a> v1.19.0</p>
+    <p>Report generated on 03-Aug-2018 at 10:26:21 by<a href="https://pypi.python.org/pypi/pytest-html"> pytest-html</a> v1.19.0</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -246,13 +246,13 @@ function filter_table(elem) {
         <td>/usr/lib/jvm/java-8-oracle</td></tr>
       <tr>
         <td>Packages</td>
-        <td>{&apos;py&apos;: &apos;1.5.2&apos;, &apos;pytest&apos;: &apos;3.4.0&apos;, &apos;pluggy&apos;: &apos;0.6.0&apos;}</td></tr>
+        <td>{&apos;pytest&apos;: &apos;3.4.0&apos;, &apos;py&apos;: &apos;1.5.2&apos;, &apos;pluggy&apos;: &apos;0.6.0&apos;}</td></tr>
       <tr>
         <td>Platform</td>
         <td>Linux-4.4.0-101-generic-x86_64-with-debian-jessie-sid</td></tr>
       <tr>
         <td>Plugins</td>
-        <td>{&apos;metadata&apos;: &apos;1.7.0&apos;, &apos;cov&apos;: &apos;2.5.1&apos;, &apos;html&apos;: &apos;1.19.0&apos;}</td></tr>
+        <td>{&apos;html&apos;: &apos;1.19.0&apos;, &apos;cov&apos;: &apos;2.5.1&apos;, &apos;metadata&apos;: &apos;1.7.0&apos;}</td></tr>
       <tr>
         <td>Python</td>
         <td>3.5.5</td></tr>
@@ -261,28 +261,31 @@ function filter_table(elem) {
         <td>master</td></tr>
       <tr>
         <td>TRAVIS_BUILD_ID</td>
-        <td>411399409</td></tr>
+        <td>411678523</td></tr>
       <tr>
         <td>TRAVIS_BUILD_NUMBER</td>
-        <td>9</td></tr>
+        <td>10</td></tr>
       <tr>
         <td>TRAVIS_COMMIT</td>
-        <td>04723ba71b95cdffdcd63a687ac662220ecca2bc</td></tr>
+        <td>124d8879721caa0540aa6f86ec9092eec62c93e1</td></tr>
       <tr>
         <td>TRAVIS_COMMIT_MESSAGE</td>
-        <td>a dummy changelog mod to check if travis new script works</td></tr>
+        <td>Functions with keyword arguments following a *args are not allowed in python 2:
+ - added kwargs check for illegal argument names (security)
+ - Created a dedicated `steps_py3_api.py` file to ensure that in python 3 at least, the functions have the best signature possible (named options instead of **kwargs).
+Note: maybe this mechanism should be put in an independent package one day for reuse ? :)</td></tr>
       <tr>
         <td>TRAVIS_COMMIT_RANGE</td>
-        <td>ac0cf670ae91...04723ba71b95</td></tr>
+        <td>04723ba71b95...124d8879721c</td></tr>
       <tr>
         <td>TRAVIS_EVENT_TYPE</td>
         <td>push</td></tr>
       <tr>
         <td>TRAVIS_JOB_ID</td>
-        <td>411399410</td></tr>
+        <td>411678525</td></tr>
       <tr>
         <td>TRAVIS_JOB_NUMBER</td>
-        <td>9.1</td></tr>
+        <td>10.2</td></tr>
       <tr>
         <td>TRAVIS_OS_NAME</td>
         <td>linux</td></tr>
@@ -296,8 +299,8 @@ function filter_table(elem) {
         <td>TRAVIS_SUDO</td>
         <td>true</td></tr></table>
     <h2>Summary</h2>
-    <p>45 tests ran in 0.35 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">45 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>51 tests ran in 0.50 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">51 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -479,6 +482,15 @@ some intermediate result created in step a for test 1b2BG ... augmented
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_stackoverflow.py::test_steps</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_stackoverflow.py::test_suite_with_shared_results[step_first]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
@@ -506,6 +518,15 @@ some intermediate result created in step a for test 1b2BG ... augmented
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_stackoverflow2.py::test_steps</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_stackoverflow2.py::test_suite[step_instance_start]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
@@ -525,6 +546,15 @@ some intermediate result created in step a for test 1b2BG ... augmented
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_stackoverflow2.py::test_suite[step_instance_delete]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_steps</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -563,6 +593,15 @@ some intermediate result created in step a for test 1b2BG ... augmented
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_steps_no_results.py::test_steps</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_steps_no_results.py::test_suite_no_results[step_a]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
@@ -580,6 +619,15 @@ some intermediate result created in step a for test 1b2BG ... augmented
           <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
 </div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_steps_with_results_basic.py::test_steps</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -601,6 +649,15 @@ some intermediate result created in step a for test 1b2BG ... augmented
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
 some intermediate result created in step a ... augmented
 </div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_steps</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
