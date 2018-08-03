@@ -23,6 +23,8 @@ With `pytest-steps` you don't have to care about the internals: it just works as
 ```
 
 ## Usage
+
+### Basic
  
 Simply decorate your test function with `@test_steps`:
 
@@ -44,6 +46,20 @@ def test_suite_no_shared_results(test_step):
     # Execute the step
     test_step()
 ```
+
+### Auto-skip/fail
+
+You can mark a step as automatically skipped or failed if some other steps did not run successfully, using the `@depends_on` decorator. In the above example you could have written:
+
+```python
+@depends_on(step_a)
+def step_b():
+    ...
+```
+
+That way, `step_b` will be skipped if `step_a` fails or is skipped. 
+
+### Shared data
 
 You can add a `steps_data` parameter to your test function if you wish to share a `StepsDataHolder` object between your steps.
 
@@ -81,7 +97,7 @@ def test_suite_with_shared_results(test_step, steps_data: StepsDataHolder):
 
 You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test suite function, it should work as expected: the steps_data object will be created everytime a new parameter/fixture combination is created, but will be shared across steps with the same parameters and fixtures.
 
-Finally, you can mark a step as automatically skipped or failed if some other steps did not run successfully, using the `@depends_on` decorator. See the [API Reference](./api_reference.md) for details.
+See the [API Reference](./api_reference.md) for details.
 
 
 ## Main features / benefits
