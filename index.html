@@ -271,6 +271,33 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic" title="Basic" class="md-nav__link">
+    Basic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-skipfail" title="Auto-skip/fail" class="md-nav__link">
+    Auto-skip/fail
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shared-data" title="Shared data" class="md-nav__link">
+    Shared data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -374,6 +401,33 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic" title="Basic" class="md-nav__link">
+    Basic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-skipfail" title="Auto-skip/fail" class="md-nav__link">
+    Auto-skip/fail
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shared-data" title="Shared data" class="md-nav__link">
+    Shared data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -446,6 +500,7 @@
 
 
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="basic">Basic<a class="headerlink" href="#basic" title="Permanent link">&para;</a></h3>
 <p>Simply decorate your test function with <code>@test_steps</code>:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pytest_steps</span> <span class="kn">import</span> <span class="n">test_steps</span>
 
@@ -466,6 +521,16 @@
 </pre></div>
 
 
+<h3 id="auto-skipfail">Auto-skip/fail<a class="headerlink" href="#auto-skipfail" title="Permanent link">&para;</a></h3>
+<p>You can mark a step as automatically skipped or failed if some other steps did not run successfully, using the <code>@depends_on</code> decorator. In the above example you could have written:</p>
+<div class="codehilite"><pre><span></span><span class="nd">@depends_on</span><span class="p">(</span><span class="n">step_a</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">step_b</span><span class="p">():</span>
+    <span class="o">...</span>
+</pre></div>
+
+
+<p>That way, <code>step_b</code> will be skipped if <code>step_a</code> fails or is skipped. </p>
+<h3 id="shared-data">Shared data<a class="headerlink" href="#shared-data" title="Permanent link">&para;</a></h3>
 <p>You can add a <code>steps_data</code> parameter to your test function if you wish to share a <code>StepsDataHolder</code> object between your steps.</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="kn">from</span> <span class="nn">pytest_steps</span> <span class="kn">import</span> <span class="n">test_steps</span><span class="p">,</span> <span class="n">StepsDataHolder</span>
@@ -500,7 +565,7 @@
 
 
 <p>You can add as many <code>@pytest.mark.parametrize</code> and pytest fixtures in your test suite function, it should work as expected: the steps_data object will be created everytime a new parameter/fixture combination is created, but will be shared across steps with the same parameters and fixtures.</p>
-<p>Finally, you can mark a step as automatically skipped or failed if some other steps did not run successfully, using the <code>@depends_on</code> decorator. See the <a href="api_reference/">API Reference</a> for details.</p>
+<p>See the <a href="api_reference/">API Reference</a> for details.</p>
 <h2 id="main-features-benefits">Main features / benefits<a class="headerlink" href="#main-features-benefits" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Split tests into steps</strong>. Although the best practices in testing are very much in favor of having each test completely independent of the other ones (for example for distributed execution), there is definitely some value in results readability to break down tests into chained sub-tests (steps). The <code>@test_steps</code> decorator provides an intuitive way to do that without forcing any data model (steps can be functions, objects, etc.).</li>
