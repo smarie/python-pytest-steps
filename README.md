@@ -72,3 +72,20 @@ This project is now automatically deployed to PyPI when a tag is created. Anyway
 twine upload dist/* -r pypitest
 twine upload dist/*
 ```
+
+### Merging pull requests with edits - memo
+
+Ax explained in github ('get commandline instructions'):
+
+```bash
+git checkout -b <git_name>-<feature_branch> master
+git pull https://github.com/<git_name>/python-pytest-steps.git <feature_branch> --no-commit --ff-only
+```
+
+if the second step does not work, do a normal auto-merge (do not use **rebase**!):
+
+```bash
+git pull https://github.com/<git_name>/python-pytest-steps.git <feature_branch> --no-commit
+```
+
+Finally review the changes, possibly perform some modifications, and commit.
