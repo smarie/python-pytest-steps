@@ -1,5 +1,7 @@
 # Changelog
 
+### 0.7.0 - Python 2 support
+
 ### 0.6.0 - New `@depends_on` decorator
 
  * Added a first version of `@depends_on` decorator. Fixes [#1](https://github.com/smarie/python-pytest-steps/issues/1)
