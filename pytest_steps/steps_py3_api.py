@@ -18,6 +18,10 @@ def new_signature_of(f_with_old_api):
         # First update the documentation:
         f_with_new_api.__doc__ = f_with_old_api.__doc__
 
+        # then update fields
+        if hasattr(f_with_old_api, '__test__'):
+            f_with_new_api.__test__ = f_with_old_api.__test__
+
         # Then create the final function that will be executed when the user calls
         def _execute_self_and_inner(f_with_new_api, *args, **kwargs):
             # First execute the function with the new api
