@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.7.1 - Fixed regression on python 3
+
+Python 3: After last tag a new bug appeared: an empty test named `test_steps` was created. Fixed it [#5](https://github.com/smarie/python-pytest-steps/issues/5).
+
 ### 0.7.0 - Python 2 support
 
 ### 0.6.0 - New `@depends_on` decorator
