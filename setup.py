@@ -28,7 +28,7 @@ except Exception as e:
 # ************** ID card *****************
 DISTNAME = 'pytest-steps'
 DESCRIPTION = 'Create step-wise / incremental tests in pytest.'
-MAINTAINER = 'Sylvain Marié'
+MAINTAINER = 'Sylvain MARIE'
 MAINTAINER_EMAIL = 'sylvain.marie@schneider-electric.com'
 URL = 'https://github.com/smarie/python-pytest-steps'
 LICENSE = 'BSD 3-Clause'

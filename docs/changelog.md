@@ -1,5 +1,7 @@
 # Changelog
 
+### 0.7.2 - minor encoding issue in setup.py
+
 ### 0.7.1 - Fixed regression on python 3
 
 Python 3: After last tag a new bug appeared: an empty test named `test_steps` was created. Fixed it [#5](https://github.com/smarie/python-pytest-steps/issues/5).
