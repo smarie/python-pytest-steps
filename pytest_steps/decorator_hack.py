@@ -81,7 +81,7 @@ def my_decorate(func, caller, extras=(), additional_args=None):
         es += ex + ', '
     fun = MyFunctionMaker.create(
         func, "return _call_(_func_, %s%%(shortsignature)s)" % es,
-        evaldict, add_args=additional_args, __wrapped__=func)
+        evaldict, add_args=reversed(additional_args), __wrapped__=func)
     if hasattr(func, '__qualname__'):
         fun.__qualname__ = func.__qualname__
     return fun
