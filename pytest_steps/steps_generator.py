@@ -1,5 +1,6 @@
-from collections import Iterable
+from collections import Iterable as It
 
+import six
 from decorator import decorate
 from six import raise_from
 from wrapt import ObjectProxy
@@ -17,7 +18,7 @@ except ImportError:
 from inspect import isgeneratorfunction
 
 try:  # python 3+
-    from typing import Iterable, Any
+    from typing import Iterable, Any, Union
 except ImportError:
     pass
 
@@ -204,14 +205,19 @@ class StepsMonitor(object):
                 elif isinstance(res.exec_result, OptionalStepException):
                     # An exception happened in the optional step. We can now raise it safely
                     # (raising it sooner would break the generator)
-                    raise res.exec_result.exc_val.with_traceback(res.exec_result.tb)
+                    raise six.reraise(res.exec_result.exc_type, res.exec_result.exc_val, res.exec_result.tb)
 
-                elif isinstance(res.exec_result, _DependentTestNotRunException):
+                elif isinstance(res.exec_result, _DependentTestsNotRunException):
                     # This exception has been put here to declare that the optional step did not run because a
                     # dependency is missing. >> Skip or fail
                     # TODO add fail_instead_of_skip argument like in depends_on
-                    pytest.skip("%s skipped because previous step %s failed" % (step_name,
-                                                                                res.exec_result.dependency_name))
+                    should_fail = False
+                    msg = "This test step '%s' depends on other steps, and the following have failed: %s" \
+                          "" % (step_name, res.exec_result.dependency_names)
+                    if should_fail:
+                        pytest.fail(msg)
+                    else:
+                        pytest.skip(msg)
                 elif res.exec_result is True:
                     # normal execution success
                     pass
@@ -223,7 +229,15 @@ class StepsMonitor(object):
         else:
             # A mandatory step failed before this one. The generator is broken, no need to even try >> Skip or fail
             # TODO add fail_instead_of_skip argument like in depends_on
-            pytest.skip("%s skipped because previous steps failed" % step_name)
+            should_fail2 = False
+            failed_step = next(iter(self.exceptions.keys())) if len(self.exceptions) == 1 \
+                else list(self.exceptions.keys())
+            msg = "This test step '%s' is not run because non-optional previous step '%s' has failed" \
+                  "" % (step_name, failed_step)
+            if should_fail2:
+                pytest.fail(msg)
+            else:
+                pytest.skip(msg)
 
     def can_execute(self, step_name):
         """
@@ -237,7 +251,7 @@ class StepsMonitor(object):
         """ returns a context manager """
 
         def handle_exception(exc_type, exc_val, exc_tb):
-            if exc_type in {_DependentTestNotRunException, OptionalStepException}:
+            if exc_type in {_DependentTestsNotRunException, OptionalStepException}:
                 # Do not register this exception
                 pass
             else:
@@ -363,14 +377,14 @@ def get_generator_decorator(steps  # type: Iterable[Any]
 
 # ----------- optional steps
 
-class _DependentTestNotRunException(Exception):
+class _DependentTestsNotRunException(Exception):
     """
     An internal exception that is actually never raised: it is used by the optional_step context manager
     """
 
     def __init__(self, step_name, dependency_name):
         self.step_name = step_name
-        self.dependency_name = dependency_name
+        self.dependency_names = [dependency_name]
 
 
 class OptionalStepException(Exception):
@@ -384,26 +398,64 @@ class OptionalStepException(Exception):
 
 class optional_step(object):
     """
-    A context manager to declare a step as independent, so that next steps in the generator can continue to execute even
-    if this one fails.
+    A context manager that you can use in *generator* mode in order to declare a step as independent, so that next
+    steps in the generator can continue to execute even if this one fails.
 
-    >>>with optional_step('toto') as toto_step:
-    >>>    if toto_step.should_run():
-    >>>        ...
-    >>>yield toto_step
+    When this context manager is used you should not forget to yield the context object ! Otherwise the test step will
+    be marked as successful even if it was not.
 
-    :return:
+    You can optionally declare dependencies using the `depends_on=` argument in the constructor. If so, you should use
+    the .should_execute() method if you wish your code block to be properly skipped.
+
+    ```python
+    from pytest_steps import test_steps, optional_step
+
+    @test_steps('step_a', 'step_b', 'step_c', 'step_d')
+    def test_suite_opt():
+        # Step A
+        assert not False
+        yield
+
+        # Step B
+        with optional_step('step_b') as step_b:
+            assert False
+        yield step_b
+
+        # Step C depends on step B
+        with optional_step('step_c', depends_on=step_b) as step_c:
+            if step_c.should_run():
+                assert True
+        yield step_c
+
+        # Step D
+        assert not False
+        yield
+    ```
     """
 
     def __init__(self,
                  step_name,       # type: str
                  depends_on=None  # type: optional_step
                  ):
+        """
+        Creates the context manager for an optional step named `step_name` with optional dependencies on other
+        optional steps.
+
+        :param step_name: the name of this optional step. This name will be used in pytest failure/skip messages when
+            other steps depend on this one and are skipped/failed because this one was skipped/failed.
+        :param depends_on: an optional dependency or list of dependencies, that should all be optional steps created
+            with an `optional_step` context manager.
+        """
+        # default values
         self.step_name = step_name
         self.exec_result = None
         self.depends_on = depends_on or []
-        if not isinstance(self.depends_on, Iterable):
+
+        # coerce depends_on to a list
+        if not isinstance(self.depends_on, It):
             self.depends_on = [self.depends_on]
+
+        # dependencies should be optional steps too
         for dependency in self.depends_on:
             if not isinstance(dependency, optional_step):
                 raise ValueError("depends_on should only contain optional_step instances")
@@ -415,7 +467,18 @@ class optional_step(object):
         # check that all dependencies have run
         for dependency in self.depends_on:
             if not dependency.ran_with_success():
-                self.exec_result = _DependentTestNotRunException(self.step_name, dependency.step_name)
+                if self.exec_result is None:
+                    self.exec_result = _DependentTestsNotRunException(self.step_name, dependency.step_name)
+                else:
+                    self.exec_result.dependency_names.append(dependency.step_name)
+
+        # Unfortunately if we raise an exception here it will not be caught by the __exit__ method
+        # So there is absolutely no way to prevent the code block to execute,
+        # - even with an ExitStack (I tried !): indeed the ExitStack is nothing more than a context manager so if an
+        # error is raised during its __enter__ method, then its __exit__ stack will not be called
+        # - A PEP 377 was created for that but was rejected
+        # - A hack also exists but it interferes with the debugger so it is too complex
+        # See https://stackoverflow.com/questions/12594148/skipping-execution-of-with-block
 
         return self
 
@@ -439,10 +502,10 @@ class optional_step(object):
             # Failure: remember the exception
             self.exec_result = OptionalStepException(exc_type, exc_val, traceback)
 
-            # We have to *cancel* the exception in the stack of the test function since it is a generator and we need to
-            # be able to execute subsequent steps
-            # see https://docs.python.org/3/reference/datamodel.html#object.__exit__
-            return True
+        # We have to *cancel* the exception in the stack of the test function since it is a generator and we need to
+        # be able to execute subsequent steps
+        # see https://docs.python.org/3/reference/datamodel.html#object.__exit__
+        return True
 
     def ran_with_success(self):
         """
