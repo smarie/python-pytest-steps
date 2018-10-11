@@ -103,12 +103,14 @@ class _ReplaceableInstance(ObjectProxy):
 
 def one_per_step(fixture_fun=None):
     """
-    A decorator to make a given function-scoped fixture factory return steps-aware
+    A decorator for a function-scoped fixture. By default if you do not use this decorator, only the fixture created
+    for the first step will be injected in your function, and all steps will see that same instance.
 
-    simply wraps the yielded or returned fixture,
+    Decorating your fixture with `@one_per_step` tells `@test_steps` to transparently replace the fixture object
+    instance by the one created for each step, before each step executes. This results in all steps using different
+    fixture instances.
 
-    :param fixture_fun:
-    :param mode:
+    :param fixture_fun: the fixture callable being decorated
     :return:
     """
     if fixture_fun is None:
@@ -435,7 +437,7 @@ class optional_step(object):
 
     def __init__(self,
                  step_name,       # type: str
-                 depends_on=None  # type: optional_step
+                 depends_on=None  # type: Union[optional_step, Iterable[optional_step]]
                  ):
         """
         Creates the context manager for an optional step named `step_name` with optional dependencies on other
