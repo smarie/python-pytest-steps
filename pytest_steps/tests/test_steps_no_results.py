@@ -1,6 +1,15 @@
 from pytest_steps import test_steps
 
 
+@test_steps('step_a', 'step_b')
+def test_suite_no_results_str(test_step):
+    # Execute the step according to name
+    if test_step == 'step_a':
+        step_a()
+    elif test_step == 'step_b':
+        step_b()
+
+
 def step_a():
     """ Step a of the test """
 
@@ -19,9 +28,9 @@ def step_b():
 
 # equivalent to
 # @pytest.mark.parametrize('test_step', (step_check_a, step_check_b), ids=lambda x: x.__name__)
-@test_steps(step_a, step_b)
-def test_suite_no_results(test_step, request):
+@test_steps(step_a, step_b, test_step_argname='test_step_fun')
+def test_suite_no_results_fun(test_step_fun, request):
     """ """
 
     # Execute the step
-    test_step()
+    test_step_fun()

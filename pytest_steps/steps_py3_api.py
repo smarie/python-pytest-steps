@@ -1,7 +1,17 @@
 from decorator import decorate
 
 import pytest_steps.steps as py2_steps
+import pytest_steps.steps_parametrizer as steps_parametrizer
 
+
+# ----------
+# This file has been created because in python 2 it is not possible to
+# declare named arguments after variable-length *args in a function signature.
+# this causes some functions to have a very cryptic signature (*args, **kwargs)
+#
+# This file is only loaded when possible (python 3), and replaces the functions
+# with cryptic signatures, with functions with the correct signatures
+# ----------
 
 def new_signature_of(f_with_old_api):
     """
@@ -15,10 +25,10 @@ def new_signature_of(f_with_old_api):
     """
     def signature_changer_decorator(f_with_new_api):
 
-        # First update the documentation:
+        # First copy the documentation:
         f_with_new_api.__doc__ = f_with_old_api.__doc__
 
-        # then update fields
+        # Then copy the pytest field if needed
         if hasattr(f_with_old_api, '__test__'):
             f_with_new_api.__test__ = f_with_old_api.__test__
 
@@ -35,6 +45,7 @@ def new_signature_of(f_with_old_api):
             # then execute the inner function
             return f_with_old_api(*args, **kwargs)
 
+        # Use decorate to preserve everything (name, signature...)
         return decorate(f_with_new_api, _execute_self_and_inner)
 
     return signature_changer_decorator
@@ -42,12 +53,13 @@ def new_signature_of(f_with_old_api):
 
 @new_signature_of(py2_steps.test_steps)
 def test_steps(*steps,
-               test_step_name: str= py2_steps._TEST_STEP_NAME_DEFAULT,
-               steps_data_holder_name: str= py2_steps._STEPS_DATA_HOLDER_NAME_DEFAULT):
+               mode: str=py2_steps.TEST_STEP_MODE_AUTO,
+               test_step_argname: str= py2_steps.TEST_STEP_ARGNAME_DEFAULT,
+               steps_data_holder_name: str= py2_steps.STEPS_DATA_HOLDER_NAME_DEFAULT):
     pass
 
 
-@new_signature_of(py2_steps.depends_on)
+@new_signature_of(steps_parametrizer.depends_on)
 def depends_on(*steps,
-               fail_instead_of_skip: bool = py2_steps._FAIL_INSTEAD_OF_SKIP_DEFAULT):
+               fail_instead_of_skip: bool = steps_parametrizer._FAIL_INSTEAD_OF_SKIP_DEFAULT):
     pass

@@ -1,6 +1,17 @@
 from pytest_steps import test_steps, StepsDataHolder
 
 
+@test_steps('step_a', 'step_b', steps_data_holder_name='steps_data2')
+def test_suite_with_shared_results(test_step,
+                                   steps_data2  # type: StepsDataHolder
+                                   ):
+    # Execute the step with access to the steps_data holder
+    if test_step == 'step_a':
+        step_a(steps_data2)
+    elif test_step == 'step_b':
+        step_b(steps_data2)
+
+
 def step_a(steps_data  # type: StepsDataHolder
            ):
     """ Step a of the test """
