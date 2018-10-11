@@ -271,16 +271,69 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#both-modes" title="Both modes" class="md-nav__link">
+    Both modes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#test_steps" title="@test_steps" class="md-nav__link">
     @test_steps
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
+  <a href="#generator-mode" title="Generator mode" class="md-nav__link">
+    Generator mode
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional_step" title="@optional_step" class="md-nav__link">
+    @optional_step
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one_per_step" title="@one_per_step" class="md-nav__link">
+    @one_per_step
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicitparametrizer-mode" title="Explicit/parametrizer mode" class="md-nav__link">
+    Explicit/parametrizer mode
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#depends_on" title="@depends_on" class="md-nav__link">
     @depends_on
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -328,16 +381,69 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#both-modes" title="Both modes" class="md-nav__link">
+    Both modes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#test_steps" title="@test_steps" class="md-nav__link">
     @test_steps
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
+  <a href="#generator-mode" title="Generator mode" class="md-nav__link">
+    Generator mode
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optional_step" title="@optional_step" class="md-nav__link">
+    @optional_step
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one_per_step" title="@one_per_step" class="md-nav__link">
+    @one_per_step
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicitparametrizer-mode" title="Explicit/parametrizer mode" class="md-nav__link">
+    Explicit/parametrizer mode
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#depends_on" title="@depends_on" class="md-nav__link">
     @depends_on
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -362,61 +468,53 @@
                 
                 <h1 id="api-reference">API reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h1>
 <p>In general, using <code>help(symbol)</code> is the recommended way to get the latest documentation. In addition, this page provides an overview of the various elements in this package.</p>
+<h2 id="both-modes">Both modes<a class="headerlink" href="#both-modes" title="Permanent link">&para;</a></h2>
 <h3 id="test_steps"><code>@test_steps</code><a class="headerlink" href="#test_steps" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nd">@test_steps</span><span class="p">(</span><span class="o">*</span><span class="n">steps</span><span class="p">,</span> 
+            <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span> 
+            <span class="n">test_step_argname</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;step_name&#39;</span><span class="p">,</span> 
+            <span class="n">steps_data_holder_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;steps_data&#39;</span><span class="p">)</span>
+</pre></div>
+
+
 <p>Decorates a test function so as to automatically parametrize it with all steps listed as arguments.</p>
-<p>Test steps can be function as shown below, or anything else.</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pytest_steps</span> <span class="kn">import</span> <span class="n">test_steps</span>
-
-<span class="k">def</span> <span class="nf">step_a</span><span class="p">():</span>
-    <span class="c1"># perform this step</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>
-
-<span class="k">def</span> <span class="nf">step_b</span><span class="p">():</span>
-    <span class="c1"># perform this step</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>
-
-<span class="nd">@test_steps</span><span class="p">(</span><span class="n">step_a</span><span class="p">,</span> <span class="n">step_b</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">test_suite_no_results</span><span class="p">(</span><span class="n">test_step</span><span class="p">):</span>
-    <span class="c1"># Execute the step</span>
-    <span class="n">test_step</span><span class="p">()</span>
-</pre></div>
-
-
-<p>You can add a 'steps_data' parameter to your test function if you wish to share a <code>StepsDataHolder</code> object between your steps.</p>
-<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">step_a</span><span class="p">(</span><span class="n">steps_data</span><span class="p">):</span>
-    <span class="c1"># perform this step</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>
-
-    <span class="c1"># intermediate results can be stored in steps_data</span>
-    <span class="n">steps_data</span><span class="o">.</span><span class="n">intermediate_a</span> <span class="o">=</span> <span class="s1">&#39;some intermediate result created in step a&#39;</span>
-
-<span class="k">def</span> <span class="nf">step_b</span><span class="p">(</span><span class="n">steps_data</span><span class="p">):</span>
-    <span class="c1"># perform this step, leveraging the previous step&#39;s results</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
-    <span class="n">new_text</span> <span class="o">=</span> <span class="n">steps_data</span><span class="o">.</span><span class="n">intermediate_a</span> <span class="o">+</span> <span class="s2">&quot; ... augmented&quot;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">56</span>
-
-<span class="nd">@test_steps</span><span class="p">(</span><span class="n">step_a</span><span class="p">,</span> <span class="n">step_b</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">test_suite_with_results</span><span class="p">(</span><span class="n">test_step</span><span class="p">,</span> <span class="n">steps_data</span><span class="p">:</span> <span class="n">StepsDataHolder</span><span class="p">):</span>
-    <span class="c1"># Execute the step with access to the steps_data holder</span>
-    <span class="n">test_step</span><span class="p">(</span><span class="n">steps_data</span><span class="p">)</span>
-</pre></div>
-
-
-<p>You can add as many <code>@pytest.mark.parametrize</code> and pytest fixtures in your test suite function, it should work as expected: a new <code>steps_data</code> instance will be created everytime a new parameter/fixture combination is created, and this instance will be shared across all steps with the same parameters and fixtures.</p>
+<p>There are two main ways to use this decorator:</p>
+<ol>
+<li>decorate a test function generator and provide as many step names as there are 'yield' statements in the generator</li>
+<li>decorate a test function with a 'test_step' parameter, and use this parameter in the test function body to decide what to execute.</li>
+</ol>
+<p>See <a href="../../">Home</a> for examples.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>steps</code>: a list of test steps. They can be anything, but typically they are non-test (not prefixed with 'test') functions.</li>
+<li><code>mode</code>: one of <code>{'auto', 'generator', 'parametrizer'}</code>. In <code>'auto'</code> mode (default), the decorator will detect if your function is a generator or not. If it is a generator it will use the <em>generator</em> mode, otherwise it will use the <em>parametrizer</em> (explicit) mode.</li>
 <li><code>test_step_argname</code>: the optional name of the function argument that will receive the test step object. Default is 'test_step'.</li>
 <li><code>test_results_argname</code>: the optional name of the function argument that will receive the shared <code>StepsDataHolder</code> object if present. Default is 'steps_data'.</li>
 </ul>
+<h2 id="generator-mode">Generator mode<a class="headerlink" href="#generator-mode" title="Permanent link">&para;</a></h2>
+<h3 id="optional_step"><code>@optional_step</code><a class="headerlink" href="#optional_step" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nd">@optional_step</span><span class="p">(</span><span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+               <span class="n">depends_on</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">optional_step</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">optional_step</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Context manager to use inside a test function body to create an optional step named <code>step_name</code> with optional dependencies on other optional steps. See <a href="../../">Home</a> for examples.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>step_name</code>: the name of this optional step. This name will be used in pytest failure/skip messages when other steps depend on this one and are skipped/failed because this one was skipped/failed.</li>
+<li><code>depends_on</code>: an optional dependency or list of dependencies, that should all be optional steps created with an <code>optional_step</code> context manager.</li>
+</ul>
+<h3 id="one_per_step"><code>@one_per_step</code><a class="headerlink" href="#one_per_step" title="Permanent link">&para;</a></h3>
+<p>A decorator for a function-scoped fixture. By default if you do not use this decorator, only the fixture created  for the first step will be injected in your function, and all steps will see that same instance. </p>
+<p>Decorating your fixture with <code>@one_per_step</code> tells <code>@test_steps</code> to transparently replace the fixture object instance by the one created for each step, before each step executes. This results in all steps using different fixture instances.</p>
+<h2 id="explicitparametrizer-mode">Explicit/parametrizer mode<a class="headerlink" href="#explicitparametrizer-mode" title="Permanent link">&para;</a></h2>
 <h3 id="depends_on"><code>@depends_on</code><a class="headerlink" href="#depends_on" title="Permanent link">&para;</a></h3>
-<p><code>@depends_on(*steps, fail_instead_of_skip: bool = False)</code></p>
-<p>Decorates a test step object/function so as to automatically mark it as skipped (default) or failed if the dependency has not succeeded.</p>
+<div class="codehilite"><pre><span></span><span class="nd">@depends_on</span><span class="p">(</span><span class="o">*</span><span class="n">steps</span><span class="p">,</span> 
+            <span class="n">fail_instead_of_skip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Decorates a test step object/function so as to automatically mark it as skipped (default) or failed if the dependency has not succeeded. This only works if the decorated object is directly used as argument in the main <code>@test_steps</code> decorator. Otherwise you can still use the shared results holder to skip manually, see <a href="../../">Home</a> for examples.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>steps</code>: a list of test steps that this step depends on. They can be anything, but typically they are non-test (not prefixed with 'test') functions.</li>
