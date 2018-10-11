@@ -77,7 +77,6 @@ def test_suite_optional_and_dependent_steps():
     yield 'step_d'
 
 
-
 @test_steps('step_a', 'step_b')
 @pytest.mark.parametrize('i', range(2), ids=lambda i: "i=%i" % i)
 def test_suite_parametrized(i):
