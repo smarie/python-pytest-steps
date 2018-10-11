@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 - new "generator" mode + pytest 2.x compliance
+
+You can now implement your test steps as `yield` statements in a generator. See documentation for details. Closes [#6](https://github.com/smarie/python-pytest-steps/issues/6)
+
+Parametrized mode now works with older version of pytest (where `@pytest.fixture` did not have a `name=` parameter). Fixes [#9](https://github.com/smarie/python-pytest-steps/issues/9)
+
 ### 0.7.2 - minor encoding issue in setup.py
 
 ### 0.7.1 - Fixed regression on python 3
