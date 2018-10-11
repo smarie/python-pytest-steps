@@ -21,132 +21,13 @@ def test_steps(*steps, **kwargs):
      2. decorate a test function with a 'test_step' parameter, and use this parameter in the test function body to
      decide what to execute.
 
-    Usage with a generator:
-    -----------------------
-    Simply put as many `yield` statements in the decorated test function, as there are declared steps in the decorator:
-
-    ```python
-    from pytest_steps import test_steps
-
-    @test_steps('step_a', 'step_b', 'step_c')
-    def test_suite():
-        # Step A
-        assert not False  # replace with your logic
-        intermediate_a = 'hello'
-        yield
-
-        # Step B
-        assert not False  # replace with your logic
-        yield
-
-        # Step C
-        new_text = intermediate_a + " ... augmented"
-        assert len(new_text) == 56
-        yield
-    ```
-
-    You can `yield <step_name>` in order to activate the automatic check that each step is the right one.
-
-    By default all steps depend on all previous steps in order. Optional steps should be wrapped with `optional_step`
-    and should yield the associated context. You can also declare that they depend on other optional steps:
-
-    ```python
-    from pytest_steps import test_steps, optional_step
-
-    @test_steps('step_a', 'step_b', 'step_c', 'step_d')
-    def test_suite_opt():
-        # Step A
-        assert not False
-        yield
-
-        # Step B
-        with optional_step('step_b') as step_b:
-            assert False
-        yield step_b
-
-        # Step C depends on step B
-        with optional_step('step_c', depends_on=step_b) as step_c:
-            if step_c.should_run():
-                assert True
-        yield step_c
-
-        # Step D
-        assert not False
-        yield
-    ```
-
-    Finally if you use a function-scoped fixture and would like it to be different for each step, wrap that fixture in
-    `@one_per_step`:
-
-    ```python
-    from pytest_steps import one_per_step
-
-    @pytest.fixture
-    @one_per_step
-    def my_fixture():
-        '''Simple function-scoped fixture that return a new instance each time'''
-        return MyFixture()
-    ```
-
-    Usage with a normal function with a parameter:
-    ----------------------------------------------
-
-    By default in this mode all steps are independent
-
-    ```python
-    from pytest_steps import test_steps
-
-    @test_steps('step_a', 'step_b')
-    def test_suite_1(test_step):
-        # Execute the step according to name
-        if test_step == 'step_a':
-            step_a()
-        elif test_step == 'step_b':
-            step_b()
-
-    def step_a():
-        # perform this step ...
-        print("step a")
-        assert not False  # replace with your logic
-
-    def step_b():
-        # perform this step
-        print("step b")
-        assert not False  # replace with your logic
-    ```
-
-    You can add a 'results' parameter to your test function if you wish to share a `StepsDataHolder` object between your
-    steps.
-
-    ```python
-    def step_a(steps_data: StepsDataHolder):
-        # perform this step
-        print("step a")
-        assert not False
-
-        # intermediate results can be stored in results
-        results.intermediate_a = 'some intermediate result created in step a'
-
-    def step_b(steps_data: StepsDataHolder):
-        # perform this step, leveraging the previous step's results
-        print("step b")
-        new_text = results.intermediate_a + " ... augmented"
-        print(new_text)
-        assert len(new_text) == 56
-
-    @test_steps(step_a, step_b)
-    def test_suite_with_results(test_step, steps_data: StepsDataHolder):
-        # Execute the step with access to the results holder
-        test_step(steps_data)
-    ```
-
-    You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test suite function, it should work as
-    expected: the `steps_data` object will be created everytime a new parameter/fixture combination is created, but will
-    be shared across steps with the same parameters and fixtures.
+    See https://smarie.github.io/python-pytest-steps/ for examples.
 
     :param steps: a list of test steps. They can be anything, but typically they will be string (when mode is
         'generator') or non-test (not prefixed with 'test') functions (when mode is 'parametrizer').
-    :param mode: one of {'auto', 'generator', 'parametrizer'}. In 'auto'
+    :param mode: one of {'auto', 'generator', 'parametrizer'}. In 'auto' mode (default), the decorator will detect if
+        your function is a generator or not. If it is a generator it will use the 'generator' mode, otherwise it will
+        use the 'parametrizer' (explicit) mode.
     :param test_step_argname: the optional name of the function argument that will receive the test step object.
         Default is 'test_step'.
     :param steps_data_holder_name: the optional name of the function argument that will receive the shared `StepsDataHolder`
