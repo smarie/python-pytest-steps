@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.1 - removed deprecation warnings
+
+ * Removed some deprecation warnings appearing in latest pytest 3.x, about the future pytest 4 to come. Fixed [#10](https://github.com/smarie/python-pytest-steps/issues/10)
+
 ### 1.0.0 - new "generator" mode + pytest 2.x compliance
 
 You can now implement your test steps as `yield` statements in a generator. See documentation for details. Closes [#6](https://github.com/smarie/python-pytest-steps/issues/6)
