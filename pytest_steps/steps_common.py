@@ -94,3 +94,21 @@ def get_id(pytest_node,
                                      "" % (param_id, p_name, pytest_node.nodeid))
 
         return node_id_base + '[' + node_id_params + ']'
+
+
+def get_fixture_value(request, fixture_name):
+    """
+    Returns the value associated with fixture named `fixture_name`, in provided request context.
+    This is just an easy way to use `getfixturevalue` or `getfuncargvalue` according to whichever is availabl in
+    current pytest version
+
+    :param request:
+    :param fixture_name:
+    :return:
+    """
+    try:
+        # Pytest 4+ or latest 3.x (to avoid the deprecated warning)
+        return request.getfixturevalue(fixture_name)
+    except AttributeError:
+        # Pytest 3-
+        return request.getfuncargvalue(fixture_name)

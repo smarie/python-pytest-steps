@@ -13,7 +13,7 @@ from inspect import getmodule
 import pytest
 
 from pytest_steps.decorator_hack import my_decorate
-from pytest_steps.steps_common import get_pytest_id
+from pytest_steps.steps_common import get_pytest_id, get_fixture_value
 
 
 class StepsDataHolder:
@@ -89,7 +89,7 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
                 dont_change_when_these_change.update({steps_data_holder_name, 'request'})
 
                 # List the values of all the test function parameters that matter
-                kwargs = {argname: request.getfuncargvalue(argname)
+                kwargs = {argname: get_fixture_value(request, argname)
                           for argname in request.funcargnames
                           if argname not in dont_change_when_these_change}
 
@@ -128,8 +128,8 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
                     request = f_sig.bind(*args, **kwargs).arguments['request']
 
                 # (a) retrieve the current step and parameters/fixtures combination
-                current_step = request.getfuncargvalue(test_step_argname)
-                params = {n: request.getfuncargvalue(n)
+                current_step = get_fixture_value(request, test_step_argname)
+                params = {n: get_fixture_value(request, n)
                           for n in request.funcargnames if n not in {test_step_argname, steps_data_holder_name, 'request'}}
                 params = HashableDict(params)
 

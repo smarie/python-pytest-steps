@@ -1,3 +1,5 @@
+from pytest_steps.steps_common import get_fixture_value
+
 try:  # python 3.2+
     from functools import lru_cache
 except ImportError:
@@ -30,7 +32,7 @@ def results(request):
     :param request:
     :return:
     """
-    kwargs = {argname: request.getfuncargvalue(argname)
+    kwargs = {argname: get_fixture_value(request, argname)
               for argname in request.funcargnames
               if argname not in {'test_step', 'results', 'request'}}
     return get_results_holder(**kwargs)
