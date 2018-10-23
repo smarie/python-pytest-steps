@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.2 - fix for old version of decorator lib
+
+ * Fixed [#11](https://github.com/smarie/python-pytest-steps/issues/11)
+
 ### 1.0.1 - removed deprecation warnings
 
  * Removed some deprecation warnings appearing in latest pytest 3.x, about the future pytest 4 to come. Fixed [#10](https://github.com/smarie/python-pytest-steps/issues/10)
