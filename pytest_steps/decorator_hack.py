@@ -1,4 +1,15 @@
-from decorator import iscoroutinefunction, FunctionMaker
+from decorator import FunctionMaker
+
+
+try:
+    from decorator import iscoroutinefunction
+except ImportError:
+    try:
+        from inspect import iscoroutinefunction
+    except ImportError:
+        # let's assume there are no coroutine functions in old Python
+        def iscoroutinefunction(f):
+            return False
 
 
 class MyFunctionMaker(FunctionMaker):
