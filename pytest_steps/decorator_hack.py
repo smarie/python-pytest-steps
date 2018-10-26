@@ -43,7 +43,7 @@ class MyFunctionMaker(FunctionMaker):
         else:
             body = 'def %(name)s(%(signature)s):\n' + ibody
 
-        # --- HACK is only here -----
+        # --- HACK part 1 -----
         if add_args is not None:
             for arg in add_args:
                 if arg not in self.args:
@@ -72,9 +72,9 @@ class MyFunctionMaker(FunctionMaker):
 
         func = self.make(body, evaldict, addsource, **attrs)
 
-        # ----- another hack
+        # ----- HACK part 2
         if add_args is not None:
-            # we have to delete this annotation otherwise the inspect.signature method misinterpretes the signature
+            # delete this annotation otherwise the inspect.signature method relies on the wrapped object's signature
             del func.__wrapped__
 
         return func
