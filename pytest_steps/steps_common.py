@@ -85,8 +85,8 @@ def get_id(pytest_node,
                 raise ValueError("Parameter %s is not a valid parameter name in node %s"
                                  "" % (p_name, pytest_node.nodeid))
             else:
-                # Strong assumption: assume that the id will be str(param_value)
-                param_id = str(pytest_node.callspec.params[p_name])
+                # Strong assumption: assume that the id will be str(param_value) of param_value.__name__
+                param_id = get_pytest_id(pytest_node.callspec.params[p_name])
                 if param_id in node_id_params:
                     node_id_params = node_id_params.replace(param_id, '*')
                 else:
