@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.3 - fix: request in arguments with new generator mode
+
+Test functions using new generator mode can now use the 'request' parameter. Fixed [#12](https://github.com/smarie/python-pytest-steps/issues/12)
+
 ### 1.0.2 - fix for old version of decorator lib
 
  * Fixed [#11](https://github.com/smarie/python-pytest-steps/issues/11)
