@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.4 in progress - improved readability
+
+Improved readability in signature-fiddling hacks: now the logic is separate from the two generated function signatures, both for generator and parametrizer modes.
+
 ### 1.0.3 - fix: request in arguments with new generator mode
 
 Test functions using new generator mode can now use the 'request' parameter. Fixed [#12](https://github.com/smarie/python-pytest-steps/issues/12)
