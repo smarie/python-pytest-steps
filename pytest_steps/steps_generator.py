@@ -346,22 +346,9 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         # Create the container that will hold all execution monitors for this function
         all_monitors = StepMonitorsContainer(test_func, step_ids)
 
-        # Create the function wrapper
-        def step_function_wrapper(f, ________step_name_, *args, **kwargs):
-            """ Wraps the test function so as to handle the generator """
-
-            step_name = ________step_name_
-
-            # Retrieve the value for request
-            if 'request' not in f_sig.parameters:
-                # easy: that's the first positional arg since we have added it (see `my_decorate`)
-                request = args[0]
-                # Remove it from the function arguments
-                args = args[1:]
-            else:
-                # harder: request is in the args and/or kwargs. Thanks, inspect package !
-                request = f_sig.bind(*args, **kwargs).arguments['request']
-
+        # Create the function wrapper.
+        # -- first create the logic
+        def _execute_step_with_monitor(step_name, request, *args, **kwargs):
             # Retrieve or create the corresponding execution monitor
             steps_monitor = all_monitors.get_execution_monitor(request.node, *args, **kwargs)
 
@@ -369,9 +356,23 @@ def get_generator_decorator(steps  # type: Iterable[Any]
             # print("DEBUG - executing step %s" % step_name)
             steps_monitor.execute(step_name, *args, **kwargs)
 
+        # -- then create the appropriate function signature according to wrapped function signature
+        if 'request' not in f_sig.parameters:
+            # easy: we can add it explicitly in our signature
+            def step_function_wrapper(f, ________step_name_, request, *args, **kwargs):
+                """Executes a step with the execution monitor for this pytest node"""
+                _execute_step_with_monitor(________step_name_, request, *args, **kwargs)
+        else:
+            # harder: we have to retrieve the value for request. Thanks, inspect package !
+            def step_function_wrapper(f, ________step_name_, *args, **kwargs):
+                """Executes a step with the execution monitor for this pytest node"""
+                request = f_sig.bind(*args, **kwargs).arguments['request']
+                _execute_step_with_monitor(________step_name_, request, *args, **kwargs)
+
         # decorate it so that its signature is the same than test_func, with just an additional argument for test step
-        wrapped_test_function = my_decorate(test_func, step_function_wrapper, additional_args=[test_step_argname,
-                                                                                               'request'])
+        # and if needed an additional argument for request
+        wrapped_test_function = my_decorate(test_func, step_function_wrapper,
+                                            additional_args=[test_step_argname, 'request'])
 
         # Parametrize the wrapper function with the test step ids
         parametrizer = pytest.mark.parametrize(test_step_argname, step_ids, ids=str)

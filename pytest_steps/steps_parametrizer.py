@@ -115,35 +115,38 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
         # Finally, if there are some steps that are marked as having a dependency,
         use_dependency = any(hasattr(step, DEPENDS_ON_FIELD) for step in steps)
         if use_dependency:
-            # Create a test function wrapper that will replace the test steps with wrapped ones before injecting them
-            def dependency_mgr_wrapper(f, *args, **kwargs):
-                # first check the request
-                f_sig = signature(f)
-                if 'request' not in f_sig.parameters:
-                    # easy: that's the first positional arg since we have added it (see `my_decorate`)
-                    request = args[0]
-                    args = args[1:]
-                else:
-                    # harder: request is in the args and/or kwargs. Thanks, inspect package !
-                    request = f_sig.bind(*args, **kwargs).arguments['request']
+            f_sig = signature(test_func)
 
-                # (a) retrieve the current step and parameters/fixtures combination
-                current_step = get_fixture_value(request, test_step_argname)
+            # Create a test function wrapper that will replace the test steps with monitored ones before injecting them
+            def _execute_step_with_dependency_checks(request, *args, **kwargs):
+                """Executes the current step only if its dependencies are correct, and registers its execution result"""
+
+                # (a) retrieve the current step function
+                current_step_fun = get_fixture_value(request, test_step_argname)
+                # Get the unique id that is shared between the steps of the same execution:
+                # -- as a string: more readable
+                # id_without_steps = get_id(request.node, remove_params=(test_step_argname,))
+                # -- as a hashable dict: get all other parameters & fixtures values. More robust but less readable
                 params = {n: get_fixture_value(request, n)
-                          for n in request.funcargnames if n not in {test_step_argname, steps_data_holder_name, 'request'}}
-                params = HashableDict(params)
+                          for n in request.funcargnames
+                          if n not in {test_step_argname, steps_data_holder_name, 'request'}}
+                test_id_without_steps = HashableDict(params)
 
-                # Make sure that all steps have a field indicating their execution success
-                if not hasattr(current_step, STEP_SUCCESS_FIELD):
-                    setattr(current_step, STEP_SUCCESS_FIELD, dict())
+                # Make sure that it has a field to store its execution success
+                if not hasattr(current_step_fun, STEP_SUCCESS_FIELD):
+                    # this is a dict where the key is the `test_id_without_steps` and the value is a boolean
+                    setattr(current_step_fun, STEP_SUCCESS_FIELD, dict())
 
                 # (b) skip or fail it if needed
-                dependencies, should_fail = getattr(current_step, DEPENDS_ON_FIELD, ([], False))
+                dependencies, should_fail = getattr(current_step_fun, DEPENDS_ON_FIELD, ([], False))
+                # -- check that dependencies have all run (execution order is correct)
                 if not all(hasattr(step, STEP_SUCCESS_FIELD) for step in dependencies):
                     raise ValueError("Test step {} depends on another step that has not yet been executed. In current "
                                      "version the steps execution order is manual, make sure it is correct."
-                                     "".format(current_step.__name__))
-                deps_successess = {step: getattr(step, STEP_SUCCESS_FIELD).get(params, False) for step in dependencies}
+                                     "".format(current_step_fun.__name__))
+                # -- check that dependencies all ran with success
+                deps_successess = {step: getattr(step, STEP_SUCCESS_FIELD).get(test_id_without_steps, False)
+                                   for step in dependencies}
                 failed_deps = [d.__name__ for d, res in deps_successess.items() if res is False]
                 if not all(deps_successess.values()):
                     msg = "This test step depends on other steps, and the following have failed: " + str(failed_deps)
@@ -152,14 +155,27 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
                     else:
                         pytest.skip(msg)
 
-                # (c) execute the function as usual
-                res = f(*args, **kwargs)
+                # (c) execute the test function for this step
+                res = test_func(*args, **kwargs)
 
-                getattr(current_step, STEP_SUCCESS_FIELD)[params] = True
+                # (d) declare execution as a success
+                getattr(current_step_fun, STEP_SUCCESS_FIELD)[test_id_without_steps] = True
 
                 return res
 
-            # wrap the test function
+            if 'request' not in f_sig.parameters:
+                # easy: we can add it explicitly in our signature
+                def dependency_mgr_wrapper(f, request, *args, **kwargs):
+                    """Executes current step with dependency checks"""
+                    return _execute_step_with_dependency_checks(request, *args, **kwargs)
+            else:
+                # harder: we have to retrieve the value for request. Thanks, inspect package !
+                def dependency_mgr_wrapper(f, *args, **kwargs):
+                    """Executes current step with dependency checks"""
+                    request = f_sig.bind(*args, **kwargs).arguments['request']
+                    return _execute_step_with_dependency_checks(request, *args, **kwargs)
+
+            # wrap the test function and add the 'request' argument if needed
             wrapped_test_function = my_decorate(test_func, dependency_mgr_wrapper, additional_args=['request'])
 
             wrapped_parametrized_test_function = parametrizer(wrapped_test_function)
