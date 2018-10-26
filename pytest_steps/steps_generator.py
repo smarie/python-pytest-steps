@@ -333,9 +333,9 @@ def get_generator_decorator(steps  # type: Iterable[Any]
                              "See help(pytest_steps) for details")
 
         # check that our name for the additional 'test step' parameter is valid (it does not exist in f signature)
-        s = signature(test_func)
+        f_sig = signature(test_func)
         test_step_argname = INNER_STEP_ARGNAME
-        if test_step_argname in s.parameters:
+        if test_step_argname in f_sig.parameters:
             raise ValueError("Your test function relies on arg name %s that is needed by @test_steps in generator "
                              "mode" % test_step_argname)
 
@@ -347,14 +347,20 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         all_monitors = StepMonitorsContainer(test_func, step_ids)
 
         # Create the function wrapper
-        def step_function_wrapper(f, ________step_name_, request, *args, **kwargs):
+        def step_function_wrapper(f, ________step_name_, *args, **kwargs):
             """ Wraps the test function so as to handle the generator """
 
             step_name = ________step_name_
 
-            # Make sure that we will send the right parameters to the function: if it needs 'request' too, add it
-            if 'request' in s.parameters:
-                kwargs['request'] = request
+            # Retrieve the value for request
+            if 'request' not in f_sig.parameters:
+                # easy: that's the first positional arg since we have added it (see `my_decorate`)
+                request = args[0]
+                # Remove it from the function arguments
+                args = args[1:]
+            else:
+                # harder: request is in the args and/or kwargs. Thanks, inspect package !
+                request = f_sig.bind(*args, **kwargs).arguments['request']
 
             # Retrieve or create the corresponding execution monitor
             steps_monitor = all_monitors.get_execution_monitor(request.node, *args, **kwargs)

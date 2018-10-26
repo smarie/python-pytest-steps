@@ -109,7 +109,7 @@ def my_fixture():
 
 
 @test_steps('step_a', 'step_b')
-def test_suite_fixture(my_fixture):
+def test_suite_fixture(my_fixture, request):
     # Step A
     print("step a")
     assert not False  # replace with your logic
