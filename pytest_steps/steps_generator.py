@@ -291,7 +291,7 @@ class StepMonitorsContainer(dict):
         :return:
         """
         # Get the unique id that is shared between the steps of the same execution, by removing the step parameter
-        id_without_steps = get_id(pytest_node, remove_params=(INNER_STEP_ARGNAME,))
+        id_without_steps = get_id(pytest_node, remove_params=(GENERATOR_MODE_STEP_ARGNAME,))
 
         if id_without_steps not in self:
             # First time we call the function with this combination of parameters
@@ -303,7 +303,7 @@ class StepMonitorsContainer(dict):
         return self[id_without_steps]
 
 
-INNER_STEP_ARGNAME = "________step_name_"
+GENERATOR_MODE_STEP_ARGNAME = "________step_name_"
 
 
 def get_generator_decorator(steps  # type: Iterable[Any]
@@ -319,7 +319,7 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         """
         The test function decorator. When a function is decorated it
          - checks that the function is a generator
-         - checks that the function signature does not contain our private name INNER_STEP_ARGNAME "by chance"
+         - checks that the function signature does not contain our private name `GENERATOR_MODE_STEP_ARGNAME` "by chance"
          - wraps the function
         :param test_func:
         :return:
@@ -334,7 +334,7 @@ def get_generator_decorator(steps  # type: Iterable[Any]
 
         # check that our name for the additional 'test step' parameter is valid (it does not exist in f signature)
         f_sig = signature(test_func)
-        test_step_argname = INNER_STEP_ARGNAME
+        test_step_argname = GENERATOR_MODE_STEP_ARGNAME
         if test_step_argname in f_sig.parameters:
             raise ValueError("Your test function relies on arg name %s that is needed by @test_steps in generator "
                              "mode" % test_step_argname)
