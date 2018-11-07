@@ -507,6 +507,9 @@
 <h3 id="one_per_step"><code>@one_per_step</code><a class="headerlink" href="#one_per_step" title="Permanent link">&para;</a></h3>
 <p>A decorator for a function-scoped fixture. By default if you do not use this decorator, only the fixture created  for the first step will be injected in your function, and all steps will see that same instance. </p>
 <p>Decorating your fixture with <code>@one_per_step</code> tells <code>@test_steps</code> to transparently replace the fixture object instance by the one created for each step, before each step executes. This results in all steps using different fixture instances.</p>
+<div class="admonition note">
+<p>When a fixture is decorated with <code>@one_per_step</code>, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using <code>get_underlying_fixture(my_fixture)</code>.</p>
+</div>
 <h2 id="explicitparametrizer-mode">Explicit/parametrizer mode<a class="headerlink" href="#explicitparametrizer-mode" title="Permanent link">&para;</a></h2>
 <h3 id="depends_on"><code>@depends_on</code><a class="headerlink" href="#depends_on" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nd">@depends_on</span><span class="p">(</span><span class="o">*</span><span class="n">steps</span><span class="p">,</span> 

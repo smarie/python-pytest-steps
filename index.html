@@ -860,6 +860,9 @@ PASSED
 </pre></div>
 
 
+<div class="admonition note">
+<p>When a fixture is decorated with <code>@one_per_step</code>, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using <code>get_underlying_fixture(my_fixture)</code>.</p>
+</div>
 <h2 id="2-usage-explicit-mode">2. Usage - "explicit" mode<a class="headerlink" href="#2-usage-explicit-mode" title="Permanent link">&para;</a></h2>
 <p>In "explicit" mode, things are a bit more complex to write but can be easier to understand because it does not use generators, just simple function calls.</p>
 <h3 id="a-basics_1">a- Basics<a class="headerlink" href="#a-basics_1" title="Permanent link">&para;</a></h3>
