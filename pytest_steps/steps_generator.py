@@ -92,12 +92,62 @@ class StepYieldError(Exception):
                % (self.step_name, self.received, self.step_name)
 
 
-class _ReplaceableInstance(ObjectProxy):
+class _OnePerStepFixtureProxy(ObjectProxy):
     """
     An object container for which one can change the inner instance.
-    By default wrapt.ObjectProxy does the job perfectly.
+    By default wrapt.ObjectProxy does the job perfectly, so this object behaves
+    transparently like the fixture it wraps.
+
+    If for some reason you still wish to access the underlying fixture object, please rely on the public API
+    `get_underlying_fixture(obj)` rather than calling `obj.__wrapped__`.
+
+    We go one step further by also proxying the representation
     """
-    pass
+    def __repr__(self):
+        return repr(self.__wrapped__)
+
+
+def is_replacable_fixture_wrapper(obj):
+    """
+    Returns True when the object results from a function-scoped fixture that has been decorated with @one_per_step.
+
+    In that case the fixture value of the first step is wrapped in a `_OnePerStepFixtureProxy`, so that we can inject the
+    other fixture values in it later. Indeed otherwise the fixture values for the other steps will never be injected in
+    the generator test function (because its args are provided only once at the first step).
+
+    :param obj:
+    :return:
+    """
+    return isinstance(obj, _OnePerStepFixtureProxy)
+
+
+def replace_fixture(rfw1, rfw2):
+    """
+    Replaces the contents of fixture obj1 with the ones from fixture obj2. This only works if both are replaceable
+    fixture wrappers
+
+    :param rfw1:
+    :param rfw2:
+    :return:
+    """
+    if is_replacable_fixture_wrapper(rfw1) and is_replacable_fixture_wrapper(rfw2):
+        rfw1.__wrapped__ = rfw2.__wrapped__
+    else:
+        raise TypeError("both objects should come from the same fixture, decorated with @one_per_step")
+
+
+def get_underlying_fixture(rfw):
+    """
+    Returns the underlying fixture object inside this fixture wrapper, or returns the fixture itself in case it is
+    not a one_per_step fixture wrapper
+
+    :param rfw:
+    :return:
+    """
+    if is_replacable_fixture_wrapper(rfw):
+        return rfw.__wrapped__
+    else:
+        return rfw
 
 
 def one_per_step(fixture_fun=None):
@@ -123,7 +173,7 @@ def one_per_step(fixture_fun=None):
             :return:
             """
             res = f(*args, **kwargs)
-            return _ReplaceableInstance(res)
+            return _OnePerStepFixtureProxy(res)
     else:
         def _steps_aware_wrapper(f, *args, **kwargs):
             """
@@ -132,7 +182,7 @@ def one_per_step(fixture_fun=None):
             """
             gen = f(*args, **kwargs)
             res = next(gen)
-            yield _ReplaceableInstance(res)
+            yield _OnePerStepFixtureProxy(res)
             next(gen)
 
     _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper)
@@ -141,30 +191,47 @@ def one_per_step(fixture_fun=None):
 
 class StepsMonitor(object):
     """
-    An object responsible to monitor execution of a test function with steps.
+    An object responsible to _monitor execution of a test function with steps.
     The function should be a generator
     """
-    def __init__(self, step_names, test_function, *args, **kwargs):
+    def __init__(self, step_names, test_function, *first_step_args, **first_step_kwargs):
         """
-        Constructor with declaration of all step names in advance
+        Constructor with declaration of all step names in advance,
+        as well as the test function to execute and the first step args and kwargs
+
+        Nothing will be executed here, the test function will only be called once to create the generator.
+
         :param step_names:
+        :param test_function:
+        :param first_step_args:
+        :param first_step_kwargs:
         """
         self.steps = step_names
         self.exceptions = dict()
 
-        # Scan for objects that should be replaced at each step
+        # Remember objects that should be replaced in subsequent steps
+        # -- for positional arguments, store in a dict under key=position
         self.replaceable_args = dict()
-        for i, a in enumerate(args):
-            if isinstance(a, _ReplaceableInstance):
+        for i, a in enumerate(first_step_args):
+            if is_replacable_fixture_wrapper(a):
                 self.replaceable_args[i] = a
 
+        # -- for keyword arguments, store in a dict under key=name
         self.replaceable_kwargs = dict()
-        for k, a in kwargs.items():
-            if isinstance(a, _ReplaceableInstance):
+        for k, a in first_step_kwargs.items():
+            if is_replacable_fixture_wrapper(a):
                 self.replaceable_kwargs[k] = a
 
         # create the generator
-        self.gen = test_function(*args, **kwargs)
+        self.gen = test_function(*first_step_args, **first_step_kwargs)
+
+    def can_execute(self, step_name):
+        """
+        As of today a step can execute if there are no registered exceptions (in previous mandatory steps).
+        :param step_name:
+        :return:
+        """
+        return len(self.exceptions) == 0
 
     def execute(self, step_name, *args, **kwargs):
         """
@@ -177,12 +244,12 @@ class StepsMonitor(object):
         if self.can_execute(step_name):
             # Replace all objects that should be replaced
             for i, a in self.replaceable_args.items():
-                a.__wrapped__ = args[i].__wrapped__
+                replace_fixture(a, args[i])
             for k, a in self.replaceable_kwargs.items():
-                a.__wrapped__ = kwargs[k].__wrapped__
+                replace_fixture(a, kwargs[k])
 
             # Execute the step
-            with self.monitor(step_name):
+            with self._monitor(step_name):
                 try:
                     res = next(self.gen)
                 except StopIteration as e:
@@ -240,16 +307,8 @@ class StepsMonitor(object):
             else:
                 pytest.skip(msg)
 
-    def can_execute(self, step_name):
-        """
-        Placeholder for more complex stuff. As of today a step can execute if there are no registered exceptions.
-        :param step_name:
-        :return:
-        """
-        return len(self.exceptions) == 0
-
-    def monitor(self, step_name):
-        """ returns a context manager """
+    def _monitor(self, step_name):
+        """ returns a context manager that registers all captured exceptions in self, under given step name """
 
         def handle_exception(exc_type, exc_val, exc_tb):
             if exc_type in {_DependentTestsNotRunException, OptionalStepException}:

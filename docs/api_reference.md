@@ -51,6 +51,9 @@ A decorator for a function-scoped fixture. By default if you do not use this dec
     
 Decorating your fixture with `@one_per_step` tells `@test_steps` to transparently replace the fixture object instance by the one created for each step, before each step executes. This results in all steps using different fixture instances.
 
+!!! note ""
+    When a fixture is decorated with `@one_per_step`, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using `get_underlying_fixture(my_fixture)`.
+
 ## Explicit/parametrizer mode
 
 ### `@depends_on`

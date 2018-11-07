@@ -280,6 +280,9 @@ step b
 PASSED
 ```
 
+!!! note ""
+    When a fixture is decorated with `@one_per_step`, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using `get_underlying_fixture(my_fixture)`.
+    
 ## 2. Usage - "explicit" mode
 
 In "explicit" mode, things are a bit more complex to write but can be easier to understand because it does not use generators, just simple function calls.
