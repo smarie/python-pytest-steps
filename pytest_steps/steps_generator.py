@@ -1,7 +1,6 @@
 from collections import Iterable as It
 
 import six
-from decorator import decorate
 from six import raise_from
 from wrapt import ObjectProxy
 
@@ -136,7 +135,7 @@ def one_per_step(fixture_fun=None):
             yield _ReplaceableInstance(res)
             next(gen)
 
-    _steps_aware_decorated_function = decorate(fixture_fun, _steps_aware_wrapper)
+    _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper)
     return _steps_aware_decorated_function
 
 
