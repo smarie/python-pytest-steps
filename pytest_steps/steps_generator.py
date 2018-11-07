@@ -150,21 +150,37 @@ def get_underlying_fixture(rfw):
         return rfw
 
 
-def one_per_step(fixture_fun=None):
+def one_per_step(*args):
     """
-    A decorator for a function-scoped fixture. By default if you do not use this decorator, only the fixture created
-    for the first step will be injected in your function, and all steps will see that same instance.
+    A decorator for a function-scoped fixture so that it works well with generator-mode test functions.
 
-    Decorating your fixture with `@one_per_step` tells `@test_steps` to transparently replace the fixture object
-    instance by the one created for each step, before each step executes. This results in all steps using different
-    fixture instances.
+    By default if you do not use this decorator but use the fixture in a generator-mode test function, only the
+    fixture created for the first step will be injected in your test function, and all subsequent steps will see that
+    same instance.
 
-    :param fixture_fun: the fixture callable being decorated
+    Decorating your fixture with `@one_per_step` tells `@test_steps` to transparently replace_fixture the fixture object
+    instance by the one created for each step, before each step executes in your test function. This results in all
+    steps using different fixture instances, as expected.
+
+    It is recommended that you put this decorator as the second decorator, right after `@pytest.fixture`:
+
+    ```python
+    @pytest.fixture
+    @one_per_step
+    def my_cool_fixture():
+        return random()
+    ```
+
     :return:
     """
-    if fixture_fun is None:
-        # called with no arguments
-        return one_per_step
+    if len(args) == 1 and callable(args[0]):
+        return one_per_step_decorate(args[0])
+    else:
+        return one_per_step_decorate
+
+
+def one_per_step_decorate(fixture_fun):
+    """ Implementation of the @one_per_step decorator, for manual decoration"""
 
     if not isgeneratorfunction(fixture_fun):
         def _steps_aware_wrapper(f, *args, **kwargs):
