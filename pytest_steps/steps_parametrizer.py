@@ -118,7 +118,7 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
             f_sig = signature(test_func)
 
             # Create a test function wrapper that will replace the test steps with monitored ones before injecting them
-            def _execute_step_with_dependency_checks(request, *args, **kwargs):
+            def dependency_mgr_wrapper(f, request, *args, **kwargs):
                 """Executes the current step only if its dependencies are correct, and registers its execution result"""
 
                 # (a) retrieve the current step function
@@ -163,20 +163,8 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
 
                 return res
 
-            if 'request' not in f_sig.parameters:
-                # easy: we can add it explicitly in our signature
-                def dependency_mgr_wrapper(f, request, *args, **kwargs):
-                    """Executes current step with dependency checks"""
-                    return _execute_step_with_dependency_checks(request, *args, **kwargs)
-            else:
-                # harder: we have to retrieve the value for request. Thanks, inspect package !
-                def dependency_mgr_wrapper(f, *args, **kwargs):
-                    """Executes current step with dependency checks"""
-                    request = f_sig.bind(*args, **kwargs).arguments['request']
-                    return _execute_step_with_dependency_checks(request, *args, **kwargs)
-
             # wrap the test function and add the 'request' argument if needed
-            wrapped_test_function = my_decorate(test_func, dependency_mgr_wrapper, additional_args=['request'])
+            wrapped_test_function = my_decorate(test_func, dependency_mgr_wrapper, additional_args=('request', ))
 
             wrapped_parametrized_test_function = parametrizer(wrapped_test_function)
             return wrapped_parametrized_test_function
