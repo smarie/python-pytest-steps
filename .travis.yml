@@ -43,8 +43,12 @@ before_install:
   # (c) base conda environment
   - echo "creating conda environment"; conda create -q -y -n test-environment python=$TRAVIS_PYTHON_VERSION
   - echo "activating conda environment"; source activate test-environment
-  - conda --version
+  - echo $PATH
+  - conda info
+  - conda config --show-sources
   - conda list
+  # unfortonately the path is not well set so harcode-add it
+  - export PATH="$HOME/miniconda/envs/test-environment/Scripts:$PATH"
 
 install:
   - python ci_tools/py_install.py conda ci_tools/requirements-conda.txt
