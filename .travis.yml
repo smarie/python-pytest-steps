@@ -52,6 +52,7 @@ install:
   - pip install PyGithub  # for ci_tools/github_release.py
   - pip install codecov  # See https://github.com/codecov/example-python.
   - conda list
+  - pytest --version
 
 script:
 #  - coverage run tests.py
