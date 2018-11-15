@@ -19,9 +19,9 @@ trap "cleanup" INT TERM EXIT
 #fi
 
 # First the raw
-# echo -e "\n\n****** Running tests : 1/2 RAW******\n\n"
-# python -m pytest --cov-report term-missing --cov=./pytest_steps -v pytest_steps/tests_raw/
+ echo -e "\n\n****** Running tests : 1/2 RAW******\n\n"
+ python -m pytest --cov-report term-missing --cov=./pytest_steps -v pytest_steps/tests_raw/
 
 # Then the meta (appended)
 echo -e "\n\n****** Running tests : 2/2 META******\n\n"
-python -m pytest --junitxml=reports/junit/junit.xml --html=reports/junit/report.html --cov-report term-missing --cov=./pytest_steps -v pytest_steps/tests/
+python -m pytest --junitxml=reports/junit/junit.xml --html=reports/junit/report.html --cov-report term-missing --cov=./pytest_steps --cov-append -v pytest_steps/tests/

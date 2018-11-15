@@ -1,3 +1,6 @@
+# META
+# {'passed': 16, 'skipped': 0, 'failed': 0}
+# END META
 from pytest_steps.steps_common import get_fixture_value
 
 try:  # python 3.2+

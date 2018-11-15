@@ -1,3 +1,6 @@
+# META
+# {'passed': 16, 'skipped': 0, 'failed': 0}
+# END META
 import pytest
 
 from pytest_steps import test_steps, StepsDataHolder

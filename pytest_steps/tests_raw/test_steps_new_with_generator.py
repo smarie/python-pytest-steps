@@ -1,7 +1,9 @@
+# META
+# {'passed': 12, 'skipped': 2, 'failed': 2}
+# END META
 import pytest
 
 from pytest_steps import test_steps, optional_step, one_per_step
-from pytest_steps.tests import DEBUG
 
 
 @test_steps('step_a', 'step_b', 'step_c')
@@ -38,8 +40,7 @@ def test_suite_exception_on_mandatory_step():
 
     # Step B
     print("step b")
-    if DEBUG:
-        assert False  # replace with your logic
+    assert False  # replace with your logic
     yield 'step_b'
 
     # Step C
@@ -60,8 +61,7 @@ def test_suite_optional_and_dependent_steps():
     # Step B
     with optional_step('step_b') as step_b:
         print("step b")
-        if DEBUG:
-            assert False
+        assert False
     yield step_b
 
     # Step C depends on step B
