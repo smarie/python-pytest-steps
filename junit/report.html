@@ -325,7 +325,7 @@ function filter_table(elem) {
     not_found_message.hidden = !all_rows_hidden;
 }
 </script>
-    <p>Report generated on 15-Nov-2018 at 15:10:07</p>
+    <p>Report generated on 15-Nov-2018 at 15:36:47</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -335,8 +335,8 @@ function filter_table(elem) {
         <td>Python</td>
         <td>3.5.6</td></tr></table>
     <h2>Summary</h2>
-    <p>68 tests ran in 0.39 seconds. </p>
-    <p>(Un)check the boxes to filter the results.</p><input checked="true" data-test-result="passed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">68 passed</span> <input checked="true" data-test-result="skipped" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span> <input checked="true" data-test-result="failed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span> <input checked="true" data-test-result="error" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span> <input checked="true" data-test-result="xfailed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span> <input checked="true" data-test-result="xpassed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span> <input checked="true" data-test-result="rerun" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span> 
+    <p>9 tests ran in 0.69 seconds. </p>
+    <p>(Un)check the boxes to filter the results.</p><input checked="true" data-test-result="passed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">9 passed</span> <input checked="true" data-test-result="skipped" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span> <input checked="true" data-test-result="failed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span> <input checked="true" data-test-result="error" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span> <input checked="true" data-test-result="xfailed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span> <input checked="true" data-test-result="xpassed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span> <input checked="true" data-test-result="rerun" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span> 
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -350,697 +350,308 @@ function filter_table(elem) {
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1a-test_step0-2A]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_with_results_complex.py]</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2AF
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;passed&apos;: 16}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests0, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 16 items
+
+test_run_all_tests.py ................
+
+========================== 16 passed in 0.03 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1a-test_step0-2B]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_stackoverflow.py]</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2BF
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_stackoverflow.py results in {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;passed&apos;: 3}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests1, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 3 items
+
+test_run_all_tests.py ...
+
+=========================== 3 passed in 0.01 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1a-test_step1-2A]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_new_with_generator.py]</td>
+          <td class="col-duration">0.17</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2AF
-some intermediate result created in step a for test 1a2AF ... augmented
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;failed&apos;: 2, &apos;skipped&apos;: 2, &apos;passed&apos;: 12}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests2, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 16 items
+
+test_run_all_tests.py ....Fs.Fs.......
+
+=================================== FAILURES ===================================
+________________ test_suite_exception_on_mandatory_step[step_b] ________________
+
+________step_name_ = &apos;step_b&apos;
+request = &lt;FixtureRequest for &lt;Function &apos;test_suite_exception_on_mandatory_step[step_b]&apos;&gt;&gt;
+
+&gt;   ???
+
+&lt;decorator-gen-4&gt;:2: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
+    **kwargs)
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_generator.py:431: in step_function_wrapper
+    steps_monitor.execute(step_name, *args, **kwargs)
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_generator.py:270: in execute
+    res = next(self.gen)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @test_steps(&apos;step_a&apos;, &apos;step_b&apos;, &apos;step_c&apos;)
+    def test_suite_exception_on_mandatory_step():
+        &quot;&quot;&quot; &quot;&quot;&quot;
+    
+        # Step A
+        print(&quot;step a&quot;)
+        assert not False  # replace with your logic
+        yield &apos;step_a&apos;
+    
+        # Step B
+        print(&quot;step b&quot;)
+&gt;       assert False  # replace with your logic
+E       assert False
+
+test_run_all_tests.py:43: AssertionError
+----------------------------- Captured stdout call -----------------------------
+step b
+_______________ test_suite_optional_and_dependent_steps[step_b] ________________
+
+________step_name_ = &apos;step_b&apos;
+request = &lt;FixtureRequest for &lt;Function &apos;test_suite_optional_and_dependent_steps[step_b]&apos;&gt;&gt;
+
+&gt;   ???
+
+&lt;decorator-gen-5&gt;:2: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
+    **kwargs)
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_generator.py:431: in step_function_wrapper
+    steps_monitor.execute(step_name, *args, **kwargs)
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_generator.py:292: in execute
+    raise six.reraise(res.exec_result.exc_type, res.exec_result.exc_val, res.exec_result.tb)
+/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/six.py:693: in reraise
+    raise value
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    @test_steps(&apos;step_a&apos;, &apos;step_b&apos;, &apos;step_c&apos;, &apos;step_d&apos;)
+    def test_suite_optional_and_dependent_steps():
+        &quot;&quot;&quot; &quot;&quot;&quot;
+    
+        # Step A
+        print(&quot;step a&quot;)
+        assert not False
+        yield &apos;step_a&apos;
+    
+        # Step B
+        with optional_step(&apos;step_b&apos;) as step_b:
+            print(&quot;step b&quot;)
+&gt;           assert False
+E           assert False
+
+test_run_all_tests.py:64: AssertionError
+----------------------------- Captured stdout call -----------------------------
+step b
+================ 2 failed, 12 passed, 2 skipped in 0.15 seconds ================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1a-test_step1-2B]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_pytest_capabilities.py]</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2BF
-some intermediate result created in step a for test 1a2BF ... augmented
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_pytest_capabilities.py results in {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;passed&apos;: 16}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 16 items
+
+test_run_all_tests.py ................
+
+========================== 16 passed in 0.04 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1b-test_step0-2A]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_with_results_basic.py]</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2AF
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;passed&apos;: 4}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests4, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 4 items
+
+test_run_all_tests.py ....
+
+=========================== 4 passed in 0.02 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1b-test_step0-2B]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_no_results.py]</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2BF
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_no_results.py results in {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;passed&apos;: 4}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 4 items
+
+test_run_all_tests.py ....
+
+=========================== 4 passed in 0.01 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1b-test_step1-2A]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_decorator.py]</td>
+          <td class="col-duration">0.05</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2AF
-some intermediate result created in step a for test 1b2AF ... augmented
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_decorator.py results in {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;passed&apos;: 4}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests6, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 4 items
+
+test_run_all_tests.py ....
+
+=========================== 4 passed in 0.02 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[F-1b-test_step1-2B]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_dependencies.py]</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2BF
-some intermediate result created in step a for test 1b2BF ... augmented
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_dependencies.py results in {&apos;failed&apos;: 2, &apos;skipped&apos;: 1, &apos;passed&apos;: 3}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 6 items
+
+test_run_all_tests.py .F..Fs
+
+=================================== FAILURES ===================================
+_____________________________ test_suite_1[step_b] _____________________________
+
+test_step = &apos;step_b&apos;
+
+    @test_steps(&apos;step_a&apos;, &apos;step_b&apos;, &apos;step_c&apos;)
+    def test_suite_1(test_step):
+        &quot;&quot;&quot; In this test suite the last step can &quot;see&quot; the dependency so it is still executed ...&quot;&quot;&quot;
+        # Execute the step according to name
+        if test_step == &apos;step_a&apos;:
+            step_a()
+        elif test_step == &apos;step_b&apos;:
+&gt;           step_b()
+
+test_run_all_tests.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def step_b():
+        &quot;&quot;&quot; Step a of the test &quot;&quot;&quot;
+    
+        # perform this step
+        print(&quot;step b&quot;)
+&gt;       assert False
+E       assert False
+
+test_run_all_tests.py:20: AssertionError
+----------------------------- Captured stdout call -----------------------------
+step b
+________________________ test_suite_no_results[step_b] _________________________
+
+test_step = &lt;function step_b at 0x7fecf990e9d8&gt;
+request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
+
+&gt;   ???
+
+&lt;decorator-gen-13&gt;:2: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
+    **kwargs)
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_parametrizer.py:159: in dependency_mgr_wrapper
+    res = test_func(*args, **kwargs)
+test_run_all_tests.py:37: in test_suite_no_results
+    test_step()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def step_b():
+        &quot;&quot;&quot; Step a of the test &quot;&quot;&quot;
+    
+        # perform this step
+        print(&quot;step b&quot;)
+&gt;       assert False
+E       assert False
+
+test_run_all_tests.py:20: AssertionError
+----------------------------- Captured stdout call -----------------------------
+step b
+================ 2 failed, 3 passed, 1 skipped in 0.04 seconds =================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1a-test_step0-2A]</td>
-          <td class="col-duration">0.00</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_stackoverflow2.py]</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2AG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1a-test_step0-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2BG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1a-test_step1-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2AG
-some intermediate result created in step a for test 1a2AG ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1a-test_step1-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2BG
-some intermediate result created in step a for test 1a2BG ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1b-test_step0-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2AG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1b-test_step0-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2BG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1b-test_step1-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2AG
-some intermediate result created in step a for test 1b2AG ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_pytest_capabilities.py::test_manual_pytest_equivalent[G-1b-test_step1-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2BG
-some intermediate result created in step a for test 1b2BG ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_stackoverflow.py::test_suite_with_shared_results[step_first]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_stackoverflow.py::test_suite_with_shared_results[step_conversion]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_stackoverflow.py::test_suite_with_shared_results[step_a_works_with_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_stackoverflow2.py::test_suite[step_instance_start]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_stackoverflow2.py::test_suite[step_instance_stop]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_stackoverflow2.py::test_suite[step_instance_delete]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="empty log">No log output captured.</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_1[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_1[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_1[step_c]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step c
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_no_results[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_no_results[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_dependencies.py::test_suite_no_results[step_c]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step c
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_fixture[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>created new fixture 140393115635384
------------------------------ Captured stdout call -----------------------------<br/>step a
-140393115635384 called for the 1-th time
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_fixture[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>created new fixture 140393115603240
------------------------------ Captured stdout call -----------------------------<br/>step b
-140393115603240 called for the 1-th time
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_shared_results_no_yield_names[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_shared_results_no_yield_names[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_shared_results_no_yield_names[step_c]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step c
-some intermediate result created in step a ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_exception_on_mandatory_step[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_exception_on_mandatory_step[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_exception_on_mandatory_step[step_c]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step c
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_optional_and_dependent_steps[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_optional_and_dependent_steps[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_optional_and_dependent_steps[step_c]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step c
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_optional_and_dependent_steps[step_d]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step d
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_parametrized[i=0-step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a, i=0
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_parametrized[i=0-step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b, i=0
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_parametrized[i=1-step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a, i=1
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_new_with_generator.py::test_suite_parametrized[i=1-step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b, i=1
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_no_results.py::test_suite_no_results_str[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_no_results.py::test_suite_no_results_str[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_no_results.py::test_suite_no_results_fun[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_no_results.py::test_suite_no_results_fun[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_basic.py::test_suite_with_shared_results[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_basic.py::test_suite_with_shared_results[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-some intermediate result created in step a ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_basic.py::test_suite_with_steps_data[step_a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_basic.py::test_suite_with_steps_data[step_b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b
-some intermediate result created in step a ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1a-step_a-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2AF
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1a-step_a-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2BF
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1a-step_b-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2AF
-some intermediate result created in step a for test 1a2AF ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1a-step_b-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2BF
-some intermediate result created in step a for test 1a2BF ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1b-step_a-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2AF
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1b-step_a-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2BF
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1b-step_b-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2AF
-some intermediate result created in step a for test 1b2AF ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[F-1b-step_b-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2BF
-some intermediate result created in step a for test 1b2BF ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1a-step_a-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2AG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1a-step_a-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1a2BG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1a-step_b-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2AG
-some intermediate result created in step a for test 1a2AG ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1a-step_b-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1a2BG
-some intermediate result created in step a for test 1a2BG ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1b-step_a-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2AG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1b-step_a-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step a - 1b2BG
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1b-step_b-2A]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2AG
-some intermediate result created in step a for test 1b2AG ... augmented
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_with_results_complex.py::test_suite_with_results[G-1b-step_b-2B]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>step b - 1b2BG
-some intermediate result created in step a for test 1b2BG ... augmented
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_stackoverflow2.py results in {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;passed&apos;: 3}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, cov-2.6.0
+collected 3 items
+
+test_run_all_tests.py ...
+
+=========================== 3 passed in 0.01 seconds ===========================
 </div></td></tr></tbody></table></body></html>
