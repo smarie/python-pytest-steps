@@ -42,7 +42,7 @@ before_install:
 
   # (c) base conda environment
   - echo "creating conda environment"; conda create -q -y -n test-environment python=$TRAVIS_PYTHON_VERSION
-  - echo "activating conda environment"; source activate test-environment
+  - echo "activating conda environment"; conda activate test-environment
   - conda --version
   - conda list
 
@@ -53,7 +53,8 @@ install:
   - pip install PyGithub  # for ci_tools/github_release.py
   - pip install codecov  # See https://github.com/codecov/example-python.
   - conda list
-  - echo $PATH
+  # make sure
+  - conda deactivate; conda activate test-environment; echo $PATH
   - which pytest
   - pytest --version
 
