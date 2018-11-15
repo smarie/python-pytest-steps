@@ -43,6 +43,7 @@ before_install:
   # (c) base conda environment
   - echo "creating conda environment"; conda create -q -y -n test-environment python=$TRAVIS_PYTHON_VERSION
   - echo "activating conda environment"; source activate test-environment
+  - ls "$HOME/miniconda/envs/test-environment/"
   - echo $PATH
   - conda info
   - conda config --show-sources
