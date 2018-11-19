@@ -1,12 +1,23 @@
 # META
 # {'passed': 3, 'skipped': 0, 'failed': 0}
 # END META
+from collections import OrderedDict
+
 import pytest
-from pytest_harvest import get_session_synthesis_dct
+from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture
+
+
+@pytest.fixture(scope='module', autouse=True)
+def store():
+    return OrderedDict()
+
+
+# A module-scoped results bag fixture
+my_results = create_results_bag_fixture('store', name='my_results')
 
 
 @pytest.mark.parametrize("dummy", [1], ids=str)
-def test_my_app_bench(dummy):
+def test_my_app_bench(dummy, my_results):
     pass
 
 
@@ -15,7 +26,7 @@ def test_basic():
     pass
 
 
-def test_synthesis(request):
+def test_synthesis(request, store):
     """
     Tests that this test runs last and the two others are available in the synthesis
     """
