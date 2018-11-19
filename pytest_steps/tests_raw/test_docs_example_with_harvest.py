@@ -1,5 +1,5 @@
 # META
-# {'passed': 14, 'skipped': 0, 'failed': 0}
+# {'passed': 13, 'skipped': 0, 'failed': 0}
 # END META
 
 from collections import OrderedDict
