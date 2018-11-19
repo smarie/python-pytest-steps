@@ -71,13 +71,10 @@ def test_my_app_bench(algo_param, dataset, my_results):
 
 def test_synthesis(request, store):
     """
-    Note: we could do this at many other places (hook, teardown of a session-scope fixture...)
-
-    Note2: we could provide helper methods in pytest_harvest to perform the code below more easily
-    :param request:
-    :param store:
-    :return:
+    Create the benchmark synthesis table.
+    Note: we could do this at many other places (hook, teardown of a session-scope fixture...). See pytest-harvest
     """
+
     # Get session synthesis using `pytest-harvest`
     # - filtered on the test function of interest
     # - combined with our store
