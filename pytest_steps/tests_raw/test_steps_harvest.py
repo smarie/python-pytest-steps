@@ -90,12 +90,9 @@ def test_basic():
 
 def test_synthesis(request, store):
     """
+    Tests that users can create a pivoted syntesis table, both by hand (only using pytest-harvest's
+    get_session_synthesis_dct) or using the provided utility functions from pytest-steps.
     Note: we could do this at many other places (hook, teardown of a session-scope fixture...)
-
-    Note2: we could provide helper methods in pytest_harvest to perform the code below more easily
-    :param request:
-    :param store:
-    :return:
     """
     # Get session synthesis
     # - filtered on the test function of interest
