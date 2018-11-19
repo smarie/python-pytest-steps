@@ -361,6 +361,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#3-combining-with-pytest-harvest" title="3. Combining with pytest-harvest" class="md-nav__link">
+    3. Combining with pytest-harvest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#main-features-benefits" title="Main features / benefits" class="md-nav__link">
     Main features / benefits
   </a>
@@ -548,6 +555,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-combining-with-pytest-harvest" title="3. Combining with pytest-harvest" class="md-nav__link">
+    3. Combining with pytest-harvest
+  </a>
   
 </li>
       
@@ -977,11 +991,159 @@ PASSED
 <p class="admonition-title">Info</p>
 <p>If you wish to share data between steps but you <strong>also</strong> wish to collect the whole dataset at the end of the tests, do not use <code>steps_data</code>. Instead, use <code>results_bag</code> from <a href="https://smarie.github.io/pytest-patterns">pytest-patterns</a>, it will work similarly but you will be able to collect it when pytest session ends.</p>
 </div>
+<h2 id="3-combining-with-pytest-harvest">3. Combining with <code>pytest-harvest</code><a class="headerlink" href="#3-combining-with-pytest-harvest" title="Permanent link">&para;</a></h2>
+<p>You might already use <a href="https://smarie.github.io/python-pytest-harvest/"><code>pytest-harvest</code></a> to turn your tests into functional benchmarks.</p>
+<p>When you combine it with <code>pytest_steps</code> you end up with one row in the synthesis table <strong>per step</strong>. For example:</p>
+<table>
+<thead>
+<tr>
+<th>test_id</th>
+<th>status</th>
+<th>duration_ms</th>
+<th><strong><em>_</em></strong><em>step_name</em></th>
+<th>algo_param</th>
+<th>dataset</th>
+<th>accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test_my_app_bench[A-1-train]</td>
+<td>passed</td>
+<td>2.00009</td>
+<td>train</td>
+<td>1</td>
+<td>my dataset #A</td>
+<td>0.832642</td>
+</tr>
+<tr>
+<td>test_my_app_bench[A-1-score]</td>
+<td>passed</td>
+<td>0</td>
+<td>score</td>
+<td>1</td>
+<td>my dataset #A</td>
+<td>nan</td>
+</tr>
+<tr>
+<td>test_my_app_bench[A-2-train]</td>
+<td>passed</td>
+<td>1.00017</td>
+<td>train</td>
+<td>2</td>
+<td>my dataset #A</td>
+<td>0.0638134</td>
+</tr>
+<tr>
+<td>test_my_app_bench[A-2-score]</td>
+<td>passed</td>
+<td>0.999928</td>
+<td>score</td>
+<td>2</td>
+<td>my dataset #A</td>
+<td>nan</td>
+</tr>
+<tr>
+<td>test_my_app_bench[B-1-train]</td>
+<td>passed</td>
+<td>0</td>
+<td>train</td>
+<td>1</td>
+<td>my dataset #B</td>
+<td>0.870705</td>
+</tr>
+<tr>
+<td>test_my_app_bench[B-1-score]</td>
+<td>passed</td>
+<td>0</td>
+<td>score</td>
+<td>1</td>
+<td>my dataset #B</td>
+<td>nan</td>
+</tr>
+<tr>
+<td>test_my_app_bench[B-2-train]</td>
+<td>passed</td>
+<td>0</td>
+<td>train</td>
+<td>2</td>
+<td>my dataset #B</td>
+<td>0.764746</td>
+</tr>
+<tr>
+<td>test_my_app_bench[B-2-score]</td>
+<td>passed</td>
+<td>1.0004</td>
+<td>score</td>
+<td>2</td>
+<td>my dataset #B</td>
+<td>nan</td>
+</tr>
+</tbody>
+</table>
+<p>If you prefer to see one row per test and the step details in columns, this package provides utility methods to perform the transform easily. You will for example get this kind of table:</p>
+<table>
+<thead>
+<tr>
+<th>test_id</th>
+<th>algo_param</th>
+<th>dataset</th>
+<th>train/status</th>
+<th>train/duration_ms</th>
+<th>train/accuracy</th>
+<th>score/status</th>
+<th>score/duration_ms</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test_my_app_bench[A-1]</td>
+<td>1</td>
+<td>my dataset #A</td>
+<td>passed</td>
+<td>2.00009</td>
+<td>0.832642</td>
+<td>passed</td>
+<td>0</td>
+</tr>
+<tr>
+<td>test_my_app_bench[A-2]</td>
+<td>2</td>
+<td>my dataset #A</td>
+<td>passed</td>
+<td>1.00017</td>
+<td>0.0638134</td>
+<td>passed</td>
+<td>0.999928</td>
+</tr>
+<tr>
+<td>test_my_app_bench[B-1]</td>
+<td>1</td>
+<td>my dataset #B</td>
+<td>passed</td>
+<td>0</td>
+<td>0.870705</td>
+<td>passed</td>
+<td>0</td>
+</tr>
+<tr>
+<td>test_my_app_bench[B-2]</td>
+<td>2</td>
+<td>my dataset #B</td>
+<td>passed</td>
+<td>0</td>
+<td>0.764746</td>
+<td>passed</td>
+<td>1.0004</td>
+</tr>
+</tbody>
+</table>
+<p>A complete example is provided <a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests_raw/test_docs_example_with_harvest.py">here</a> and should be quite straightforward for those familiar with pytest-harvest.</p>
 <h2 id="main-features-benefits">Main features / benefits<a class="headerlink" href="#main-features-benefits" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Split tests into steps</strong>. Although the best practices in testing are very much in favor of having each test completely independent of the other ones (for example for distributed execution), there is definitely some value in results readability to break down tests into chained sub-tests (steps). The <code>@test_steps</code> decorator provides an intuitive way to do that without forcing any data model (steps can be functions, objects, etc.).</li>
 <li><strong>Multi-style</strong>: an <em>explicit</em> mode and a <em>generator</em> mode are supported, developers may wish to use one or the other depending on their coding style or readability target.</li>
-<li><strong>Steps can share data</strong>: In <em>generator</em> mode this is out-of-the-box. In <em>explicit</em> mode all steps in the same test suite can share data through the injected <code>steps_data</code> container (name is configurable).</li>
+<li><strong>Steps can share data</strong>- In <em>generator</em> mode this is out-of-the-box. In <em>explicit</em> mode all steps in the same test suite can share data through the injected <code>steps_data</code> container (name is configurable).</li>
 <li><strong>Steps dependencies can be defined</strong>: a <code>@depends_on</code> decorator (<em>explicit</em> mode) or an <code>optional_step</code> context manager (<em>generator</em> mode) allow you to specify that a given test step should be skipped or failed if its dependencies did not complete. </li>
 </ul>
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>

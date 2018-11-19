@@ -1,26 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="1" name="pytest" skips="0" tests="10" time="1.147"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.10643720626831055"><system-out>
-Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;passed&apos;: 16, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="2" name="pytest" skips="0" tests="12" time="1.691"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.06966733932495117"><system-out>
+Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 16}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests0, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests0, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
 collected 16 items
 
-test_run_all_tests.py ................                                   [100%]
+test_run_all_tests.py ................
 
-========================== 16 passed in 0.06 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.13695120811462402"><failure message="AssertionError: assert {&apos;error&apos;: 1, ...pped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;...pped&apos;: 0, ...}
-  Common items:
-  {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;xfailed&apos;: 0, &apos;xpassed&apos;: 0}
-  Differing items:
-  {&apos;passed&apos;: 0} != {&apos;passed&apos;: 1}
-  {&apos;error&apos;: 1} != {&apos;error&apos;: 0}
-  Full diff:
-  - {&apos;error&apos;: 1, &apos;failed&apos;: 0, &apos;passed&apos;: 0, &apos;skipped&apos;: 0, &apos;xfailed&apos;: 0, &apos;xpassed&apos;: 0}
-  ?           ^                         ^
-  + {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 1, &apos;skipped&apos;: 0, &apos;xfailed&apos;: 0, &apos;xpassed&apos;: 0}
-  ?           ^                         ^">test_to_run = &apos;test_wrapped_in_class.py&apos;
-testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/test_run_all_tests1&apos;)&gt;
+========================== 16 passed in 0.04 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.035074710845947266"><system-out>
+Testing that running pytest on file test_wrapped_in_class.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 1}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests1, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
+collected 1 items
+
+test_run_all_tests.py .
+
+=========================== 1 passed in 0.01 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.04122304916381836"><system-out>
+Testing that running pytest on file test_stackoverflow.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests2, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
+collected 3 items
+
+test_run_all_tests.py ...
+
+=========================== 3 passed in 0.01 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_harvest.py]" time="0.5110883712768555"><failure message="assert 14 == 13
+ +  where 13 = &lt;built-in method get of dict object at 0x7f1b8cab5388&gt;(&apos;passed&apos;, 0)
+ +    where &lt;built-in method get of dict object at 0x7f1b8cab5388&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;seconds&apos;: 46}.get">test_to_run = &apos;test_steps_harvest.py&apos;
+testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3&apos;)&gt;
 
     @pytest.mark.parametrize(&apos;test_to_run&apos;, test_files, ids=str)
     def test_run_all_tests(test_to_run, testdir):
@@ -70,85 +84,111 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     result.assert_outcomes(**asserts_dct)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;_pytest.pytester.RunResult object at 0x7fc0b156c080&gt;, passed = 1
-skipped = 0, failed = 0, error = 0, xpassed = 0, xfailed = 0
+self = &lt;_pytest.pytester.RunResult object at 0x7f1b8057b7f0&gt;, passed = 14
+skipped = 0, failed = 0
 
-    def assert_outcomes(
-        self, passed=0, skipped=0, failed=0, error=0, xpassed=0, xfailed=0
-    ):
-        &quot;&quot;&quot;Assert that the specified outcomes appear with the respective
-        numbers (0 means it didn&apos;t occur) in the text output from a test run.
-    
-        &quot;&quot;&quot;
+    def assert_outcomes(self, passed=0, skipped=0, failed=0):
+        &quot;&quot;&quot; assert that the specified outcomes appear with the respective
+            numbers (0 means it didn&apos;t occur) in the text output from a test run.&quot;&quot;&quot;
         d = self.parseoutcomes()
-        obtained = {
-            &quot;passed&quot;: d.get(&quot;passed&quot;, 0),
-            &quot;skipped&quot;: d.get(&quot;skipped&quot;, 0),
-            &quot;failed&quot;: d.get(&quot;failed&quot;, 0),
-            &quot;error&quot;: d.get(&quot;error&quot;, 0),
-            &quot;xpassed&quot;: d.get(&quot;xpassed&quot;, 0),
-            &quot;xfailed&quot;: d.get(&quot;xfailed&quot;, 0),
-        }
-        expected = {
-            &quot;passed&quot;: passed,
-            &quot;skipped&quot;: skipped,
-            &quot;failed&quot;: failed,
-            &quot;error&quot;: error,
-            &quot;xpassed&quot;: xpassed,
-            &quot;xfailed&quot;: xfailed,
-        }
-&gt;       assert obtained == expected
-E       AssertionError: assert {&apos;error&apos;: 1, ...pped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;...pped&apos;: 0, ...}
-E         Common items:
-E         {&apos;failed&apos;: 0, &apos;skipped&apos;: 0, &apos;xfailed&apos;: 0, &apos;xpassed&apos;: 0}
-E         Differing items:
-E         {&apos;passed&apos;: 0} != {&apos;passed&apos;: 1}
-E         {&apos;error&apos;: 1} != {&apos;error&apos;: 0}
-E         Full diff:
-E         - {&apos;error&apos;: 1, &apos;failed&apos;: 0, &apos;passed&apos;: 0, &apos;skipped&apos;: 0, &apos;xfailed&apos;: 0, &apos;xpassed&apos;: 0}
-E         ?           ^                         ^
-E         + {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 1, &apos;skipped&apos;: 0, &apos;xfailed&apos;: 0, &apos;xpassed&apos;: 0}
-E         ?           ^                         ^
+&gt;       assert passed == d.get(&quot;passed&quot;, 0)
+E       assert 14 == 13
+E        +  where 13 = &lt;built-in method get of dict object at 0x7f1b8cab5388&gt;(&apos;passed&apos;, 0)
+E        +    where &lt;built-in method get of dict object at 0x7f1b8cab5388&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;seconds&apos;: 46}.get
 
-/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:444: AssertionError</failure><system-out>
-Testing that running pytest on file test_wrapped_in_class.py results in {&apos;passed&apos;: 1, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
+/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError</failure><system-out>
+Testing that running pytest on file test_steps_harvest.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 14}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests1, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
-collected 0 items / 1 errors
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
+collected 14 items
 
-==================================== ERRORS ====================================
-____________________ ERROR collecting test_run_all_tests.py ____________________
-ImportError while importing test module &apos;/tmp/pytest-of-travis/pytest-0/test_run_all_tests1/test_run_all_tests.py&apos;.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-test_run_all_tests.py:4: in &lt;module&gt;
-    from pytest_harvest import get_session_synthesis_dct
-E   ImportError: No module named &apos;pytest_harvest&apos;
-!!!!!!!!!!!!!!!!!!! Interrupted: 1 errors during collection !!!!!!!!!!!!!!!!!!!!
-=========================== 1 error in 0.09 seconds ============================
-Error while asserting that test_wrapped_in_class.py results in {&apos;passed&apos;: 1, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.0636289119720459"><system-out>
-Testing that running pytest on file test_stackoverflow.py results in {&apos;passed&apos;: 3, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
+test_run_all_tests.py .F............
+
+=================================== FAILURES ===================================
+________________________________ test_synthesis ________________________________
+
+request = &lt;FixtureRequest for &lt;Function &apos;test_synthesis&apos;&gt;&gt;
+store = OrderedDict()
+
+    def test_synthesis(request, store):
+        &quot;&quot;&quot;
+        Note: we could do this at many other places (hook, teardown of a session-scope fixture...)
+    
+        Note2: we could provide helper methods in pytest_harvest to perform the code below more easily
+        :param request:
+        :param store:
+        :return:
+        &quot;&quot;&quot;
+        # Get session synthesis
+        # - filtered on the test function of interest
+        # - combined with our store
+        results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
+                                                durations_in_ms=True, test_id_format=&apos;function&apos;, status_details=False,
+                                                fixture_store=store, flatten=True, flatten_more=&apos;my_results&apos;)
+    
+        # print keys and first node details
+        assert len(results_dct) &gt; 0
+        print(&quot;\nKeys:\n&quot; + &quot;\n&quot;.join(list(results_dct.keys())))
+        print(&quot;\nFirst node:\n&quot; + &quot;\n&quot;.join(repr(k) + &quot;: &quot; + repr(v) for k, v in list(results_dct.values())[0].items()))
+    
+        # ---------- First version &quot;all by dataframe processing&quot; -----------
+        param_names = {&apos;algo_param&apos;, &apos;dataset&apos;}
+&gt;       tmp_df = build_df_from_raw_synthesis(results_dct, cross_steps_columns=param_names)
+
+test_run_all_tests.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+results_dct = OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7f1b7992ef28&gt;), (&apos;status&apos;, &apos;passed&apos;), (&apos;duration_ms&apos;, 0.10657310485839844)]))])
+cross_steps_columns = {&apos;algo_param&apos;, &apos;dataset&apos;}
+
+    def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
+        &quot;&quot;&quot;
+        Converts the &apos;raw&apos; synthesis dct into a pivoted dataframe where steps are a level in multilevel columns
+    
+        :param results_dct:
+        :return:
+        &quot;&quot;&quot;
+        # convert to a pandas dataframe
+        results_df = pd.DataFrame.from_dict(results_dct, orient=&apos;index&apos;)  # this does not preserve rows order
+        results_df = results_df.loc[list(results_dct.keys()), :]          # update rows order
+    
+        # (a) rename step id
+        results_df.rename(columns={GENERATOR_MODE_STEP_ARGNAME: &apos;step_id&apos;}, inplace=True)
+    
+        # (b) create a column with the new id and use it as index in combination with step id
+        # -- check column names provided
+        non_present = set(cross_steps_columns) - set(results_df.columns)
+        if len(non_present) &gt; 0:
+            raise ValueError(&quot;Columns %s are not present in the resulting dataframe. Available columns: %s&quot;
+&gt;                            &quot;&quot; % (non_present, list(results_df.columns)))
+E           ValueError: Columns {&apos;algo_param&apos;, &apos;dataset&apos;} are not present in the resulting dataframe. Available columns: [&apos;pytest_obj&apos;, &apos;status&apos;, &apos;duration_ms&apos;]
+
+test_run_all_tests.py:170: ValueError
+----------------------------- Captured stdout call -----------------------------
+
+Keys:
+test_basic
+
+First node:
+&apos;pytest_obj&apos;: &lt;function test_basic at 0x7f1b7992ef28&gt;
+&apos;status&apos;: &apos;passed&apos;
+&apos;duration_ms&apos;: 0.10657310485839844
+----------------------------- Captured stderr call -----------------------------
+/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pytest_harvest/results_session.py:341: UserWarning: [pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with pip. If it is already the case, you case try to force-use it by adding `pytest_plugins = [&apos;harvest&apos;]` to your conftest.py. But for normal use this should not be required, installing with pip should be enough.
+  warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
+===================== 1 failed, 13 passed in 0.46 seconds ======================
+Error while asserting that test_steps_harvest.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 14}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.16617631912231445"><system-out>
+Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;skipped&apos;: 2, &apos;failed&apos;: 2, &apos;passed&apos;: 12}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests2, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
-collected 3 items
-
-test_run_all_tests.py ...                                                [100%]
-
-=========================== 3 passed in 0.02 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.17316603660583496"><system-out>
-Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;passed&apos;: 12, &apos;failed&apos;: 2, &apos;skipped&apos;: 2}
-============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests3, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests4, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
 collected 16 items
 
-test_run_all_tests.py ....Fs.Fs.......                                   [100%]
+test_run_all_tests.py ......Fs.Fs.....
 
 =================================== FAILURES ===================================
 ________________ test_suite_exception_on_mandatory_step[step_b] ________________
@@ -158,7 +198,7 @@ request = &lt;FixtureRequest for &lt;Function &apos;test_suite_exception_on_mand
 
 &gt;   ???
 
-&lt;decorator-gen-4&gt;:2: 
+&lt;decorator-gen-7&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
     **kwargs)
@@ -192,7 +232,7 @@ request = &lt;FixtureRequest for &lt;Function &apos;test_suite_optional_and_depe
 
 &gt;   ???
 
-&lt;decorator-gen-5&gt;:2: 
+&lt;decorator-gen-8&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
     **kwargs)
@@ -222,60 +262,174 @@ E           assert False
 test_run_all_tests.py:64: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 12 passed, 2 skipped in 0.13 seconds ================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.1009833812713623"><system-out>
-Testing that running pytest on file test_pytest_capabilities.py results in {&apos;passed&apos;: 16, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
+================ 2 failed, 12 passed, 2 skipped in 0.14 seconds ================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.061154842376708984"><system-out>
+Testing that running pytest on file test_pytest_capabilities.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 16}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests4, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
 collected 16 items
 
-test_run_all_tests.py ................                                   [100%]
+test_run_all_tests.py ................
 
-========================== 16 passed in 0.06 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.07203364372253418"><system-out>
-Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;passed&apos;: 4, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
+========================== 16 passed in 0.04 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.04177141189575195"><system-out>
+Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 4}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests5, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests6, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
 collected 4 items
 
-test_run_all_tests.py ....                                               [100%]
-
-=========================== 4 passed in 0.03 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.06693339347839355"><system-out>
-Testing that running pytest on file test_steps_no_results.py results in {&apos;passed&apos;: 4, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
-============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests6, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
-collected 4 items
-
-test_run_all_tests.py ....                                               [100%]
+test_run_all_tests.py ....
 
 =========================== 4 passed in 0.02 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_decorator.py]" time="0.07327508926391602"><system-out>
-Testing that running pytest on file test_decorator.py results in {&apos;passed&apos;: 4, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_docs_example_with_harvest.py]" time="0.3877429962158203"><failure message="assert 13 == 12
+ +  where 12 = &lt;built-in method get of dict object at 0x7f1b795746c8&gt;(&apos;passed&apos;, 0)
+ +    where &lt;built-in method get of dict object at 0x7f1b795746c8&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;seconds&apos;: 34}.get">test_to_run = &apos;test_docs_example_with_harvest.py&apos;
+testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7&apos;)&gt;
+
+    @pytest.mark.parametrize(&apos;test_to_run&apos;, test_files, ids=str)
+    def test_run_all_tests(test_to_run, testdir):
+        &quot;&quot;&quot;
+        This is a meta-test. It is executed for each test file in the &apos;tests_raw&apos; folder.
+        For each of them, the file is retrieved and the expected test results are read from its first lines.
+        Then a dedicated pytest runner is run on this file, and the results are compared with the expected ones.
+    
+        See https://docs.pytest.org/en/latest/writing_plugins.html
+    
+        :param test_to_run:
+        :param testdir:
+        :return:
+        &quot;&quot;&quot;
+    
+        with open(join(tests_raw_folder, test_to_run)) as f:
+            # Create a temporary conftest.py file
+            # testdir.makeconftest(&quot;&quot;&quot;&quot;&quot;&quot;)
+    
+            # create a temporary pytest test file
+            test_file_contents = f.read()
+            testdir.makepyfile(test_file_contents)
+    
+            # Grab the expected things to check when this is executed
+            m = META_REGEX.match(test_file_contents)
+            if m is None:
+                raise ValueError(&quot;test file &apos;%s&apos; does not contain the META-header&quot; % test_to_run)
+            asserts_dct_str = m.groupdict()[&apos;asserts_dct&apos;]
+            asserts_dct = ast.literal_eval(asserts_dct_str)
+    
+            # Here we run pytest
+            print(&quot;\nTesting that running pytest on file %s results in %s&quot; % (test_to_run, str(asserts_dct)))
+            result = testdir.runpytest()  # (&quot;-q&quot;)
+    
+            # Here we check that everything is ok
+            try:
+                result.assert_outcomes(**asserts_dct)
+            except Exception as e:
+                print(&quot;Error while asserting that %s results in %s&quot; % (test_to_run, str(asserts_dct)))
+&gt;               six.raise_from(e, e)
+
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+&lt;string&gt;:3: in raise_from
+    ???
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:57: in test_run_all_tests
+    result.assert_outcomes(**asserts_dct)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;_pytest.pytester.RunResult object at 0x7f1b794415f8&gt;, passed = 13
+skipped = 0, failed = 0
+
+    def assert_outcomes(self, passed=0, skipped=0, failed=0):
+        &quot;&quot;&quot; assert that the specified outcomes appear with the respective
+            numbers (0 means it didn&apos;t occur) in the text output from a test run.&quot;&quot;&quot;
+        d = self.parseoutcomes()
+&gt;       assert passed == d.get(&quot;passed&quot;, 0)
+E       assert 13 == 12
+E        +  where 12 = &lt;built-in method get of dict object at 0x7f1b795746c8&gt;(&apos;passed&apos;, 0)
+E        +    where &lt;built-in method get of dict object at 0x7f1b795746c8&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;seconds&apos;: 34}.get
+
+/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError</failure><system-out>
+Testing that running pytest on file test_docs_example_with_harvest.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 13}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests7, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
+collected 13 items
+
+test_run_all_tests.py F............
+
+=================================== FAILURES ===================================
+________________________________ test_synthesis ________________________________
+
+request = &lt;FixtureRequest for &lt;Function &apos;test_synthesis&apos;&gt;&gt;
+store = OrderedDict()
+
+    def test_synthesis(request, store):
+        &quot;&quot;&quot;
+        Note: we could do this at many other places (hook, teardown of a session-scope fixture...)
+    
+        Note2: we could provide helper methods in pytest_harvest to perform the code below more easily
+        :param request:
+        :param store:
+        :return:
+        &quot;&quot;&quot;
+        # Get session synthesis using `pytest-harvest`
+        # - filtered on the test function of interest
+        # - combined with our store
+        results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
+                                                durations_in_ms=True, test_id_format=&apos;function&apos;, status_details=False,
+                                                fixture_store=store, flatten=True, flatten_more=&apos;my_results&apos;)
+        # separate test id from step id when needed
+        results_dct = handle_steps_in_synthesis_dct(results_dct, is_flat=True)
+    
+        # print keys and first node details
+        print(&quot;\nKeys:\n&quot; + &quot;\n&quot;.join([str(t) for t in results_dct.keys()]))
+&gt;       print(&quot;\nFirst node:\n&quot; + &quot;\n&quot;.join(repr(k) + &quot;: &quot; + repr(v) for k, v in list(results_dct.values())[0].items()))
+E       IndexError: list index out of range
+
+test_run_all_tests.py:92: IndexError
+----------------------------- Captured stdout call -----------------------------
+
+Keys:
+
+----------------------------- Captured stderr call -----------------------------
+/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pytest_harvest/results_session.py:341: UserWarning: [pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with pip. If it is already the case, you case try to force-use it by adding `pytest_plugins = [&apos;harvest&apos;]` to your conftest.py. But for normal use this should not be required, installing with pip should be enough.
+  warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
+===================== 1 failed, 12 passed in 0.34 seconds ======================
+Error while asserting that test_docs_example_with_harvest.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 13}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.038959503173828125"><system-out>
+Testing that running pytest on file test_steps_no_results.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 4}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
 collected 4 items
 
-test_run_all_tests.py ....                                               [100%]
+test_run_all_tests.py ....
 
-=========================== 4 passed in 0.03 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.12273478507995605"><system-out>
-Testing that running pytest on file test_steps_dependencies.py results in {&apos;passed&apos;: 3, &apos;failed&apos;: 2, &apos;skipped&apos;: 1}
+=========================== 4 passed in 0.01 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_decorator.py]" time="0.043767452239990234"><system-out>
+Testing that running pytest on file test_decorator.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 4}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests8, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests9, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
+collected 4 items
+
+test_run_all_tests.py ....
+
+=========================== 4 passed in 0.02 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.06723785400390625"><system-out>
+Testing that running pytest on file test_steps_dependencies.py results in {&apos;skipped&apos;: 1, &apos;failed&apos;: 2, &apos;passed&apos;: 3}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests10, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
 collected 6 items
 
-test_run_all_tests.py .F..Fs                                             [100%]
+test_run_all_tests.py .F..Fs
 
 =================================== FAILURES ===================================
 _____________________________ test_suite_1[step_b] _____________________________
@@ -307,12 +461,12 @@ test_run_all_tests.py:20: AssertionError
 step b
 ________________________ test_suite_no_results[step_b] _________________________
 
-test_step = &lt;function step_b at 0x7fc0b11cc840&gt;
+test_step = &lt;function step_b at 0x7f1b78c049d8&gt;
 request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
 
 &gt;   ???
 
-&lt;decorator-gen-13&gt;:2: 
+&lt;decorator-gen-19&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
     **kwargs)
@@ -333,16 +487,16 @@ E       assert False
 test_run_all_tests.py:20: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 3 passed, 1 skipped in 0.08 seconds =================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.06575155258178711"><system-out>
-Testing that running pytest on file test_stackoverflow2.py results in {&apos;passed&apos;: 3, &apos;failed&apos;: 0, &apos;skipped&apos;: 0}
+================ 2 failed, 3 passed, 1 skipped in 0.04 seconds =================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.03705096244812012"><system-out>
+Testing that running pytest on file test_stackoverflow2.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
-rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests9, inifile:
-plugins: metadata-1.7.0, html-1.19.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests11, inifile: 
+plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
 collected 3 items
 
-test_run_all_tests.py ...                                                [100%]
+test_run_all_tests.py ...
 
-=========================== 3 passed in 0.02 seconds ===========================
+=========================== 3 passed in 0.01 seconds ===========================
 </system-out></testcase></testsuite>

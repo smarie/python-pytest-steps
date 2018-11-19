@@ -283,6 +283,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#110-pytest-harvest-utilities-one_per_step-fix" title="1.1.0 - pytest-harvest utilities + @one_per_step fix" class="md-nav__link">
+    1.1.0 - pytest-harvest utilities + @one_per_step fix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#104-in-progress-improved-readability" title="1.0.4 in progress - improved readability" class="md-nav__link">
     1.0.4 in progress - improved readability
   </a>
@@ -384,6 +391,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#110-pytest-harvest-utilities-one_per_step-fix" title="1.1.0 - pytest-harvest utilities + @one_per_step fix" class="md-nav__link">
+    1.1.0 - pytest-harvest utilities + @one_per_step fix
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#104-in-progress-improved-readability" title="1.0.4 in progress - improved readability" class="md-nav__link">
     1.0.4 in progress - improved readability
   </a>
@@ -473,6 +487,12 @@
                 
                 
                 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h3 id="110-pytest-harvest-utilities-one_per_step-fix">1.1.0 - <code>pytest-harvest</code> utilities + <code>@one_per_step</code> fix<a class="headerlink" href="#110-pytest-harvest-utilities-one_per_step-fix" title="Permanent link">&para;</a></h3>
+<p>Fixed: <code>@one_per_step</code> can now be used with generator-style fixtures.</p>
+<p>API:
+ - New method <code>get_underlying_fixture</code> to Truly get a fixture value even if it comes from a <code>@one_per_step</code>
+ - internal constant <code>INNER_STEP_ARGNAME</code> is now named <code>GENERATOR_MODE_STEP_ARGNAME</code>
+ - 5 new utility methods to support combining this plugin with <code>pytest-harvest</code> (see documentation for details): <code>handle_steps_in_synthesis_dct</code>, <code>remove_step_from_test_id</code>, <code>get_all_pytest_param_names_except_step_id</code>, <code>pivot_steps_on_df</code>, <code>get_flattened_multilevel_columns</code></p>
 <h3 id="104-in-progress-improved-readability">1.0.4 in progress - improved readability<a class="headerlink" href="#104-in-progress-improved-readability" title="Permanent link">&para;</a></h3>
 <p>Improved readability in signature-fiddling hacks: now the logic is separate from the two generated function signatures, both for generator and parametrizer modes.</p>
 <h3 id="103-fix-request-in-arguments-with-new-generator-mode">1.0.3 - fix: request in arguments with new generator mode<a class="headerlink" href="#103-fix-request-in-arguments-with-new-generator-mode" title="Permanent link">&para;</a></h3>
