@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0 - `pytest-harvest` utilities + `@one_per_step` fix
+
+Fixed: `@one_per_step` can now be used with generator-style fixtures.
+
+API:
+ - New method `get_underlying_fixture` to Truly get a fixture value even if it comes from a `@one_per_step`
+ - internal constant `INNER_STEP_ARGNAME` is now named `GENERATOR_MODE_STEP_ARGNAME`
+ - 5 new utility methods to support combining this plugin with `pytest-harvest` (see documentation for details): `handle_steps_in_synthesis_dct`, `remove_step_from_test_id`, `get_all_pytest_param_names_except_step_id`, `pivot_steps_on_df`, `get_flattened_multilevel_columns`
+
 ### 1.0.4 in progress - improved readability
 
 Improved readability in signature-fiddling hacks: now the logic is separate from the two generated function signatures, both for generator and parametrizer modes.
