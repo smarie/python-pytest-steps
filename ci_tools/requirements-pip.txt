@@ -7,6 +7,7 @@ xunitparser
 
 # --- to run the tests
 tabulate
+pytest_harvest>=1
 pytest$PYTEST_VERSION
 pytest-logging  # ==2015.11.4
 
