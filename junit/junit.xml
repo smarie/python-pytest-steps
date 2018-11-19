@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="2" name="pytest" skips="0" tests="13" time="1.780"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.06716275215148926"><system-out>
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="2" name="pytest" skips="0" tests="13" time="1.780"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.06656122207641602"><system-out>
 Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 16, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -8,8 +8,8 @@ collected 16 items
 
 test_run_all_tests.py ................
 
-========================== 16 passed in 0.03 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.035096168518066406"><system-out>
+========================== 16 passed in 0.04 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.036351680755615234"><system-out>
 Testing that running pytest on file test_wrapped_in_class.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 1, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -20,7 +20,7 @@ collected 1 items
 test_run_all_tests.py .
 
 =========================== 1 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.04125642776489258"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.04249691963195801"><system-out>
 Testing that running pytest on file test_stackoverflow.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -31,9 +31,9 @@ collected 3 items
 test_run_all_tests.py ...
 
 =========================== 3 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_harvest.py]" time="0.5184454917907715"><failure message="assert 14 == 13
- +  where 13 = &lt;built-in method get of dict object at 0x7f041b0f3408&gt;(&apos;passed&apos;, 0)
- +    where &lt;built-in method get of dict object at 0x7f041b0f3408&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;seconds&apos;: 47}.get">test_to_run = &apos;test_steps_harvest.py&apos;
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_harvest.py]" time="0.5214977264404297"><failure message="assert 14 == 13
+ +  where 13 = &lt;built-in method get of dict object at 0x7f51b917b408&gt;(&apos;passed&apos;, 0)
+ +    where &lt;built-in method get of dict object at 0x7f51b917b408&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;seconds&apos;: 47}.get">test_to_run = &apos;test_steps_harvest.py&apos;
 testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3&apos;)&gt;
 
     @pytest.mark.parametrize(&apos;test_to_run&apos;, test_files, ids=str)
@@ -84,7 +84,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     result.assert_outcomes(**asserts_dct)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;_pytest.pytester.RunResult object at 0x7f041b0f6f98&gt;, passed = 14
+self = &lt;_pytest.pytester.RunResult object at 0x7f51acc3d898&gt;, passed = 14
 skipped = 0, failed = 0
 
     def assert_outcomes(self, passed=0, skipped=0, failed=0):
@@ -93,8 +93,8 @@ skipped = 0, failed = 0
         d = self.parseoutcomes()
 &gt;       assert passed == d.get(&quot;passed&quot;, 0)
 E       assert 14 == 13
-E        +  where 13 = &lt;built-in method get of dict object at 0x7f041b0f3408&gt;(&apos;passed&apos;, 0)
-E        +    where &lt;built-in method get of dict object at 0x7f041b0f3408&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;seconds&apos;: 47}.get
+E        +  where 13 = &lt;built-in method get of dict object at 0x7f51b917b408&gt;(&apos;passed&apos;, 0)
+E        +    where &lt;built-in method get of dict object at 0x7f51b917b408&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;seconds&apos;: 47}.get
 
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError</failure><system-out>
 Testing that running pytest on file test_steps_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0}
@@ -137,7 +137,7 @@ store = OrderedDict()
 test_run_all_tests.py:111: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-results_dct = OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7f0408413048&gt;), (&apos;status&apos;, &apos;passed&apos;), (&apos;duration_ms&apos;, 0.10609626770019531)]))])
+results_dct = OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7f51a5fdcf28&gt;), (&apos;status&apos;, &apos;passed&apos;), (&apos;duration_ms&apos;, 0.11134147644042969)]))])
 cross_steps_columns = {&apos;algo_param&apos;, &apos;dataset&apos;}
 
     def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
@@ -169,15 +169,15 @@ Keys:
 test_basic
 
 First node:
-&apos;pytest_obj&apos;: &lt;function test_basic at 0x7f0408413048&gt;
+&apos;pytest_obj&apos;: &lt;function test_basic at 0x7f51a5fdcf28&gt;
 &apos;status&apos;: &apos;passed&apos;
-&apos;duration_ms&apos;: 0.10609626770019531
+&apos;duration_ms&apos;: 0.11134147644042969
 ----------------------------- Captured stderr call -----------------------------
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pytest_harvest/results_session.py:341: UserWarning: [pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with pip. If it is already the case, you case try to force-use it by adding `pytest_plugins = [&apos;harvest&apos;]` to your conftest.py. But for normal use this should not be required, installing with pip should be enough.
   warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
 ===================== 1 failed, 13 passed in 0.47 seconds ======================
 Error while asserting that test_steps_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0}
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.1749725341796875"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.1721816062927246"><system-out>
 Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;failed&apos;: 2, &apos;passed&apos;: 12, &apos;skipped&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -260,7 +260,7 @@ test_run_all_tests.py:64: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
 ================ 2 failed, 12 passed, 2 skipped in 0.15 seconds ================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_alphanumeric_order.py]" time="0.03847336769104004"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_alphanumeric_order.py]" time="0.03815340995788574"><system-out>
 Testing that running pytest on file test_alphanumeric_order.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -271,7 +271,7 @@ collected 3 items
 test_run_all_tests.py ...
 
 =========================== 3 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.0637366771697998"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.06287837028503418"><system-out>
 Testing that running pytest on file test_pytest_capabilities.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 16, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -282,7 +282,7 @@ collected 16 items
 test_run_all_tests.py ................
 
 ========================== 16 passed in 0.04 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.04571819305419922"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.04237771034240723"><system-out>
 Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -293,9 +293,9 @@ collected 4 items
 test_run_all_tests.py ....
 
 =========================== 4 passed in 0.02 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_docs_example_with_harvest.py]" time="0.40362071990966797"><failure message="assert 13 == 12
- +  where 12 = &lt;built-in method get of dict object at 0x7f04080158c8&gt;(&apos;passed&apos;, 0)
- +    where &lt;built-in method get of dict object at 0x7f04080158c8&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;seconds&apos;: 35}.get">test_to_run = &apos;test_docs_example_with_harvest.py&apos;
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_docs_example_with_harvest.py]" time="0.40677523612976074"><failure message="assert 13 == 12
+ +  where 12 = &lt;built-in method get of dict object at 0x7f51a5dd7f08&gt;(&apos;passed&apos;, 0)
+ +    where &lt;built-in method get of dict object at 0x7f51a5dd7f08&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;seconds&apos;: 35}.get">test_to_run = &apos;test_docs_example_with_harvest.py&apos;
 testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8&apos;)&gt;
 
     @pytest.mark.parametrize(&apos;test_to_run&apos;, test_files, ids=str)
@@ -346,7 +346,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     result.assert_outcomes(**asserts_dct)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;_pytest.pytester.RunResult object at 0x7f0408017630&gt;, passed = 13
+self = &lt;_pytest.pytester.RunResult object at 0x7f51a5db1c18&gt;, passed = 13
 skipped = 0, failed = 0
 
     def assert_outcomes(self, passed=0, skipped=0, failed=0):
@@ -355,8 +355,8 @@ skipped = 0, failed = 0
         d = self.parseoutcomes()
 &gt;       assert passed == d.get(&quot;passed&quot;, 0)
 E       assert 13 == 12
-E        +  where 12 = &lt;built-in method get of dict object at 0x7f04080158c8&gt;(&apos;passed&apos;, 0)
-E        +    where &lt;built-in method get of dict object at 0x7f04080158c8&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;seconds&apos;: 35}.get
+E        +  where 12 = &lt;built-in method get of dict object at 0x7f51a5dd7f08&gt;(&apos;passed&apos;, 0)
+E        +    where &lt;built-in method get of dict object at 0x7f51a5dd7f08&gt; = {&apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;seconds&apos;: 35}.get
 
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError</failure><system-out>
 Testing that running pytest on file test_docs_example_with_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 13, &apos;skipped&apos;: 0}
@@ -404,7 +404,7 @@ Keys:
   warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
 ===================== 1 failed, 12 passed in 0.35 seconds ======================
 Error while asserting that test_docs_example_with_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 13, &apos;skipped&apos;: 0}
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.04094648361206055"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.040730953216552734"><system-out>
 Testing that running pytest on file test_steps_no_results.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -415,7 +415,7 @@ collected 4 items
 test_run_all_tests.py ....
 
 =========================== 4 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_decorator.py]" time="0.043704986572265625"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_decorator.py]" time="0.04468727111816406"><system-out>
 Testing that running pytest on file test_decorator.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -426,7 +426,7 @@ collected 4 items
 test_run_all_tests.py ....
 
 =========================== 4 passed in 0.02 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.06858229637145996"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.07045340538024902"><system-out>
 Testing that running pytest on file test_steps_dependencies.py results in {&apos;failed&apos;: 2, &apos;passed&apos;: 3, &apos;skipped&apos;: 1}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -466,12 +466,12 @@ test_run_all_tests.py:20: AssertionError
 step b
 ________________________ test_suite_no_results[step_b] _________________________
 
-test_step = &lt;function step_b at 0x7f040774d730&gt;
+test_step = &lt;function step_b at 0x7f51a5312840&gt;
 request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
 
 &gt;   ???
 
-&lt;decorator-gen-19&gt;:2: 
+&lt;decorator-gen-20&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
     **kwargs)
@@ -493,7 +493,7 @@ test_run_all_tests.py:20: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
 ================ 2 failed, 3 passed, 1 skipped in 0.04 seconds =================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.04013538360595703"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.039412498474121094"><system-out>
 Testing that running pytest on file test_stackoverflow2.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
