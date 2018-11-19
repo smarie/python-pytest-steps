@@ -1,8 +1,8 @@
 from copy import copy
 
 from pytest_harvest import get_all_pytest_param_names
-from steps import TEST_STEP_ARGNAME_DEFAULT
-from steps_generator import GENERATOR_MODE_STEP_ARGNAME
+from pytest_steps.steps import TEST_STEP_ARGNAME_DEFAULT
+from pytest_steps.steps_generator import GENERATOR_MODE_STEP_ARGNAME
 
 try: # python 3.5+
     from typing import Union, Iterable, Mapping, Any
