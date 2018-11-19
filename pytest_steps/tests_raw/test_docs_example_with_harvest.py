@@ -97,7 +97,7 @@ def test_synthesis(request, store):
     # print using tabulate
     print(tabulate(results_df, headers='keys'))
 
-    # pivot
+    # pivot: we want one row per test, describing all steps at once (in columns)
     param_names = get_all_pytest_param_names_except_step_id(request.session, filter=test_synthesis.__module__)
     report_df = pivot_steps_on_df(results_df, cross_steps_columns=param_names)
 
