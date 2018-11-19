@@ -414,11 +414,40 @@ You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test 
     If you wish to share data between steps but you **also** wish to collect the whole dataset at the end of the tests, do not use `steps_data`. Instead, use `results_bag` from [pytest-patterns](https://smarie.github.io/pytest-patterns), it will work similarly but you will be able to collect it when pytest session ends.
 
 
+## 3. Combining with `pytest-harvest`
+
+You might already use [`pytest-harvest`](https://smarie.github.io/python-pytest-harvest/) to turn your tests into functional benchmarks.
+
+When you combine it with `pytest_steps` you end up with one row in the synthesis table **per step**. For example:
+
+| test_id                      | status   |   duration_ms | ________step_name_   |   algo_param | dataset       |    accuracy |
+|------------------------------|----------|---------------|----------------------|--------------|---------------|-------------|
+| test_my_app_bench[A-1-train] | passed   |      2.00009  | train                |            1 | my dataset #A |   0.832642  |
+| test_my_app_bench[A-1-score] | passed   |      0        | score                |            1 | my dataset #A | nan         |
+| test_my_app_bench[A-2-train] | passed   |      1.00017  | train                |            2 | my dataset #A |   0.0638134 |
+| test_my_app_bench[A-2-score] | passed   |      0.999928 | score                |            2 | my dataset #A | nan         |
+| test_my_app_bench[B-1-train] | passed   |      0        | train                |            1 | my dataset #B |   0.870705  |
+| test_my_app_bench[B-1-score] | passed   |      0        | score                |            1 | my dataset #B | nan         |
+| test_my_app_bench[B-2-train] | passed   |      0        | train                |            2 | my dataset #B |   0.764746  |
+| test_my_app_bench[B-2-score] | passed   |      1.0004   | score                |            2 | my dataset #B | nan         |
+
+If you prefer to see one row per test and the step details in columns, this package provides utility methods to perform the transform easily. You will for example get this kind of table:
+
+| test_id                |   algo_param | dataset       | train/status   |   train/duration_ms |   train/accuracy | score/status   |   score/duration_ms |
+|------------------------|--------------|---------------|----------------|---------------------|------------------|----------------|---------------------|
+| test_my_app_bench[A-1] |            1 | my dataset #A | passed         |             2.00009 |        0.832642  | passed         |            0        |
+| test_my_app_bench[A-2] |            2 | my dataset #A | passed         |             1.00017 |        0.0638134 | passed         |            0.999928 |
+| test_my_app_bench[B-1] |            1 | my dataset #B | passed         |             0       |        0.870705  | passed         |            0        |
+| test_my_app_bench[B-2] |            2 | my dataset #B | passed         |             0       |        0.764746  | passed         |            1.0004   |
+
+
+A complete example is provided [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests_raw/test_docs_example_with_harvest.py) and should be quite straightforward for those familiar with pytest-harvest.
+
 ## Main features / benefits
 
  * **Split tests into steps**. Although the best practices in testing are very much in favor of having each test completely independent of the other ones (for example for distributed execution), there is definitely some value in results readability to break down tests into chained sub-tests (steps). The `@test_steps` decorator provides an intuitive way to do that without forcing any data model (steps can be functions, objects, etc.).
  * **Multi-style**: an *explicit* mode and a *generator* mode are supported, developers may wish to use one or the other depending on their coding style or readability target.
- * **Steps can share data**: In *generator* mode this is out-of-the-box. In *explicit* mode all steps in the same test suite can share data through the injected `steps_data` container (name is configurable).
+ * **Steps can share data**- In *generator* mode this is out-of-the-box. In *explicit* mode all steps in the same test suite can share data through the injected `steps_data` container (name is configurable).
  * **Steps dependencies can be defined**: a `@depends_on` decorator (*explicit* mode) or an `optional_step` context manager (*generator* mode) allow you to specify that a given test step should be skipped or failed if its dependencies did not complete. 
 
 ## See Also
