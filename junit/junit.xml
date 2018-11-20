@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="3" name="pytest" skips="0" tests="13" time="2.162"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.10550713539123535"><system-out>
-Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 16, &apos;skipped&apos;: 0}
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="3" name="pytest" skips="0" tests="13" time="2.016"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.0981302261352539"><system-out>
+Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests0, inifile:
@@ -8,9 +8,9 @@ collected 16 items
 
 test_run_all_tests.py ................                                   [100%]
 
-========================== 16 passed in 0.06 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.060906171798706055"><system-out>
-Testing that running pytest on file test_wrapped_in_class.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 1, &apos;skipped&apos;: 0}
+========================== 16 passed in 0.05 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.056061506271362305"><system-out>
+Testing that running pytest on file test_wrapped_in_class.py results in {&apos;passed&apos;: 1, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests1, inifile:
@@ -19,9 +19,9 @@ collected 1 item
 
 test_run_all_tests.py .                                                  [100%]
 
-=========================== 1 passed in 0.02 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.0670006275177002"><system-out>
-Testing that running pytest on file test_stackoverflow.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
+=========================== 1 passed in 0.01 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.06073498725891113"><system-out>
+Testing that running pytest on file test_stackoverflow.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests2, inifile:
@@ -31,7 +31,7 @@ collected 3 items
 test_run_all_tests.py ...                                                [100%]
 
 =========================== 3 passed in 0.02 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_harvest.py]" time="0.5243303775787354"><failure message="AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0, ...}">test_to_run = &apos;test_steps_harvest.py&apos;
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_harvest.py]" time="0.4898383617401123"><failure message="AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0, ...}">test_to_run = &apos;test_steps_harvest.py&apos;
 testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/test_run_all_tests3&apos;)&gt;
 
     @pytest.mark.parametrize(&apos;test_to_run&apos;, test_files, ids=str)
@@ -82,7 +82,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     result.assert_outcomes(**asserts_dct)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;_pytest.pytester.RunResult object at 0x7efbf7f33b70&gt;, passed = 14
+self = &lt;_pytest.pytester.RunResult object at 0x7f56a68a0b38&gt;, passed = 14
 skipped = 0, failed = 0, error = 0, xpassed = 0, xfailed = 0
 
     def assert_outcomes(
@@ -113,7 +113,7 @@ skipped = 0, failed = 0, error = 0, xpassed = 0, xfailed = 0
 E       AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 13, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0, ...}
 
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:444: AssertionError</failure><system-out>
-Testing that running pytest on file test_steps_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_steps_harvest.py results in {&apos;passed&apos;: 14, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests3, inifile:
@@ -153,7 +153,7 @@ store = OrderedDict()
 test_run_all_tests.py:111: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-results_dct = OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7efbe3e4a1e0&gt;), (&apos;status&apos;, &apos;passed&apos;), (&apos;duration_ms&apos;, 0.2205371856689453)]))])
+results_dct = OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7f5691f8d1e0&gt;), (&apos;status&apos;, &apos;passed&apos;), (&apos;duration_ms&apos;, 0.21266937255859375)]))])
 cross_steps_columns = {&apos;algo_param&apos;, &apos;dataset&apos;}
 
     def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
@@ -185,19 +185,19 @@ Keys:
 test_basic
 
 First node:
-&apos;pytest_obj&apos;: &lt;function test_basic at 0x7efbe3e4a1e0&gt;
+&apos;pytest_obj&apos;: &lt;function test_basic at 0x7f5691f8d1e0&gt;
 &apos;status&apos;: &apos;passed&apos;
-&apos;duration_ms&apos;: 0.2205371856689453
+&apos;duration_ms&apos;: 0.21266937255859375
 =============================== warnings summary ===============================
 test_run_all_tests.py::test_synthesis
   /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pytest_harvest/results_session.py:341: UserWarning: [pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with pip. If it is already the case, you case try to force-use it by adding `pytest_plugins = [&apos;harvest&apos;]` to your conftest.py. But for normal use this should not be required, installing with pip should be enough.
     warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
-=============== 1 failed, 13 passed, 1 warnings in 0.48 seconds ================
-Error while asserting that test_steps_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0}
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.17188692092895508"><system-out>
-Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;failed&apos;: 2, &apos;passed&apos;: 12, &apos;skipped&apos;: 2}
+=============== 1 failed, 13 passed, 1 warnings in 0.45 seconds ================
+Error while asserting that test_steps_harvest.py results in {&apos;passed&apos;: 14, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.16271328926086426"><system-out>
+Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;passed&apos;: 12, &apos;skipped&apos;: 2, &apos;failed&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests4, inifile:
@@ -278,8 +278,8 @@ E           assert False
 test_run_all_tests.py:64: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 12 passed, 2 skipped in 0.13 seconds ================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_alphanumeric_order.py]" time="0.09209084510803223"><failure message="AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0, ...}">test_to_run = &apos;test_alphanumeric_order.py&apos;
+================ 2 failed, 12 passed, 2 skipped in 0.12 seconds ================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_alphanumeric_order.py]" time="0.08136105537414551"><failure message="AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 7, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0, ...}">test_to_run = &apos;test_alphanumeric_order.py&apos;
 testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/test_run_all_tests5&apos;)&gt;
 
     @pytest.mark.parametrize(&apos;test_to_run&apos;, test_files, ids=str)
@@ -330,7 +330,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     result.assert_outcomes(**asserts_dct)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;_pytest.pytester.RunResult object at 0x7efbe3d3fac8&gt;, passed = 3
+self = &lt;_pytest.pytester.RunResult object at 0x7f5691ead3c8&gt;, passed = 3
 skipped = 0, failed = 0, error = 0, xpassed = 0, xfailed = 0
 
     def assert_outcomes(
@@ -358,22 +358,50 @@ skipped = 0, failed = 0, error = 0, xpassed = 0, xfailed = 0
             &quot;xfailed&quot;: xfailed,
         }
 &gt;       assert obtained == expected
-E       AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 14, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0, ...}
+E       AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 7, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0, ...}
 
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:444: AssertionError</failure><system-out>
-Testing that running pytest on file test_alphanumeric_order.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_alphanumeric_order.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests5, inifile:
 plugins: metadata-1.7.0, html-1.19.0, harvest-1.0.0, cov-2.6.0
-collected 14 items
+collected 8 items
 
-test_run_all_tests.py ..............                                     [100%]
+test_run_all_tests.py .F......                                           [100%]
 
-========================== 14 passed in 0.05 seconds ===========================
-Error while asserting that test_alphanumeric_order.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.0995323657989502"><system-out>
-Testing that running pytest on file test_pytest_capabilities.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 16, &apos;skipped&apos;: 0}
+=================================== FAILURES ===================================
+________________________________ test_synthesis ________________________________
+
+request = &lt;FixtureRequest for &lt;Function &apos;test_synthesis&apos;&gt;&gt;
+store = OrderedDict()
+
+    def test_synthesis(request, store):
+        &quot;&quot;&quot;
+        Tests that this test runs last and the two others are available in the synthesis
+        &quot;&quot;&quot;
+        # Get session synthesis
+        # - filtered on the test function of interest
+        # - combined with our store
+        results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
+                                                durations_in_ms=True, test_id_format=&apos;function&apos;)
+    
+        # incomplete are not here so length should be 2
+&gt;       assert len(results_dct) == 7
+E       AssertionError: assert 1 == 7
+E        +  where 1 = len(OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7f5691e826a8&gt;), (&apos;pytest_status&apos;, &apos;passed&apos;), (&apos;pytest_duration_ms&apos;, 0.19359588623046875), (&apos;pytest_params&apos;, OrderedDict())]))]))
+
+test_run_all_tests.py:62: AssertionError
+=============================== warnings summary ===============================
+test_run_all_tests.py::test_synthesis
+  /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pytest_harvest/results_session.py:341: UserWarning: [pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with pip. If it is already the case, you case try to force-use it by adding `pytest_plugins = [&apos;harvest&apos;]` to your conftest.py. But for normal use this should not be required, installing with pip should be enough.
+    warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
+
+-- Docs: https://docs.pytest.org/en/latest/warnings.html
+================ 1 failed, 7 passed, 1 warnings in 0.04 seconds ================
+Error while asserting that test_alphanumeric_order.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.09524917602539062"><system-out>
+Testing that running pytest on file test_pytest_capabilities.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests6, inifile:
@@ -382,9 +410,9 @@ collected 16 items
 
 test_run_all_tests.py ................                                   [100%]
 
-========================== 16 passed in 0.06 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.07021975517272949"><system-out>
-Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
+========================== 16 passed in 0.05 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.06422924995422363"><system-out>
+Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests7, inifile:
@@ -393,8 +421,8 @@ collected 4 items
 
 test_run_all_tests.py ....                                               [100%]
 
-=========================== 4 passed in 0.03 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_docs_example_with_harvest.py]" time="0.39053845405578613"><failure message="AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 13, &apos;skipped&apos;: 0, ...}">test_to_run = &apos;test_docs_example_with_harvest.py&apos;
+=========================== 4 passed in 0.02 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_docs_example_with_harvest.py]" time="0.3645656108856201"><failure message="AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 13, &apos;skipped&apos;: 0, ...}">test_to_run = &apos;test_docs_example_with_harvest.py&apos;
 testdir = &lt;Testdir local(&apos;/tmp/pytest-of-travis/pytest-0/test_run_all_tests8&apos;)&gt;
 
     @pytest.mark.parametrize(&apos;test_to_run&apos;, test_files, ids=str)
@@ -445,7 +473,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     result.assert_outcomes(**asserts_dct)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-self = &lt;_pytest.pytester.RunResult object at 0x7efbe3a72320&gt;, passed = 13
+self = &lt;_pytest.pytester.RunResult object at 0x7f5691b90978&gt;, passed = 13
 skipped = 0, failed = 0, error = 0, xpassed = 0, xfailed = 0
 
     def assert_outcomes(
@@ -476,7 +504,7 @@ skipped = 0, failed = 0, error = 0, xpassed = 0, xfailed = 0
 E       AssertionError: assert {&apos;error&apos;: 0, &apos;failed&apos;: 1, &apos;passed&apos;: 12, &apos;skipped&apos;: 0, ...} == {&apos;error&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 13, &apos;skipped&apos;: 0, ...}
 
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:444: AssertionError</failure><system-out>
-Testing that running pytest on file test_docs_example_with_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 13, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_docs_example_with_harvest.py results in {&apos;passed&apos;: 13, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests8, inifile:
@@ -522,10 +550,10 @@ test_run_all_tests.py::test_synthesis
     warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
-=============== 1 failed, 12 passed, 1 warnings in 0.35 seconds ================
-Error while asserting that test_docs_example_with_harvest.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 13, &apos;skipped&apos;: 0}
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.06630635261535645"><system-out>
-Testing that running pytest on file test_steps_no_results.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
+=============== 1 failed, 12 passed, 1 warnings in 0.32 seconds ================
+Error while asserting that test_docs_example_with_harvest.py results in {&apos;passed&apos;: 13, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.06260085105895996"><system-out>
+Testing that running pytest on file test_steps_no_results.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests9, inifile:
@@ -535,8 +563,8 @@ collected 4 items
 test_run_all_tests.py ....                                               [100%]
 
 =========================== 4 passed in 0.02 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_decorator.py]" time="0.07052063941955566"><system-out>
-Testing that running pytest on file test_decorator.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_decorator.py]" time="0.0652170181274414"><system-out>
+Testing that running pytest on file test_decorator.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests10, inifile:
@@ -545,9 +573,9 @@ collected 4 items
 
 test_run_all_tests.py ....                                               [100%]
 
-=========================== 4 passed in 0.03 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.09342050552368164"><system-out>
-Testing that running pytest on file test_steps_dependencies.py results in {&apos;failed&apos;: 2, &apos;passed&apos;: 3, &apos;skipped&apos;: 1}
+=========================== 4 passed in 0.02 seconds ===========================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.08573150634765625"><system-out>
+Testing that running pytest on file test_steps_dependencies.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 1, &apos;failed&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests11, inifile:
@@ -586,12 +614,12 @@ test_run_all_tests.py:20: AssertionError
 step b
 ________________________ test_suite_no_results[step_b] _________________________
 
-test_step = &lt;function step_b at 0x7efbe32258c8&gt;
+test_step = &lt;function step_b at 0x7f5691342c80&gt;
 request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
 
 &gt;   ???
 
-&lt;decorator-gen-21&gt;:2: 
+&lt;decorator-gen-22&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
     **kwargs)
@@ -612,9 +640,9 @@ E       assert False
 test_run_all_tests.py:20: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 3 passed, 1 skipped in 0.05 seconds =================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.06542277336120605"><system-out>
-Testing that running pytest on file test_stackoverflow2.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
+================ 2 failed, 3 passed, 1 skipped in 0.04 seconds =================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.061307430267333984"><system-out>
+Testing that running pytest on file test_stackoverflow2.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
 rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests12, inifile:
