@@ -9,6 +9,9 @@ from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture
 
 # ---------- Tests
 # A module-scoped store
+from pytest_steps import test_steps
+
+
 @pytest.fixture(scope='module', autouse=True)
 def store():
     return OrderedDict()
@@ -25,6 +28,7 @@ def dataset(request):
     return "my dataset #%s" % request.param
 
 
+@test_steps('train', 'score')
 @pytest.mark.parametrize("algo_param", [1, 2], ids=str)
 def test_my_app_bench(algo_param, dataset, my_results):
     """
@@ -34,6 +38,9 @@ def test_my_app_bench(algo_param, dataset, my_results):
     Accuracies are stored in a results bag (`results_bag`)
     """
     my_results.foo = 1
+    yield
+    print("nothing")
+    yield
 
 
 def test_basic():
@@ -52,4 +59,4 @@ def test_synthesis(request, store):
                                             durations_in_ms=True, test_id_format='function')
 
     # incomplete are not here so length should be 2
-    assert len(results_dct) == 7
+    assert len(results_dct) == 13
