@@ -28,10 +28,10 @@ def dataset(request):
     return "my dataset #%s" % request.param
 
 
-# @test_steps('train', 'score')
-@pytest.mark.parametrize('________step_name_', ['train', 'score'], ids=str)
+@test_steps('train', 'score')
+#@pytest.mark.parametrize('________step_name_', ['train', 'score'], ids=str)
 @pytest.mark.parametrize("algo_param", [1, 2], ids=str)
-def test_my_app_bench(________step_name_, algo_param, dataset, my_results):
+def test_my_app_bench(test_step, algo_param, dataset, my_results):
     """
     This test applies the algorithm with various parameters (`algo_param`)
     on various datasets (`dataset`).
