@@ -69,7 +69,6 @@ def test_my_app_bench(algo_param, dataset, my_results):
     yield
 
 
-@pytest.mark.last  # if this test does not run last, pip install pytest-ordering
 def test_synthesis(request, store):
     """
     Create the benchmark synthesis table.

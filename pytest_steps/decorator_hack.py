@@ -83,6 +83,7 @@ class MyFunctionMaker(FunctionMaker):
         # ----- HACK part 2
         if add_args is not None:
             # delete this annotation otherwise the inspect.signature method relies on the wrapped object's signature
+            func.__wrapped_with_addargs__ = func.__wrapped__
             del func.__wrapped__
 
         return func
@@ -166,7 +167,7 @@ def _wrap_caller_for_additional_args(func, caller, additional_args):
     return caller
 
 
-def my_decorate(func, caller, extras=(), additional_args=()):
+def my_decorate(func, caller, extras=(), additional_args=(), pytest_place_as=True):
     """
     A clone of 'decorate' with the possibility to add additional args to the function signature,
     and with support for generator functions.
@@ -202,4 +203,9 @@ def my_decorate(func, caller, extras=(), additional_args=()):
             evaldict, add_args=reversed(additional_args), __wrapped__=func)
     if hasattr(func, '__qualname__'):
         fun.__qualname__ = func.__qualname__
+
+    # With this hack our decorator will be ordered correctly by pytest https://github.com/pytest-dev/pytest/issues/4429
+    if pytest_place_as:
+        fun.place_as = func
+
     return fun
