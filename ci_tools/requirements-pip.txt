@@ -6,6 +6,7 @@ pytest-html$PYTEST_HTML_VERSION
 xunitparser
 
 # --- to run the tests
+pytest-faulthandler
 tabulate
 pytest-harvest>=1
 pytest$PYTEST_VERSION
