@@ -81,6 +81,7 @@ def test_synthesis(request, store):
     results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
                                             durations_in_ms=True, test_id_format='function', status_details=False,
                                             fixture_store=store, flatten=True, flatten_more='my_results')
+    assert len(results_dct) == 12
     # separate test id from step id when needed
     results_dct = handle_steps_in_synthesis_dct(results_dct, is_flat=True)
 

@@ -441,7 +441,7 @@ If you prefer to see one row per test and the step details in columns, this pack
 | test_my_app_bench[B-2] |            2 | my dataset #B | passed         |             0       |        0.764746  | passed         |            1.0004   |
 
 
-A complete example is provided [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests_raw/test_docs_example_with_harvest.py) and should be quite straightforward for those familiar with pytest-harvest.
+A complete example is provided [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py) and should be quite straightforward for those familiar with pytest-harvest.
 
 ## Main features / benefits
 
