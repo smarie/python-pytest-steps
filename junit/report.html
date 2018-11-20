@@ -325,7 +325,7 @@ function filter_table(elem) {
     not_found_message.hidden = !all_rows_hidden;
 }
 </script>
-    <p>Report generated on 20-Nov-2018 at 08:50:00</p>
+    <p>Report generated on 20-Nov-2018 at 10:59:08</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -335,7 +335,7 @@ function filter_table(elem) {
         <td>Python</td>
         <td>3.5.6</td></tr></table>
     <h2>Summary</h2>
-    <p>13 tests ran in 2.00 seconds. </p>
+    <p>13 tests ran in 1.86 seconds. </p>
     <p>(Un)check the boxes to filter the results.</p><input checked="true" data-test-result="passed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">10 passed</span> <input checked="true" data-test-result="skipped" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span> <input checked="true" data-test-result="failed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">3 failed</span> <input checked="true" data-test-result="error" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span> <input checked="true" data-test-result="xfailed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span> <input checked="true" data-test-result="xpassed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span> <input checked="true" data-test-result="rerun" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span> 
     <h2>Results</h2>
     <table id="results-table">
@@ -351,7 +351,7 @@ function filter_table(elem) {
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_with_results_complex.py]</td>
-          <td class="col-duration">0.07</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
@@ -371,7 +371,7 @@ test_run_all_tests.py ................
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_wrapped_in_class.py]</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-duration">0.03</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
@@ -405,17 +405,17 @@ collected 3 items
 
 test_run_all_tests.py ...
 
-=========================== 3 passed in 0.02 seconds ===========================
+=========================== 3 passed in 0.01 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="failed results-table-row">
         <tr>
           <td class="col-result">Failed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_harvest.py]</td>
-          <td class="col-duration">0.56</td>
+          <td class="col-duration">0.52</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">test_to_run = &#x27;test_steps_harvest.py&#x27;<br/>testdir = &lt;Testdir local(&#x27;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3&#x27;)&gt;<br/><br/>    @pytest.mark.parametrize(&#x27;test_to_run&#x27;, test_files, ids=str)<br/>    def test_run_all_tests(test_to_run, testdir):<br/>        &quot;&quot;&quot;<br/>        This is a meta-test. It is executed for each test file in the &#x27;tests_raw&#x27; folder.<br/>        For each of them, the file is retrieved and the expected test results are read from its first lines.<br/>        Then a dedicated pytest runner is run on this file, and the results are compared with the expected ones.<br/>    <br/>        See https://docs.pytest.org/en/latest/writing_plugins.html<br/>    <br/>        :param test_to_run:<br/>        :param testdir:<br/>        :return:<br/>        &quot;&quot;&quot;<br/>    <br/>        with open(join(tests_raw_folder, test_to_run)) as f:<br/>            # Create a temporary conftest.py file<br/>            # testdir.makeconftest(&quot;&quot;&quot;&quot;&quot;&quot;)<br/>    <br/>            # create a temporary pytest test file<br/>            test_file_contents = f.read()<br/>            testdir.makepyfile(test_file_contents)<br/>    <br/>            # Grab the expected things to check when this is executed<br/>            m = META_REGEX.match(test_file_contents)<br/>            if m is None:<br/>                raise ValueError(&quot;test file &#x27;%s&#x27; does not contain the META-header&quot; % test_to_run)<br/>            asserts_dct_str = m.groupdict()[&#x27;asserts_dct&#x27;]<br/>            asserts_dct = ast.literal_eval(asserts_dct_str)<br/>    <br/>            # Here we run pytest<br/>            print(&quot;\nTesting that running pytest on file %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>            result = testdir.runpytest()  # (&quot;-q&quot;)<br/>    <br/>            # Here we check that everything is ok<br/>            try:<br/>                result.assert_outcomes(**asserts_dct)<br/>            except Exception as e:<br/>                print(&quot;Error while asserting that %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>&gt;               six.raise_from(e, e)<br/><br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:60: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>&lt;string&gt;:3: in raise_from<br/>    ???<br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:57: in test_run_all_tests<br/>    result.assert_outcomes(**asserts_dct)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;_pytest.pytester.RunResult object at 0x7f1fa650a8d0&gt;, passed = 14<br/>skipped = 0, failed = 0<br/><br/>    def assert_outcomes(self, passed=0, skipped=0, failed=0):<br/>        &quot;&quot;&quot; assert that the specified outcomes appear with the respective<br/>            numbers (0 means it didn&#x27;t occur) in the text output from a test run.&quot;&quot;&quot;<br/>        d = self.parseoutcomes()<br/>&gt;       assert passed == d.get(&quot;passed&quot;, 0)<br/><span class="error">E       assert 14 == 13</span><br/><span class="error">E        +  where 13 = &lt;built-in method get of dict object at 0x7f1fb3320308&gt;(&#x27;passed&#x27;, 0)</span><br/><span class="error">E        +    where &lt;built-in method get of dict object at 0x7f1fb3320308&gt; = {&#x27;failed&#x27;: 1, &#x27;passed&#x27;: 13, &#x27;seconds&#x27;: 51}.get</span><br/><br/>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError<br/>----------------------------- Captured stdout call -----------------------------<br/>
+            <div class="log">test_to_run = &#x27;test_steps_harvest.py&#x27;<br/>testdir = &lt;Testdir local(&#x27;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3&#x27;)&gt;<br/><br/>    @pytest.mark.parametrize(&#x27;test_to_run&#x27;, test_files, ids=str)<br/>    def test_run_all_tests(test_to_run, testdir):<br/>        &quot;&quot;&quot;<br/>        This is a meta-test. It is executed for each test file in the &#x27;tests_raw&#x27; folder.<br/>        For each of them, the file is retrieved and the expected test results are read from its first lines.<br/>        Then a dedicated pytest runner is run on this file, and the results are compared with the expected ones.<br/>    <br/>        See https://docs.pytest.org/en/latest/writing_plugins.html<br/>    <br/>        :param test_to_run:<br/>        :param testdir:<br/>        :return:<br/>        &quot;&quot;&quot;<br/>    <br/>        with open(join(tests_raw_folder, test_to_run)) as f:<br/>            # Create a temporary conftest.py file<br/>            # testdir.makeconftest(&quot;&quot;&quot;&quot;&quot;&quot;)<br/>    <br/>            # create a temporary pytest test file<br/>            test_file_contents = f.read()<br/>            testdir.makepyfile(test_file_contents)<br/>    <br/>            # Grab the expected things to check when this is executed<br/>            m = META_REGEX.match(test_file_contents)<br/>            if m is None:<br/>                raise ValueError(&quot;test file &#x27;%s&#x27; does not contain the META-header&quot; % test_to_run)<br/>            asserts_dct_str = m.groupdict()[&#x27;asserts_dct&#x27;]<br/>            asserts_dct = ast.literal_eval(asserts_dct_str)<br/>    <br/>            # Here we run pytest<br/>            print(&quot;\nTesting that running pytest on file %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>            result = testdir.runpytest()  # (&quot;-q&quot;)<br/>    <br/>            # Here we check that everything is ok<br/>            try:<br/>                result.assert_outcomes(**asserts_dct)<br/>            except Exception as e:<br/>                print(&quot;Error while asserting that %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>&gt;               six.raise_from(e, e)<br/><br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:60: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>&lt;string&gt;:3: in raise_from<br/>    ???<br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:57: in test_run_all_tests<br/>    result.assert_outcomes(**asserts_dct)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;_pytest.pytester.RunResult object at 0x7fddcf5b8898&gt;, passed = 14<br/>skipped = 0, failed = 0<br/><br/>    def assert_outcomes(self, passed=0, skipped=0, failed=0):<br/>        &quot;&quot;&quot; assert that the specified outcomes appear with the respective<br/>            numbers (0 means it didn&#x27;t occur) in the text output from a test run.&quot;&quot;&quot;<br/>        d = self.parseoutcomes()<br/>&gt;       assert passed == d.get(&quot;passed&quot;, 0)<br/><span class="error">E       assert 14 == 13</span><br/><span class="error">E        +  where 13 = &lt;built-in method get of dict object at 0x7fdddbaed488&gt;(&#x27;passed&#x27;, 0)</span><br/><span class="error">E        +    where &lt;built-in method get of dict object at 0x7fdddbaed488&gt; = {&#x27;failed&#x27;: 1, &#x27;passed&#x27;: 13, &#x27;seconds&#x27;: 47}.get</span><br/><br/>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError<br/>----------------------------- Captured stdout call -----------------------------<br/>
 Testing that running pytest on file test_steps_harvest.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 14, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -456,7 +456,7 @@ store = OrderedDict()
 test_run_all_tests.py:111: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-results_dct = OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7f1f9f8a8f28&gt;), (&apos;status&apos;, &apos;passed&apos;), (&apos;duration_ms&apos;, 0.10323524475097656)]))])
+results_dct = OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7fddc8957f28&gt;), (&apos;status&apos;, &apos;passed&apos;), (&apos;duration_ms&apos;, 0.11587142944335938)]))])
 cross_steps_columns = {&apos;algo_param&apos;, &apos;dataset&apos;}
 
     def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
@@ -479,7 +479,7 @@ cross_steps_columns = {&apos;algo_param&apos;, &apos;dataset&apos;}
         if len(non_present) &gt; 0:
             raise ValueError(&quot;Columns %s are not present in the resulting dataframe. Available columns: %s&quot;
 &gt;                            &quot;&quot; % (non_present, list(results_df.columns)))
-E           ValueError: Columns {&apos;dataset&apos;, &apos;algo_param&apos;} are not present in the resulting dataframe. Available columns: [&apos;pytest_obj&apos;, &apos;status&apos;, &apos;duration_ms&apos;]
+E           ValueError: Columns {&apos;algo_param&apos;, &apos;dataset&apos;} are not present in the resulting dataframe. Available columns: [&apos;pytest_obj&apos;, &apos;status&apos;, &apos;duration_ms&apos;]
 
 test_run_all_tests.py:167: ValueError
 ----------------------------- Captured stdout call -----------------------------
@@ -488,20 +488,20 @@ Keys:
 test_basic
 
 First node:
-&apos;pytest_obj&apos;: &lt;function test_basic at 0x7f1f9f8a8f28&gt;
+&apos;pytest_obj&apos;: &lt;function test_basic at 0x7fddc8957f28&gt;
 &apos;status&apos;: &apos;passed&apos;
-&apos;duration_ms&apos;: 0.10323524475097656
+&apos;duration_ms&apos;: 0.11587142944335938
 ----------------------------- Captured stderr call -----------------------------
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pytest_harvest/results_session.py:341: UserWarning: [pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with pip. If it is already the case, you case try to force-use it by adding `pytest_plugins = [&apos;harvest&apos;]` to your conftest.py. But for normal use this should not be required, installing with pip should be enough.
   warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
-===================== 1 failed, 13 passed in 0.51 seconds ======================
+===================== 1 failed, 13 passed in 0.47 seconds ======================
 Error while asserting that test_steps_harvest.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 14, &apos;failed&apos;: 0}
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_new_with_generator.py]</td>
-          <td class="col-duration">0.19</td>
+          <td class="col-duration">0.18</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
@@ -587,34 +587,56 @@ E           assert False
 test_run_all_tests.py:64: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 12 passed, 2 skipped in 0.16 seconds ================
+================ 2 failed, 12 passed, 2 skipped in 0.15 seconds ================
 </div></td></tr></tbody>
       <tbody class="failed results-table-row">
         <tr>
           <td class="col-result">Failed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_alphanumeric_order.py]</td>
-          <td class="col-duration">0.08</td>
+          <td class="col-duration">0.09</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">test_to_run = &#x27;test_alphanumeric_order.py&#x27;<br/>testdir = &lt;Testdir local(&#x27;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5&#x27;)&gt;<br/><br/>    @pytest.mark.parametrize(&#x27;test_to_run&#x27;, test_files, ids=str)<br/>    def test_run_all_tests(test_to_run, testdir):<br/>        &quot;&quot;&quot;<br/>        This is a meta-test. It is executed for each test file in the &#x27;tests_raw&#x27; folder.<br/>        For each of them, the file is retrieved and the expected test results are read from its first lines.<br/>        Then a dedicated pytest runner is run on this file, and the results are compared with the expected ones.<br/>    <br/>        See https://docs.pytest.org/en/latest/writing_plugins.html<br/>    <br/>        :param test_to_run:<br/>        :param testdir:<br/>        :return:<br/>        &quot;&quot;&quot;<br/>    <br/>        with open(join(tests_raw_folder, test_to_run)) as f:<br/>            # Create a temporary conftest.py file<br/>            # testdir.makeconftest(&quot;&quot;&quot;&quot;&quot;&quot;)<br/>    <br/>            # create a temporary pytest test file<br/>            test_file_contents = f.read()<br/>            testdir.makepyfile(test_file_contents)<br/>    <br/>            # Grab the expected things to check when this is executed<br/>            m = META_REGEX.match(test_file_contents)<br/>            if m is None:<br/>                raise ValueError(&quot;test file &#x27;%s&#x27; does not contain the META-header&quot; % test_to_run)<br/>            asserts_dct_str = m.groupdict()[&#x27;asserts_dct&#x27;]<br/>            asserts_dct = ast.literal_eval(asserts_dct_str)<br/>    <br/>            # Here we run pytest<br/>            print(&quot;\nTesting that running pytest on file %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>            result = testdir.runpytest()  # (&quot;-q&quot;)<br/>    <br/>            # Here we check that everything is ok<br/>            try:<br/>                result.assert_outcomes(**asserts_dct)<br/>            except Exception as e:<br/>                print(&quot;Error while asserting that %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>&gt;               six.raise_from(e, e)<br/><br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:60: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>&lt;string&gt;:3: in raise_from<br/>    ???<br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:57: in test_run_all_tests<br/>    result.assert_outcomes(**asserts_dct)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;_pytest.pytester.RunResult object at 0x7f1f9f770dd8&gt;, passed = 3<br/>skipped = 0, failed = 0<br/><br/>    def assert_outcomes(self, passed=0, skipped=0, failed=0):<br/>        &quot;&quot;&quot; assert that the specified outcomes appear with the respective<br/>            numbers (0 means it didn&#x27;t occur) in the text output from a test run.&quot;&quot;&quot;<br/>        d = self.parseoutcomes()<br/>&gt;       assert passed == d.get(&quot;passed&quot;, 0)<br/><span class="error">E       assert 3 == 8</span><br/><span class="error">E        +  where 8 = &lt;built-in method get of dict object at 0x7f1f9f6df388&gt;(&#x27;passed&#x27;, 0)</span><br/><span class="error">E        +    where &lt;built-in method get of dict object at 0x7f1f9f6df388&gt; = {&#x27;passed&#x27;: 8, &#x27;seconds&#x27;: 2}.get</span><br/><br/>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError<br/>----------------------------- Captured stdout call -----------------------------<br/>
+            <div class="log">test_to_run = &#x27;test_alphanumeric_order.py&#x27;<br/>testdir = &lt;Testdir local(&#x27;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5&#x27;)&gt;<br/><br/>    @pytest.mark.parametrize(&#x27;test_to_run&#x27;, test_files, ids=str)<br/>    def test_run_all_tests(test_to_run, testdir):<br/>        &quot;&quot;&quot;<br/>        This is a meta-test. It is executed for each test file in the &#x27;tests_raw&#x27; folder.<br/>        For each of them, the file is retrieved and the expected test results are read from its first lines.<br/>        Then a dedicated pytest runner is run on this file, and the results are compared with the expected ones.<br/>    <br/>        See https://docs.pytest.org/en/latest/writing_plugins.html<br/>    <br/>        :param test_to_run:<br/>        :param testdir:<br/>        :return:<br/>        &quot;&quot;&quot;<br/>    <br/>        with open(join(tests_raw_folder, test_to_run)) as f:<br/>            # Create a temporary conftest.py file<br/>            # testdir.makeconftest(&quot;&quot;&quot;&quot;&quot;&quot;)<br/>    <br/>            # create a temporary pytest test file<br/>            test_file_contents = f.read()<br/>            testdir.makepyfile(test_file_contents)<br/>    <br/>            # Grab the expected things to check when this is executed<br/>            m = META_REGEX.match(test_file_contents)<br/>            if m is None:<br/>                raise ValueError(&quot;test file &#x27;%s&#x27; does not contain the META-header&quot; % test_to_run)<br/>            asserts_dct_str = m.groupdict()[&#x27;asserts_dct&#x27;]<br/>            asserts_dct = ast.literal_eval(asserts_dct_str)<br/>    <br/>            # Here we run pytest<br/>            print(&quot;\nTesting that running pytest on file %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>            result = testdir.runpytest()  # (&quot;-q&quot;)<br/>    <br/>            # Here we check that everything is ok<br/>            try:<br/>                result.assert_outcomes(**asserts_dct)<br/>            except Exception as e:<br/>                print(&quot;Error while asserting that %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>&gt;               six.raise_from(e, e)<br/><br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:60: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>&lt;string&gt;:3: in raise_from<br/>    ???<br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:57: in test_run_all_tests<br/>    result.assert_outcomes(**asserts_dct)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;_pytest.pytester.RunResult object at 0x7fddc8840dd8&gt;, passed = 3<br/>skipped = 0, failed = 0<br/><br/>    def assert_outcomes(self, passed=0, skipped=0, failed=0):<br/>        &quot;&quot;&quot; assert that the specified outcomes appear with the respective<br/>            numbers (0 means it didn&#x27;t occur) in the text output from a test run.&quot;&quot;&quot;<br/>        d = self.parseoutcomes()<br/>&gt;       assert passed == d.get(&quot;passed&quot;, 0)<br/><span class="error">E       assert 3 == 13</span><br/><span class="error">E        +  where 13 = &lt;built-in method get of dict object at 0x7fddc884e448&gt;(&#x27;passed&#x27;, 0)</span><br/><span class="error">E        +    where &lt;built-in method get of dict object at 0x7fddc884e448&gt; = {&#x27;failed&#x27;: 1, &#x27;passed&#x27;: 13, &#x27;seconds&#x27;: 4}.get</span><br/><br/>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError<br/>----------------------------- Captured stdout call -----------------------------<br/>
 Testing that running pytest on file test_alphanumeric_order.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 3, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
 plugins: logging-2015.11.4, html-1.9.0, harvest-1.0.0, cov-2.6.0
-collected 8 items
+collected 14 items
 
-test_run_all_tests.py ........
+test_run_all_tests.py .F............
 
-=========================== 8 passed in 0.02 seconds ===========================
+=================================== FAILURES ===================================
+________________________________ test_synthesis ________________________________
+
+request = &lt;FixtureRequest for &lt;Function &apos;test_synthesis&apos;&gt;&gt;
+store = OrderedDict()
+
+    def test_synthesis(request, store):
+        &quot;&quot;&quot;
+        Tests that this test runs last and the two others are available in the synthesis
+        &quot;&quot;&quot;
+        # Get session synthesis
+        # - filtered on the test function of interest
+        # - combined with our store
+        results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
+                                                durations_in_ms=True, test_id_format=&apos;function&apos;)
+    
+        # incomplete are not here so length should be 2
+&gt;       assert len(results_dct) == 13
+E       assert 1 == 13
+E        +  where 1 = len(OrderedDict([(&apos;test_basic&apos;, OrderedDict([(&apos;pytest_obj&apos;, &lt;function test_basic at 0x7fddc8842620&gt;), (&apos;pytest_status&apos;, &apos;passed&apos;), (&apos;pytest_duration_ms&apos;, 0.12731552124023438), (&apos;pytest_params&apos;, OrderedDict())]))]))
+
+test_run_all_tests.py:62: AssertionError
+===================== 1 failed, 13 passed in 0.04 seconds ======================
 Error while asserting that test_alphanumeric_order.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 3, &apos;failed&apos;: 0}
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_pytest_capabilities.py]</td>
-          <td class="col-duration">0.07</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
@@ -654,11 +676,11 @@ test_run_all_tests.py ....
         <tr>
           <td class="col-result">Failed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_docs_example_with_harvest.py]</td>
-          <td class="col-duration">0.43</td>
+          <td class="col-duration">0.40</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">test_to_run = &#x27;test_docs_example_with_harvest.py&#x27;<br/>testdir = &lt;Testdir local(&#x27;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8&#x27;)&gt;<br/><br/>    @pytest.mark.parametrize(&#x27;test_to_run&#x27;, test_files, ids=str)<br/>    def test_run_all_tests(test_to_run, testdir):<br/>        &quot;&quot;&quot;<br/>        This is a meta-test. It is executed for each test file in the &#x27;tests_raw&#x27; folder.<br/>        For each of them, the file is retrieved and the expected test results are read from its first lines.<br/>        Then a dedicated pytest runner is run on this file, and the results are compared with the expected ones.<br/>    <br/>        See https://docs.pytest.org/en/latest/writing_plugins.html<br/>    <br/>        :param test_to_run:<br/>        :param testdir:<br/>        :return:<br/>        &quot;&quot;&quot;<br/>    <br/>        with open(join(tests_raw_folder, test_to_run)) as f:<br/>            # Create a temporary conftest.py file<br/>            # testdir.makeconftest(&quot;&quot;&quot;&quot;&quot;&quot;)<br/>    <br/>            # create a temporary pytest test file<br/>            test_file_contents = f.read()<br/>            testdir.makepyfile(test_file_contents)<br/>    <br/>            # Grab the expected things to check when this is executed<br/>            m = META_REGEX.match(test_file_contents)<br/>            if m is None:<br/>                raise ValueError(&quot;test file &#x27;%s&#x27; does not contain the META-header&quot; % test_to_run)<br/>            asserts_dct_str = m.groupdict()[&#x27;asserts_dct&#x27;]<br/>            asserts_dct = ast.literal_eval(asserts_dct_str)<br/>    <br/>            # Here we run pytest<br/>            print(&quot;\nTesting that running pytest on file %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>            result = testdir.runpytest()  # (&quot;-q&quot;)<br/>    <br/>            # Here we check that everything is ok<br/>            try:<br/>                result.assert_outcomes(**asserts_dct)<br/>            except Exception as e:<br/>                print(&quot;Error while asserting that %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>&gt;               six.raise_from(e, e)<br/><br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:60: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>&lt;string&gt;:3: in raise_from<br/>    ???<br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:57: in test_run_all_tests<br/>    result.assert_outcomes(**asserts_dct)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;_pytest.pytester.RunResult object at 0x7f1f9f3b9630&gt;, passed = 13<br/>skipped = 0, failed = 0<br/><br/>    def assert_outcomes(self, passed=0, skipped=0, failed=0):<br/>        &quot;&quot;&quot; assert that the specified outcomes appear with the respective<br/>            numbers (0 means it didn&#x27;t occur) in the text output from a test run.&quot;&quot;&quot;<br/>        d = self.parseoutcomes()<br/>&gt;       assert passed == d.get(&quot;passed&quot;, 0)<br/><span class="error">E       assert 13 == 12</span><br/><span class="error">E        +  where 12 = &lt;built-in method get of dict object at 0x7f1f9f466a08&gt;(&#x27;passed&#x27;, 0)</span><br/><span class="error">E        +    where &lt;built-in method get of dict object at 0x7f1f9f466a08&gt; = {&#x27;failed&#x27;: 1, &#x27;passed&#x27;: 12, &#x27;seconds&#x27;: 37}.get</span><br/><br/>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError<br/>----------------------------- Captured stdout call -----------------------------<br/>
+            <div class="log">test_to_run = &#x27;test_docs_example_with_harvest.py&#x27;<br/>testdir = &lt;Testdir local(&#x27;/tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8&#x27;)&gt;<br/><br/>    @pytest.mark.parametrize(&#x27;test_to_run&#x27;, test_files, ids=str)<br/>    def test_run_all_tests(test_to_run, testdir):<br/>        &quot;&quot;&quot;<br/>        This is a meta-test. It is executed for each test file in the &#x27;tests_raw&#x27; folder.<br/>        For each of them, the file is retrieved and the expected test results are read from its first lines.<br/>        Then a dedicated pytest runner is run on this file, and the results are compared with the expected ones.<br/>    <br/>        See https://docs.pytest.org/en/latest/writing_plugins.html<br/>    <br/>        :param test_to_run:<br/>        :param testdir:<br/>        :return:<br/>        &quot;&quot;&quot;<br/>    <br/>        with open(join(tests_raw_folder, test_to_run)) as f:<br/>            # Create a temporary conftest.py file<br/>            # testdir.makeconftest(&quot;&quot;&quot;&quot;&quot;&quot;)<br/>    <br/>            # create a temporary pytest test file<br/>            test_file_contents = f.read()<br/>            testdir.makepyfile(test_file_contents)<br/>    <br/>            # Grab the expected things to check when this is executed<br/>            m = META_REGEX.match(test_file_contents)<br/>            if m is None:<br/>                raise ValueError(&quot;test file &#x27;%s&#x27; does not contain the META-header&quot; % test_to_run)<br/>            asserts_dct_str = m.groupdict()[&#x27;asserts_dct&#x27;]<br/>            asserts_dct = ast.literal_eval(asserts_dct_str)<br/>    <br/>            # Here we run pytest<br/>            print(&quot;\nTesting that running pytest on file %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>            result = testdir.runpytest()  # (&quot;-q&quot;)<br/>    <br/>            # Here we check that everything is ok<br/>            try:<br/>                result.assert_outcomes(**asserts_dct)<br/>            except Exception as e:<br/>                print(&quot;Error while asserting that %s results in %s&quot; % (test_to_run, str(asserts_dct)))<br/>&gt;               six.raise_from(e, e)<br/><br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:60: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>&lt;string&gt;:3: in raise_from<br/>    ???<br/>/home/travis/build/smarie/python-pytest-steps/pytest_steps/tests/test_all.py:57: in test_run_all_tests<br/>    result.assert_outcomes(**asserts_dct)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;_pytest.pytester.RunResult object at 0x7fddc83fe080&gt;, passed = 13<br/>skipped = 0, failed = 0<br/><br/>    def assert_outcomes(self, passed=0, skipped=0, failed=0):<br/>        &quot;&quot;&quot; assert that the specified outcomes appear with the respective<br/>            numbers (0 means it didn&#x27;t occur) in the text output from a test run.&quot;&quot;&quot;<br/>        d = self.parseoutcomes()<br/>&gt;       assert passed == d.get(&quot;passed&quot;, 0)<br/><span class="error">E       assert 13 == 12</span><br/><span class="error">E        +  where 12 = &lt;built-in method get of dict object at 0x7fddc8524ec8&gt;(&#x27;passed&#x27;, 0)</span><br/><span class="error">E        +    where &lt;built-in method get of dict object at 0x7fddc8524ec8&gt; = {&#x27;failed&#x27;: 1, &#x27;passed&#x27;: 12, &#x27;seconds&#x27;: 35}.get</span><br/><br/>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/_pytest/pytester.py:370: AssertionError<br/>----------------------------- Captured stdout call -----------------------------<br/>
 Testing that running pytest on file test_docs_example_with_harvest.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 13, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
@@ -702,7 +724,7 @@ Keys:
 ----------------------------- Captured stderr call -----------------------------
 /home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pytest_harvest/results_session.py:341: UserWarning: [pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with pip. If it is already the case, you case try to force-use it by adding `pytest_plugins = [&apos;harvest&apos;]` to your conftest.py. But for normal use this should not be required, installing with pip should be enough.
   warn(&quot;[pytest-harvest] Test items status is not available. You should maybe install pytest-harvest with &quot;
-===================== 1 failed, 12 passed in 0.37 seconds ======================
+===================== 1 failed, 12 passed in 0.35 seconds ======================
 Error while asserting that test_docs_example_with_harvest.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 13, &apos;failed&apos;: 0}
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -723,13 +745,13 @@ collected 4 items
 
 test_run_all_tests.py ....
 
-=========================== 4 passed in 0.02 seconds ===========================
+=========================== 4 passed in 0.01 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_decorator.py]</td>
-          <td class="col-duration">0.05</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
@@ -749,7 +771,7 @@ test_run_all_tests.py ....
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_dependencies.py]</td>
-          <td class="col-duration">0.07</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
@@ -793,12 +815,12 @@ test_run_all_tests.py:20: AssertionError
 step b
 ________________________ test_suite_no_results[step_b] _________________________
 
-test_step = &lt;function step_b at 0x7f1f9ed4ac80&gt;
+test_step = &lt;function step_b at 0x7fddc7d57268&gt;
 request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
 
 &gt;   ???
 
-&lt;decorator-gen-21&gt;:2: 
+&lt;decorator-gen-22&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/decorator_hack.py:154: in caller
     **kwargs)
