@@ -88,6 +88,7 @@ def test_basic():
     pass
 
 
+@pytest.mark.last  # if this test does not run last, pip install pytest-ordering
 def test_synthesis(request, store):
     """
     Tests that users can create a pivoted syntesis table, both by hand (only using pytest-harvest's
