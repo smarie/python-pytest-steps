@@ -14,7 +14,9 @@ def my_normal():
         print(i)
     return
 
+
 assert not isgeneratorfunction(my_normal)
+my_normal()
 
 
 # A generator
@@ -23,7 +25,9 @@ def my_generator():
         print(i)
         yield i
 
+
 assert isgeneratorfunction(my_generator)
+next(my_generator())
 
 
 def test_normal_normal():
@@ -31,7 +35,9 @@ def test_normal_normal():
     def normal_around_normal(f, *args, **kwargs):
         return my_normal()
 
-    assert not isgeneratorfunction(my_decorate(my_generator, normal_around_normal))
+    decorated = my_decorate(my_generator, normal_around_normal)
+    assert not isgeneratorfunction(decorated)
+    decorated()
 
 
 def test_normal_gen():
@@ -42,7 +48,9 @@ def test_normal_gen():
             pass
         return 15
 
-    assert not isgeneratorfunction(my_decorate(my_generator, normal_around_gen))
+    decorated = my_decorate(my_generator, normal_around_gen)
+    assert not isgeneratorfunction(decorated)
+    decorated()
 
 
 def test_gen_gen():
@@ -51,7 +59,9 @@ def test_gen_gen():
         for res in my_generator():
             yield res
 
-    assert isgeneratorfunction(my_decorate(my_generator, gen_around_gen))
+    decorated = my_decorate(my_generator, gen_around_gen)
+    assert isgeneratorfunction(decorated)
+    next(decorated())
 
 
 def test_gen_normal():
@@ -59,4 +69,6 @@ def test_gen_normal():
     def gen_around_normal(f, *args, **kwargs):
         yield my_normal()
 
-    assert isgeneratorfunction(my_decorate(my_normal, gen_around_normal))
+    decorated = my_decorate(my_normal, gen_around_normal)
+    assert isgeneratorfunction(decorated)
+    next(decorated())
