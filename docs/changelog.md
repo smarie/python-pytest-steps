@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.2 - pytest-harvest is now an optional dependency
+
+Fixed [#20](https://github.com/smarie/python-pytest-steps/issues/20)
+
 ### 1.1.1 - fixed ordering issue in generator mode
 
 Fixed a pytest ordering issue in generator mode, by relying on [place_as](https://github.com/pytest-dev/pytest/issues/4429). Fixed [#18](https://github.com/smarie/python-pytest-steps/issues/18).
