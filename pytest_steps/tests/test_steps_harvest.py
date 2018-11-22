@@ -181,3 +181,17 @@ def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
     results_df.drop(['pytest_obj'], axis=1, inplace=True)  # drop pytest object column
 
     return results_df
+
+
+def test_synthesis_not_flat(request, store):
+    """Additional test to improve coverage"""
+
+    results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
+                                            durations_in_ms=True, test_id_format='function', status_details=False,
+                                            flatten=False)
+    assert len(results_dct) > 0
+
+    # put a stupid step param name so that we can easily do the asserts below
+    results_dct2 = handle_steps_in_synthesis_dct(results_dct, is_flat=False, step_param_names=['hohoho'])
+    assert [(k, '-') for k in results_dct.keys()] == list(results_dct2.keys())
+    assert list(results_dct2.values()) == list(results_dct.values())
