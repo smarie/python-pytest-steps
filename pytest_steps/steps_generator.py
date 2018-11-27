@@ -365,7 +365,8 @@ class StepMonitorsContainer(dict):
         :return:
         """
         # Get the unique id that is shared between the steps of the same execution, by removing the step parameter
-        # TODO also discard all parametrized fixtures that are @one_per_step
+        # Note: when the id was using not only param values but also fixture values we had to discard
+        # 'request' and maybe some fixtures here. But that's not the case anymore,simply discard the "test step" param
         id_without_steps = get_pytest_node_hash_id(pytest_node, params_to_ignore=(GENERATOR_MODE_STEP_ARGNAME,))
 
         if id_without_steps not in self:

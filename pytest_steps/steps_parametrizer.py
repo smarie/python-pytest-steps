@@ -70,17 +70,20 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
 
             def results(request):
                 """
-                The fixture for the StepsDataHolder. It implements an intelligent cache so that the same StepsDataHolder
-                object is used across test steps.
+                The fixture for the StepsDataHolder.
+
+                It is function-scoped (so oit is called for each step of each param combination)
+                but it implements an intelligent cache so that the same StepsDataHolder object is returned across all
+                test steps belonging to the same param combination.
 
                 :param request:
                 :return:
                 """
                 # Get a good unique identifier of the test.
                 # The id should be different everytime anything changes, except when the test step changes
-                # TODO also discard all parametrized fixtures that are @one_per_step
-                test_id = get_pytest_node_hash_id(request.node,
-                                                  params_to_ignore={test_step_argname, steps_data_holder_name})
+                # Note: when the id was using not only param values but also fixture values we had to discard
+                # steps_data_holder_name and 'request'. But that's not the case anymore,simply discard "test step" param
+                test_id = get_pytest_node_hash_id(request.node, params_to_ignore={test_step_argname})
 
                 # Get or create the cached Result holder for this combination of parameters
                 return get_results_holder(id=test_id)
@@ -104,20 +107,18 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
         # Finally, if there are some steps that are marked as having a dependency,
         use_dependency = any(hasattr(step, DEPENDS_ON_FIELD) for step in steps)
         if use_dependency:
-            f_sig = signature(test_func)
 
             # Create a test function wrapper that will replace the test steps with monitored ones before injecting them
             def dependency_mgr_wrapper(f, request, *args, **kwargs):
                 """Executes the current step only if its dependencies are correct, and registers its execution result"""
 
-                # (a) retrieve the current step function
+                # (a) retrieve the "current step" function
                 current_step_fun = get_fixture_or_param_value(request, test_step_argname)
 
                 # Get the unique id that is shared between the steps of the same execution
-                # TODO also discard all parametrized fixtures that are @one_per_step
-                test_id_without_steps = get_pytest_node_hash_id(request.node, params_to_ignore={test_step_argname,
-                                                                                                steps_data_holder_name,
-                                                                                                'request'})
+                # Note: when the id was using not only param values but also fixture values we had to discard
+                # steps_data_holder_name and 'request'. But that's not the case anymore,simply discard "test step" param
+                test_id_without_steps = get_pytest_node_hash_id(request.node, params_to_ignore={test_step_argname})
 
                 # Make sure that it has a field to store its execution success
                 if not hasattr(current_step_fun, STEP_SUCCESS_FIELD):
@@ -161,14 +162,6 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
             return parametrized_test_func
 
     return steps_decorator
-
-
-def get_nonsuccessful_dependencies(step):
-    """
-
-    :param step:
-    :return:
-    """
 
 
 DEPENDS_ON_FIELD = '__depends_on__'
