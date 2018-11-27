@@ -5,7 +5,7 @@ import six
 
 from pytest_steps.steps import TEST_STEP_ARGNAME_DEFAULT
 from pytest_steps.steps_generator import GENERATOR_MODE_STEP_ARGNAME
-from steps_common import remove_param_from_pytest_node_str_id
+from pytest_steps.steps_common import remove_param_from_pytest_node_str_id
 
 try: # python 3.5+
     from typing import Union, Iterable, Mapping, Any
