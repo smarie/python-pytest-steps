@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test. 
+
+This fixes some bugs that were happening on edge cases where several parameters had the same string id representation (or one was a substring of the other). Fixed [#21](https://github.com/smarie/python-pytest-steps/issues/21).
+
 ### 1.1.2 - pytest-harvest is now an optional dependency
 
 Fixed [#20](https://github.com/smarie/python-pytest-steps/issues/20)
