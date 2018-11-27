@@ -1,7 +1,7 @@
 # META
 # {'passed': 16, 'skipped': 0, 'failed': 0}
 # END META
-from pytest_steps.steps_common import get_fixture_value
+from pytest_steps.steps_common import get_fixture_or_param_value
 
 try:  # python 3.2+
     from functools import lru_cache
@@ -35,7 +35,7 @@ def results(request):
     :param request:
     :return:
     """
-    kwargs = {argname: get_fixture_value(request, argname)
+    kwargs = {argname: get_fixture_or_param_value(request, argname)
               for argname in request.funcargnames
               if argname not in {'test_step', 'results', 'request'}}
     return get_results_holder(**kwargs)

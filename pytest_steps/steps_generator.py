@@ -23,7 +23,7 @@ except ImportError:
 
 import pytest
 
-from pytest_steps.steps_common import get_pytest_id, get_id
+from pytest_steps.steps_common import create_pytest_param_str_id, get_pytest_node_hash_id
 from pytest_steps.decorator_hack import my_decorate
 
 
@@ -365,7 +365,8 @@ class StepMonitorsContainer(dict):
         :return:
         """
         # Get the unique id that is shared between the steps of the same execution, by removing the step parameter
-        id_without_steps = get_id(pytest_node, remove_params=(GENERATOR_MODE_STEP_ARGNAME,))
+        # TODO also discard all parametrized fixtures that are @one_per_step
+        id_without_steps = get_pytest_node_hash_id(pytest_node, params_to_ignore=(GENERATOR_MODE_STEP_ARGNAME,))
 
         if id_without_steps not in self:
             # First time we call the function with this combination of parameters
@@ -415,7 +416,7 @@ def get_generator_decorator(steps  # type: Iterable[Any]
 
         # ------CORE -------
         # Transform the steps into ids if needed
-        step_ids = [get_pytest_id(f) for f in steps]
+        step_ids = [create_pytest_param_str_id(f) for f in steps]
 
         # Create the container that will hold all execution monitors for this function
         all_monitors = StepMonitorsContainer(test_func, step_ids)

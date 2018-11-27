@@ -5,6 +5,7 @@ import six
 
 from pytest_steps.steps import TEST_STEP_ARGNAME_DEFAULT
 from pytest_steps.steps_generator import GENERATOR_MODE_STEP_ARGNAME
+from steps_common import remove_param_from_pytest_node_str_id
 
 try: # python 3.5+
     from typing import Union, Iterable, Mapping, Any
@@ -108,15 +109,7 @@ def remove_step_from_test_id(test_id, step_id):
     # from math import isnan
     # if isnan(step_id):
     #     return test_id
-    new_id = test_id.replace('-' + step_id + '-', '-')
-    # only continue if previous replacement was not successful to avoid cases where the step id is identical to
-    # another parameter
-    if len(new_id) == len(test_id):
-        new_id = test_id.replace('[' + step_id + '-', '[')
-    if len(new_id) == len(test_id):
-        new_id = test_id.replace('-' + step_id + ']', ']')
-
-    return new_id
+    return remove_param_from_pytest_node_str_id(test_id, step_id)
 
 
 def get_all_pytest_param_names_except_step_id(session,

@@ -13,7 +13,7 @@ from inspect import getmodule
 import pytest
 
 from pytest_steps.decorator_hack import my_decorate
-from pytest_steps.steps_common import get_pytest_id, get_fixture_value
+from pytest_steps.steps_common import create_pytest_param_str_id, get_fixture_or_param_value, get_pytest_node_hash_id
 
 
 class StepsDataHolder:
@@ -27,11 +27,6 @@ class StepsDataHolder:
 
 
 STEP_SUCCESS_FIELD = "__test_step_successful_for__"
-
-
-class HashableDict(dict):
-    def __hash__(self):
-        return hash(tuple(sorted(self.items())))
 
 
 def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
@@ -56,7 +51,7 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
         """
 
         # Step ids
-        step_ids = [get_pytest_id(f) for f in steps]
+        step_ids = [create_pytest_param_str_id(f) for f in steps]
 
         # Depending on the presence of steps_data_holder_name in signature, create a cached fixture for steps data
         s = signature(test_func)
@@ -81,20 +76,14 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
                 :param request:
                 :return:
                 """
-                # The object should be different everytime anything changes, except when the test step changes
-                dont_change_when_these_change = {test_step_argname}
-
-                # We also do not want the 'results' itself nor the pytest 'request' to be taken into account, since
-                # the first is not yet defined and the second is an internal pytest variable
-                dont_change_when_these_change.update({steps_data_holder_name, 'request'})
-
-                # List the values of all the test function parameters that matter
-                kwargs = {argname: get_fixture_value(request, argname)
-                          for argname in request.funcargnames
-                          if argname not in dont_change_when_these_change}
+                # Get a good unique identifier of the test.
+                # The id should be different everytime anything changes, except when the test step changes
+                # TODO also discard all parametrized fixtures that are @one_per_step
+                test_id = get_pytest_node_hash_id(request.node,
+                                                  params_to_ignore={test_step_argname, steps_data_holder_name})
 
                 # Get or create the cached Result holder for this combination of parameters
-                return get_results_holder(**kwargs)
+                return get_results_holder(id=test_id)
 
             # Create a fixture with custom name : this seems to work also for old pytest versions
             results.__name__ = steps_data_holder_name
@@ -122,15 +111,13 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
                 """Executes the current step only if its dependencies are correct, and registers its execution result"""
 
                 # (a) retrieve the current step function
-                current_step_fun = get_fixture_value(request, test_step_argname)
-                # Get the unique id that is shared between the steps of the same execution:
-                # -- as a string: more readable
-                # id_without_steps = get_id(request.node, remove_params=(test_step_argname,))
-                # -- as a hashable dict: get all other parameters & fixtures values. More robust but less readable
-                params = {n: get_fixture_value(request, n)
-                          for n in request.funcargnames
-                          if n not in {test_step_argname, steps_data_holder_name, 'request'}}
-                test_id_without_steps = HashableDict(params)
+                current_step_fun = get_fixture_or_param_value(request, test_step_argname)
+
+                # Get the unique id that is shared between the steps of the same execution
+                # TODO also discard all parametrized fixtures that are @one_per_step
+                test_id_without_steps = get_pytest_node_hash_id(request.node, params_to_ignore={test_step_argname,
+                                                                                                steps_data_holder_name,
+                                                                                                'request'})
 
                 # Make sure that it has a field to store its execution success
                 if not hasattr(current_step_fun, STEP_SUCCESS_FIELD):
