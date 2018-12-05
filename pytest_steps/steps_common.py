@@ -166,7 +166,8 @@ def get_pytest_node_hash_id(pytest_node,
     # Method 3
     # Hash a tuple containing the parameter names with a hash of their value
     params_dct = get_pytest_node_current_param_values(pytest_node)
-    l = []
+    # first include the pytest object (the test function)
+    l = [pytest_node.obj]
     for p, v in params_dct.items():
         if p not in params_to_ignore:
             try:
