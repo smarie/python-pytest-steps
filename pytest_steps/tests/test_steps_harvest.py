@@ -22,7 +22,8 @@ except:
 from tabulate import tabulate
 
 import pytest
-from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture, saved_fixture
+from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture, saved_fixture, \
+    get_all_pytest_fixture_names
 
 from pytest_steps import test_steps, handle_steps_in_synthesis_dct, get_flattened_multilevel_columns, pivot_steps_on_df, \
     get_all_pytest_param_names_except_step_id, remove_step_from_test_id
@@ -97,7 +98,7 @@ def test_synthesis(request, my_store):
     # Get session synthesis
     # - filtered on the test function of interest
     # - combined with our store
-    results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
+    results_dct = get_session_synthesis_dct(request, filter=test_synthesis.__module__,
                                             durations_in_ms=True, test_id_format='function', status_details=False,
                                             fixture_store=my_store, flatten=True, flatten_more='my_results')
 
@@ -107,7 +108,7 @@ def test_synthesis(request, my_store):
     print("\nFirst node:\n" + "\n".join(repr(k) + ": " + repr(v) for k, v in list(results_dct.values())[0].items()))
 
     # ---------- First version "all by dataframe processing" -----------
-    param_names = {'algo_param', 'dataset'}
+    param_names = {'algo_param', 'dataset_param', 'dataset'}
     tmp_df = build_df_from_raw_synthesis(results_dct, cross_steps_columns=param_names)
     report_df = pivot_steps_on_df(tmp_df, cross_steps_columns=param_names)
     # --report
@@ -116,14 +117,15 @@ def test_synthesis(request, my_store):
 
     # ---------- second version "relying on `handle_steps_in_synthesis_dct`"---------
     param_names = get_all_pytest_param_names_except_step_id(request.session, filter=test_synthesis.__module__)
+    fixture_names = get_all_pytest_fixture_names(request.session, filter=test_synthesis.__module__)
     results_dct2 = handle_steps_in_synthesis_dct(results_dct, is_flat=True)
     tmp_df = build_df_from_processed_synthesis(results_dct2)
-    report_df2 = pivot_steps_on_df(tmp_df, cross_steps_columns=param_names)
+    report_df2 = pivot_steps_on_df(tmp_df, cross_steps_columns=param_names + fixture_names)
     # --report
     report_df2.columns = get_flattened_multilevel_columns(report_df2)
     print("\nPivoted table (2):\n" + tabulate(report_df2, headers='keys'))
 
-    assert list(report_df2.columns) == ['algo_param', 'dataset',
+    assert list(report_df2.columns) == ['algo_param', 'dataset_param', 'dataset',
                                         'train/status', 'train/duration_ms', 'train/accuracy',
                                         'score/status', 'score/duration_ms',
                                         '-/status', '-/duration_ms']
