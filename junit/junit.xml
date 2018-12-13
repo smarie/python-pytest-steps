@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="0" name="pytest" skips="0" tests="75" time="1.647"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.0669105052947998"><system-out>
-Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 16, &apos;failed&apos;: 0}
+<?xml version="1.0" encoding="utf-8"?><testsuite errors="0" failures="0" name="pytest" skips="0" tests="75" time="1.525"><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_complex.py]" time="0.06332683563232422"><system-out>
+Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests0, inifile: 
@@ -9,8 +9,8 @@ collected 16 items
 test_run_all_tests.py ................
 
 ========================== 16 passed in 0.03 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_generator_does_not_change_order.py]" time="0.03715372085571289"><system-out>
-Testing that running pytest on file test_steps_generator_does_not_change_order.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 3, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_generator_does_not_change_order.py]" time="0.037555694580078125"><system-out>
+Testing that running pytest on file test_steps_generator_does_not_change_order.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests1, inifile: 
@@ -20,8 +20,8 @@ collected 3 items
 test_run_all_tests.py ...
 
 =========================== 3 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.037152767181396484"><system-out>
-Testing that running pytest on file test_wrapped_in_class.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 1, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_wrapped_in_class.py]" time="0.03568458557128906"><system-out>
+Testing that running pytest on file test_wrapped_in_class.py results in {&apos;passed&apos;: 1, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests2, inifile: 
@@ -31,8 +31,8 @@ collected 1 items
 test_run_all_tests.py .
 
 =========================== 1 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.037889719009399414"><system-out>
-Testing that running pytest on file test_stackoverflow.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 3, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow.py]" time="0.03637981414794922"><system-out>
+Testing that running pytest on file test_stackoverflow.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3, inifile: 
@@ -42,8 +42,8 @@ collected 3 items
 test_run_all_tests.py ...
 
 =========================== 3 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.21420669555664062"><system-out>
-Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;skipped&apos;: 2, &apos;passed&apos;: 12, &apos;failed&apos;: 2}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_new_with_generator.py]" time="0.2037522792816162"><system-out>
+Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;passed&apos;: 12, &apos;skipped&apos;: 2, &apos;failed&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests4, inifile: 
@@ -124,9 +124,9 @@ E           assert False
 test_run_all_tests.py:64: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 12 passed, 2 skipped in 0.19 seconds ================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.06154298782348633"><system-out>
-Testing that running pytest on file test_pytest_capabilities.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 16, &apos;failed&apos;: 0}
+================ 2 failed, 12 passed, 2 skipped in 0.18 seconds ================
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_pytest_capabilities.py]" time="0.059564828872680664"><system-out>
+Testing that running pytest on file test_pytest_capabilities.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
@@ -136,8 +136,8 @@ collected 16 items
 test_run_all_tests.py ................
 
 ========================== 16 passed in 0.03 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.04115772247314453"><system-out>
-Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 4, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_with_results_basic.py]" time="0.04005312919616699"><system-out>
+Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests6, inifile: 
@@ -147,8 +147,8 @@ collected 4 items
 test_run_all_tests.py ....
 
 =========================== 4 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.03892850875854492"><system-out>
-Testing that running pytest on file test_steps_no_results.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 4, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_no_results.py]" time="0.03627347946166992"><system-out>
+Testing that running pytest on file test_steps_no_results.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7, inifile: 
@@ -158,8 +158,8 @@ collected 4 items
 test_run_all_tests.py ....
 
 =========================== 4 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.05668497085571289"><system-out>
-Testing that running pytest on file test_steps_dependencies.py results in {&apos;skipped&apos;: 1, &apos;passed&apos;: 3, &apos;failed&apos;: 2}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_dependencies.py]" time="0.053000450134277344"><system-out>
+Testing that running pytest on file test_steps_dependencies.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 1, &apos;failed&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8, inifile: 
@@ -171,7 +171,7 @@ test_run_all_tests.py .Fs.F.
 =================================== FAILURES ===================================
 ________________________ test_suite_no_results[step_b] _________________________
 
-test_step = &lt;function step_b at 0x7fbf8f5b4378&gt;
+test_step = &lt;function step_b at 0x7f594f120378&gt;
 request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
 
     @test_steps(step_a, step_b, step_c)
@@ -223,8 +223,8 @@ test_run_all_tests.py:20: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
 ================ 2 failed, 3 passed, 1 skipped in 0.03 seconds =================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_and_dependency_tree.py]" time="0.08602190017700195"><system-out>
-Testing that running pytest on file test_steps_and_dependency_tree.py results in {&apos;skipped&apos;: 5, &apos;passed&apos;: 8, &apos;failed&apos;: 1}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_steps_and_dependency_tree.py]" time="0.08576655387878418"><system-out>
+Testing that running pytest on file test_steps_and_dependency_tree.py results in {&apos;passed&apos;: 8, &apos;skipped&apos;: 5, &apos;failed&apos;: 1}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests9, inifile: 
@@ -268,8 +268,8 @@ E           assert False
 
 test_run_all_tests.py:33: AssertionError
 ================ 1 failed, 8 passed, 5 skipped in 0.06 seconds =================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.039324045181274414"><system-out>
-Testing that running pytest on file test_stackoverflow2.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 3, &apos;failed&apos;: 0}
+</system-out></testcase><testcase classname="pytest_steps.tests.test_all" file="pytest_steps/tests/test_all.py" line="21" name="test_run_all_tests[test_stackoverflow2.py]" time="0.03795933723449707"><system-out>
+Testing that running pytest on file test_stackoverflow2.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests10, inifile: 
@@ -279,7 +279,7 @@ collected 3 items
 test_run_all_tests.py ...
 
 =========================== 3 passed in 0.01 seconds ===========================
-</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="32" name="test_normal_normal" time="0.001745462417602539"><system-out>0
+</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="32" name="test_normal_normal" time="0.0012173652648925781"><system-out>0
 1
 2
 3
@@ -289,7 +289,7 @@ test_run_all_tests.py ...
 7
 8
 9
-</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="42" name="test_normal_gen" time="0.0016398429870605469"><system-out>0
+</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="42" name="test_normal_gen" time="0.0013036727905273438"><system-out>0
 1
 2
 3
@@ -299,8 +299,8 @@ test_run_all_tests.py ...
 7
 8
 9
-</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="55" name="test_gen_gen" time="0.001566171646118164"><system-out>0
-</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="66" name="test_gen_normal" time="0.0015132427215576172"><system-out>0
+</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="55" name="test_gen_gen" time="0.0012662410736083984"><system-out>0
+</system-out></testcase><testcase classname="pytest_steps.tests.test_decorator" file="pytest_steps/tests/test_decorator.py" line="66" name="test_gen_normal" time="0.0015058517456054688"><system-out>0
 1
 2
 3
@@ -310,7 +310,7 @@ test_run_all_tests.py ...
 7
 8
 9
-</system-out></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-1-train]" time="0.002118825912475586"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-1-score]" time="0.0019884109497070312"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-2-train]" time="0.0018875598907470703"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-2-score]" time="0.0018324851989746094"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-1-train]" time="0.0018630027770996094"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-1-score]" time="0.001306772232055664"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-2-train]" time="0.001527547836303711"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-2-score]" time="0.002004861831665039"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-1-train]" time="0.002513885498046875"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-1-score]" time="0.001809835433959961"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-2-train]" time="0.001989603042602539"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-2-score]" time="0.0016646385192871094"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="60" name="test_synthesis" time="0.05131173133850098"><system-out>
+</system-out></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-1-train]" time="0.0014407634735107422"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-1-score]" time="0.0013952255249023438"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-2-train]" time="0.001293182373046875"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[A-2-score]" time="0.0012054443359375"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-1-train]" time="0.001359701156616211"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-1-score]" time="0.0013282299041748047"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-2-train]" time="0.0013461112976074219"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[B-2-score]" time="0.0013580322265625"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-1-train]" time="0.0016388893127441406"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-1-score]" time="0.001285552978515625"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-2-train]" time="0.0012898445129394531"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="39" name="test_my_app_bench[C-2-score]" time="0.0012469291687011719"></testcase><testcase classname="pytest_steps.tests.test_docs_example_with_harvest" file="pytest_steps/tests/test_docs_example_with_harvest.py" line="60" name="test_synthesis" time="0.045313358306884766"><system-out>
 Keys:
 (&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)
 (&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)
@@ -326,64 +326,64 @@ Keys:
 (&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)
 
 First node:
-&apos;pytest_obj&apos;: &lt;function test_my_app_bench at 0x7fbf8fafa378&gt;
+&apos;pytest_obj&apos;: &lt;function test_my_app_bench at 0x7f594f663378&gt;
 &apos;status&apos;: &apos;passed&apos;
-&apos;duration_ms&apos;: 0.45752525329589844
+&apos;duration_ms&apos;: 0.32138824462890625
 &apos;algo_param&apos;: 1
 &apos;dataset_param&apos;: &apos;A&apos;
 &apos;dataset&apos;: &apos;my dataset #A&apos;
-&apos;accuracy&apos;: 0.2742826190998384
-                                     status      duration_ms    algo_param  dataset_param    dataset          accuracy
------------------------------------  --------  -------------  ------------  ---------------  -------------  ----------
-(&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)  passed         0.457525             1  A                my dataset #A    0.274283
-(&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)  passed         0.43416              1  A                my dataset #A  nan
-(&apos;test_my_app_bench[A-2]&apos;, &apos;train&apos;)  passed         0.448465             2  A                my dataset #A    0.37943
-(&apos;test_my_app_bench[A-2]&apos;, &apos;score&apos;)  passed         0.44632              2  A                my dataset #A  nan
-(&apos;test_my_app_bench[B-1]&apos;, &apos;train&apos;)  passed         0.447512             1  B                my dataset #B    0.160543
-(&apos;test_my_app_bench[B-1]&apos;, &apos;score&apos;)  passed         0.2985               1  B                my dataset #B  nan
-(&apos;test_my_app_bench[B-2]&apos;, &apos;train&apos;)  passed         0.461102             2  B                my dataset #B    0.110796
-(&apos;test_my_app_bench[B-2]&apos;, &apos;score&apos;)  passed         0.435829             2  B                my dataset #B  nan
-(&apos;test_my_app_bench[C-1]&apos;, &apos;train&apos;)  passed         0.404835             1  C                my dataset #C    0.981473
-(&apos;test_my_app_bench[C-1]&apos;, &apos;score&apos;)  passed         0.392675             1  C                my dataset #C  nan
-(&apos;test_my_app_bench[C-2]&apos;, &apos;train&apos;)  passed         0.496864             2  C                my dataset #C    0.192778
-(&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)  passed         0.321627             2  C                my dataset #C  nan
+&apos;accuracy&apos;: 0.9439339585505223
+                                     status      duration_ms    algo_param  dataset_param    dataset           accuracy
+-----------------------------------  --------  -------------  ------------  ---------------  -------------  -----------
+(&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)  passed         0.321388             1  A                my dataset #A    0.943934
+(&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)  passed         0.322342             1  A                my dataset #A  nan
+(&apos;test_my_app_bench[A-2]&apos;, &apos;train&apos;)  passed         0.278473             2  A                my dataset #A    0.130467
+(&apos;test_my_app_bench[A-2]&apos;, &apos;score&apos;)  passed         0.273705             2  A                my dataset #A  nan
+(&apos;test_my_app_bench[B-1]&apos;, &apos;train&apos;)  passed         0.319004             1  B                my dataset #B    0.0562456
+(&apos;test_my_app_bench[B-1]&apos;, &apos;score&apos;)  passed         0.284672             1  B                my dataset #B  nan
+(&apos;test_my_app_bench[B-2]&apos;, &apos;train&apos;)  passed         0.296354             2  B                my dataset #B    0.376811
+(&apos;test_my_app_bench[B-2]&apos;, &apos;score&apos;)  passed         0.30899              2  B                my dataset #B  nan
+(&apos;test_my_app_bench[C-1]&apos;, &apos;train&apos;)  passed         0.312805             1  C                my dataset #C    0.314868
+(&apos;test_my_app_bench[C-1]&apos;, &apos;score&apos;)  passed         0.278473             1  C                my dataset #C  nan
+(&apos;test_my_app_bench[C-2]&apos;, &apos;train&apos;)  passed         0.287771             2  C                my dataset #C    0.620473
+(&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)  passed         0.295877             2  C                my dataset #C  nan
 test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms    train/accuracy  score/status      score/duration_ms
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  ----------------  --------------  -------------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.457525          0.274283  passed                     0.43416
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.448465          0.37943   passed                     0.44632
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.447512          0.160543  passed                     0.2985
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.461102          0.110796  passed                     0.435829
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.404835          0.981473  passed                     0.392675
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.496864          0.192778  passed                     0.321627
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.321388         0.943934   passed                     0.322342
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.278473         0.130467   passed                     0.273705
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.319004         0.0562456  passed                     0.284672
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.296354         0.376811   passed                     0.30899
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.312805         0.314868   passed                     0.278473
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.287771         0.620473   passed                     0.295877
 </system-out><system-err>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pandas/core/reshape/merge.py:544: UserWarning: merging between different levels can give an unintended result (1 levels on the left, 2 on the right)
   warnings.warn(msg, UserWarning)
-</system-err></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=a-a]" time="0.001546621322631836"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=a-b]" time="0.0014257431030273438"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=b-a]" time="0.0018908977508544922"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=b-b]" time="0.0014345645904541016"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="33" name="test_step_id_gen_mode_approx_conflict_fixture[hello-b-foo-a]" time="0.0010037422180175781"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="33" name="test_step_id_gen_mode_approx_conflict_fixture[hello-b-foo-b]" time="0.0010151863098144531"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=a-a]" time="0.0021009445190429688"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=a-b]" time="0.001560211181640625"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=b-a]" time="0.0015974044799804688"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=b-b]" time="0.001638650894165039"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[a-a]" time="0.001692056655883789"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[a-b]" time="0.0013973712921142578"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[b-a]" time="0.0010843276977539062"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[b-b]" time="0.0014619827270507812"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="59" name="test_step_id_gen_mode_exact_conflict_with_fixture[b-a]" time="0.001547098159790039"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="59" name="test_step_id_gen_mode_exact_conflict_with_fixture[b-b]" time="0.0019538402557373047"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-a-a]" time="0.001615285873413086"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-a-b]" time="0.0016558170318603516"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-b-a]" time="0.001161336898803711"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-b-b]" time="0.001177072525024414"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=a-a]" time="0.0014805793762207031"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=a-b]" time="0.0015501976013183594"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=b-a]" time="0.0015444755554199219"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=b-b]" time="0.0016565322875976562"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=a-a]" time="0.0021576881408691406"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=a-b]" time="0.0010383129119873047"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=b-a]" time="0.001134634017944336"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=b-b]" time="0.0016291141510009766"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=a-a]" time="0.0021715164184570312"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=a-b]" time="0.0016770362854003906"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=b-a]" time="0.0016605854034423828"><system-out>a
-</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=b-b]" time="0.0016012191772460938"><system-out>b
-</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-1-train]" time="0.0018935203552246094"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-1-score]" time="0.0017135143280029297"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-2-train]" time="0.0022356510162353516"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-2-score]" time="0.0020647048950195312"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-1-train]" time="0.002420663833618164"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-1-score]" time="0.0019383430480957031"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-2-train]" time="0.001485586166381836"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-2-score]" time="0.0012934207916259766"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-1-train]" time="0.0020983219146728516"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-1-score]" time="0.0019412040710449219"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-2-train]" time="0.002005338668823242"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-2-score]" time="0.0019328594207763672"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="86" name="test_basic" time="0.0011608600616455078"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="91" name="test_synthesis" time="0.09653663635253906"><system-out>
+</system-err></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=a-a]" time="0.0011653900146484375"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=a-b]" time="0.0010561943054199219"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=b-a]" time="0.0012614727020263672"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="26" name="test_step_id_gen_mode_approx_conflict_params[p=b-b]" time="0.0010437965393066406"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="33" name="test_step_id_gen_mode_approx_conflict_fixture[hello-b-foo-a]" time="0.0010120868682861328"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="33" name="test_step_id_gen_mode_approx_conflict_fixture[hello-b-foo-b]" time="0.0009691715240478516"></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=a-a]" time="0.0014317035675048828"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=a-b]" time="0.000985860824584961"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=b-a]" time="0.0010559558868408203"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="39" name="test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=b-b]" time="0.0010561943054199219"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[a-a]" time="0.0009829998016357422"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[a-b]" time="0.0013651847839355469"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[b-a]" time="0.0010313987731933594"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="50" name="test_step_id_gen_mode_exact_conflict_with_param[b-b]" time="0.00102996826171875"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="59" name="test_step_id_gen_mode_exact_conflict_with_fixture[b-a]" time="0.0010573863983154297"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="59" name="test_step_id_gen_mode_exact_conflict_with_fixture[b-b]" time="0.0013284683227539062"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-a-a]" time="0.001010894775390625"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-a-b]" time="0.0010666847229003906"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-b-a]" time="0.0010607242584228516"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="67" name="test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-b-b]" time="0.00116729736328125"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=a-a]" time="0.001096963882446289"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=a-b]" time="0.001089334487915039"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=b-a]" time="0.0011005401611328125"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="79" name="test_step_id_parametrize_mode_approx_conflict[p=b-b]" time="0.0011377334594726562"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=a-a]" time="0.0014193058013916016"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=a-b]" time="0.000982046127319336"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=b-a]" time="0.0011258125305175781"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="88" name="test_step_id_conflicts_parametrized2[1-p=b-b]" time="0.0011639595031738281"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=a-a]" time="0.0015192031860351562"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=a-b]" time="0.0011398792266845703"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=b-a]" time="0.0010840892791748047"><system-out>a
+</system-out></testcase><testcase classname="pytest_steps.tests.test_step_id_conflicts" file="pytest_steps/tests/test_step_id_conflicts.py" line="97" name="test_step_id_conflicts_parametrized3[b-p=b-b]" time="0.0011188983917236328"><system-out>b
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-1-train]" time="0.0018329620361328125"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-1-score]" time="0.0013194084167480469"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-2-train]" time="0.0012440681457519531"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[A-2-score]" time="0.0013320446014404297"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-1-train]" time="0.001772165298461914"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-1-score]" time="0.0013685226440429688"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-2-train]" time="0.0013539791107177734"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[B-2-score]" time="0.0013799667358398438"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-1-train]" time="0.0015053749084472656"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-1-score]" time="0.001382589340209961"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-2-train]" time="0.0013320446014404297"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="65" name="test_my_app_bench[C-2-score]" time="0.0012006759643554688"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="86" name="test_basic" time="0.000675201416015625"></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="91" name="test_synthesis" time="0.0989389419555664"><system-out>
 Keys:
 test_my_app_bench[A-1-train]
 test_my_app_bench[A-1-score]
@@ -400,34 +400,34 @@ test_my_app_bench[C-2-score]
 test_basic
 
 First node:
-&apos;pytest_obj&apos;: &lt;function test_my_app_bench at 0x7fbf8f8948c8&gt;
+&apos;pytest_obj&apos;: &lt;function test_my_app_bench at 0x7f594f4038c8&gt;
 &apos;status&apos;: &apos;passed&apos;
-&apos;duration_ms&apos;: 0.3325939178466797
+&apos;duration_ms&apos;: 0.32973289489746094
 &apos;________step_name_&apos;: &apos;train&apos;
 &apos;algo_param&apos;: 1
 &apos;dataset_param&apos;: &apos;A&apos;
 &apos;dataset&apos;: &apos;my dataset #A&apos;
-&apos;accuracy&apos;: 0.42214282165082107
+&apos;accuracy&apos;: 0.815879405702439
 
 Pivoted table:
 test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms    train/accuracy  score/status      score/duration_ms  -/status      -/duration_ms
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  ----------------  --------------  -------------------  ----------  ---------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.332594        0.422143    passed                     0.421762  nan              nan
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.522614        0.0560499   passed                     0.464678  nan              nan
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.939846        0.942632    passed                     0.453234  nan              nan
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.306845        0.782546    passed                     0.289679  nan              nan
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.480652        0.565463    passed                     0.422955  nan              nan
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.457764        0.00441112  passed                     0.429153  nan              nan
-test_basic                       nan  nan              nan            nan                      nan             nan           nan                      nan         passed             0.299931
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.329733          0.815879  passed                     0.281572  nan              nan
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.260353          0.333589  passed                     0.31352   nan              nan
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.693083          0.726194  passed                     0.310183  nan              nan
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.294685          0.686626  passed                     0.286341  nan              nan
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.327587          0.938196  passed                     0.31662   nan              nan
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.261784          0.249304  passed                     0.244856  nan              nan
+test_basic                       nan  nan              nan            nan                      nan               nan         nan                      nan         passed             0.184774
 
 Pivoted table (2):
 test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms    train/accuracy  score/status      score/duration_ms  -/status      -/duration_ms
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  ----------------  --------------  -------------------  ----------  ---------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.332594        0.422143    passed                     0.421762  nan              nan
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.522614        0.0560499   passed                     0.464678  nan              nan
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.939846        0.942632    passed                     0.453234  nan              nan
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.306845        0.782546    passed                     0.289679  nan              nan
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.480652        0.565463    passed                     0.422955  nan              nan
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.457764        0.00441112  passed                     0.429153  nan              nan
-test_basic                       nan  nan              nan            nan                      nan             nan           nan                      nan         passed             0.299931
-</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="187" name="test_synthesis_not_flat" time="0.0037724971771240234"></testcase></testsuite>
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.329733          0.815879  passed                     0.281572  nan              nan
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.260353          0.333589  passed                     0.31352   nan              nan
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.693083          0.726194  passed                     0.310183  nan              nan
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.294685          0.686626  passed                     0.286341  nan              nan
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.327587          0.938196  passed                     0.31662   nan              nan
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.261784          0.249304  passed                     0.244856  nan              nan
+test_basic                       nan  nan              nan            nan                      nan               nan         nan                      nan         passed             0.184774
+</system-out></testcase><testcase classname="pytest_steps.tests.test_steps_harvest" file="pytest_steps/tests/test_steps_harvest.py" line="187" name="test_synthesis_not_flat" time="0.002948760986328125"></testcase></testsuite>
