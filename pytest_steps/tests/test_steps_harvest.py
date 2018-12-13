@@ -47,16 +47,16 @@ def my_score(model, data):
 # ---------- Tests
 # A module-scoped store
 @pytest.fixture(scope='module', autouse=True)
-def store():
+def my_store():
     return OrderedDict()
 
 
 # A module-scoped results bag fixture
-my_results = create_results_bag_fixture('store', name='my_results')
+my_results = create_results_bag_fixture('my_store', name='my_results')
 
 
 @pytest.fixture(params=['A', 'B', 'C'])
-@saved_fixture('store')
+@saved_fixture('my_store')
 def dataset(request):
     """Represents a dataset fixture."""
     return "my dataset #%s" % request.param
@@ -88,7 +88,7 @@ def test_basic():
     pass
 
 
-def test_synthesis(request, store):
+def test_synthesis(request, my_store):
     """
     Tests that users can create a pivoted syntesis table, both by hand (only using pytest-harvest's
     get_session_synthesis_dct) or using the provided utility functions from pytest-steps.
@@ -99,7 +99,7 @@ def test_synthesis(request, store):
     # - combined with our store
     results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
                                             durations_in_ms=True, test_id_format='function', status_details=False,
-                                            fixture_store=store, flatten=True, flatten_more='my_results')
+                                            fixture_store=my_store, flatten=True, flatten_more='my_results')
 
     # print keys and first node details
     assert len(results_dct) > 0
@@ -183,7 +183,7 @@ def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
     return results_df
 
 
-def test_synthesis_not_flat(request, store):
+def test_synthesis_not_flat(request, my_store):
     """Additional test to improve coverage"""
 
     results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
