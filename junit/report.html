@@ -3,150 +3,8 @@
   <head>
     <meta charset="utf-8"/>
     <title>Test Report</title>
-    <style>body {
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 12px;
-	min-width: 1200px;
-	color: #999;
-}
-h2 {
-	font-size: 16px;
-	color: black;
-}
-
-p {
-    color: black;
-}
-
-a {
-	color: #999;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-/******************************
- * SUMMARY INFORMATION
- ******************************/
-
-#environment td {
-	padding: 5px;
-	border: 1px solid #E6E6E6;
-}
-
-#environment tr:nth-child(odd) {
-	background-color: #f6f6f6;
-}
-
-/******************************
- * TEST RESULT COLORS
- ******************************/
-span.passed, .passed .col-result {
-	color: green;
-}
-span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
-	color: orange;
-}
-span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
-	color: red;
-}
-
-
-/******************************
- * RESULTS TABLE
- *
- * 1. Table Layout
- * 2. Extra
- * 3. Sorting items
- *
- ******************************/
-
-/*------------------
- * 1. Table Layout
- *------------------*/
-
-#results-table {
-	border: 1px solid #e6e6e6;
-	color: #999;
-	font-size: 12px;
-	width: 100%
-}
-
-#results-table th, #results-table td {
-	padding: 5px;
-	border: 1px solid #E6E6E6;
-	text-align: left
-}
-#results-table th {
-	font-weight: bold
-}
-
-/*------------------
- * 2. Extra
- *------------------*/
-
-.log:only-child {
-	height: inherit
-}
-.log {
-	background-color: #e6e6e6;
-	border: 1px solid #e6e6e6;
-	color: black;
-	display: block;
-	font-family: "Courier New", Courier, monospace;
-	height: 230px;
-	overflow-y: scroll;
-	padding: 5px;
-	white-space: pre-wrap
-}
-div.image {
-	border: 1px solid #e6e6e6;
-	float: right;
-	height: 240px;
-	margin-left: 5px;
-	overflow: hidden;
-	width: 320px
-}
-div.image img {
-	width: 320px
-}
-
-/*------------------
- * 3. Sorting items
- *------------------*/
-.sortable {
-	cursor: pointer;
-}
-
-.sort-icon {
-	font-size: 0px;
-	float: left;
-	margin-right: 5px;
-	margin-top: 5px;
-	/*triangle*/
-	width: 0;
-	height: 0;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-}
-
-.inactive .sort-icon {
-	/*finish triangle*/
-	border-top: 8px solid #E6E6E6;
-}
-
-.asc.active .sort-icon {
-	/*finish triangle*/
-	border-bottom: 8px solid #999;
-}
-
-.desc.active .sort-icon {
-	/*finish triangle*/
-	border-top: 8px solid #999;
-}
-</style></head>
-  <body>
+    <link href="assets/style.css" rel="stylesheet" type="text/css"/></head>
+  <body onLoad="init()">
     <script>/* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
@@ -187,36 +45,80 @@ function sort_column(elem) {
     sort_table(elem, key(colIndex));
 }
 
-addEventListener("DOMContentLoaded", function() {
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
     reset_sort_headers();
 
-    sort_column(find('.initial-sort'));
+    add_collapse();
 
-    find_all('.col-links a.image').forEach(function(elem) {
-        elem.addEventListener("click",
-                              function(event) {
-                                  var node = elem;
-                                  while (node && !node.classList.contains('results-table-row')) {
-                                      node = node.parentNode;
-                                  }
-                                  if (node != null) {
-                                      if (node.nextSibling &&
-                                          node.nextSibling.classList.contains("extra")) {
-                                          var href = find('.image img', node.nextSibling).src;
-                                          window.open(href);
-                                      }
-                                  }
-                                  event.preventDefault();
-                              }, false)
-    });
+    show_filters();
 
-    find_all('.image a').forEach(function(elem) {
-        elem.addEventListener("click",
-                              function(event) {
-                                  window.open(find('img', elem).getAttribute('src'));
-                                  event.preventDefault();
-                              }, false)
-    });
+    toggle_sort_states(find('.initial-sort'));
 
     find_all('.sortable').forEach(function(elem) {
         elem.addEventListener("click",
@@ -225,17 +127,24 @@ addEventListener("DOMContentLoaded", function() {
                               }, false)
     });
 
-});
+};
 
 function sort_table(clicked, key_func) {
     var rows = find_all('.results-table-row');
     var reversed = !clicked.classList.contains('asc');
     var sorted_rows = sort(rows, key_func, reversed);
-
-    var parent = document.getElementById('results-table');
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
     sorted_rows.forEach(function(elem) {
         parent.appendChild(elem);
     });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
 }
 
 function sort(items, key_func, reversed) {
@@ -270,8 +179,8 @@ function key_num(col_index) {
 
 function key_result(col_index) {
     return function(elem) {
-        var strings = ['Error', 'Failed', 'XFailed', 'XPassed', 'Skipped',
-                       'Passed'];
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
         return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
     };
 }
@@ -314,142 +223,194 @@ function filter_table(elem) {
     var outcome = elem.getAttribute(outcome_att);
     class_outcome = outcome + " results-table-row";
     var outcome_rows = document.getElementsByClassName(class_outcome);
-   
+
     for(var i = 0; i < outcome_rows.length; i++){
         outcome_rows[i].hidden = !elem.checked;
     }
 
     var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
-    var all_rows_hidden = rows.length == 0 ? true : false;    
+    var all_rows_hidden = rows.length == 0 ? true : false;
     var not_found_message = document.getElementById("not-found-message");
     not_found_message.hidden = !all_rows_hidden;
 }
 </script>
-    <p>Report generated on 13-Dec-2018 at 17:02:43</p>
+    <h1>report.html</h1>
+    <p>Report generated on 13-Dec-2018 at 17:04:16 by<a href="https://pypi.python.org/pypi/pytest-html"> pytest-html</a> v1.19.0</p>
     <h2>Environment</h2>
     <table id="environment">
+      <tr>
+        <td>CI</td>
+        <td>true</td></tr>
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>/usr/lib/jvm/java-8-oracle</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;3.10.1&apos;, &apos;pluggy&apos;: &apos;0.8.0&apos;, &apos;py&apos;: &apos;1.7.0&apos;}</td></tr>
       <tr>
         <td>Platform</td>
         <td>Linux-4.4.0-101-generic-x86_64-with-debian-jessie-sid</td></tr>
       <tr>
+        <td>Plugins</td>
+        <td>{&apos;faulthandler&apos;: &apos;1.5.0&apos;, &apos;html&apos;: &apos;1.19.0&apos;, &apos;cov&apos;: &apos;2.6.0&apos;, &apos;metadata&apos;: &apos;1.7.0&apos;, &apos;harvest&apos;: &apos;1.2.1&apos;}</td></tr>
+      <tr>
         <td>Python</td>
-        <td>3.5.6</td></tr></table>
+        <td>3.5.6</td></tr>
+      <tr>
+        <td>TRAVIS_BRANCH</td>
+        <td>1.2.1</td></tr>
+      <tr>
+        <td>TRAVIS_BUILD_ID</td>
+        <td>467607327</td></tr>
+      <tr>
+        <td>TRAVIS_BUILD_NUMBER</td>
+        <td>85</td></tr>
+      <tr>
+        <td>TRAVIS_COMMIT</td>
+        <td>1574b46a4e3fcb38eb7752698ccfdfbe755b462f</td></tr>
+      <tr>
+        <td>TRAVIS_COMMIT_MESSAGE</td>
+        <td>1.2.1 changelog</td></tr>
+      <tr>
+        <td>TRAVIS_EVENT_TYPE</td>
+        <td>push</td></tr>
+      <tr>
+        <td>TRAVIS_JOB_ID</td>
+        <td>467607332</td></tr>
+      <tr>
+        <td>TRAVIS_JOB_NUMBER</td>
+        <td>85.5</td></tr>
+      <tr>
+        <td>TRAVIS_OS_NAME</td>
+        <td>linux</td></tr>
+      <tr>
+        <td>TRAVIS_PULL_REQUEST</td>
+        <td>false</td></tr>
+      <tr>
+        <td>TRAVIS_REPO_SLUG</td>
+        <td>smarie/python-pytest-steps</td></tr>
+      <tr>
+        <td>TRAVIS_SUDO</td>
+        <td>true</td></tr>
+      <tr>
+        <td>TRAVIS_TAG</td>
+        <td>1.2.1</td></tr></table>
     <h2>Summary</h2>
-    <p>75 tests ran in 1.53 seconds. </p>
-    <p>(Un)check the boxes to filter the results.</p><input checked="true" data-test-result="passed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">75 passed</span> <input checked="true" data-test-result="skipped" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span> <input checked="true" data-test-result="failed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span> <input checked="true" data-test-result="error" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span> <input checked="true" data-test-result="xfailed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span> <input checked="true" data-test-result="xpassed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span> <input checked="true" data-test-result="rerun" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span> 
+    <p>75 tests ran in 2.16 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">75 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
         <tr>
-          <th class="sortable initial-sort result" col="result">Result</th>
+          <th class="sortable result initial-sort" col="result">Result</th>
           <th class="sortable" col="name">Test</th>
           <th class="sortable numeric" col="duration">Duration</th>
           <th>Links</th></tr>
         <tr hidden="true" id="not-found-message">
-          <th colspan="5">No results found. Try to check the filters</th></tr></thead>
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_with_results_complex.py]</td>
-          <td class="col-duration">0.06</td>
+          <td class="col-duration">0.11</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_with_results_complex.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_steps_with_results_complex.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 16}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests0, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests0, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 16 items
 
-test_run_all_tests.py ................
+test_run_all_tests.py ................                                   [100%]
 
-========================== 16 passed in 0.03 seconds ===========================
+========================== 16 passed in 0.06 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_generator_does_not_change_order.py]</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_generator_does_not_change_order.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_steps_generator_does_not_change_order.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 3}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests1, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests1, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 3 items
 
-test_run_all_tests.py ...
+test_run_all_tests.py ...                                                [100%]
 
-=========================== 3 passed in 0.01 seconds ===========================
+=========================== 3 passed in 0.02 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_wrapped_in_class.py]</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-duration">0.10</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_wrapped_in_class.py results in {&apos;passed&apos;: 1, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_wrapped_in_class.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 1}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests2, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
-collected 1 items
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests2, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+collected 1 item
 
-test_run_all_tests.py .
+test_run_all_tests.py .                                                  [100%]
 
-=========================== 1 passed in 0.01 seconds ===========================
+=========================== 1 passed in 0.06 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_stackoverflow.py]</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_stackoverflow.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_stackoverflow.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 3}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests3, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 3 items
 
-test_run_all_tests.py ...
+test_run_all_tests.py ...                                                [100%]
 
-=========================== 3 passed in 0.01 seconds ===========================
+=========================== 3 passed in 0.02 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_new_with_generator.py]</td>
-          <td class="col-duration">0.20</td>
+          <td class="col-duration">0.22</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_new_with_generator.py results in {&apos;passed&apos;: 12, &apos;skipped&apos;: 2, &apos;failed&apos;: 2}
+Testing that running pytest on file test_steps_new_with_generator.py results in {&#x27;failed&#x27;: 2, &#x27;skipped&#x27;: 2, &#x27;passed&#x27;: 12}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests4, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests4, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 16 items
 
-test_run_all_tests.py ....Fs.Fs.......
+test_run_all_tests.py ....Fs.Fs.......                                   [100%]
 
 =================================== FAILURES ===================================
 ________________ test_suite_exception_on_mandatory_step[step_b] ________________
 
-________step_name_ = &apos;step_b&apos;
-request = &lt;FixtureRequest for &lt;Function &apos;test_suite_exception_on_mandatory_step[step_b]&apos;&gt;&gt;
+________step_name_ = &#x27;step_b&#x27;
+request = &lt;FixtureRequest for &lt;Function &#x27;test_suite_exception_on_mandatory_step[step_b]&#x27;&gt;&gt;
 
 &gt;   ???
 
@@ -463,14 +424,14 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     res = next(self.gen)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-    @test_steps(&apos;step_a&apos;, &apos;step_b&apos;, &apos;step_c&apos;)
+    @test_steps(&#x27;step_a&#x27;, &#x27;step_b&#x27;, &#x27;step_c&#x27;)
     def test_suite_exception_on_mandatory_step():
         &quot;&quot;&quot; &quot;&quot;&quot;
     
         # Step A
         print(&quot;step a&quot;)
         assert not False  # replace with your logic
-        yield &apos;step_a&apos;
+        yield &#x27;step_a&#x27;
     
         # Step B
         print(&quot;step b&quot;)
@@ -482,8 +443,8 @@ test_run_all_tests.py:43: AssertionError
 step b
 _______________ test_suite_optional_and_dependent_steps[step_b] ________________
 
-________step_name_ = &apos;step_b&apos;
-request = &lt;FixtureRequest for &lt;Function &apos;test_suite_optional_and_dependent_steps[step_b]&apos;&gt;&gt;
+________step_name_ = &#x27;step_b&#x27;
+request = &lt;FixtureRequest for &lt;Function &#x27;test_suite_optional_and_dependent_steps[step_b]&#x27;&gt;&gt;
 
 &gt;   ???
 
@@ -499,17 +460,17 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     raise value
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-    @test_steps(&apos;step_a&apos;, &apos;step_b&apos;, &apos;step_c&apos;, &apos;step_d&apos;)
+    @test_steps(&#x27;step_a&#x27;, &#x27;step_b&#x27;, &#x27;step_c&#x27;, &#x27;step_d&#x27;)
     def test_suite_optional_and_dependent_steps():
         &quot;&quot;&quot; &quot;&quot;&quot;
     
         # Step A
         print(&quot;step a&quot;)
         assert not False
-        yield &apos;step_a&apos;
+        yield &#x27;step_a&#x27;
     
         # Step B
-        with optional_step(&apos;step_b&apos;) as step_b:
+        with optional_step(&#x27;step_b&#x27;) as step_b:
             print(&quot;step b&quot;)
 &gt;           assert False
 E           assert False
@@ -517,91 +478,91 @@ E           assert False
 test_run_all_tests.py:64: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 12 passed, 2 skipped in 0.18 seconds ================
+================ 2 failed, 12 passed, 2 skipped in 0.17 seconds ================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_pytest_capabilities.py]</td>
-          <td class="col-duration">0.06</td>
+          <td class="col-duration">0.11</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_pytest_capabilities.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_pytest_capabilities.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 16}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests5, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 16 items
 
-test_run_all_tests.py ................
+test_run_all_tests.py ................                                   [100%]
 
-========================== 16 passed in 0.03 seconds ===========================
+========================== 16 passed in 0.06 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_with_results_basic.py]</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_with_results_basic.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_steps_with_results_basic.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 4}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests6, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests6, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 4 items
 
-test_run_all_tests.py ....
+test_run_all_tests.py ....                                               [100%]
 
-=========================== 4 passed in 0.01 seconds ===========================
+=========================== 4 passed in 0.03 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_no_results.py]</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_no_results.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_steps_no_results.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 4}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests7, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 4 items
 
-test_run_all_tests.py ....
+test_run_all_tests.py ....                                               [100%]
 
-=========================== 4 passed in 0.01 seconds ===========================
+=========================== 4 passed in 0.02 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_dependencies.py]</td>
-          <td class="col-duration">0.05</td>
+          <td class="col-duration">0.09</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_dependencies.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 1, &apos;failed&apos;: 2}
+Testing that running pytest on file test_steps_dependencies.py results in {&#x27;failed&#x27;: 2, &#x27;skipped&#x27;: 1, &#x27;passed&#x27;: 3}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests8, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 6 items
 
-test_run_all_tests.py .Fs.F.
+test_run_all_tests.py .Fs.F.                                             [100%]
 
 =================================== FAILURES ===================================
 ________________________ test_suite_no_results[step_b] _________________________
 
-test_step = &lt;function step_b at 0x7f594f120378&gt;
-request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
+test_step = &lt;function step_b at 0x7f0c7cf4d378&gt;
+request = &lt;FixtureRequest for &lt;Function &#x27;test_suite_no_results[step_b]&#x27;&gt;&gt;
 
     @test_steps(step_a, step_b, step_c)
     def test_suite_no_results(test_step, request):
@@ -626,15 +587,15 @@ test_run_all_tests.py:20: AssertionError
 step b
 _____________________________ test_suite_1[step_b] _____________________________
 
-test_step = &apos;step_b&apos;
+test_step = &#x27;step_b&#x27;
 
-    @test_steps(&apos;step_a&apos;, &apos;step_b&apos;, &apos;step_c&apos;)
+    @test_steps(&#x27;step_a&#x27;, &#x27;step_b&#x27;, &#x27;step_c&#x27;)
     def test_suite_1(test_step):
         &quot;&quot;&quot; In this test suite the last step can &quot;see&quot; the dependency so it is still executed ...&quot;&quot;&quot;
         # Execute the step according to name
-        if test_step == &apos;step_a&apos;:
+        if test_step == &#x27;step_a&#x27;:
             step_a()
-        elif test_step == &apos;step_b&apos;:
+        elif test_step == &#x27;step_b&#x27;:
 &gt;           step_b()
 
 test_run_all_tests.py:47: 
@@ -651,32 +612,32 @@ E       assert False
 test_run_all_tests.py:20: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 3 passed, 1 skipped in 0.03 seconds =================
+================ 2 failed, 3 passed, 1 skipped in 0.04 seconds =================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_and_dependency_tree.py]</td>
-          <td class="col-duration">0.08</td>
+          <td class="col-duration">0.13</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_and_dependency_tree.py results in {&apos;passed&apos;: 8, &apos;skipped&apos;: 5, &apos;failed&apos;: 1}
+Testing that running pytest on file test_steps_and_dependency_tree.py results in {&#x27;failed&#x27;: 1, &#x27;skipped&#x27;: 5, &#x27;passed&#x27;: 8}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests9, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests9, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 14 items
 
-test_run_all_tests.py ....Fs....ssss
+test_run_all_tests.py ....Fs....ssss                                     [100%]
 
 =================================== FAILURES ===================================
 _____________________________ test_3_4[p=b-step3] ______________________________
 
-________step_name_ = &apos;step3&apos;
-request = &lt;FixtureRequest for &lt;Function &apos;test_3_4[p=b-step3]&apos;&gt;&gt;, p = &apos;b&apos;
-results_dct = {&apos;step1&apos;: 1, &apos;step2&apos;: &apos;hello&apos;, &apos;step3&apos;: {&apos;a&apos;: &apos;bla&apos;, &apos;b&apos;: &apos;bla&apos;}, &apos;step4&apos;: {&apos;a&apos;: &apos;blabla&apos;}}
+________step_name_ = &#x27;step3&#x27;
+request = &lt;FixtureRequest for &lt;Function &#x27;test_3_4[p=b-step3]&#x27;&gt;&gt;, p = &#x27;b&#x27;
+results_dct = {&#x27;step1&#x27;: 1, &#x27;step2&#x27;: &#x27;hello&#x27;, &#x27;step3&#x27;: {&#x27;a&#x27;: &#x27;bla&#x27;, &#x27;b&#x27;: &#x27;bla&#x27;}, &#x27;step4&#x27;: {&#x27;a&#x27;: &#x27;blabla&#x27;}}
 
 &gt;   ???
 
@@ -690,42 +651,42 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     res = next(self.gen)
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-p = &apos;b&apos;
-results_dct = {&apos;step1&apos;: 1, &apos;step2&apos;: &apos;hello&apos;, &apos;step3&apos;: {&apos;a&apos;: &apos;bla&apos;, &apos;b&apos;: &apos;bla&apos;}, &apos;step4&apos;: {&apos;a&apos;: &apos;blabla&apos;}}
+p = &#x27;b&#x27;
+results_dct = {&#x27;step1&#x27;: 1, &#x27;step2&#x27;: &#x27;hello&#x27;, &#x27;step3&#x27;: {&#x27;a&#x27;: &#x27;bla&#x27;, &#x27;b&#x27;: &#x27;bla&#x27;}, &#x27;step4&#x27;: {&#x27;a&#x27;: &#x27;blabla&#x27;}}
 
-    @test_steps(&apos;step3&apos;, &apos;step4&apos;)
-    @pytest.mark.parametrize(&apos;p&apos;, [&apos;a&apos;, &apos;b&apos;], ids=&quot;p={}&quot;.format)
+    @test_steps(&#x27;step3&#x27;, &#x27;step4&#x27;)
+    @pytest.mark.parametrize(&#x27;p&#x27;, [&#x27;a&#x27;, &#x27;b&#x27;], ids=&quot;p={}&quot;.format)
     def test_3_4(p, results_dct):
-        if &apos;step2&apos; not in results_dct:
+        if &#x27;step2&#x27; not in results_dct:
             pytest.skip(&quot;Can not start step 3: step 2 has not run successfuly&quot;)
         # step 3
-        results_dct.setdefault(&apos;step3&apos;, dict())[p] = &apos;bla&apos;
-        if p == &apos;b&apos;:
+        results_dct.setdefault(&#x27;step3&#x27;, dict())[p] = &#x27;bla&#x27;
+        if p == &#x27;b&#x27;:
 &gt;           assert False
 E           assert False
 
 test_run_all_tests.py:33: AssertionError
-================ 1 failed, 8 passed, 5 skipped in 0.06 seconds =================
+================ 1 failed, 8 passed, 5 skipped in 0.09 seconds =================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_stackoverflow2.py]</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-duration">0.07</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_stackoverflow2.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
+Testing that running pytest on file test_stackoverflow2.py results in {&#x27;failed&#x27;: 0, &#x27;skipped&#x27;: 0, &#x27;passed&#x27;: 3}
 ============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests10, inifile: 
-plugins: logging-2015.11.4, html-1.9.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
+platform linux -- Python 3.5.6, pytest-3.10.1, py-1.7.0, pluggy-0.8.0
+rootdir: /tmp/pytest-of-travis/pytest-0/test_run_all_tests10, inifile:
+plugins: metadata-1.7.0, html-1.19.0, harvest-1.2.1, faulthandler-1.5.0, cov-2.6.0
 collected 3 items
 
-test_run_all_tests.py ...
+test_run_all_tests.py ...                                                [100%]
 
-=========================== 3 passed in 0.01 seconds ===========================
+=========================== 3 passed in 0.02 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -734,7 +695,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>0
 1
 2
@@ -753,7 +714,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>0
 1
 2
@@ -772,7 +733,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>0
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -782,7 +743,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>0
 1
 2
@@ -801,7 +762,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -810,7 +771,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -819,7 +780,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -828,7 +789,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -837,7 +798,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -846,7 +807,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -855,7 +816,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -864,7 +825,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -873,7 +834,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -882,7 +843,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -891,7 +852,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -900,7 +861,7 @@ test_run_all_tests.py ...
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -909,54 +870,52 @@ test_run_all_tests.py ...
           <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
 Keys:
-(&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)
-(&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)
-(&apos;test_my_app_bench[A-2]&apos;, &apos;train&apos;)
-(&apos;test_my_app_bench[A-2]&apos;, &apos;score&apos;)
-(&apos;test_my_app_bench[B-1]&apos;, &apos;train&apos;)
-(&apos;test_my_app_bench[B-1]&apos;, &apos;score&apos;)
-(&apos;test_my_app_bench[B-2]&apos;, &apos;train&apos;)
-(&apos;test_my_app_bench[B-2]&apos;, &apos;score&apos;)
-(&apos;test_my_app_bench[C-1]&apos;, &apos;train&apos;)
-(&apos;test_my_app_bench[C-1]&apos;, &apos;score&apos;)
-(&apos;test_my_app_bench[C-2]&apos;, &apos;train&apos;)
-(&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)
+(&#x27;test_my_app_bench[A-1]&#x27;, &#x27;train&#x27;)
+(&#x27;test_my_app_bench[A-1]&#x27;, &#x27;score&#x27;)
+(&#x27;test_my_app_bench[A-2]&#x27;, &#x27;train&#x27;)
+(&#x27;test_my_app_bench[A-2]&#x27;, &#x27;score&#x27;)
+(&#x27;test_my_app_bench[B-1]&#x27;, &#x27;train&#x27;)
+(&#x27;test_my_app_bench[B-1]&#x27;, &#x27;score&#x27;)
+(&#x27;test_my_app_bench[B-2]&#x27;, &#x27;train&#x27;)
+(&#x27;test_my_app_bench[B-2]&#x27;, &#x27;score&#x27;)
+(&#x27;test_my_app_bench[C-1]&#x27;, &#x27;train&#x27;)
+(&#x27;test_my_app_bench[C-1]&#x27;, &#x27;score&#x27;)
+(&#x27;test_my_app_bench[C-2]&#x27;, &#x27;train&#x27;)
+(&#x27;test_my_app_bench[C-2]&#x27;, &#x27;score&#x27;)
 
 First node:
-&apos;pytest_obj&apos;: &lt;function test_my_app_bench at 0x7f594f663378&gt;
-&apos;status&apos;: &apos;passed&apos;
-&apos;duration_ms&apos;: 0.32138824462890625
-&apos;algo_param&apos;: 1
-&apos;dataset_param&apos;: &apos;A&apos;
-&apos;dataset&apos;: &apos;my dataset #A&apos;
-&apos;accuracy&apos;: 0.9439339585505223
-                                     status      duration_ms    algo_param  dataset_param    dataset           accuracy
------------------------------------  --------  -------------  ------------  ---------------  -------------  -----------
-(&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)  passed         0.321388             1  A                my dataset #A    0.943934
-(&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)  passed         0.322342             1  A                my dataset #A  nan
-(&apos;test_my_app_bench[A-2]&apos;, &apos;train&apos;)  passed         0.278473             2  A                my dataset #A    0.130467
-(&apos;test_my_app_bench[A-2]&apos;, &apos;score&apos;)  passed         0.273705             2  A                my dataset #A  nan
-(&apos;test_my_app_bench[B-1]&apos;, &apos;train&apos;)  passed         0.319004             1  B                my dataset #B    0.0562456
-(&apos;test_my_app_bench[B-1]&apos;, &apos;score&apos;)  passed         0.284672             1  B                my dataset #B  nan
-(&apos;test_my_app_bench[B-2]&apos;, &apos;train&apos;)  passed         0.296354             2  B                my dataset #B    0.376811
-(&apos;test_my_app_bench[B-2]&apos;, &apos;score&apos;)  passed         0.30899              2  B                my dataset #B  nan
-(&apos;test_my_app_bench[C-1]&apos;, &apos;train&apos;)  passed         0.312805             1  C                my dataset #C    0.314868
-(&apos;test_my_app_bench[C-1]&apos;, &apos;score&apos;)  passed         0.278473             1  C                my dataset #C  nan
-(&apos;test_my_app_bench[C-2]&apos;, &apos;train&apos;)  passed         0.287771             2  C                my dataset #C    0.620473
-(&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)  passed         0.295877             2  C                my dataset #C  nan
+&#x27;pytest_obj&#x27;: &lt;function test_my_app_bench at 0x7f0c7d1e7f28&gt;
+&#x27;status&#x27;: &#x27;passed&#x27;
+&#x27;duration_ms&#x27;: 0.4315376281738281
+&#x27;algo_param&#x27;: 1
+&#x27;dataset_param&#x27;: &#x27;A&#x27;
+&#x27;dataset&#x27;: &#x27;my dataset #A&#x27;
+&#x27;accuracy&#x27;: 0.5173417885162725
+                                     status      duration_ms    algo_param  dataset_param    dataset          accuracy
+-----------------------------------  --------  -------------  ------------  ---------------  -------------  ----------
+(&#x27;test_my_app_bench[A-1]&#x27;, &#x27;train&#x27;)  passed         0.431538             1  A                my dataset #A    0.517342
+(&#x27;test_my_app_bench[A-1]&#x27;, &#x27;score&#x27;)  passed         0.516176             1  A                my dataset #A  nan
+(&#x27;test_my_app_bench[A-2]&#x27;, &#x27;train&#x27;)  passed         0.739336             2  A                my dataset #A    0.513012
+(&#x27;test_my_app_bench[A-2]&#x27;, &#x27;score&#x27;)  passed         0.632524             2  A                my dataset #A  nan
+(&#x27;test_my_app_bench[B-1]&#x27;, &#x27;train&#x27;)  passed         0.474453             1  B                my dataset #B    0.550321
+(&#x27;test_my_app_bench[B-1]&#x27;, &#x27;score&#x27;)  passed         0.45228              1  B                my dataset #B  nan
+(&#x27;test_my_app_bench[B-2]&#x27;, &#x27;train&#x27;)  passed         0.485182             2  B                my dataset #B    0.32
+(&#x27;test_my_app_bench[B-2]&#x27;, &#x27;score&#x27;)  passed         0.673771             2  B                my dataset #B  nan
+(&#x27;test_my_app_bench[C-1]&#x27;, &#x27;train&#x27;)  passed         0.381231             1  C                my dataset #C    0.37284
+(&#x27;test_my_app_bench[C-1]&#x27;, &#x27;score&#x27;)  passed         0.688314             1  C                my dataset #C  nan
+(&#x27;test_my_app_bench[C-2]&#x27;, &#x27;train&#x27;)  passed         0.471354             2  C                my dataset #C    0.214405
+(&#x27;test_my_app_bench[C-2]&#x27;, &#x27;score&#x27;)  passed         0.454187             2  C                my dataset #C  nan
 test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms    train/accuracy  score/status      score/duration_ms
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  ----------------  --------------  -------------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.321388         0.943934   passed                     0.322342
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.278473         0.130467   passed                     0.273705
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.319004         0.0562456  passed                     0.284672
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.296354         0.376811   passed                     0.30899
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.312805         0.314868   passed                     0.278473
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.287771         0.620473   passed                     0.295877
------------------------------ Captured stderr call -----------------------------<br/>/home/travis/miniconda/envs/test-environment/lib/python3.5/site-packages/pandas/core/reshape/merge.py:544: UserWarning: merging between different levels can give an unintended result (1 levels on the left, 2 on the right)
-  warnings.warn(msg, UserWarning)
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.431538          0.517342  passed                     0.516176
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.739336          0.513012  passed                     0.632524
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.474453          0.550321  passed                     0.45228
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.485182          0.32      passed                     0.673771
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.381231          0.37284   passed                     0.688314
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.471354          0.214405  passed                     0.454187
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -965,7 +924,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -974,7 +933,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -983,7 +942,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -992,7 +951,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1001,7 +960,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1010,7 +969,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1019,7 +978,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1029,7 +988,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1039,7 +998,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1049,7 +1008,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1059,7 +1018,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1069,7 +1028,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1079,7 +1038,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1089,7 +1048,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1099,7 +1058,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1109,7 +1068,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1119,7 +1078,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1129,7 +1088,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1139,7 +1098,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1149,7 +1108,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1159,7 +1118,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1169,7 +1128,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1179,7 +1138,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1189,7 +1148,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1199,7 +1158,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1209,7 +1168,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1219,7 +1178,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1229,7 +1188,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1239,7 +1198,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1249,7 +1208,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1259,7 +1218,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1269,7 +1228,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
@@ -1279,7 +1238,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1288,7 +1247,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1297,7 +1256,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1306,7 +1265,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1315,7 +1274,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1324,7 +1283,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1333,7 +1292,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1342,7 +1301,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1351,7 +1310,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1360,7 +1319,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1369,7 +1328,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1378,7 +1337,7 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1387,16 +1346,16 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_synthesis</td>
-          <td class="col-duration">0.10</td>
+          <td class="col-duration">0.06</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
 Keys:
 test_my_app_bench[A-1-train]
@@ -1414,36 +1373,36 @@ test_my_app_bench[C-2-score]
 test_basic
 
 First node:
-&apos;pytest_obj&apos;: &lt;function test_my_app_bench at 0x7f594f4038c8&gt;
-&apos;status&apos;: &apos;passed&apos;
-&apos;duration_ms&apos;: 0.32973289489746094
-&apos;________step_name_&apos;: &apos;train&apos;
-&apos;algo_param&apos;: 1
-&apos;dataset_param&apos;: &apos;A&apos;
-&apos;dataset&apos;: &apos;my dataset #A&apos;
-&apos;accuracy&apos;: 0.815879405702439
+&#x27;pytest_obj&#x27;: &lt;function test_my_app_bench at 0x7f0c7d211b70&gt;
+&#x27;status&#x27;: &#x27;passed&#x27;
+&#x27;duration_ms&#x27;: 0.3566741943359375
+&#x27;________step_name_&#x27;: &#x27;train&#x27;
+&#x27;algo_param&#x27;: 1
+&#x27;dataset_param&#x27;: &#x27;A&#x27;
+&#x27;dataset&#x27;: &#x27;my dataset #A&#x27;
+&#x27;accuracy&#x27;: 0.22609398003698666
 
 Pivoted table:
 test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms    train/accuracy  score/status      score/duration_ms  -/status      -/duration_ms
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  ----------------  --------------  -------------------  ----------  ---------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.329733          0.815879  passed                     0.281572  nan              nan
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.260353          0.333589  passed                     0.31352   nan              nan
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.693083          0.726194  passed                     0.310183  nan              nan
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.294685          0.686626  passed                     0.286341  nan              nan
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.327587          0.938196  passed                     0.31662   nan              nan
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.261784          0.249304  passed                     0.244856  nan              nan
-test_basic                       nan  nan              nan            nan                      nan               nan         nan                      nan         passed             0.184774
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.356674         0.226094   passed                     0.350714  nan              nan
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.431538         0.903266   passed                     0.312805  nan              nan
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.324488         0.576232   passed                     0.329971  nan              nan
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.314474         0.315158   passed                     0.313282  nan              nan
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.37384          0.436439   passed                     0.357866  nan              nan
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.324011         0.0960862  passed                     0.331879  nan              nan
+test_basic                       nan  nan              nan            nan                      nan              nan          nan                      nan         passed             0.266314
 
 Pivoted table (2):
 test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms    train/accuracy  score/status      score/duration_ms  -/status      -/duration_ms
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  ----------------  --------------  -------------------  ----------  ---------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.329733          0.815879  passed                     0.281572  nan              nan
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.260353          0.333589  passed                     0.31352   nan              nan
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.693083          0.726194  passed                     0.310183  nan              nan
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.294685          0.686626  passed                     0.286341  nan              nan
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.327587          0.938196  passed                     0.31662   nan              nan
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.261784          0.249304  passed                     0.244856  nan              nan
-test_basic                       nan  nan              nan            nan                      nan               nan         nan                      nan         passed             0.184774
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.356674         0.226094   passed                     0.350714  nan              nan
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.431538         0.903266   passed                     0.312805  nan              nan
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.324488         0.576232   passed                     0.329971  nan              nan
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.314474         0.315158   passed                     0.313282  nan              nan
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.37384          0.436439   passed                     0.357866  nan              nan
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.324011         0.0960862  passed                     0.331879  nan              nan
+test_basic                       nan  nan              nan            nan                      nan              nan          nan                      nan         passed             0.266314
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1452,5 +1411,5 @@ test_basic                       nan  nan              nan            nan       
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
-          <td class="extra" colspan="5">
+          <td class="extra" colspan="4">
             <div class="empty log">No log output captured.</div></td></tr></tbody></table></body></html>
