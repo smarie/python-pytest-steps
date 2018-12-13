@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.1 - Minor improvements
+
+The unique id internally generated for each test now includes the pytest object. In practice this does not change anything for most use cases, but it might allow later refactoring 
+
 ### 1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test. 
 
 This fixes some bugs that were happening on edge cases where several parameters had the same string id representation (or one was a substring of the other). Fixed [#21](https://github.com/smarie/python-pytest-steps/issues/21).
