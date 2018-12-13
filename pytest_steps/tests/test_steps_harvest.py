@@ -145,7 +145,7 @@ def build_df_from_processed_synthesis(results_dct):
     return results_df
 
 
-def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
+def build_df_from_raw_synthesis(results_dct, cross_steps_columns, no_step_id='-'):
     """
     Converts the 'raw' synthesis dct into a pivoted dataframe where steps are a level in multilevel columns
 
@@ -174,7 +174,7 @@ def build_df_from_raw_synthesis(results_dct, cross_steps_columns):
         test_id, step_id = test_id_series.name, test_id_series.values[0]
         return remove_step_from_test_id(test_id, step_id) if not pd.isnull(step_id) else test_id
     results_df['test_id'] = results_df[['step_id']].apply(create_new_name, axis=1)
-    results_df['step_id'].fillna(value='-', inplace=True)
+    results_df['step_id'].fillna(value=no_step_id, inplace=True)
     results_df = results_df.reset_index(drop=True).set_index(['test_id', 'step_id'])
 
     # now we can drop
