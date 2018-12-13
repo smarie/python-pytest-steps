@@ -1,8 +1,10 @@
 # Changelog
 
-### 1.2.1 - Minor improvements
+### 1.2.1 - Alignment with pytest-harvest 1.2.1
 
-The unique id internally generated for each test now includes the pytest object. In practice this does not change anything for most use cases, but it might allow later refactoring 
+`pytest-harvest` 1.2 provides default fixtures and fixes a few issues in the synthesis dictionary (in particular fixture and fixture parameters were overlapping each other). We aligned `pytest-steps` to leverage it.
+ 
+Also, minor improvement: the unique id internally generated for each test now includes the pytest object. In practice this does not change anything for most use cases, but it might allow later refactoring, and better diagnostics.
 
 ### 1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test. 
 
