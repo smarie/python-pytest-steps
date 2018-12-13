@@ -283,6 +283,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#121-alignment-with-pytest-harvest-121" title="1.2.1 - Alignment with pytest-harvest 1.2.1" class="md-nav__link">
+    1.2.1 - Alignment with pytest-harvest 1.2.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#120-internal-refactoring-we-now-use-a-more-robust-method-to-identify-tests-that-are-steps-of-the-same-test" title="1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test." class="md-nav__link">
     1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test.
   </a>
@@ -412,6 +419,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#121-alignment-with-pytest-harvest-121" title="1.2.1 - Alignment with pytest-harvest 1.2.1" class="md-nav__link">
+    1.2.1 - Alignment with pytest-harvest 1.2.1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#120-internal-refactoring-we-now-use-a-more-robust-method-to-identify-tests-that-are-steps-of-the-same-test" title="1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test." class="md-nav__link">
     1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test.
   </a>
@@ -529,6 +543,9 @@
                 
                 
                 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h3 id="121-alignment-with-pytest-harvest-121">1.2.1 - Alignment with pytest-harvest 1.2.1<a class="headerlink" href="#121-alignment-with-pytest-harvest-121" title="Permanent link">&para;</a></h3>
+<p><code>pytest-harvest</code> 1.2 provides default fixtures and fixes a few issues in the synthesis dictionary (in particular fixture and fixture parameters were overlapping each other). We aligned <code>pytest-steps</code> to leverage it.</p>
+<p>Also, minor improvement: the unique id internally generated for each test now includes the pytest object. In practice this does not change anything for most use cases, but it might allow later refactoring, and better diagnostics.</p>
 <h3 id="120-internal-refactoring-we-now-use-a-more-robust-method-to-identify-tests-that-are-steps-of-the-same-test">1.2.0 - Internal refactoring: we now use a more robust method to identify tests that are steps of the same test.<a class="headerlink" href="#120-internal-refactoring-we-now-use-a-more-robust-method-to-identify-tests-that-are-steps-of-the-same-test" title="Permanent link">&para;</a></h3>
 <p>This fixes some bugs that were happening on edge cases where several parameters had the same string id representation (or one was a substring of the other). Fixed <a href="https://github.com/smarie/python-pytest-steps/issues/21">#21</a>.</p>
 <h3 id="112-pytest-harvest-is-now-an-optional-dependency">1.1.2 - pytest-harvest is now an optional dependency<a class="headerlink" href="#112-pytest-harvest-is-now-an-optional-dependency" title="Permanent link">&para;</a></h3>
