@@ -14,7 +14,7 @@ here = path.abspath(path.dirname(__file__))
 INSTALL_REQUIRES = ['decorator', 'wrapt', 'functools32;python_version<"3.2"', 'funcsigs;python_version<"3.3"']
 DEPENDENCY_LINKS = []
 SETUP_REQUIRES = ['pytest-runner', 'setuptools_scm', 'pypandoc', 'pandoc']
-TESTS_REQUIRE = ['pytest', 'pytest-logging', 'pytest-cov', 'pytest-harvest>=1.2.1']
+TESTS_REQUIRE = ['pytest', 'pytest-logging', 'pytest-cov', 'pytest-harvest>=1.4.0']
 EXTRAS_REQUIRE = {}
 
 # simple check
@@ -160,4 +160,7 @@ setup(
     #         'sample=sample:main',
     #     ],
     # },
+
+    # the following makes a plugin available to pytest
+    entry_points={"pytest11": ["steps = pytest_steps.plugin"]},
 )

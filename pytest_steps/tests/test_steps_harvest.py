@@ -22,12 +22,10 @@ except:
 from tabulate import tabulate
 
 import pytest
-from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture, saved_fixture, \
-    get_all_pytest_fixture_names
+from pytest_harvest import get_session_synthesis_dct, saved_fixture
 
-from pytest_steps import test_steps, handle_steps_in_synthesis_dct, get_flattened_multilevel_columns, pivot_steps_on_df, \
-    get_all_pytest_param_names_except_step_id, remove_step_from_test_id
-from pytest_steps.steps_generator import GENERATOR_MODE_STEP_ARGNAME
+from pytest_steps import test_steps, pivot_steps_on_df, flatten_multilevel_columns, handle_steps_in_results_df
+
 
 
 # ---------- The function to test -------
@@ -46,18 +44,8 @@ def my_score(model, data):
 
 
 # ---------- Tests
-# A module-scoped store
-@pytest.fixture(scope='module', autouse=True)
-def my_store():
-    return OrderedDict()
-
-
-# A module-scoped results bag fixture
-my_results = create_results_bag_fixture('my_store', name='my_results')
-
-
 @pytest.fixture(params=['A', 'B', 'C'])
-@saved_fixture('my_store')
+@saved_fixture
 def dataset(request):
     """Represents a dataset fixture."""
     return "my dataset #%s" % request.param
@@ -65,7 +53,7 @@ def dataset(request):
 
 @test_steps('train', 'score')
 @pytest.mark.parametrize("algo_param", [1, 2], ids=str)
-def test_my_app_bench(algo_param, dataset, my_results):
+def test_my_app_bench(algo_param, dataset, results_bag):
     """
     This test applies the algorithm with various parameters (`algo_param`)
     on various datasets (`dataset`).
@@ -80,7 +68,7 @@ def test_my_app_bench(algo_param, dataset, my_results):
     accuracy = my_score(model, dataset)
 
     # store accuracy in the results bag
-    my_results.accuracy = accuracy
+    results_bag.accuracy = accuracy
     yield
 
 
@@ -89,111 +77,46 @@ def test_basic():
     pass
 
 
-def test_synthesis(request, my_store):
+def test_synthesis(request, fixture_store):
     """
-    Tests that users can create a pivoted syntesis table, both by hand (only using pytest-harvest's
-    get_session_synthesis_dct) or using the provided utility functions from pytest-steps.
+    Tests that users can create a pivoted syntesis table manually by combining pytest-harvest and pytest-steps.
+
     Note: we could do this at many other places (hook, teardown of a session-scope fixture...)
     """
     # Get session synthesis
     # - filtered on the test function of interest
-    # - combined with our store
+    # - combined with default fixture store and results bag
     results_dct = get_session_synthesis_dct(request, filter=test_synthesis.__module__,
                                             durations_in_ms=True, test_id_format='function', status_details=False,
-                                            fixture_store=my_store, flatten=True, flatten_more='my_results')
+                                            fixture_store=fixture_store, flatten=True, flatten_more='results_bag')
 
-    # print keys and first node details
-    assert len(results_dct) > 0
-    print("\nKeys:\n" + "\n".join(list(results_dct.keys())))
-    print("\nFirst node:\n" + "\n".join(repr(k) + ": " + repr(v) for k, v in list(results_dct.values())[0].items()))
-
-    # ---------- First version "all by dataframe processing" -----------
-    param_names = {'algo_param', 'dataset_param', 'dataset'}
-    tmp_df = build_df_from_raw_synthesis(results_dct, cross_steps_columns=param_names)
-    report_df = pivot_steps_on_df(tmp_df, cross_steps_columns=param_names)
-    # --report
-    report_df.columns = get_flattened_multilevel_columns(report_df)
-    print("\nPivoted table:\n" + tabulate(report_df, headers='keys'))
-
-    # ---------- second version "relying on `handle_steps_in_synthesis_dct`"---------
-    param_names = get_all_pytest_param_names_except_step_id(request.session, filter=test_synthesis.__module__)
-    fixture_names = get_all_pytest_fixture_names(request.session, filter=test_synthesis.__module__)
-    results_dct2 = handle_steps_in_synthesis_dct(results_dct, is_flat=True)
-    tmp_df = build_df_from_processed_synthesis(results_dct2)
-    report_df2 = pivot_steps_on_df(tmp_df, cross_steps_columns=param_names + fixture_names)
-    # --report
-    report_df2.columns = get_flattened_multilevel_columns(report_df2)
-    print("\nPivoted table (2):\n" + tabulate(report_df2, headers='keys'))
-
-    assert list(report_df2.columns) == ['algo_param', 'dataset_param', 'dataset',
-                                        'train/status', 'train/duration_ms', 'train/accuracy',
-                                        'score/status', 'score/duration_ms',
-                                        '-/status', '-/duration_ms']
-    pandas_testing.assert_frame_equal(report_df, report_df2)
-
-    # create a csv report
-    # results_df.to_csv("all_results.csv")   # TODO how to flatten multilevel column names in csv ?
-
-
-def build_df_from_processed_synthesis(results_dct):
+    # We could use this function to perform the test id split here, but we will do it directly on the df
+    # results_dct = handle_steps_in_results_dct(results_dct, is_flat=True, keep_orig_id=False)
 
     # convert to a pandas dataframe
-    results_df = pd.DataFrame.from_dict(results_dct, orient='index')  # this does not preserve rows order
-    results_df = results_df.loc[list(results_dct.keys()), :]          # update rows order
-    results_df.index.names = ['test_id', 'step_id']
+    results_df = pd.DataFrame.from_dict(results_dct, orient='index')
+    results_df = results_df.loc[list(results_dct.keys()), :]     # fix rows order
+    results_df.index.name = 'test_id'
+    # results_df.index.names = ['test_id', 'step_id']              # set multiindex names
+    results_df.drop(['pytest_obj'], axis=1, inplace=True)        # drop pytest object column
 
-    results_df.drop(['pytest_obj'], axis=1, inplace=True)  # drop pytest object column
+    # extract the step id and replace the index by a multiindex
+    results_df = handle_steps_in_results_df(results_df, keep_orig_id=False)
 
-    return results_df
+    # Pivot but do not raise an error if one of the above columns is not present - just in case.
+    pivoted_df = pivot_steps_on_df(results_df, pytest_session=request.session)
 
-
-def build_df_from_raw_synthesis(results_dct, cross_steps_columns, no_step_id='-'):
-    """
-    Converts the 'raw' synthesis dct into a pivoted dataframe where steps are a level in multilevel columns
-
-    :param results_dct:
-    :return:
-    """
-    # convert to a pandas dataframe
-    results_df = pd.DataFrame.from_dict(results_dct, orient='index')  # this does not preserve rows order
-    results_df = results_df.loc[list(results_dct.keys()), :]          # update rows order
-
-    # (a) rename step id
-    results_df.rename(columns={GENERATOR_MODE_STEP_ARGNAME: 'step_id'}, inplace=True)
-
-    # (b) create a column with the new id and use it as index in combination with step id
-    # -- check column names provided
-    non_present = set(cross_steps_columns) - set(results_df.columns)
-    if len(non_present) > 0:
-        raise ValueError("Columns %s are not present in the resulting dataframe. Available columns: %s"
-                         "" % (non_present, list(results_df.columns)))
-    cross_steps_cols_list = list(c for c in results_df.columns if c in cross_steps_columns)
-    # -- create the new id
-    # def create_new_name(r):
-    #     return r[0].__name__ + '[' + '-'.join(str(o) for o in r[1:].values) + ']'
-    # results_df['test_id'] = results_df[['pytest_obj'] + cross_steps_cols_list].apply(create_new_name, axis=1)
-    def create_new_name(test_id_series):
-        test_id, step_id = test_id_series.name, test_id_series.values[0]
-        return remove_step_from_test_id(test_id, step_id) if not pd.isnull(step_id) else test_id
-    results_df['test_id'] = results_df[['step_id']].apply(create_new_name, axis=1)
-    results_df['step_id'].fillna(value=no_step_id, inplace=True)
-    results_df = results_df.reset_index(drop=True).set_index(['test_id', 'step_id'])
-
-    # now we can drop
-    results_df.drop(['pytest_obj'], axis=1, inplace=True)  # drop pytest object column
-
-    return results_df
+    # print using tabulate
+    flatten_multilevel_columns(pivoted_df)
+    print(tabulate(pivoted_df, headers='keys'))
 
 
-def test_synthesis_not_flat(request, my_store):
-    """Additional test to improve coverage"""
-
-    results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
-                                            durations_in_ms=True, test_id_format='function', status_details=False,
-                                            flatten=False)
-    assert len(results_dct) > 0
-
-    # put a stupid step param name so that we can easily do the asserts below
-    results_dct2 = handle_steps_in_synthesis_dct(results_dct, is_flat=False, step_param_names=['hohoho'])
-    assert [(k, '-') for k in results_dct.keys()] == list(results_dct2.keys())
-    assert list(results_dct2.values()) == list(results_dct.values())
+# test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms    train/accuracy  score/status      score/duration_ms  -/status      -/duration_ms
+# ----------------------  ------------  ---------------  -------------  --------------  -------------------  ----------------  --------------  -------------------  ----------  ---------------
+# test_my_app_bench[A-1]             1  A                my dataset #A  passed                            0         0.0324809  passed                     0                                 nan
+# test_my_app_bench[A-2]             2  A                my dataset #A  passed                            0         0.771141   passed                     0                                 nan
+# test_my_app_bench[B-1]             1  B                my dataset #B  passed                            0         0.318179   passed                     0                                 nan
+# test_my_app_bench[B-2]             2  B                my dataset #B  passed                            0         0.952537   passed                     0.999928                          nan
+# test_my_app_bench[C-1]             1  C                my dataset #C  passed                            0         0.7479     passed                     0                                 nan
+# test_my_app_bench[C-2]             2  C                my dataset #C  passed                            0         0.841485   passed                     0                                 nan
+# test_basic                       nan  nan              nan                                            nan       nan                                   nan         passed                    0
