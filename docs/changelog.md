@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.3.0 - Default fixtures for `pytest-harvest`
+
+When steps are present, we now offer `session_results_df_steps_pivoted` and `module_results_df_steps_pivoted` default fixtures, to align with `pytest-harvest` >= 1.1 default fixtures `session_results_df` and `module_results_df`. Fixes [#23](https://github.com/smarie/python-pytest-steps/issues/23).
+
+Improved API to manipulate `pytest-harvest` results objects in presence of steps:
+ - Renamed `handle_steps_in_synthesis_dct` into `handle_steps_in_results_dct` (old alias is kept for this version). Renamed parameter `raise_if_no_step` to `raise_if_one_test_without_step_id`. Added a parameter `keep_orig_id`, by default (True) the original test id is kept for reference. Another parameter `no_steps_policy` allows users to make the method transparent if no steps are found.
+ - new method `handle_steps_in_results_df` to perform the same things than `handle_steps_in_results_dct` but directly on the synthesis dataframe. The parameters are almost the same.
+ - New method `flatten_multilevel_columns` to diretly apply `get_flattened_multilevel_columns` on the columns of a dataframe
+ - `pivot_steps_on_df` now has the ability to detect parameter and fixture names from the provided pytest session, so as not to pivot them (they should be stable across steps). It also provides an `error_if_not_present` parameter
+
 ### 1.2.1 - Alignment with pytest-harvest 1.2.1
 
 `pytest-harvest` 1.2 provides default fixtures and fixes a few issues in the synthesis dictionary (in particular fixture and fixture parameters were overlapping each other). We aligned `pytest-steps` to leverage it.
@@ -25,7 +35,7 @@ Fixed: `@one_per_step` can now be used with generator-style fixtures.
 API:
  - New method `get_underlying_fixture` to Truly get a fixture value even if it comes from a `@one_per_step`
  - internal constant `INNER_STEP_ARGNAME` is now named `GENERATOR_MODE_STEP_ARGNAME`
- - 5 new utility methods to support combining this plugin with `pytest-harvest` (see documentation for details): `handle_steps_in_synthesis_dct`, `remove_step_from_test_id`, `get_all_pytest_param_names_except_step_id`, `pivot_steps_on_df`, `get_flattened_multilevel_columns`
+ - 5 new utility methods to support combining this plugin with `pytest-harvest` (see documentation for details): `handle_steps_in_results_dct`, `remove_step_from_test_id`, `get_all_pytest_param_names_except_step_id`, `pivot_steps_on_df`, `get_flattened_multilevel_columns`
 
 ### 1.0.4 in progress - improved readability
 
