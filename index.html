@@ -365,6 +365,33 @@
     3. Combining with pytest-harvest
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-enhancing-the-raw-results-table" title="a- Enhancing the raw results table" class="md-nav__link">
+    a- Enhancing the raw results table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-pivoting-results-table" title="b- Pivoting results table" class="md-nav__link">
+    b- Pivoting results table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-examples" title="c- Examples" class="md-nav__link">
+    c- Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -562,6 +589,33 @@
   <a href="#3-combining-with-pytest-harvest" title="3. Combining with pytest-harvest" class="md-nav__link">
     3. Combining with pytest-harvest
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-enhancing-the-raw-results-table" title="a- Enhancing the raw results table" class="md-nav__link">
+    a- Enhancing the raw results table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-pivoting-results-table" title="b- Pivoting results table" class="md-nav__link">
+    b- Pivoting results table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-examples" title="c- Examples" class="md-nav__link">
+    c- Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -995,8 +1049,8 @@ PASSED
 <p>If you wish to share data between steps but you <strong>also</strong> wish to collect the whole dataset at the end of the tests, do not use <code>steps_data</code>. Instead, use <code>results_bag</code> from <a href="https://smarie.github.io/pytest-patterns">pytest-patterns</a>, it will work similarly but you will be able to collect it when pytest session ends.</p>
 </div>
 <h2 id="3-combining-with-pytest-harvest">3. Combining with <code>pytest-harvest</code><a class="headerlink" href="#3-combining-with-pytest-harvest" title="Permanent link">&para;</a></h2>
-<p>You might already use <a href="https://smarie.github.io/python-pytest-harvest/"><code>pytest-harvest</code></a> to turn your tests into functional benchmarks.</p>
-<p>When you combine it with <code>pytest_steps</code> you end up with one row in the synthesis table <strong>per step</strong>. For example:</p>
+<h3 id="a-enhancing-the-raw-results-table">a- Enhancing the raw results table<a class="headerlink" href="#a-enhancing-the-raw-results-table" title="Permanent link">&para;</a></h3>
+<p>You might already use <a href="https://smarie.github.io/python-pytest-harvest/"><code>pytest-harvest</code></a> to turn your tests into functional benchmarks. When you combine it with <code>pytest_steps</code> you end up with one row in the synthesis table <strong>per step</strong>. For example:</p>
 <table>
 <thead>
 <tr>
@@ -1085,7 +1139,9 @@ PASSED
 </tbody>
 </table>
 <p>You might wish to use the provided <code>handle_steps_in_results_df</code> utility method to replace the index with a 2-level multiindex (test id without step, step id).</p>
-<p>If you prefer to see one row per test and the step details in columns, this package also provides <code>pivot_steps_on_df</code> utility method and <em>NEW</em> default <code>[module/session]_results_df_steps_pivoted</code> fixtures to perform the pivot transform easily. You will for example get this kind of table:</p>
+<h3 id="b-pivoting-results-table">b- Pivoting results table<a class="headerlink" href="#b-pivoting-results-table" title="Permanent link">&para;</a></h3>
+<p>If you prefer to see one row per test and the step details in columns, this package also provides <em>NEW</em> default <code>[module/session]_results_df_steps_pivoted</code> fixtures to directly get the pivoted version ; and a <code>pivot_steps_on_df</code> utility method to perform the pivot transform easily.</p>
+<p>You will for example obtain this kind of pivoted table:</p>
 <table>
 <thead>
 <tr>
@@ -1142,6 +1198,7 @@ PASSED
 </tr>
 </tbody>
 </table>
+<h3 id="c-examples">c- Examples<a class="headerlink" href="#c-examples" title="Permanent link">&para;</a></h3>
 <p>Two examples are available that should be quite straightforward for those familiar with pytest-harvest:</p>
 <ul>
 <li><a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py">here</a> an example relying on default fixtures, to show how simple it is to satisfy the most common use cases.</li>
