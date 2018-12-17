@@ -8,7 +8,7 @@ from tabulate import tabulate
 import pytest
 
 from pytest_harvest import saved_fixture
-from pytest_steps import test_steps, flatten_multilevel_columns
+from pytest_steps import test_steps, flatten_multilevel_columns, handle_steps_in_results_df
 
 
 # ---------- The function to test -------
@@ -60,10 +60,10 @@ def test_synthesis_df(module_results_df, module_results_df_steps_pivoted):
     Create the benchmark synthesis table.
     Note: we could do this at many other places (hook, teardown of a session-scope fixture...). See pytest-harvest
     """
-
     # print the RAW synthesis dataframe
     assert len(module_results_df) == 12
-    module_results_df.drop(['pytest_obj'], axis=1, inplace=True)  # drop pytest object column
+    module_results_df = handle_steps_in_results_df(module_results_df, keep_orig_id=False)  # hande step id column
+    module_results_df.drop(['pytest_obj'], axis=1, inplace=True)                           # drop pytest object column
     print("\n   `module_results_df` dataframe:\n")
     print(module_results_df)
     try:

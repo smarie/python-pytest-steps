@@ -6,6 +6,8 @@
 
 !!! success "New 'generator' style is there, [check it out](#1-usage-generator-mode) !"
 
+!!! success "New `pytest-harvest` compatibility fixtures, [check them out](#3-combining-with-pytest-harvest) !"
+
 Did you ever want to organize your test is incremental steps, for example to improve readability in case of failure ? Or to have some optional steps, executing only conditionally to previous steps' results?
 
 `pytest-steps` leverages `pytest` and its great `@pytest.mark.parametrize` and `@pytest.fixture` decorators, so that you can **create incremental tests with steps** without having to think about the pytest fixture/parametrize pattern that has to be implemented for your particular case. 
@@ -431,7 +433,9 @@ When you combine it with `pytest_steps` you end up with one row in the synthesis
 | test_my_app_bench[B-2-train] | passed   |      0        | train                |            2 | my dataset #B |   0.764746  |
 | test_my_app_bench[B-2-score] | passed   |      1.0004   | score                |            2 | my dataset #B | nan         |
 
-If you prefer to see one row per test and the step details in columns, this package provides utility methods to perform the transform easily. You will for example get this kind of table:
+You might wish to use the provided `handle_steps_in_results_df` utility method to replace the index with a 2-level multiindex (test id without step, step id).
+
+If you prefer to see one row per test and the step details in columns, this package also provides `pivot_steps_on_df` utility method and *NEW* default `[module/session]_results_df_steps_pivoted` fixtures to perform the pivot transform easily. You will for example get this kind of table:
 
 | test_id                |   algo_param | dataset       | train/status   |   train/duration_ms |   train/accuracy | score/status   |   score/duration_ms |
 |------------------------|--------------|---------------|----------------|---------------------|------------------|----------------|---------------------|
@@ -441,7 +445,10 @@ If you prefer to see one row per test and the step details in columns, this pack
 | test_my_app_bench[B-2] |            2 | my dataset #B | passed         |             0       |        0.764746  | passed         |            1.0004   |
 
 
-A complete example is provided [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py) and should be quite straightforward for those familiar with pytest-harvest.
+Two examples are available that should be quite straightforward for those familiar with pytest-harvest:
+
+ - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py) an example relying on default fixtures, to show how simple it is to satisfy the most common use cases.
+ - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest.py) an advanced example where the custom synthesis is created manually from the dictionary provided by pytest-harvest, thanks to helper methods.
 
 ## Main features / benefits
 
