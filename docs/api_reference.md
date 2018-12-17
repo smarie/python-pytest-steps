@@ -31,11 +31,11 @@ See [Home](../) for examples.
 
 ## Generator mode
 
-### `@optional_step`
+### `with optional_step`
 
 ```python
-@optional_step(step_name: str, 
-               depends_on: Union[optional_step, Iterable[optional_step]] = None)
+with optional_step(step_name: str, 
+                   depends_on: Union[optional_step, Iterable[optional_step]] = None)
 ```
 
 Context manager to use inside a test function body to create an optional step named `step_name` with optional dependencies on other optional steps. See [Home](../) for examples.
@@ -69,3 +69,98 @@ Decorates a test step object/function so as to automatically mark it as skipped 
 
  - `steps`: a list of test steps that this step depends on. They can be anything, but typically they are non-test (not prefixed with 'test') functions.
  - `fail_instead_of_skip`: if set to True, the test will be marked as failed instead of skipped when the dependencies have not succeeded.
+
+
+## `pytest-harvest` utility methods
+
+### `handle_steps_in_results_dct`
+
+```python
+def handle_steps_in_results_dct(results_dct,
+                                is_flat=False,
+                                raise_if_one_test_without_step_id=False,
+                                no_step_id='-',
+                                step_param_names=None,
+                                keep_orig_id=True,
+                                no_steps_policy='raise'
+                                )
+```
+
+Improves the synthesis dictionary so that
+
+ - the keys are replaced with a tuple (new_test_id, step_id) where new_test_id is a step-independent test id
+ - the 'step_id' parameter is removed from the contents
+
+`is_flat` should be set to `True` if the dictionary has been flattened by `pytest-harvest`.
+
+The step id is identified by looking at the pytest parameters, and finding one with a name included in the `step_param_names` list (`None` uses the default names). If no step id is found on an entry, it is replaced with the value of `no_step_id` except if `raise_if_one_test_without_step_id=True` - in which case an error is raised.
+    
+If all step ids are missing, for all entries in the dictionary, `no_steps_policy` determines what happens: it can either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an error ('raise'). 
+
+If `keep_orig_id` is set to True (default), the original id is added to each entry.
+
+### `handle_steps_in_results_df`
+
+```python
+def handle_steps_in_results_df(results_df,
+                               raise_if_one_test_without_step_id=False,  # type: bool
+                               no_step_id='-',  # type: str
+                               step_param_names=None,  # type: Union[str, Iterable[str]]
+                               keep_orig_id=True,  # type: bool
+                               no_steps_policy='raise',  # type: str
+                               inplace=False
+                               ):
+```
+
+Improves the synthesis dataframe so that
+
+ - the test_id index is replaced with a multilevel index (new_test_id, step_id) where new_test_id is a
+ step-independent test id. A 'pytest_id' column remains with the original id except if keep_orig_id=False
+ (default=True)
+ - the 'step_id' parameter is removed from the contents
+
+The step id is identified by looking at the columns, and finding one with a name included in the
+`step_param_names` list (`None` uses the default names). If no step id is found on an entry, it is replaced with 
+the value of `no_step_id` except if `raise_if_one_test_without_step_id=True` - in which case an error is raised.
+    
+If all step ids are missing, for all entries in the dictionary, `no_steps_policy` determines what happens: it can
+either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an 
+error ('raise').
+
+If `keep_orig_id` is set to True (default), the original id is added as a new column.
+
+If `inplace` is `False` (default), a new dataframe will be returned. Otherwise the input dataframe will be modified inplace and nothing will be returned.
+
+### `pivot_steps_on_df`
+
+```python
+def pivot_steps_on_df(results_df,
+                      pytest_session=None,
+                      cross_steps_columns=None,  # type: List[str]
+                      error_if_not_present=True  # type: bool
+                      ):
+```
+
+Pivots the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info.
+The input dataframe should have a multilevel index with two levels (test id, step id) and with names
+(`results_df.index.names` should be set). The test id should be independent on the step id. 
+
+### `flatten_multilevel_columns`
+
+```python
+def flatten_multilevel_columns(df,
+                               sep='/'  # type: str
+                               ):
+```
+
+Replaces the multilevel columns (typically after a pivot) with single-level ones, where the names contain all levels concatenated with the separator `sep`. For example when the two levels are `foo` and `bar`, the single level becomes `foo/bar`.
+
+This method is a shortcut for `df.columns = get_flattened_multilevel_columns(df)`.
+
+### Lower-level methods
+
+#### `remove_step_from_test_id`
+
+#### `get_all_pytest_param_names_except_step_id`
+
+#### `get_flattened_multilevel_columns`

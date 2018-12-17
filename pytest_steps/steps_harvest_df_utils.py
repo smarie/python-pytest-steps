@@ -16,11 +16,11 @@ def pivot_steps_on_df(results_df,
                       error_if_not_present=True  # type: bool
                       ):
     """
-    Pivot the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info.
+    Pivots the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info.
     The input dataframe should have a multilevel index with two levels (test id, step id) and with names
     (`results_df.index.names` should be set). The test id should be independent on the step id.
 
-    :param results_df:
+    :param results_df: a synthesis dataframe created by `pytest-harvest`.
     :param pytest_session: If this is provided, the cross_steps_columns will be infered from the pytest session
         information. (only one of pytest_session of cross_steps_columns should be provided).
     :param cross_steps_columns: a list of columns in the dataframe that are stable across steps. Provide this only if
@@ -84,7 +84,11 @@ def flatten_multilevel_columns(df,
                                sep='/'  # type: str
                                ):
     """
-    A shortcut for `df.columns = get_flattened_multilevel_columns(df)`.
+    Replaces the multilevel columns (typically after a pivot) with single-level ones, where the names contain all
+    levels concatenated with the separator `sep`. For example when the two levels are `foo` and `bar`, the single level
+    becomes `foo/bar`.
+
+    This method is a shortcut for `df.columns = get_flattened_multilevel_columns(df)`.
 
     :param df:
     :param sep:
@@ -122,7 +126,7 @@ def get_flattened_multilevel_columns(df,
     return [flatten_multilevel_colname(cols) for cols in df.columns.values]
 
 
-def handle_steps_in_results_df(df,
+def handle_steps_in_results_df(results_df,
                                raise_if_one_test_without_step_id=False,  # type: bool
                                no_step_id='-',  # type: str
                                step_param_names=None,  # type: Union[str, Iterable[str]]
@@ -139,10 +143,20 @@ def handle_steps_in_results_df(df,
      (default=True)
      - the 'step_id' parameter is removed from the contents
 
-    The step id is identified by looking at the pytest parameters, and finding one with a name included in the
-    `step_param_names` list. If no step id is found,
+    The step id is identified by looking at the columns, and finding one with a name included in the
+    `step_param_names` list (`None` uses the default names). If no step id is found on an entry, it is replaced with
+    the value of `no_step_id` except if `raise_if_one_test_without_step_id=True` - in which case an error is raised.
 
-    :param df:
+    If all step ids are missing, for all entries in the dictionary, `no_steps_policy` determines what happens: it can
+    either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an
+    error ('raise').
+
+    If `keep_orig_id` is set to True (default), the original id is added as a new column.
+
+    If `inplace` is `False` (default), a new dataframe will be returned. Otherwise the input dataframe will
+    be modified inplace and nothing will be returned.
+
+    :param results_df:
     :param raise_if_one_test_without_step_id: if this is set to `True` and at least one step id can not be found in the tests, an
         error will be raised. By default this is set to `False`: in that case, when the step id is not found it is
         replaced with value of the `no_step_id` parameter.
@@ -166,39 +180,37 @@ def handle_steps_in_results_df(df,
         raise ValueError("`no_steps_policy` should be one of {'ignore', 'raise', 'skip'}")
 
     if not inplace:
-        df = df.copy()
+        results_df = results_df.copy()
 
     # find the unique column containing "step id" parameter
-    step_name_columns = set(step_param_names).intersection(set(df.columns))
+    step_name_columns = set(step_param_names).intersection(set(results_df.columns))
     if len(step_name_columns) == 1:
         step_name_col = step_name_columns.pop()
     elif len(step_name_columns) == 0:
         if no_steps_policy == 'raise':
             raise ValueError("The synthesis dataframe provided does not seem to contain step name columns. You can "
                              "ignore this error by switching to `no_steps_policy`='ignore'. Available "
-                             "columns: %s" % list(df.columns))
+                             "columns: %s" % list(results_df.columns))
         elif no_steps_policy == 'skip':
             if inplace:
                 return
             else:
-                return df
+                return results_df
         else:
             # no steps column - create one with only none values
             step_name_col = '__step_id'
-            df[step_name_col] = None
+            results_df[step_name_col] = None
     else:
         raise ValueError("The synthesis dataframe provided contains several 'step name' columns: %s"
                          "" % step_name_columns)
 
-
-
     # check that the column has at least one non-null value
-    null_steps_indexer = df[step_name_col].isnull()
+    null_steps_indexer = results_df[step_name_col].isnull()
     nb_without_step_id = null_steps_indexer.sum()
     if nb_without_step_id > 0:
         if raise_if_one_test_without_step_id:
             raise ValueError("The synthesis DataFrame provided does not seem to contain step name parameters for "
-                             "test nodes %s" % list(df.loc[null_steps_indexer, 'pytest_id']))
+                             "test nodes %s" % list(results_df.loc[null_steps_indexer, 'pytest_id']))
         # elif nb_without_step_id == len(df):
         #     # no test has steps, simply return without change
         #     if inplace:
@@ -207,11 +219,11 @@ def handle_steps_in_results_df(df,
         #         return df
         else:
             # replace missing values with `no_step_id`
-            df.loc[null_steps_indexer, step_name_col] = no_step_id
+            results_df.loc[null_steps_indexer, step_name_col] = no_step_id
 
     # original test id column is the current index
-    df.index.name = 'pytest_id'
-    df.reset_index(inplace=True)
+    results_df.index.name = 'pytest_id'
+    results_df.reset_index(inplace=True)
 
     # split the id in two and use it as multiindex
     def _remove_step_from_test_id(s):
@@ -219,14 +231,14 @@ def handle_steps_in_results_df(df,
         if pd.isnull(step_id):
             step_id = no_step_id
         return remove_step_from_test_id(test_id, step_id)
-    df['test_id'] = df[['pytest_id', step_name_col]].apply(_remove_step_from_test_id, axis=1, raw=True)
-    df.rename(columns={step_name_col: 'step_id'}, inplace=True)
-    df.set_index(['test_id', 'step_id'], inplace=True)
+    results_df['test_id'] = results_df[['pytest_id', step_name_col]].apply(_remove_step_from_test_id, axis=1, raw=True)
+    results_df.rename(columns={step_name_col: 'step_id'}, inplace=True)
+    results_df.set_index(['test_id', 'step_id'], inplace=True)
 
     # drop original id if required
     if not keep_orig_id:
-        df.drop('pytest_id', axis=1, inplace=True)
+        results_df.drop('pytest_id', axis=1, inplace=True)
 
     # return
     if not inplace:
-        return df
+        return results_df

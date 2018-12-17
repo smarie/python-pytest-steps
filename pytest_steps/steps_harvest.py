@@ -13,7 +13,7 @@ except ImportError:
     pass
 
 
-def handle_steps_in_results_dct(synth_dct,
+def handle_steps_in_results_dct(results_dct,
                                 is_flat=False,  # type: bool
                                 raise_if_one_test_without_step_id=False,  # type: bool
                                 no_step_id='-',  # type: str
@@ -26,10 +26,19 @@ def handle_steps_in_results_dct(synth_dct,
      - the keys are replaced with a tuple (new_test_id, step_id) where new_test_id is a step-independent test id
      - the 'step_id' parameter is removed from the contents
 
-    The step id is identified by looking at the pytest parameters, and finding one with a name included in the
-    `step_param_names` list. If no step id is found,
+    `is_flat` should be set to `True` if the dictionary has been flattened by `pytest-harvest`.
 
-    :param synth_dct:
+    The step id is identified by looking at the pytest parameters, and finding one with a name included in the
+    `step_param_names` list (`None` uses the default names). If no step id is found on an entry, it is replaced with
+    the value of `no_step_id` except if `raise_if_one_test_without_step_id=True` - in which case an error is raised.
+
+    If all step ids are missing, for all entries in the dictionary, `no_steps_policy` determines what happens: it can
+    either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an
+    error ('raise').
+
+    If `keep_orig_id` is set to True (default), the original id is added to each entry.
+
+    :param results_dct: a synthesis dictionary created by `pytest-harvest`.
     :param is_flat: to declare that synth_dct was flatten or not (if it was generated using `get_session_synthesis_dct`
         with `flatten=True` or `False`).
     :param raise_if_one_test_without_step_id: if this is set to `True` and at least one step id can not be found in the
@@ -53,15 +62,15 @@ def handle_steps_in_results_dct(synth_dct,
         raise ValueError("`no_steps_policy` should be one of {'ignore', 'raise', 'skip'}")
 
     # edge case of empty dict
-    if len(synth_dct) == 0:
-        return copy(synth_dct)
+    if len(results_dct) == 0:
+        return copy(results_dct)
 
     # create an object of the same container type
-    res_dct = type(synth_dct)()
+    res_dct = type(results_dct)()
 
     # fill it
     one_step_id_was_present = False
-    for test_id, test_info in synth_dct.items():
+    for test_id, test_info in results_dct.items():
         # copy the first level (no deepcopy because we do not want to perform copies of entries in the dict)
         new_info = copy(test_info)
         if not is_flat:
@@ -117,7 +126,7 @@ def handle_steps_in_results_dct(synth_dct,
     if not one_step_id_was_present:
         if no_steps_policy == 'skip':
             # do not return the modified one, and return the initial dictionary (a copy)
-            return copy(synth_dct)
+            return copy(results_dct)
         elif no_steps_policy == 'raise':
             raise ValueError("No step ids can be found in provided dictionary. You can ignore this error by switching "
                              "to `no_steps_policy`='ignore'")
