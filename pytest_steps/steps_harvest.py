@@ -13,12 +13,14 @@ except ImportError:
     pass
 
 
-def handle_steps_in_synthesis_dct(synth_dct,
-                                  is_flat=False,  # type: bool
-                                  raise_if_no_step_id=False,  # type: bool
-                                  no_step_id='-',  # type: str
-                                  step_param_names=None  # type: Union[str, Iterable[str]]
-                                  ):
+def handle_steps_in_results_dct(synth_dct,
+                                is_flat=False,  # type: bool
+                                raise_if_no_step_id=False,  # type: bool
+                                no_step_id='-',  # type: str
+                                step_param_names=None,  # type: Union[str, Iterable[str]]
+                                keep_orig_id=True,
+                                skip_if_no_steps=False
+                                ):
     """
     Improves the synthesis dictionary so that
      - the keys are replaced with a tuple (new_test_id, step_id) where new_test_id is a step-independent test id
@@ -37,6 +39,10 @@ def handle_steps_in_synthesis_dct(synth_dct,
     :param step_param_names: a singleton or iterable containing the names of the test step parameters used in the
         tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both
         generator-mode and legacy manual mode.
+    :param keep_orig_id: if True (default) the original test id will appear in the dict entries under 'pytest_id'
+    :param skip_if_no_steps: if `False` (default) the returned dictionary keys will be tuples (test id, step id) in all
+        cases, even if no step is present. If `True` and no step is present, the method will return a copy of the input
+        and will not modify anything.
     :return: a dictionary where the keys are tuples of (new_test_id, step_id), and the values are copies of the initial
         dictionarie's ones, except that the step id parameter is not present anymore
     """
@@ -51,6 +57,7 @@ def handle_steps_in_synthesis_dct(synth_dct,
     res_dct = type(synth_dct)()
 
     # fill it
+    one_step_id_was_present = False
     for test_id, test_info in synth_dct.items():
         # copy the first level (no deepcopy because we do not want to perform copies of entries in the dict)
         new_info = copy(test_info)
@@ -74,6 +81,9 @@ def handle_steps_in_synthesis_dct(synth_dct,
 
         step_name_params = set(step_param_names).intersection(set(where_params_dct.keys()))
         if len(step_name_params) == 1:
+            # remember that there was at least one
+            one_step_id_was_present = True
+
             # use the key to retrieve step id value and remove it from where it was
             step_id_key = step_name_params.pop()
             step_id = where_params_dct.pop(step_id_key)
@@ -92,10 +102,24 @@ def handle_steps_in_synthesis_dct(synth_dct,
         # finally create the new id by replacing in the existing id (whatever its position in the parameters order)
         new_id = remove_step_from_test_id(test_id, step_id)
 
+        # remember the old id
+        if keep_orig_id:
+            new_info['pytest_id'] = new_id
+            # move it to the beginning of the dict
+            new_info.move_to_end('pytest_id', last=False)
+
         # store the element
         res_dct[(new_id, step_id)] = new_info
 
-    return res_dct
+    if skip_if_no_steps and not one_step_id_was_present:
+        # do not return the modified one, and return the initial dictionary (a copy)
+        return copy(synth_dct)
+    else:
+        return res_dct
+
+
+handle_steps_in_synthesis_dct = handle_steps_in_results_dct
+"""deprecated alias - to remove"""
 
 
 def remove_step_from_test_id(test_id, step_id):
