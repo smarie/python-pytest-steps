@@ -15,11 +15,11 @@ except ImportError:
 
 def handle_steps_in_results_dct(synth_dct,
                                 is_flat=False,  # type: bool
-                                raise_if_no_step_id=False,  # type: bool
+                                raise_if_one_test_without_step_id=False,  # type: bool
                                 no_step_id='-',  # type: str
                                 step_param_names=None,  # type: Union[str, Iterable[str]]
                                 keep_orig_id=True,
-                                skip_if_no_steps=False
+                                no_steps_policy='raise'  # type str
                                 ):
     """
     Improves the synthesis dictionary so that
@@ -32,22 +32,25 @@ def handle_steps_in_results_dct(synth_dct,
     :param synth_dct:
     :param is_flat: to declare that synth_dct was flatten or not (if it was generated using `get_session_synthesis_dct`
         with `flatten=True` or `False`).
-    :param raise_if_no_step_id: if this is set to `True` and at least one step id can not be found in the tests, an
-        error will be raised. By default this is set to `False`: in that case, when the step id is not found it is
-        replaced with value of the `no_step_id` parameter.
+    :param raise_if_one_test_without_step_id: if this is set to `True` and at least one step id can not be found in the
+        tests, an error will be raised. By default this is set to `False`: in that case, when the step id is not found
+        it is replaced with value of the `no_step_id` parameter.
     :param no_step_id: the identifier to use when the step id is not found (if `raise_if_no_step_id` is `False`)
     :param step_param_names: a singleton or iterable containing the names of the test step parameters used in the
         tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both
         generator-mode and legacy manual mode.
     :param keep_orig_id: if True (default) the original test id will appear in the dict entries under 'pytest_id'
-    :param skip_if_no_steps: if `False` (default) the returned dictionary keys will be tuples (test id, step id) in all
-        cases, even if no step is present. If `True` and no step is present, the method will return a copy of the input
-        and will not modify anything.
+    :param no_steps_policy: if `'ignore` the returned dictionary keys will be tuples (test id, step id) in all
+        cases, even if no step is present. If 'skip' and no step is present, the method will return a copy of the input
+        and will not modify anything. If 'raise' (default) and no step is present, an error is raised.
     :return: a dictionary where the keys are tuples of (new_test_id, step_id), and the values are copies of the initial
         dictionarie's ones, except that the step id parameter is not present anymore
     """
-    # test_step_param_names
+
+    # validate parameters
     step_param_names = _get_step_param_names_or_default(step_param_names)
+    if not isinstance(no_steps_policy, str) or no_steps_policy not in {'ignore', 'raise', 'skip'}:
+        raise ValueError("`no_steps_policy` should be one of {'ignore', 'raise', 'skip'}")
 
     # edge case of empty dict
     if len(synth_dct) == 0:
@@ -89,7 +92,7 @@ def handle_steps_in_results_dct(synth_dct,
             step_id = where_params_dct.pop(step_id_key)
 
         elif len(step_name_params) == 0:
-            if raise_if_no_step_id:
+            if raise_if_one_test_without_step_id:
                 raise ValueError("The synthesis dictionary provided does not seem to contain step name parameters for "
                                  "test node '%s'" % test_id)
             else:
@@ -111,11 +114,18 @@ def handle_steps_in_results_dct(synth_dct,
         # store the element
         res_dct[(new_id, step_id)] = new_info
 
-    if skip_if_no_steps and not one_step_id_was_present:
-        # do not return the modified one, and return the initial dictionary (a copy)
-        return copy(synth_dct)
-    else:
-        return res_dct
+    if not one_step_id_was_present:
+        if no_steps_policy == 'skip':
+            # do not return the modified one, and return the initial dictionary (a copy)
+            return copy(synth_dct)
+        elif no_steps_policy == 'raise':
+            raise ValueError("No step ids can be found in provided dictionary. You can ignore this error by switching "
+                             "to `no_steps_policy`='ignore'")
+        else:
+            # 'ignore": same
+            return res_dct
+
+    return res_dct
 
 
 handle_steps_in_synthesis_dct = handle_steps_in_results_dct

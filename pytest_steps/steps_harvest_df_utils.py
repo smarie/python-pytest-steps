@@ -123,10 +123,11 @@ def get_flattened_multilevel_columns(df,
 
 
 def handle_steps_in_results_df(df,
-                               raise_if_no_step_id=False,  # type: bool
-                               no_step_id='-',             # type: str
-                               step_param_names=None,      # type: Union[str, Iterable[str]]
-                               keep_orig_id=True,          # type: bool
+                               raise_if_one_test_without_step_id=False,  # type: bool
+                               no_step_id='-',  # type: str
+                               step_param_names=None,  # type: Union[str, Iterable[str]]
+                               keep_orig_id=True,  # type: bool
+                               no_steps_policy='raise',  # type: str
                                inplace=False
                                ):
     """
@@ -142,7 +143,7 @@ def handle_steps_in_results_df(df,
     `step_param_names` list. If no step id is found,
 
     :param df:
-    :param raise_if_no_step_id: if this is set to `True` and at least one step id can not be found in the tests, an
+    :param raise_if_one_test_without_step_id: if this is set to `True` and at least one step id can not be found in the tests, an
         error will be raised. By default this is set to `False`: in that case, when the step id is not found it is
         replaced with value of the `no_step_id` parameter.
     :param no_step_id: the identifier to use when the step id is not found (if `raise_if_no_step_id` is `False`)
@@ -150,40 +151,52 @@ def handle_steps_in_results_df(df,
         tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both
         generator-mode and legacy manual mode.
     :param keep_orig_id: if True (default) the original test id will appear in the df under 'pytest_id' column
+    :param no_steps_policy: if `'ignore` the returned dataframe will be multilevel (test id, step id) in all
+        cases, even if no step is present. If 'skip' and no step is present, the method will not modify anything in the
+        dataframe. If 'raise' (default) and no step column is present, an error is raised.
     :param inplace: if this is `False` (default), a new dataframe will be returned. Otherwise the input dataframe will
         be modified inplace and None will be returned
     :return:
     """
     import pandas as pd
 
-    # default values
+    # validate parameters
     step_param_names = _get_step_param_names_or_default(step_param_names)
+    if not isinstance(no_steps_policy, str) or no_steps_policy not in {'ignore', 'raise', 'skip'}:
+        raise ValueError("`no_steps_policy` should be one of {'ignore', 'raise', 'skip'}")
+
+    if not inplace:
+        df = df.copy()
 
     # find the unique column containing "step id" parameter
     step_name_columns = set(step_param_names).intersection(set(df.columns))
     if len(step_name_columns) == 1:
         step_name_col = step_name_columns.pop()
     elif len(step_name_columns) == 0:
-        if raise_if_no_step_id:
-            raise ValueError("The synthesis dataframe provided does not seem to contain step name columns")
-        else:
-            # no steps column
+        if no_steps_policy == 'raise':
+            raise ValueError("The synthesis dataframe provided does not seem to contain step name columns. You can "
+                             "ignore this error by switching to `no_steps_policy`='ignore'. Available "
+                             "columns: %s" % list(df.columns))
+        elif no_steps_policy == 'skip':
             if inplace:
                 return
             else:
-                return df.copy()
+                return df
+        else:
+            # no steps column - create one with only none values
+            step_name_col = '__step_id'
+            df[step_name_col] = None
     else:
         raise ValueError("The synthesis dataframe provided contains several 'step name' columns: %s"
                          "" % step_name_columns)
 
-    if not inplace:
-        df = df.copy()
+
 
     # check that the column has at least one non-null value
     null_steps_indexer = df[step_name_col].isnull()
     nb_without_step_id = null_steps_indexer.sum()
     if nb_without_step_id > 0:
-        if raise_if_no_step_id:
+        if raise_if_one_test_without_step_id:
             raise ValueError("The synthesis DataFrame provided does not seem to contain step name parameters for "
                              "test nodes %s" % list(df.loc[null_steps_indexer, 'pytest_id']))
         # elif nb_without_step_id == len(df):
