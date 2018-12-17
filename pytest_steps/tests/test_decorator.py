@@ -1,7 +1,3 @@
-# META
-# {'passed': 4, 'skipped': 0, 'failed': 0}
-# END META
-
 from inspect import isgeneratorfunction
 
 # from decorator import decorate

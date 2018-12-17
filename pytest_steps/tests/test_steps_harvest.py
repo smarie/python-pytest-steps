@@ -1,31 +1,10 @@
-# META
-# {'passed': 14, 'skipped': 0, 'failed': 0}
-# END META
-from collections import OrderedDict
-from random import random
-from warnings import warn
-
 import pandas as pd
-# make 'assert_frame_equal', 'assert_series_equal', etc. become available too:
-try:
-    # pandas 0.20+
-    pandas_testing = pd.testing
-except:
-    try:
-        # pandas 0.18
-        pandas_testing = pd.util.testing
-    except ImportError as e:
-        pandas_testing = None
-        warn('Could not re-export pandas.testing routines for this version of pandas ({})'.format(pd.__version__))
-
-
+from random import random
 from tabulate import tabulate
 
 import pytest
 from pytest_harvest import get_session_synthesis_dct, saved_fixture
-
 from pytest_steps import test_steps, pivot_steps_on_df, flatten_multilevel_columns, handle_steps_in_results_df
-
 
 
 # ---------- The function to test -------

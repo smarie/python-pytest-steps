@@ -418,9 +418,9 @@ You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test 
 
 ## 3. Combining with `pytest-harvest`
 
-You might already use [`pytest-harvest`](https://smarie.github.io/python-pytest-harvest/) to turn your tests into functional benchmarks.
+### a- Enhancing the raw results table
 
-When you combine it with `pytest_steps` you end up with one row in the synthesis table **per step**. For example:
+You might already use [`pytest-harvest`](https://smarie.github.io/python-pytest-harvest/) to turn your tests into functional benchmarks. When you combine it with `pytest_steps` you end up with one row in the synthesis table **per step**. For example:
 
 | test_id                      | status   |   duration_ms | ________step_name_   |   algo_param | dataset       |    accuracy |
 |------------------------------|----------|---------------|----------------------|--------------|---------------|-------------|
@@ -435,7 +435,11 @@ When you combine it with `pytest_steps` you end up with one row in the synthesis
 
 You might wish to use the provided `handle_steps_in_results_df` utility method to replace the index with a 2-level multiindex (test id without step, step id).
 
-If you prefer to see one row per test and the step details in columns, this package also provides `pivot_steps_on_df` utility method and *NEW* default `[module/session]_results_df_steps_pivoted` fixtures to perform the pivot transform easily. You will for example get this kind of table:
+### b- Pivoting results table
+
+If you prefer to see one row per test and the step details in columns, this package also provides *NEW* default `[module/session]_results_df_steps_pivoted` fixtures to directly get the pivoted version ; and a `pivot_steps_on_df` utility method to perform the pivot transform easily.
+
+You will for example obtain this kind of pivoted table:
 
 | test_id                |   algo_param | dataset       | train/status   |   train/duration_ms |   train/accuracy | score/status   |   score/duration_ms |
 |------------------------|--------------|---------------|----------------|---------------------|------------------|----------------|---------------------|
@@ -444,6 +448,7 @@ If you prefer to see one row per test and the step details in columns, this pack
 | test_my_app_bench[B-1] |            1 | my dataset #B | passed         |             0       |        0.870705  | passed         |            0        |
 | test_my_app_bench[B-2] |            2 | my dataset #B | passed         |             0       |        0.764746  | passed         |            1.0004   |
 
+### c- Examples
 
 Two examples are available that should be quite straightforward for those familiar with pytest-harvest:
 
