@@ -624,6 +624,9 @@
 <div class="admonition success">
 <p class="admonition-title">New 'generator' style is there, <a href="#1-usage-generator-mode">check it out</a> !</p>
 </div>
+<div class="admonition success">
+<p class="admonition-title">New <code>pytest-harvest</code> compatibility fixtures, <a href="#3-combining-with-pytest-harvest">check them out</a> !</p>
+</div>
 <p>Did you ever want to organize your test is incremental steps, for example to improve readability in case of failure ? Or to have some optional steps, executing only conditionally to previous steps' results?</p>
 <p><code>pytest-steps</code> leverages <code>pytest</code> and its great <code>@pytest.mark.parametrize</code> and <code>@pytest.fixture</code> decorators, so that you can <strong>create incremental tests with steps</strong> without having to think about the pytest fixture/parametrize pattern that has to be implemented for your particular case. </p>
 <p>This is particularly helpful if:</p>
@@ -1081,7 +1084,8 @@ PASSED
 </tr>
 </tbody>
 </table>
-<p>If you prefer to see one row per test and the step details in columns, this package provides utility methods to perform the transform easily. You will for example get this kind of table:</p>
+<p>You might wish to use the provided <code>handle_steps_in_results_df</code> utility method to replace the index with a 2-level multiindex (test id without step, step id).</p>
+<p>If you prefer to see one row per test and the step details in columns, this package also provides <code>pivot_steps_on_df</code> utility method and <em>NEW</em> default <code>[module/session]_results_df_steps_pivoted</code> fixtures to perform the pivot transform easily. You will for example get this kind of table:</p>
 <table>
 <thead>
 <tr>
@@ -1138,7 +1142,11 @@ PASSED
 </tr>
 </tbody>
 </table>
-<p>A complete example is provided <a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py">here</a> and should be quite straightforward for those familiar with pytest-harvest.</p>
+<p>Two examples are available that should be quite straightforward for those familiar with pytest-harvest:</p>
+<ul>
+<li><a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py">here</a> an example relying on default fixtures, to show how simple it is to satisfy the most common use cases.</li>
+<li><a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest.py">here</a> an advanced example where the custom synthesis is created manually from the dictionary provided by pytest-harvest, thanks to helper methods.</li>
+</ul>
 <h2 id="main-features-benefits">Main features / benefits<a class="headerlink" href="#main-features-benefits" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Split tests into steps</strong>. Although the best practices in testing are very much in favor of having each test completely independent of the other ones (for example for distributed execution), there is definitely some value in results readability to break down tests into chained sub-tests (steps). The <code>@test_steps</code> decorator provides an intuitive way to do that without forcing any data model (steps can be functions, objects, etc.).</li>

@@ -283,6 +283,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#130-default-fixtures-for-pytest-harvest" title="1.3.0 - Default fixtures for pytest-harvest" class="md-nav__link">
+    1.3.0 - Default fixtures for pytest-harvest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#121-alignment-with-pytest-harvest-121" title="1.2.1 - Alignment with pytest-harvest 1.2.1" class="md-nav__link">
     1.2.1 - Alignment with pytest-harvest 1.2.1
   </a>
@@ -419,6 +426,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#130-default-fixtures-for-pytest-harvest" title="1.3.0 - Default fixtures for pytest-harvest" class="md-nav__link">
+    1.3.0 - Default fixtures for pytest-harvest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#121-alignment-with-pytest-harvest-121" title="1.2.1 - Alignment with pytest-harvest 1.2.1" class="md-nav__link">
     1.2.1 - Alignment with pytest-harvest 1.2.1
   </a>
@@ -543,6 +557,13 @@
                 
                 
                 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h3 id="130-default-fixtures-for-pytest-harvest">1.3.0 - Default fixtures for <code>pytest-harvest</code><a class="headerlink" href="#130-default-fixtures-for-pytest-harvest" title="Permanent link">&para;</a></h3>
+<p>When steps are present, we now offer <code>session_results_df_steps_pivoted</code> and <code>module_results_df_steps_pivoted</code> default fixtures, to align with <code>pytest-harvest</code> &gt;= 1.1 default fixtures <code>session_results_df</code> and <code>module_results_df</code>. Fixes <a href="https://github.com/smarie/python-pytest-steps/issues/23">#23</a>.</p>
+<p>Improved API to manipulate <code>pytest-harvest</code> results objects in presence of steps:
+ - Renamed <code>handle_steps_in_synthesis_dct</code> into <code>handle_steps_in_results_dct</code> (old alias is kept for this version). Renamed parameter <code>raise_if_no_step</code> to <code>raise_if_one_test_without_step_id</code>. Added a parameter <code>keep_orig_id</code>, by default (True) the original test id is kept for reference. Another parameter <code>no_steps_policy</code> allows users to make the method transparent if no steps are found.
+ - new method <code>handle_steps_in_results_df</code> to perform the same things than <code>handle_steps_in_results_dct</code> but directly on the synthesis dataframe. The parameters are almost the same.
+ - New method <code>flatten_multilevel_columns</code> to diretly apply <code>get_flattened_multilevel_columns</code> on the columns of a dataframe
+ - <code>pivot_steps_on_df</code> now has the ability to detect parameter and fixture names from the provided pytest session, so as not to pivot them (they should be stable across steps). It also provides an <code>error_if_not_present</code> parameter</p>
 <h3 id="121-alignment-with-pytest-harvest-121">1.2.1 - Alignment with pytest-harvest 1.2.1<a class="headerlink" href="#121-alignment-with-pytest-harvest-121" title="Permanent link">&para;</a></h3>
 <p><code>pytest-harvest</code> 1.2 provides default fixtures and fixes a few issues in the synthesis dictionary (in particular fixture and fixture parameters were overlapping each other). We aligned <code>pytest-steps</code> to leverage it.</p>
 <p>Also, minor improvement: the unique id internally generated for each test now includes the pytest object. In practice this does not change anything for most use cases, but it might allow later refactoring, and better diagnostics.</p>
@@ -557,7 +578,7 @@
 <p>API:
  - New method <code>get_underlying_fixture</code> to Truly get a fixture value even if it comes from a <code>@one_per_step</code>
  - internal constant <code>INNER_STEP_ARGNAME</code> is now named <code>GENERATOR_MODE_STEP_ARGNAME</code>
- - 5 new utility methods to support combining this plugin with <code>pytest-harvest</code> (see documentation for details): <code>handle_steps_in_synthesis_dct</code>, <code>remove_step_from_test_id</code>, <code>get_all_pytest_param_names_except_step_id</code>, <code>pivot_steps_on_df</code>, <code>get_flattened_multilevel_columns</code></p>
+ - 5 new utility methods to support combining this plugin with <code>pytest-harvest</code> (see documentation for details): <code>handle_steps_in_results_dct</code>, <code>remove_step_from_test_id</code>, <code>get_all_pytest_param_names_except_step_id</code>, <code>pivot_steps_on_df</code>, <code>get_flattened_multilevel_columns</code></p>
 <h3 id="104-in-progress-improved-readability">1.0.4 in progress - improved readability<a class="headerlink" href="#104-in-progress-improved-readability" title="Permanent link">&para;</a></h3>
 <p>Improved readability in signature-fiddling hacks: now the logic is separate from the two generated function signatures, both for generator and parametrizer modes.</p>
 <h3 id="103-fix-request-in-arguments-with-new-generator-mode">1.0.3 - fix: request in arguments with new generator mode<a class="headerlink" href="#103-fix-request-in-arguments-with-new-generator-mode" title="Permanent link">&para;</a></h3>
