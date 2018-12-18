@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.5.0 - New `@cross_steps_fixture` decorator
+
+`@one_per_step` renamed `@one_fixture_per_step` for clarity. Old alias will remain across at least one minor version.
+
+New `@cross_steps_fixture` decorator to declare that a function-scoped fixture should be created once and reused across all steps. This decorator and the already existing decorator `@one_fixture_per_step` provide a consistent and very intuitive way for users to declare how fixtures should behave in presence of steps. Fixes [#24](https://github.com/smarie/python-pytest-steps/issues/24).
+
+Minor: `_get_step_param_names_or_default` moved to `steps` submodule.
+
 ### 1.4.0 - Documentation + Possibility to call a decorated test function manually.
 
 New features:
