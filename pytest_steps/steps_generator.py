@@ -424,25 +424,26 @@ def get_generator_decorator(steps  # type: Iterable[Any]
 
         # Create the function wrapper.
         # -- first create the logic
-        def step_function_wrapper(f, step_name, request, *args, **kwargs):
+        def step_function_wrapper(f, request, step_name, *args, **kwargs):
             if request is None:
                 # we are manually called outside of pytest. let's execute all steps at nce
                 if step_name is None:
-                    print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is set "
-                          "to None so all steps will be executed in order" % (f, test_step_argname))
+                    # print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is set "
+                    #       "to None so all steps will be executed in order" % (f, test_step_argname))
                     step_names = step_ids
                 else:
-                    print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is set "
-                          "to %s so only these steps will be executed in order. Note that the order should be feasible"
-                          "" % (f, test_step_argname, step_name))
-                    try:
-                        for a in step_name:
-                            pass
-                    except TypeError:
-                        raise TypeError("`%s` parameter should be an iterable" % step_name)
-                    step_names = step_name
+                    # print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is set "
+                    #       "to %s so only these steps will be executed in order. Note that the order should be feasible"
+                    #       "" % (f, test_step_argname, step_name))
+                    if not isinstance(step_name, (list, tuple)):
+                        step_names = [create_pytest_param_str_id(step_name)]
+                    else:
+                        step_names = [create_pytest_param_str_id(f) for f in steps]
                 steps_monitor = StepsMonitor(step_ids, test_func, *args, **kwargs)
-                for step_name in step_names:
+                for i, (step_name, ref_step_name) in enumerate(zip(step_names, step_ids)):
+                    if step_name != ref_step_name:
+                        raise ValueError("Incorrect sequence of steps provided for manual execution. Step #%s should"
+                                         " be named '%s', found '%s'" % (i+1, ref_step_name, step_name))
                     steps_monitor.execute(step_name, *args, **kwargs)
             else:
                 # Retrieve or create the corresponding execution monitor
@@ -455,7 +456,7 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         # decorate it so that its signature is the same than test_func, with just an additional argument for test step
         # and if needed an additional argument for request
         wrapped_test_function = my_decorate(test_func, step_function_wrapper,
-                                            additional_args=(test_step_argname, 'request'))
+                                            additional_args=('request', test_step_argname))
 
         # Parametrize the wrapper function with the test step ids
         parametrizer = pytest.mark.parametrize(test_step_argname, step_ids, ids=str)

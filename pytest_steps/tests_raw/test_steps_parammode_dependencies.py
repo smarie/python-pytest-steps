@@ -37,7 +37,7 @@ def step_c():
 
 
 @test_steps(step_a, step_b, step_c)
-def test_suite_no_results(test_step, request):
+def test_suite_no_results(request, test_step):
     """ In this test suite, the last step will be skipped because the second step failed (and there is a dependency) """
 
     # Execute the step
@@ -50,13 +50,13 @@ def test_manual_call():
 
     # A good way to know which parameters to fill is to use inspect
     s = signature(test_suite_no_results)
-    assert list(s.parameters.keys()) == ['test_step', 'request']
+    assert list(s.parameters.keys()) == ['request', 'test_step']
 
     # Then fill request with blanks
-    test_suite_no_results(step_a, None)
+    test_suite_no_results(None, step_a)
     with pytest.raises(AssertionError):
-        test_suite_no_results(step_b, None)
-    test_suite_no_results(step_c, None)
+        test_suite_no_results(None, step_b)
+    test_suite_no_results(None, step_c)
 
     # Whole suite
     with pytest.raises(AssertionError):

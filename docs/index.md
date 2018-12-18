@@ -153,7 +153,55 @@ _______________ test_suite_optional_and_dependent_steps[step_b] _______________
 ================ 1 failed, 2 passed, 1 skipped in 0.16 seconds ================
 ```
 
-### d- Compliance with the other pytest mechanisms
+### d- Calling decorated functions manually
+
+In some cases you might wish to call your test functions manually before the tests actually run. This can be very useful when you do not wish the package import times to be counted in test execution durations - typically in a "benchmarking" use case such as shown [here](https://smarie.github.io/pytest-patterns/examples/data_science_benchmark/).
+
+It is now possible to call a test function decorated with `@test_steps` manually. For this the best way to understand what you have to provide is to inspect it.
+
+```python
+from pytest_steps import test_steps
+
+@test_steps('first', 'second')
+def test_dummy():
+    print('hello')
+    yield
+    print('world')
+    yield
+
+print(help(test_dummy))
+```
+
+yields
+
+```
+test_dummy(request, ________step_name_) 
+```
+
+So we have to provide two arguments: `request` and `________step_name_`. Note: the same information can be obtained in a more formal way using `signature` from the `inspect` (latest python) or `funcsigs` (older) packages.
+
+Once you know what arguments you have to provide, there are two rules to follow in order to execute the function manually:
+
+ - replace the `request` argument with `None`, to indicate that you are executing outside of any pytest context.
+ - replace the `step_name` argument with which steps you wish to execute: `None` to execute all steps in order, or a list of steps to execute some steps only. Note that in generator mode, "by design" (generator function) it is only possible to call the steps in correct order and starting from the first one, but you can provide a partial list:
+ 
+```python
+> test_dummy(None, None)
+
+hello
+world
+
+> test_dummy(None, 'first')
+
+hello
+
+> test_dummy(None, 'second')
+
+ValueError: Incorrect sequence of steps provided for manual execution. Step #1 should be named 'first', found 'second'
+```
+
+
+### e- Compliance with the other pytest mechanisms
 
 Under the hood, the `@test_steps` decorator simply generates a wrapper function around your function and mark it with `@pytest.mark.parametrize`, that is equivalent to this:
 
@@ -408,7 +456,11 @@ def step_b(steps_data):
     assert len(new_text) == 56
 ```
 
-### d- Compliance with the other pytest mechanisms
+### d- Calling decorated functions manually
+
+In "explicit" mode it is possible to call your test functions outside of pytest runners, exactly the same way [we saw in generator mode](#d-calling-decorated-functions-manually).
+
+### e- Compliance with the other pytest mechanisms
 
 You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test suite function, it should work as expected: a **new** `steps_data` object will be created everytime a new parameter/fixture combination is created, and that object will be **shared** across steps with the same parameters and fixtures.
 
@@ -454,6 +506,7 @@ Two examples are available that should be quite straightforward for those famili
 
  - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py) an example relying on default fixtures, to show how simple it is to satisfy the most common use cases.
  - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest.py) an advanced example where the custom synthesis is created manually from the dictionary provided by pytest-harvest, thanks to helper methods.
+
 
 ## Main features / benefits
 
