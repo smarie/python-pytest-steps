@@ -325,7 +325,7 @@ function filter_table(elem) {
     not_found_message.hidden = !all_rows_hidden;
 }
 </script>
-    <p>Report generated on 18-Dec-2018 at 16:21:04</p>
+    <p>Report generated on 18-Dec-2018 at 16:26:16</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -335,7 +335,7 @@ function filter_table(elem) {
         <td>Python</td>
         <td>3.5.6</td></tr></table>
     <h2>Summary</h2>
-    <p>88 tests ran in 1.63 seconds. </p>
+    <p>88 tests ran in 1.61 seconds. </p>
     <p>(Un)check the boxes to filter the results.</p><input checked="true" data-test-result="passed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">88 passed</span> <input checked="true" data-test-result="skipped" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span> <input checked="true" data-test-result="failed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span> <input checked="true" data-test-result="error" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span> <input checked="true" data-test-result="xfailed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span> <input checked="true" data-test-result="xpassed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span> <input checked="true" data-test-result="rerun" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span> 
     <h2>Results</h2>
     <table id="results-table">
@@ -356,7 +356,7 @@ function filter_table(elem) {
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_wrapped_in_class.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 1}
+Testing that running pytest on file test_wrapped_in_class.py results in {&apos;passed&apos;: 1, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests0, inifile: 
@@ -376,7 +376,7 @@ test_run_all_tests.py .
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_with_results_complex.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 16}
+Testing that running pytest on file test_steps_parammode_with_results_complex.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests1, inifile: 
@@ -391,12 +391,12 @@ test_run_all_tests.py ................
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_dependencies.py]</td>
-          <td class="col-duration">0.10</td>
+          <td class="col-duration">0.09</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_dependencies.py results in {&apos;skipped&apos;: 1, &apos;failed&apos;: 2, &apos;passed&apos;: 4}
+Testing that running pytest on file test_steps_parammode_dependencies.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 1, &apos;failed&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests2, inifile: 
@@ -409,7 +409,7 @@ test_run_all_tests.py .Fs..F.
 ________________________ test_suite_no_results[step_b] _________________________
 
 request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
-test_step = &lt;function step_b at 0x7fb3ea416620&gt;
+test_step = &lt;function step_b at 0x7f71cfe5c620&gt;
 
     @test_steps(step_a, step_b, step_c)
     def test_suite_no_results(request, test_step):
@@ -471,7 +471,7 @@ step b
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_no_results.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 4}
+Testing that running pytest on file test_steps_parammode_no_results.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3, inifile: 
@@ -486,12 +486,12 @@ test_run_all_tests.py ....
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_genmode.py]</td>
-          <td class="col-duration">0.19</td>
+          <td class="col-duration">0.18</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_genmode.py results in {&apos;skipped&apos;: 2, &apos;failed&apos;: 2, &apos;passed&apos;: 15}
+Testing that running pytest on file test_steps_genmode.py results in {&apos;passed&apos;: 15, &apos;skipped&apos;: 2, &apos;failed&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests4, inifile: 
@@ -572,7 +572,7 @@ E           assert False
 test_run_all_tests.py:80: AssertionError
 ----------------------------- Captured stdout call -----------------------------
 step b
-================ 2 failed, 15 passed, 2 skipped in 0.16 seconds ================
+================ 2 failed, 15 passed, 2 skipped in 0.15 seconds ================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -583,7 +583,7 @@ step b
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_stackoverflow2.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3}
+Testing that running pytest on file test_steps_parammode_stackoverflow2.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
@@ -603,7 +603,7 @@ test_run_all_tests.py ...
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_with_results_basic.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 4}
+Testing that running pytest on file test_steps_parammode_with_results_basic.py results in {&apos;passed&apos;: 4, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests6, inifile: 
@@ -618,12 +618,12 @@ test_run_all_tests.py ....
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_genmode_does_not_change_order.py]</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_genmode_does_not_change_order.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3}
+Testing that running pytest on file test_steps_genmode_does_not_change_order.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7, inifile: 
@@ -638,12 +638,12 @@ test_run_all_tests.py ...
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_stackoverflow.py]</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_stackoverflow.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 3}
+Testing that running pytest on file test_steps_parammode_stackoverflow.py results in {&apos;passed&apos;: 3, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8, inifile: 
@@ -663,7 +663,7 @@ test_run_all_tests.py ...
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_pytest_parametrization_capabilities.py results in {&apos;skipped&apos;: 0, &apos;failed&apos;: 0, &apos;passed&apos;: 16}
+Testing that running pytest on file test_pytest_parametrization_capabilities.py results in {&apos;passed&apos;: 16, &apos;skipped&apos;: 0, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests9, inifile: 
@@ -683,7 +683,7 @@ test_run_all_tests.py ................
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_genmode_dependency_tree.py results in {&apos;skipped&apos;: 5, &apos;failed&apos;: 1, &apos;passed&apos;: 8}
+Testing that running pytest on file test_steps_genmode_dependency_tree.py results in {&apos;passed&apos;: 8, &apos;skipped&apos;: 5, &apos;failed&apos;: 1}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.7.0, pluggy-0.3.1
 rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests10, inifile: 
@@ -1087,54 +1087,54 @@ world
                                 status    ...     accuracy
 test_id                step_id            ...             
 test_my_app_bench[A-1] train    passed    ...          NaN
-                       score    passed    ...     0.480814
+                       score    passed    ...     0.218703
 test_my_app_bench[A-2] train    passed    ...          NaN
-                       score    passed    ...     0.140204
+                       score    passed    ...     0.419761
 test_my_app_bench[B-1] train    passed    ...          NaN
-                       score    passed    ...     0.080370
+                       score    passed    ...     0.461684
 test_my_app_bench[B-2] train    passed    ...          NaN
-                       score    passed    ...     0.616022
+                       score    passed    ...     0.989271
 test_my_app_bench[C-1] train    passed    ...          NaN
-                       score    passed    ...     0.363745
+                       score    passed    ...     0.329513
 test_my_app_bench[C-2] train    passed    ...          NaN
-                       score    passed    ...     0.764876
+                       score    passed    ...     0.629826
 
 [12 rows x 6 columns]
-                                     status      duration_ms    algo_param  dataset_param    dataset           accuracy
------------------------------------  --------  -------------  ------------  ---------------  -------------  -----------
-(&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)  passed         0.474453             1  A                my dataset #A  nan
-(&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)  passed         0.951767             1  A                my dataset #A    0.480814
-(&apos;test_my_app_bench[A-2]&apos;, &apos;train&apos;)  passed         0.541925             2  A                my dataset #A  nan
-(&apos;test_my_app_bench[A-2]&apos;, &apos;score&apos;)  passed         0.287294             2  A                my dataset #A    0.140204
-(&apos;test_my_app_bench[B-1]&apos;, &apos;train&apos;)  passed         0.359535             1  B                my dataset #B  nan
-(&apos;test_my_app_bench[B-1]&apos;, &apos;score&apos;)  passed         0.348806             1  B                my dataset #B    0.0803697
-(&apos;test_my_app_bench[B-2]&apos;, &apos;train&apos;)  passed         1.06215              2  B                my dataset #B  nan
-(&apos;test_my_app_bench[B-2]&apos;, &apos;score&apos;)  passed         0.420809             2  B                my dataset #B    0.616022
-(&apos;test_my_app_bench[C-1]&apos;, &apos;train&apos;)  passed         0.365973             1  C                my dataset #C  nan
-(&apos;test_my_app_bench[C-1]&apos;, &apos;score&apos;)  passed         0.430822             1  C                my dataset #C    0.363745
-(&apos;test_my_app_bench[C-2]&apos;, &apos;train&apos;)  passed         0.313759             2  C                my dataset #C  nan
-(&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)  passed         0.422001             2  C                my dataset #C    0.764876
+                                     status      duration_ms    algo_param  dataset_param    dataset          accuracy
+-----------------------------------  --------  -------------  ------------  ---------------  -------------  ----------
+(&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)  passed         0.400543             1  A                my dataset #A  nan
+(&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)  passed         0.454664             1  A                my dataset #A    0.218703
+(&apos;test_my_app_bench[A-2]&apos;, &apos;train&apos;)  passed         0.476599             2  A                my dataset #A  nan
+(&apos;test_my_app_bench[A-2]&apos;, &apos;score&apos;)  passed         0.257254             2  A                my dataset #A    0.419761
+(&apos;test_my_app_bench[B-1]&apos;, &apos;train&apos;)  passed         0.386477             1  B                my dataset #B  nan
+(&apos;test_my_app_bench[B-1]&apos;, &apos;score&apos;)  passed         0.348091             1  B                my dataset #B    0.461684
+(&apos;test_my_app_bench[B-2]&apos;, &apos;train&apos;)  passed         0.739336             2  B                my dataset #B  nan
+(&apos;test_my_app_bench[B-2]&apos;, &apos;score&apos;)  passed         0.396252             2  B                my dataset #B    0.989271
+(&apos;test_my_app_bench[C-1]&apos;, &apos;train&apos;)  passed         0.374556             1  C                my dataset #C  nan
+(&apos;test_my_app_bench[C-1]&apos;, &apos;score&apos;)  passed         0.336885             1  C                my dataset #C    0.329513
+(&apos;test_my_app_bench[C-2]&apos;, &apos;train&apos;)  passed         0.264645             2  C                my dataset #C  nan
+(&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)  passed         0.25773              2  C                my dataset #C    0.629826
 
    `module_results_df_steps_pivoted` dataframe:
 
                         algo_param      ...       score/accuracy
 test_id                                 ...                     
-test_my_app_bench[A-1]           1      ...             0.480814
-test_my_app_bench[A-2]           2      ...             0.140204
-test_my_app_bench[B-1]           1      ...             0.080370
-test_my_app_bench[B-2]           2      ...             0.616022
-test_my_app_bench[C-1]           1      ...             0.363745
-test_my_app_bench[C-2]           2      ...             0.764876
+test_my_app_bench[A-1]           1      ...             0.218703
+test_my_app_bench[A-2]           2      ...             0.419761
+test_my_app_bench[B-1]           1      ...             0.461684
+test_my_app_bench[B-2]           2      ...             0.989271
+test_my_app_bench[C-1]           1      ...             0.329513
+test_my_app_bench[C-2]           2      ...             0.629826
 
 [6 rows x 8 columns]
 test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms  score/status      score/duration_ms    score/accuracy
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  --------------  -------------------  ----------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.474453  passed                     0.951767         0.480814
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.541925  passed                     0.287294         0.140204
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.359535  passed                     0.348806         0.0803697
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     1.06215   passed                     0.420809         0.616022
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.365973  passed                     0.430822         0.363745
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.313759  passed                     0.422001         0.764876
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.400543  passed                     0.454664          0.218703
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.476599  passed                     0.257254          0.419761
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.386477  passed                     0.348091          0.461684
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.739336  passed                     0.396252          0.989271
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.374556  passed                     0.336885          0.329513
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.264645  passed                     0.25773           0.629826
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1571,17 +1571,17 @@ test_my_app_bench[C-2]             2  C                my dataset #C  passed    
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_synthesis</td>
-          <td class="col-duration">0.03</td>
+          <td class="col-duration">0.05</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>test_id                   algo_param  dataset_param    dataset        train/status      train/duration_ms  score/status      score/duration_ms    score/accuracy  -/status      -/duration_ms
 ----------------------  ------------  ---------------  -------------  --------------  -------------------  --------------  -------------------  ----------------  ----------  ---------------
-test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.337839  passed                     0.389576        0.3011      nan              nan
-test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.478745  passed                     0.252962        0.335944    nan              nan
-test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.22769   passed                     0.315189        0.413873    nan              nan
-test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.181675  passed                     0.258684        0.0950557   nan              nan
-test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.27132   passed                     0.501871        0.00952353  nan              nan
-test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.515461  passed                     0.176668        0.72431     nan              nan
-test_basic                       nan  nan              nan            nan                      nan         nan                      nan             nan           passed             0.180483
+test_my_app_bench[A-1]             1  A                my dataset #A  passed                     0.356674  passed                     0.403166         0.155257   nan              nan
+test_my_app_bench[A-2]             2  A                my dataset #A  passed                     0.33927   passed                     0.272751         0.927683   nan              nan
+test_my_app_bench[B-1]             1  B                my dataset #B  passed                     0.268459  passed                     0.249863         0.0179014  nan              nan
+test_my_app_bench[B-2]             2  B                my dataset #B  passed                     0.37694   passed                     0.264168         0.282893   nan              nan
+test_my_app_bench[C-1]             1  C                my dataset #C  passed                     0.379801  passed                     0.283957         0.834791   nan              nan
+test_my_app_bench[C-2]             2  C                my dataset #C  passed                     0.7689    passed                     0.329733         0.644026   nan              nan
+test_basic                       nan  nan              nan            nan                      nan         nan                      nan              nan          passed             0.153542
 </div></td></tr></tbody></table></body></html>
