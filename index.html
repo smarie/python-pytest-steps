@@ -1114,6 +1114,7 @@ PASSED
 
 <h3 id="d-calling-decorated-functions-manually_1">d- Calling decorated functions manually<a class="headerlink" href="#d-calling-decorated-functions-manually_1" title="Permanent link">&para;</a></h3>
 <p>In "explicit" mode it is possible to call your test functions outside of pytest runners, exactly the same way <a href="#d-calling-decorated-functions-manually">we saw in generator mode</a>.</p>
+<p>An exemple can be found <a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_manual_call.py">here</a>.</p>
 <h3 id="e-compliance-with-the-other-pytest-mechanisms_1">e- Compliance with the other pytest mechanisms<a class="headerlink" href="#e-compliance-with-the-other-pytest-mechanisms_1" title="Permanent link">&para;</a></h3>
 <p>You can add as many <code>@pytest.mark.parametrize</code> and pytest fixtures in your test suite function, it should work as expected: a <strong>new</strong> <code>steps_data</code> object will be created everytime a new parameter/fixture combination is created, and that object will be <strong>shared</strong> across steps with the same parameters and fixtures.</p>
 <div class="admonition info">

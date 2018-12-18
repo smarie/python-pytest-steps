@@ -283,6 +283,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#140-documentation-possibility-to-call-a-decorated-test-function-manually" title="1.4.0 - Documentation + Possibility to call a decorated test function manually." class="md-nav__link">
+    1.4.0 - Documentation + Possibility to call a decorated test function manually.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#130-default-fixtures-for-pytest-harvest" title="1.3.0 - Default fixtures for pytest-harvest" class="md-nav__link">
     1.3.0 - Default fixtures for pytest-harvest
   </a>
@@ -426,6 +433,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#140-documentation-possibility-to-call-a-decorated-test-function-manually" title="1.4.0 - Documentation + Possibility to call a decorated test function manually." class="md-nav__link">
+    1.4.0 - Documentation + Possibility to call a decorated test function manually.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#130-default-fixtures-for-pytest-harvest" title="1.3.0 - Default fixtures for pytest-harvest" class="md-nav__link">
     1.3.0 - Default fixtures for pytest-harvest
   </a>
@@ -557,6 +571,12 @@
                 
                 
                 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h3 id="140-documentation-possibility-to-call-a-decorated-test-function-manually">1.4.0 - Documentation + Possibility to call a decorated test function manually.<a class="headerlink" href="#140-documentation-possibility-to-call-a-decorated-test-function-manually" title="Permanent link">&para;</a></h3>
+<p>New features:
+ - It is now possible to call a test function decorated with <code>@test_steps</code> manually, for example to run it once at the beinning of a test session in order for all imports to be done before actual execution. Fixes <a href="https://github.com/smarie/python-pytest-steps/issues/22">#22</a></p>
+<p>Minor:
+ - <code>steps_harvest_df_utils</code> submodule is now correctly listed in <code>__all__</code>.
+ - Improved docstrings and documentation page for API reference.</p>
 <h3 id="130-default-fixtures-for-pytest-harvest">1.3.0 - Default fixtures for <code>pytest-harvest</code><a class="headerlink" href="#130-default-fixtures-for-pytest-harvest" title="Permanent link">&para;</a></h3>
 <p>When steps are present, we now offer <code>session_results_df_steps_pivoted</code> and <code>module_results_df_steps_pivoted</code> default fixtures, to align with <code>pytest-harvest</code> &gt;= 1.1 default fixtures <code>session_results_df</code> and <code>module_results_df</code>. Fixes <a href="https://github.com/smarie/python-pytest-steps/issues/23">#23</a>.</p>
 <p>Improved API to manipulate <code>pytest-harvest</code> results objects in presence of steps:
