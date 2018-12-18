@@ -295,8 +295,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#d-compliance-with-the-other-pytest-mechanisms" title="d- Compliance with the other pytest mechanisms" class="md-nav__link">
-    d- Compliance with the other pytest mechanisms
+  <a href="#d-calling-decorated-functions-manually" title="d- Calling decorated functions manually" class="md-nav__link">
+    d- Calling decorated functions manually
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-compliance-with-the-other-pytest-mechanisms" title="e- Compliance with the other pytest mechanisms" class="md-nav__link">
+    e- Compliance with the other pytest mechanisms
   </a>
   
 </li>
@@ -349,8 +356,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#d-compliance-with-the-other-pytest-mechanisms_1" title="d- Compliance with the other pytest mechanisms" class="md-nav__link">
-    d- Compliance with the other pytest mechanisms
+  <a href="#d-calling-decorated-functions-manually_1" title="d- Calling decorated functions manually" class="md-nav__link">
+    d- Calling decorated functions manually
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-compliance-with-the-other-pytest-mechanisms_1" title="e- Compliance with the other pytest mechanisms" class="md-nav__link">
+    e- Compliance with the other pytest mechanisms
   </a>
   
 </li>
@@ -520,8 +534,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#d-compliance-with-the-other-pytest-mechanisms" title="d- Compliance with the other pytest mechanisms" class="md-nav__link">
-    d- Compliance with the other pytest mechanisms
+  <a href="#d-calling-decorated-functions-manually" title="d- Calling decorated functions manually" class="md-nav__link">
+    d- Calling decorated functions manually
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-compliance-with-the-other-pytest-mechanisms" title="e- Compliance with the other pytest mechanisms" class="md-nav__link">
+    e- Compliance with the other pytest mechanisms
   </a>
   
 </li>
@@ -574,8 +595,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#d-compliance-with-the-other-pytest-mechanisms_1" title="d- Compliance with the other pytest mechanisms" class="md-nav__link">
-    d- Compliance with the other pytest mechanisms
+  <a href="#d-calling-decorated-functions-manually_1" title="d- Calling decorated functions manually" class="md-nav__link">
+    d- Calling decorated functions manually
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-compliance-with-the-other-pytest-mechanisms_1" title="e- Compliance with the other pytest mechanisms" class="md-nav__link">
+    e- Compliance with the other pytest mechanisms
   </a>
   
 </li>
@@ -813,7 +841,49 @@ _______________ test_suite_optional_and_dependent_steps[step_b] _______________
 </pre></div>
 
 
-<h3 id="d-compliance-with-the-other-pytest-mechanisms">d- Compliance with the other pytest mechanisms<a class="headerlink" href="#d-compliance-with-the-other-pytest-mechanisms" title="Permanent link">&para;</a></h3>
+<h3 id="d-calling-decorated-functions-manually">d- Calling decorated functions manually<a class="headerlink" href="#d-calling-decorated-functions-manually" title="Permanent link">&para;</a></h3>
+<p>In some cases you might wish to call your test functions manually before the tests actually run. This can be very useful when you do not wish the package import times to be counted in test execution durations - typically in a "benchmarking" use case such as shown <a href="https://smarie.github.io/pytest-patterns/examples/data_science_benchmark/">here</a>.</p>
+<p>It is now possible to call a test function decorated with <code>@test_steps</code> manually. For this the best way to understand what you have to provide is to inspect it.</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pytest_steps</span> <span class="kn">import</span> <span class="n">test_steps</span>
+
+<span class="nd">@test_steps</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_dummy</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="k">yield</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+    <span class="k">yield</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">help</span><span class="p">(</span><span class="n">test_dummy</span><span class="p">))</span>
+</pre></div>
+
+
+<p>yields</p>
+<div class="codehilite"><pre><span></span>test_dummy(request, ________step_name_) 
+</pre></div>
+
+
+<p>So we have to provide two arguments: <code>request</code> and <code>________step_name_</code>. Note: the same information can be obtained in a more formal way using <code>signature</code> from the <code>inspect</code> (latest python) or <code>funcsigs</code> (older) packages.</p>
+<p>Once you know what arguments you have to provide, there are two rules to follow in order to execute the function manually:</p>
+<ul>
+<li>replace the <code>request</code> argument with <code>None</code>, to indicate that you are executing outside of any pytest context.</li>
+<li>replace the <code>step_name</code> argument with which steps you wish to execute: <code>None</code> to execute all steps in order, or a list of steps to execute some steps only. Note that in generator mode, "by design" (generator function) it is only possible to call the steps in correct order and starting from the first one, but you can provide a partial list:</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="n">hello</span>
+<span class="n">world</span>
+
+<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;first&#39;</span><span class="p">)</span>
+
+<span class="n">hello</span>
+
+<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)</span>
+
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">Incorrect</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">steps</span> <span class="n">provided</span> <span class="k">for</span> <span class="n">manual</span> <span class="n">execution</span><span class="o">.</span> <span class="n">Step</span> <span class="c1">#1 should be named &#39;first&#39;, found &#39;second&#39;</span>
+</pre></div>
+
+
+<h3 id="e-compliance-with-the-other-pytest-mechanisms">e- Compliance with the other pytest mechanisms<a class="headerlink" href="#e-compliance-with-the-other-pytest-mechanisms" title="Permanent link">&para;</a></h3>
 <p>Under the hood, the <code>@test_steps</code> decorator simply generates a wrapper function around your function and mark it with <code>@pytest.mark.parametrize</code>, that is equivalent to this:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
 <span class="kn">from</span> <span class="nn">pytest_steps.steps_generator</span> <span class="kn">import</span> <span class="n">get_pytest_id</span>
@@ -1042,7 +1112,9 @@ PASSED
 </pre></div>
 
 
-<h3 id="d-compliance-with-the-other-pytest-mechanisms_1">d- Compliance with the other pytest mechanisms<a class="headerlink" href="#d-compliance-with-the-other-pytest-mechanisms_1" title="Permanent link">&para;</a></h3>
+<h3 id="d-calling-decorated-functions-manually_1">d- Calling decorated functions manually<a class="headerlink" href="#d-calling-decorated-functions-manually_1" title="Permanent link">&para;</a></h3>
+<p>In "explicit" mode it is possible to call your test functions outside of pytest runners, exactly the same way <a href="#d-calling-decorated-functions-manually">we saw in generator mode</a>.</p>
+<h3 id="e-compliance-with-the-other-pytest-mechanisms_1">e- Compliance with the other pytest mechanisms<a class="headerlink" href="#e-compliance-with-the-other-pytest-mechanisms_1" title="Permanent link">&para;</a></h3>
 <p>You can add as many <code>@pytest.mark.parametrize</code> and pytest fixtures in your test suite function, it should work as expected: a <strong>new</strong> <code>steps_data</code> object will be created everytime a new parameter/fixture combination is created, and that object will be <strong>shared</strong> across steps with the same parameters and fixtures.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
