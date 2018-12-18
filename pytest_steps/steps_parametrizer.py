@@ -112,44 +112,75 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
             def dependency_mgr_wrapper(f, request, *args, **kwargs):
                 """Executes the current step only if its dependencies are correct, and registers its execution result"""
 
-                # (a) retrieve the "current step" function
-                current_step_fun = get_fixture_or_param_value(request, test_step_argname)
-
-                # Get the unique id that is shared between the steps of the same execution
-                # Note: when the id was using not only param values but also fixture values we had to discard
-                # steps_data_holder_name and 'request'. But that's not the case anymore,simply discard "test step" param
-                test_id_without_steps = get_pytest_node_hash_id(request.node, params_to_ignore={test_step_argname})
-
-                # Make sure that it has a field to store its execution success
-                if not hasattr(current_step_fun, STEP_SUCCESS_FIELD):
-                    # this is a dict where the key is the `test_id_without_steps` and the value is a boolean
-                    setattr(current_step_fun, STEP_SUCCESS_FIELD, dict())
-
-                # (b) skip or fail it if needed
-                dependencies, should_fail = getattr(current_step_fun, DEPENDS_ON_FIELD, ([], False))
-                # -- check that dependencies have all run (execution order is correct)
-                if not all(hasattr(step, STEP_SUCCESS_FIELD) for step in dependencies):
-                    raise ValueError("Test step {} depends on another step that has not yet been executed. In current "
-                                     "version the steps execution order is manual, make sure it is correct."
-                                     "".format(current_step_fun.__name__))
-                # -- check that dependencies all ran with success
-                deps_successess = {step: getattr(step, STEP_SUCCESS_FIELD).get(test_id_without_steps, False)
-                                   for step in dependencies}
-                failed_deps = [d.__name__ for d, res in deps_successess.items() if res is False]
-                if not all(deps_successess.values()):
-                    msg = "This test step depends on other steps, and the following have failed: " + str(failed_deps)
-                    if should_fail:
-                        pytest.fail(msg)
+                if request is None:
+                    # request is None: manual call (maybe for pre-loading?), no dependency management
+                    bound = s.bind(*args, **kwargs)
+                    steps_to_run = bound.arguments[test_step_argname]
+                    if steps_to_run is None:
+                        print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is "
+                              "set to None so all steps will be executed in order" % (f, test_step_argname))
+                        steps_to_run = steps
+                        run_several_steps = True
                     else:
-                        pytest.skip(msg)
+                        print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is "
+                              "set to %s so only these steps will be executed in order."
+                              "" % (f, test_step_argname, steps_to_run))
+                        try:
+                            # is it iterable ? consume and keep in mem in case it is a one-shot iterable
+                            steps_to_run = [a for a in steps_to_run]
+                            run_several_steps = True
+                        except TypeError:
+                            run_several_steps = False
 
-                # (c) execute the test function for this step
-                res = test_func(*args, **kwargs)
+                    if run_several_steps:
+                        # execute specified steps
+                        for step in steps_to_run:
+                            # set the step
+                            bound.arguments[test_step_argname] = step
+                            # execute
+                            test_func(*bound.args, **bound.kwargs)
+                    else:
+                        # execute the specified step
+                        return test_func(*args, **kwargs)
+                else:
+                    # (a) retrieve the "current step" function
+                    current_step_fun = get_fixture_or_param_value(request, test_step_argname)
 
-                # (d) declare execution as a success
-                getattr(current_step_fun, STEP_SUCCESS_FIELD)[test_id_without_steps] = True
+                    # Get the unique id that is shared between the steps of the same execution
+                    # Note: when the id was using not only param values but also fixture values we had to discard
+                    # steps_data_holder_name and 'request'. But that's not the case anymore, simply discard "test step"
+                    test_id_without_steps = get_pytest_node_hash_id(request.node, params_to_ignore={test_step_argname})
 
-                return res
+                    # Make sure that it has a field to store its execution success
+                    if not hasattr(current_step_fun, STEP_SUCCESS_FIELD):
+                        # this is a dict where the key is the `test_id_without_steps` and the value is a boolean
+                        setattr(current_step_fun, STEP_SUCCESS_FIELD, dict())
+
+                    # (b) skip or fail it if needed
+                    dependencies, should_fail = getattr(current_step_fun, DEPENDS_ON_FIELD, ([], False))
+                    # -- check that dependencies have all run (execution order is correct)
+                    if not all(hasattr(step, STEP_SUCCESS_FIELD) for step in dependencies):
+                        raise ValueError("Test step {} depends on another step that has not yet been executed. In "
+                                         "current version the steps execution order is manual, make sure it is correct."
+                                         "".format(current_step_fun.__name__))
+                    # -- check that dependencies all ran with success
+                    deps_successess = {step: getattr(step, STEP_SUCCESS_FIELD).get(test_id_without_steps, False)
+                                       for step in dependencies}
+                    failed_deps = [d.__name__ for d, res in deps_successess.items() if res is False]
+                    if not all(deps_successess.values()):
+                        msg = "This test step depends on other steps, and the following have failed: %s" % failed_deps
+                        if should_fail:
+                            pytest.fail(msg)
+                        else:
+                            pytest.skip(msg)
+
+                    # (c) execute the test function for this step
+                    res = test_func(*args, **kwargs)
+
+                    # (d) declare execution as a success
+                    getattr(current_step_fun, STEP_SUCCESS_FIELD)[test_id_without_steps] = True
+
+                    return res
 
             # wrap the test function and add the 'request' argument if needed
             wrapped_test_function = my_decorate(test_func, dependency_mgr_wrapper, additional_args=('request', ))

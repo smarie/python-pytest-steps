@@ -1,9 +1,14 @@
 # META
-# {'passed': 12, 'skipped': 2, 'failed': 2}
+# {'passed': 13, 'skipped': 2, 'failed': 2}
 # END META
 import pytest
 
 from pytest_steps import test_steps, optional_step, one_per_step
+
+try:  # python 3.3+
+    from inspect import signature
+except ImportError:
+    from funcsigs import signature
 
 
 @test_steps('step_a', 'step_b', 'step_c')
@@ -27,6 +32,17 @@ def test_suite_shared_results_no_yield_names():
     print(new_text)
     assert len(new_text) == 56
     yield
+
+
+def test_manual_call():
+    """Tests that we can call the WHOLE test suite manually with all the steps executed at once"""
+
+    # A good way to know which parameters to fill is to use inspect
+    s = signature(test_suite_shared_results_no_yield_names)
+    assert list(s.parameters.keys()) == ['________step_name_', 'request']
+
+    # Then fill with blanks
+    test_suite_shared_results_no_yield_names(None, None)
 
 
 @test_steps('step_a', 'step_b', 'step_c')

@@ -425,12 +425,32 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         # Create the function wrapper.
         # -- first create the logic
         def step_function_wrapper(f, step_name, request, *args, **kwargs):
-            # Retrieve or create the corresponding execution monitor
-            steps_monitor = all_monitors.get_execution_monitor(request.node, *args, **kwargs)
+            if request is None:
+                # we are manually called outside of pytest. let's execute all steps at nce
+                if step_name is None:
+                    print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is set "
+                          "to None so all steps will be executed in order" % (f, test_step_argname))
+                    step_names = step_ids
+                else:
+                    print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is set "
+                          "to %s so only these steps will be executed in order. Note that the order should be feasible"
+                          "" % (f, test_step_argname, step_name))
+                    try:
+                        for a in step_name:
+                            pass
+                    except TypeError:
+                        raise TypeError("`%s` parameter should be an iterable" % step_name)
+                    step_names = step_name
+                steps_monitor = StepsMonitor(step_ids, test_func, *args, **kwargs)
+                for step_name in step_names:
+                    steps_monitor.execute(step_name, *args, **kwargs)
+            else:
+                # Retrieve or create the corresponding execution monitor
+                steps_monitor = all_monitors.get_execution_monitor(request.node, *args, **kwargs)
 
-            # execute the step
-            # print("DEBUG - executing step %s" % step_name)
-            steps_monitor.execute(step_name, *args, **kwargs)
+                # execute the step
+                # print("DEBUG - executing step %s" % step_name)
+                steps_monitor.execute(step_name, *args, **kwargs)
 
         # decorate it so that its signature is the same than test_func, with just an additional argument for test step
         # and if needed an additional argument for request

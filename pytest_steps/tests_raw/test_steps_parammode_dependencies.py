@@ -1,7 +1,14 @@
 # META
-# {'passed': 3, 'skipped': 1, 'failed': 2}
+# {'passed': 4, 'skipped': 1, 'failed': 2}
 # END META
+import pytest
+
 from pytest_steps import test_steps, depends_on
+
+try:  # python 3.3+
+    from inspect import signature
+except ImportError:
+    from funcsigs import signature
 
 
 def step_a():
@@ -35,6 +42,25 @@ def test_suite_no_results(test_step, request):
 
     # Execute the step
     test_step()
+
+
+# test that manual call works in case of a dependency
+def test_manual_call():
+    """Tests that we can call the test manually with all the steps executed at once"""
+
+    # A good way to know which parameters to fill is to use inspect
+    s = signature(test_suite_no_results)
+    assert list(s.parameters.keys()) == ['test_step', 'request']
+
+    # Then fill request with blanks
+    test_suite_no_results(step_a, None)
+    with pytest.raises(AssertionError):
+        test_suite_no_results(step_b, None)
+    test_suite_no_results(step_c, None)
+
+    # Whole suite
+    with pytest.raises(AssertionError):
+        test_suite_no_results(None, None)
 
 
 @test_steps('step_a', 'step_b', 'step_c')
