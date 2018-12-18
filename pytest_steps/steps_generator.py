@@ -4,10 +4,10 @@ import six
 from six import raise_from
 from wrapt import ObjectProxy
 
-try:  # python 3.2+
-    from functools import lru_cache
-except ImportError:
-    from functools32 import lru_cache
+# try:  # python 3.2+
+#     from functools import lru_cache
+# except ImportError:
+#     from functools32 import lru_cache
 
 try:  # python 3.3+
     from inspect import signature
@@ -109,7 +109,7 @@ class _OnePerStepFixtureProxy(ObjectProxy):
 
 def is_replacable_fixture_wrapper(obj):
     """
-    Returns True when the object results from a function-scoped fixture that has been decorated with @one_per_step.
+    Returns True when the object results from a function-scoped fixture that has been decorated with @one_fixture_per_step.
 
     In that case the fixture value of the first step is wrapped in a `_OnePerStepFixtureProxy`, so that we can inject the
     other fixture values in it later. Indeed otherwise the fixture values for the other steps will never be injected in
@@ -133,13 +133,13 @@ def replace_fixture(rfw1, rfw2):
     if is_replacable_fixture_wrapper(rfw1) and is_replacable_fixture_wrapper(rfw2):
         rfw1.__wrapped__ = rfw2.__wrapped__
     else:
-        raise TypeError("both objects should come from the same fixture, decorated with @one_per_step")
+        raise TypeError("both objects should come from the same fixture, decorated with @one_fixture_per_step")
 
 
 def get_underlying_fixture(rfw):
     """
     Returns the underlying fixture object inside this fixture wrapper, or returns the fixture itself in case it is
-    not a one_per_step fixture wrapper
+    not a one_fixture_per_step fixture wrapper
 
     :param rfw:
     :return:
@@ -150,7 +150,7 @@ def get_underlying_fixture(rfw):
         return rfw
 
 
-def one_per_step(*args):
+def one_fixture_per_step(*args):
     """
     A decorator for a function-scoped fixture so that it works well with generator-mode test functions.
 
@@ -158,7 +158,7 @@ def one_per_step(*args):
     fixture created for the first step will be injected in your test function, and all subsequent steps will see that
     same instance.
 
-    Decorating your fixture with `@one_per_step` tells `@test_steps` to transparently replace_fixture the fixture object
+    Decorating your fixture with `@one_fixture_per_step` tells `@test_steps` to transparently replace the fixture object
     instance by the one created for each step, before each step executes in your test function. This results in all
     steps using different fixture instances, as expected.
 
@@ -166,7 +166,7 @@ def one_per_step(*args):
 
     ```python
     @pytest.fixture
-    @one_per_step
+    @one_fixture_per_step
     def my_cool_fixture():
         return random()
     ```
@@ -174,13 +174,17 @@ def one_per_step(*args):
     :return:
     """
     if len(args) == 1 and callable(args[0]):
-        return one_per_step_decorate(args[0])
+        return one_fixture_per_step_decorate(args[0])
     else:
-        return one_per_step_decorate
+        return one_fixture_per_step_decorate
 
 
-def one_per_step_decorate(fixture_fun):
-    """ Implementation of the @one_per_step decorator, for manual decoration"""
+one_per_step = one_fixture_per_step
+"""Deprecated alias for `@one_fixture_per_step`."""
+
+
+def one_fixture_per_step_decorate(fixture_fun):
+    """ Implementation of the @one_fixture_per_step decorator, for manual decoration"""
 
     if not isgeneratorfunction(fixture_fun):
         def _steps_aware_wrapper(f, *args, **kwargs):
@@ -203,6 +207,10 @@ def one_per_step_decorate(fixture_fun):
 
     _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper)
     return _steps_aware_decorated_function
+
+
+one_per_step_decorate = one_fixture_per_step_decorate
+"""Deprecated alias for `one_fixture_per_step_decorate`"""
 
 
 class StepsMonitor(object):
@@ -356,9 +364,6 @@ class StepMonitorsContainer(dict):
         If there is no monitor yet (first function call with this combination of parameters), then one is created,
         that will be used subsequently.
 
-        Note: for readability we do not use a @lru_cache anymore but an explicit string id (more maintainable). Also
-        this is more robust because it does not require any of *args, **kwargs to be hash-able.
-
         :param pytest_node:
         :param args:
         :param kwargs:
@@ -420,6 +425,7 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         step_ids = [create_pytest_param_str_id(f) for f in steps]
 
         # Create the container that will hold all execution monitors for this function
+        # TODO maybe have later a single 'monitor' instance at plugin level... like in pytest-benchmark
         all_monitors = StepMonitorsContainer(test_func, step_ids)
 
         # Create the function wrapper.

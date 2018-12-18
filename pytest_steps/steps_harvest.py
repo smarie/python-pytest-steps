@@ -3,8 +3,7 @@ from copy import copy
 # WARNING do not import pytest-harvest here: it should remain optional
 import six
 
-from pytest_steps.steps import TEST_STEP_ARGNAME_DEFAULT
-from pytest_steps.steps_generator import GENERATOR_MODE_STEP_ARGNAME
+from pytest_steps.steps import _get_step_param_names_or_default
 from pytest_steps.steps_common import remove_param_from_pytest_node_str_id
 
 try: # python 3.5+
@@ -196,18 +195,3 @@ def get_all_pytest_param_names_except_step_id(session,
     except ImportError as e:
         six.raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
                                    "`get_all_pytest_param_names_except_step_id`"), e)
-
-
-def _get_step_param_names_or_default(step_param_names):
-    """
-
-    :param step_param_names:
-    :return: a list of step parameter names
-    """
-    if step_param_names is None:
-        # default: cover both generator and legacy mode default names
-        step_param_names = [GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]
-    elif isinstance(step_param_names, str):
-        # singleton
-        step_param_names = [step_param_names]
-    return step_param_names

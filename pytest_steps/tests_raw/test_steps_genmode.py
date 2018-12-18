@@ -3,7 +3,7 @@
 # END META
 import pytest
 
-from pytest_steps import test_steps, optional_step, one_per_step
+from pytest_steps import test_steps, optional_step, one_fixture_per_step
 
 try:  # python 3.3+
     from inspect import signature
@@ -118,7 +118,7 @@ class MyFixture(object):
 
 
 @pytest.fixture
-@one_per_step
+@one_fixture_per_step
 def my_fixture():
     """Simple function-scoped fixture that return a new instance each time"""
     return MyFixture()

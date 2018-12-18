@@ -1,6 +1,8 @@
 from inspect import isgeneratorfunction
 
-from pytest_steps.steps_generator import get_generator_decorator
+from pytest_steps.decorator_hack import my_decorate
+from pytest_steps.steps_common import get_pytest_node_hash_id
+from pytest_steps.steps_generator import get_generator_decorator, GENERATOR_MODE_STEP_ARGNAME
 from pytest_steps.steps_parametrizer import get_parametrize_decorator
 
 
@@ -65,3 +67,101 @@ def test_steps(*steps, **kwargs):
 
 
 test_steps.__test__ = False  # to prevent pytest to think that this is a test !
+
+
+def cross_steps_fixture(step_param_names):
+    """
+    A decorator for a function-scoped fixture so that it is not called for each step, but only once for all steps.
+
+    Decorating your fixture with `@cross_steps_fixture` tells `@test_steps` to detect when the fixture function is
+    called for the first step, to cache that first step instance, and to reuse it instead of calling your fixture
+    function for subsequent steps. This results in all steps (with the same other parameters) using the same fixture
+    instance.
+
+    It is recommended that you put this decorator as the second decorator, right after `@pytest.fixture`:
+
+    ```python
+    @pytest.fixture
+    @cross_steps_fixture
+    def my_cool_fixture():
+        return random()
+    ```
+
+    If you use custom test step parameter names and not the default, you will have to provide an exhaustive list in
+    `step_param_names`.
+
+    :param step_param_names: a singleton or iterable containing the names of the test step parameters used in the
+        tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both
+        generator-mode and legacy manual mode.
+    :return:
+    """
+    if callable(step_param_names):
+        # decorator used without argument, this is the function not the param
+        return cross_steps_fixture_decorate(step_param_names)
+    else:
+        return cross_steps_fixture_decorate
+
+
+def cross_steps_fixture_decorate(fixture_fun,
+                                 step_param_names=None):
+    """
+    Implementation of the @cross_steps_fixture decorator, for manual decoration
+
+    :param fixture_fun:
+    :param step_param_names: a singleton or iterable containing the names of the test step parameters used in the
+        tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both
+        generator-mode and legacy manual mode.
+    :return:
+    """
+    ref_dct = dict()
+
+    if not isgeneratorfunction(fixture_fun):
+        def _steps_aware_wrapper(f, request, *args, **kwargs):
+            id_without_steps = get_pytest_node_hash_id(request.node,
+                                                       params_to_ignore=_get_step_param_names_or_default(
+                                                           step_param_names))
+            try:
+                # already available: this is a subsequent step.
+                return ref_dct[id_without_steps]
+            except KeyError:
+                # not yet cached, this is probably the first step
+                res = f(*args, **kwargs)
+                ref_dct[id_without_steps] = res
+                return res
+    else:
+        def _steps_aware_wrapper(f, request, *args, **kwargs):
+            """
+
+            :return:
+            """
+            id_without_steps = get_pytest_node_hash_id(request.node,
+                                                       params_to_ignore=_get_step_param_names_or_default(
+                                                           step_param_names))
+            try:
+                # already available: this is a subsequent step.
+                yield ref_dct[id_without_steps]
+            except KeyError:
+                # not yet cached, this is probably the first step
+                gen = f(*args, **kwargs)
+                res = next(gen)
+                ref_dct[id_without_steps] = res
+                yield res
+                next(gen)
+
+    _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper, additional_args=('request',))
+    return _steps_aware_decorated_function
+
+
+def _get_step_param_names_or_default(step_param_names):
+    """
+
+    :param step_param_names:
+    :return: a list of step parameter names
+    """
+    if step_param_names is None:
+        # default: cover both generator and legacy mode default names
+        step_param_names = [GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]
+    elif isinstance(step_param_names, str):
+        # singleton
+        step_param_names = [step_param_names]
+    return step_param_names
