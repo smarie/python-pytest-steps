@@ -1,5 +1,3 @@
-# import re
-
 try:  # python 3+
     from typing import Tuple
 except ImportError:
