@@ -283,6 +283,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#150-new-cross_steps_fixture-decorator" title="1.5.0 - New @cross_steps_fixture decorator" class="md-nav__link">
+    1.5.0 - New @cross_steps_fixture decorator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#140-documentation-possibility-to-call-a-decorated-test-function-manually" title="1.4.0 - Documentation + Possibility to call a decorated test function manually." class="md-nav__link">
     1.4.0 - Documentation + Possibility to call a decorated test function manually.
   </a>
@@ -433,6 +440,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#150-new-cross_steps_fixture-decorator" title="1.5.0 - New @cross_steps_fixture decorator" class="md-nav__link">
+    1.5.0 - New @cross_steps_fixture decorator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#140-documentation-possibility-to-call-a-decorated-test-function-manually" title="1.4.0 - Documentation + Possibility to call a decorated test function manually." class="md-nav__link">
     1.4.0 - Documentation + Possibility to call a decorated test function manually.
   </a>
@@ -571,6 +585,10 @@
                 
                 
                 <h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h1>
+<h3 id="150-new-cross_steps_fixture-decorator">1.5.0 - New <code>@cross_steps_fixture</code> decorator<a class="headerlink" href="#150-new-cross_steps_fixture-decorator" title="Permanent link">&para;</a></h3>
+<p><code>@one_per_step</code> renamed <code>@one_fixture_per_step</code> for clarity. Old alias will remain across at least one minor version.</p>
+<p>New <code>@cross_steps_fixture</code> decorator to declare that a function-scoped fixture should be created once and reused across all steps. This decorator and the already existing decorator <code>@one_fixture_per_step</code> provide a consistent and very intuitive way for users to declare how fixtures should behave in presence of steps. Fixes <a href="https://github.com/smarie/python-pytest-steps/issues/24">#24</a>.</p>
+<p>Minor: <code>_get_step_param_names_or_default</code> moved to <code>steps</code> submodule.</p>
 <h3 id="140-documentation-possibility-to-call-a-decorated-test-function-manually">1.4.0 - Documentation + Possibility to call a decorated test function manually.<a class="headerlink" href="#140-documentation-possibility-to-call-a-decorated-test-function-manually" title="Permanent link">&para;</a></h3>
 <p>New features:
  - It is now possible to call a test function decorated with <code>@test_steps</code> manually, for example to run it once at the beinning of a test session in order for all imports to be done before actual execution. Fixes <a href="https://github.com/smarie/python-pytest-steps/issues/22">#22</a></p>

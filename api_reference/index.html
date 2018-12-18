@@ -285,6 +285,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#cross_steps_fixture" title="@cross_steps_fixture" class="md-nav__link">
+    @cross_steps_fixture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one_fixture_per_step" title="@one_fixture_per_step" class="md-nav__link">
+    @one_fixture_per_step
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -301,13 +315,6 @@
           <li class="md-nav__item">
   <a href="#with-optional_step" title="with optional_step" class="md-nav__link">
     with optional_step
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#one_per_step" title="@one_per_step" class="md-nav__link">
-    @one_per_step
   </a>
   
 </li>
@@ -470,6 +477,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#cross_steps_fixture" title="@cross_steps_fixture" class="md-nav__link">
+    @cross_steps_fixture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one_fixture_per_step" title="@one_fixture_per_step" class="md-nav__link">
+    @one_fixture_per_step
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -486,13 +507,6 @@
           <li class="md-nav__item">
   <a href="#with-optional_step" title="with optional_step" class="md-nav__link">
     with optional_step
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#one_per_step" title="@one_per_step" class="md-nav__link">
-    @one_per_step
   </a>
   
 </li>
@@ -641,6 +655,33 @@
 <li><code>test_step_argname</code>: the optional name of the function argument that will receive the test step object. Default is 'test_step'.</li>
 <li><code>test_results_argname</code>: the optional name of the function argument that will receive the shared <code>StepsDataHolder</code> object if present. Default is 'steps_data'.</li>
 </ul>
+<h3 id="cross_steps_fixture"><code>@cross_steps_fixture</code><a class="headerlink" href="#cross_steps_fixture" title="Permanent link">&para;</a></h3>
+<p>A decorator for a function-scoped fixture so that it is not called for each step, but only once for all steps.</p>
+<p>Decorating your fixture with <code>@cross_steps_fixture</code> tells <code>@test_steps</code> to detect when the fixture function is called for the first step, to cache that first step instance, and to reuse it instead of calling your fixture function for subsequent steps. This results in all steps (with the same other parameters) using the same fixture instance.</p>
+<p>It is recommended that you put this decorator as the second decorator, right after <code>@pytest.fixture</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nd">@pytest.fixture</span>
+<span class="nd">@cross_steps_fixture</span>
+<span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">random</span><span class="p">()</span>
+</pre></div>
+
+
+<p>If you use custom test step parameter names and not the default, you will have to provide an exhaustive list in the <code>step_param_names</code> argument.</p>
+<h3 id="one_fixture_per_step"><code>@one_fixture_per_step</code><a class="headerlink" href="#one_fixture_per_step" title="Permanent link">&para;</a></h3>
+<p>A decorator for a function-scoped fixture so that it works well with generator-mode test functions. You do not have to use it in parametrizer mode, although it does not hurt.</p>
+<p>By default if you do not use this decorator but use the fixture in a generator-mode test function, only the fixture created for the first step will be injected in your test function, and all subsequent steps will see that same instance.</p>
+<p>Decorating your fixture with <code>@one_fixture_per_step</code> tells <code>@test_steps</code> to transparently replace the fixture object instance by the one created for each step, before each step executes in your test function. This results in all steps using different fixture instances, as expected.</p>
+<p>It is recommended that you put this decorator as the second decorator, right after <code>@pytest.fixture</code>:</p>
+<div class="codehilite"><pre><span></span><span class="nd">@pytest.fixture</span>
+<span class="nd">@one_fixture_per_step</span>
+<span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">random</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p>When a fixture is decorated with <code>@one_fixture_per_step</code>, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using <code>get_underlying_fixture(my_fixture)</code>.</p>
+</div>
 <h2 id="generator-mode">Generator mode<a class="headerlink" href="#generator-mode" title="Permanent link">&para;</a></h2>
 <h3 id="with-optional_step"><code>with optional_step</code><a class="headerlink" href="#with-optional_step" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="k">with</span> <span class="n">optional_step</span><span class="p">(</span><span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
@@ -654,12 +695,6 @@
 <li><code>step_name</code>: the name of this optional step. This name will be used in pytest failure/skip messages when other steps depend on this one and are skipped/failed because this one was skipped/failed.</li>
 <li><code>depends_on</code>: an optional dependency or list of dependencies, that should all be optional steps created with an <code>optional_step</code> context manager.</li>
 </ul>
-<h3 id="one_per_step"><code>@one_per_step</code><a class="headerlink" href="#one_per_step" title="Permanent link">&para;</a></h3>
-<p>A decorator for a function-scoped fixture. By default if you do not use this decorator, only the fixture created  for the first step will be injected in your function, and all steps will see that same instance. </p>
-<p>Decorating your fixture with <code>@one_per_step</code> tells <code>@test_steps</code> to transparently replace the fixture object instance by the one created for each step, before each step executes. This results in all steps using different fixture instances.</p>
-<div class="admonition note">
-<p>When a fixture is decorated with <code>@one_per_step</code>, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using <code>get_underlying_fixture(my_fixture)</code>.</p>
-</div>
 <h2 id="explicitparametrizer-mode">Explicit/parametrizer mode<a class="headerlink" href="#explicitparametrizer-mode" title="Permanent link">&para;</a></h2>
 <h3 id="depends_on"><code>@depends_on</code><a class="headerlink" href="#depends_on" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nd">@depends_on</span><span class="p">(</span><span class="o">*</span><span class="n">steps</span><span class="p">,</span> 
@@ -709,17 +744,12 @@
 
 <p>Improves the synthesis dataframe so that</p>
 <ul>
-<li>the test_id index is replaced with a multilevel index (new_test_id, step_id) where new_test_id is a
- step-independent test id. A 'pytest_id' column remains with the original id except if keep_orig_id=False
+<li>the test_id index is replaced with a multilevel index (new_test_id, step_id) where new_test_id is a step-independent test id. A 'pytest_id' column remains with the original id except if keep_orig_id=False
  (default=True)</li>
 <li>the 'step_id' parameter is removed from the contents</li>
 </ul>
-<p>The step id is identified by looking at the columns, and finding one with a name included in the
-<code>step_param_names</code> list (<code>None</code> uses the default names). If no step id is found on an entry, it is replaced with 
-the value of <code>no_step_id</code> except if <code>raise_if_one_test_without_step_id=True</code> - in which case an error is raised.</p>
-<p>If all step ids are missing, for all entries in the dictionary, <code>no_steps_policy</code> determines what happens: it can
-either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an 
-error ('raise').</p>
+<p>The step id is identified by looking at the columns, and finding one with a name included in the <code>step_param_names</code> list (<code>None</code> uses the default names). If no step id is found on an entry, it is replaced with the value of <code>no_step_id</code> except if <code>raise_if_one_test_without_step_id=True</code> - in which case an error is raised.</p>
+<p>If all step ids are missing, for all entries in the dictionary, <code>no_steps_policy</code> determines what happens: it can either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an error ('raise').</p>
 <p>If <code>keep_orig_id</code> is set to True (default), the original id is added as a new column.</p>
 <p>If <code>inplace</code> is <code>False</code> (default), a new dataframe will be returned. Otherwise the input dataframe will be modified inplace and nothing will be returned.</p>
 <h3 id="pivot_steps_on_df"><code>pivot_steps_on_df</code><a class="headerlink" href="#pivot_steps_on_df" title="Permanent link">&para;</a></h3>
@@ -731,8 +761,7 @@ error ('raise').</p>
 </pre></div>
 
 
-<p>Pivots the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info.
-The input dataframe should have a multilevel index with two levels (test id, step id) and with names
+<p>Pivots the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info. The input dataframe should have a multilevel index with two levels (test id, step id) and with names
 (<code>results_df.index.names</code> should be set). The test id should be independent on the step id. </p>
 <h3 id="flatten_multilevel_columns"><code>flatten_multilevel_columns</code><a class="headerlink" href="#flatten_multilevel_columns" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">flatten_multilevel_columns</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
