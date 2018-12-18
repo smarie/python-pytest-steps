@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.4.0 - Documentation + Possibility to call a decorated test function manually.
+
+New features:
+ - It is now possible to call a test function decorated with `@test_steps` manually, for example to run it once at the beinning of a test session in order for all imports to be done before actual execution. Fixes [#22](https://github.com/smarie/python-pytest-steps/issues/22)
+
+Minor:
+ - `steps_harvest_df_utils` submodule is now correctly listed in `__all__`.
+ - Improved docstrings and documentation page for API reference.
+
 ### 1.3.0 - Default fixtures for `pytest-harvest`
 
 When steps are present, we now offer `session_results_df_steps_pivoted` and `module_results_df_steps_pivoted` default fixtures, to align with `pytest-harvest` >= 1.1 default fixtures `session_results_df` and `module_results_df`. Fixes [#23](https://github.com/smarie/python-pytest-steps/issues/23).
