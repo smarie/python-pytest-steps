@@ -29,6 +29,45 @@ See [Home](../) for examples.
  - `test_step_argname`: the optional name of the function argument that will receive the test step object. Default is 'test_step'.
  - `test_results_argname`: the optional name of the function argument that will receive the shared `StepsDataHolder` object if present. Default is 'steps_data'.
 
+### `@cross_steps_fixture`
+
+A decorator for a function-scoped fixture so that it is not called for each step, but only once for all steps.
+
+Decorating your fixture with `@cross_steps_fixture` tells `@test_steps` to detect when the fixture function is called for the first step, to cache that first step instance, and to reuse it instead of calling your fixture function for subsequent steps. This results in all steps (with the same other parameters) using the same fixture instance.
+
+It is recommended that you put this decorator as the second decorator, right after `@pytest.fixture`:
+
+```python
+@pytest.fixture
+@cross_steps_fixture
+def my_cool_fixture():
+    return random()
+```
+
+If you use custom test step parameter names and not the default, you will have to provide an exhaustive list in the `step_param_names` argument.
+
+
+### `@one_fixture_per_step`
+
+A decorator for a function-scoped fixture so that it works well with generator-mode test functions. You do not have to use it in parametrizer mode, although it does not hurt.
+
+By default if you do not use this decorator but use the fixture in a generator-mode test function, only the fixture created for the first step will be injected in your test function, and all subsequent steps will see that same instance.
+
+Decorating your fixture with `@one_fixture_per_step` tells `@test_steps` to transparently replace the fixture object instance by the one created for each step, before each step executes in your test function. This results in all steps using different fixture instances, as expected.
+
+It is recommended that you put this decorator as the second decorator, right after `@pytest.fixture`:
+
+```python
+@pytest.fixture
+@one_fixture_per_step
+def my_cool_fixture():
+    return random()
+```
+
+!!! note ""
+    When a fixture is decorated with `@one_fixture_per_step`, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using `get_underlying_fixture(my_fixture)`.
+
+
 ## Generator mode
 
 ### `with optional_step`
@@ -44,15 +83,6 @@ Context manager to use inside a test function body to create an optional step na
 
  - `step_name`: the name of this optional step. This name will be used in pytest failure/skip messages when other steps depend on this one and are skipped/failed because this one was skipped/failed.
  - `depends_on`: an optional dependency or list of dependencies, that should all be optional steps created with an `optional_step` context manager.
-
-### `@one_per_step`
-
-A decorator for a function-scoped fixture. By default if you do not use this decorator, only the fixture created  for the first step will be injected in your function, and all steps will see that same instance. 
-    
-Decorating your fixture with `@one_per_step` tells `@test_steps` to transparently replace the fixture object instance by the one created for each step, before each step executes. This results in all steps using different fixture instances.
-
-!!! note ""
-    When a fixture is decorated with `@one_per_step`, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using `get_underlying_fixture(my_fixture)`.
 
 ## Explicit/parametrizer mode
 
@@ -114,18 +144,13 @@ def handle_steps_in_results_df(results_df,
 
 Improves the synthesis dataframe so that
 
- - the test_id index is replaced with a multilevel index (new_test_id, step_id) where new_test_id is a
- step-independent test id. A 'pytest_id' column remains with the original id except if keep_orig_id=False
+ - the test_id index is replaced with a multilevel index (new_test_id, step_id) where new_test_id is a step-independent test id. A 'pytest_id' column remains with the original id except if keep_orig_id=False
  (default=True)
  - the 'step_id' parameter is removed from the contents
 
-The step id is identified by looking at the columns, and finding one with a name included in the
-`step_param_names` list (`None` uses the default names). If no step id is found on an entry, it is replaced with 
-the value of `no_step_id` except if `raise_if_one_test_without_step_id=True` - in which case an error is raised.
+The step id is identified by looking at the columns, and finding one with a name included in the `step_param_names` list (`None` uses the default names). If no step id is found on an entry, it is replaced with the value of `no_step_id` except if `raise_if_one_test_without_step_id=True` - in which case an error is raised.
     
-If all step ids are missing, for all entries in the dictionary, `no_steps_policy` determines what happens: it can
-either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an 
-error ('raise').
+If all step ids are missing, for all entries in the dictionary, `no_steps_policy` determines what happens: it can either skip the whole function and return a copy of the input ('skip', or behave as usual ('ignore'), or raise an error ('raise').
 
 If `keep_orig_id` is set to True (default), the original id is added as a new column.
 
@@ -141,8 +166,7 @@ def pivot_steps_on_df(results_df,
                       ):
 ```
 
-Pivots the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info.
-The input dataframe should have a multilevel index with two levels (test id, step id) and with names
+Pivots the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info. The input dataframe should have a multilevel index with two levels (test id, step id) and with names
 (`results_df.index.names` should be set). The test id should be independent on the step id. 
 
 ### `flatten_multilevel_columns`

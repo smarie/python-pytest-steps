@@ -82,7 +82,7 @@ collected 3 items
 !!! note "Debugging note"
     You might wish to use `yield <step_name>` instead of `yield` at the end of each step when debugging if you think that there is an issue with the execution order. This will activate a built-in checker, that will check that each step name in the declared sequence corresponds to what you actually yield at the end of that step.
 
-### b- Sharing intermediate results between steps
+### b- Shared data
 
 By design, all intermediate results created during function execution are shared between steps, since they are part of the same python function call. You therefore have nothing to do: this is what is shown above in step c where we reuse `intermediate_a` from step a. 
 
@@ -201,27 +201,13 @@ ValueError: Incorrect sequence of steps provided for manual execution. Step #1 s
 ```
 
 
-### e- Compliance with the other pytest mechanisms
+### e- Compliance with pytest
 
-Under the hood, the `@test_steps` decorator simply generates a wrapper function around your function and mark it with `@pytest.mark.parametrize`, that is equivalent to this:
+#### *parameters*
 
-```python
-import pytest
-from pytest_steps.steps_generator import get_pytest_id
+Under the hood, the `@test_steps` decorator simply generates a wrapper function around your function and mark it with `@pytest.mark.parametrize`. The function wrapper is created using the excellent [`decorator`](https://github.com/micheles/decorator) library, so all marks that exist on it are kept in the process, as well as its name and signature. 
 
-step_ids = [get_pytest_id(f) for f in steps]
-
-@pytest.mark.parametrize('________step_name_', step_ids, ids=str)
-def step_function_wrapper(________step_name_, request, *args, **kwargs):
-    # here we create an execution monitor on first step 
-    # by calling f(*args, **kwargs) and saving the resulting generator,
-    # and we reuse the same generator for subsequent steps
-    ...
-``` 
-
-The function wrapper is created using the excellent [`decorator`](https://github.com/micheles/decorator) library, so all marks that exist on it are kept in the process, as well as its name and signature. Therefore `@test_steps` should be compliant with all native pytest mechanisms. 
-
-For exemple you can use decorators such as `@pytest.mark.parametrize` before or after it in the function decoration order (depending on your desired resulting test order):
+Therefore `@test_steps` **should be compliant with all native pytest mechanisms.** For exemple you can use decorators such as `@pytest.mark.parametrize` before or after it in the function decoration order (depending on your desired resulting test order):
  
 ```python
 @test_steps('step_a', 'step_b')
@@ -252,86 +238,62 @@ collected 4 items
 ========================== 4 passed in 0.07 seconds ===========================
 ```
 
-You can also use fixtures as usual, but special care has to be taken about **function-scope fixtures**. Let's consider the following example:
+#### *fixtures*
+
+You can also use fixtures as usual, but **special care has to be taken about function-scope fixtures**. Let's consider the following example:
 
 ```python
-class MyFixture(object):
-    def __init__(self):
-        print("created new fixture %i" % id(self))
-        self.i = 0
-    
-    def call(self):
-        self.i += 1
-        print("%i called for the %i-th time" % (id(self), self.i))
+usage_counter = 0
 
 @pytest.fixture
 def my_fixture():
     """Simple function-scoped fixture that return a new instance each time"""
-    return MyFixture()
+    global usage_counter
+    usage_counter += 1
+    print("created my_fixture %s" % usage_counter)
+    return usage_counter
 
 @test_steps('step_a', 'step_b')
-def test_suite_fix(my_fixture):
+def test_suite_one_fixture_per_step(my_fixture):
     # Step A
     print("step a")
-    assert not False  # replace with your logic
-    my_fixture.call()
+    assert my_fixture == 1
     yield
 
     # Step B
     print("step b")
-    assert not False  # replace with your logic
-    my_fixture.call()
+    assert my_fixture == 2  # >> raises an AssertionError because my_fixture = 1 !
     yield
 ```
 
-Here, and that can be a bit misleading, `pytest` will call `my_fixture()` twice (because there are two pytest function executions, one for each step), but the second instance will never be passed to our code: instead, the `my_fixture` instance that was passed as argument in the first step will be used by all steps.
+Here, and that can be a bit misleading, 
 
-If we look at pytest results using the `-s` flag to see the prints, we can see it clearly:
+ - `pytest` will call `my_fixture()` twice, because there are two pytest function executions, one for each step. So we think that everything is good...
+ - ...however the second fixture instance is never be passed to our test code: instead, the `my_fixture` instance that was passed as argument in the first step will be used by all steps. Therefore we end up having a failure in the test furing step b.
 
-```
-(...)/test_example.py::test_suite_fix[step_a] <- <decorator-gen-3>
-created new fixture 60339872
-step a
-60339872 called for the 1-th time
-PASSED
-(...)/test_example.py::test_suite_fix[step_b] <- <decorator-gen-3>
-created new fixture 60341832
-step b
-60339872 called for the 2-th time
-PASSED
-```
+It is possible to circumvent this behaviour by declaring explicitly what you expect:
+ 
+ - if you would like to share fixture instances across steps, decorate your fixture with `@cross_steps_fixture`.
+ - if you would like each step to have its own fixture instance, decorate your fixture with `@one_fixture_per_step`.
 
-Indeed, the second fixture instance `60341832` is created but never used.
-
-It is possible to circumvent this behaviour, for the cases where you would like each step to have its own fixture instance. Simply decorate your fixture with `@one_per_step`:
+For example
 
 ```python
-from pytest_steps import one_per_step
+from pytest_steps import one_fixture_per_step
 
 @pytest.fixture
-@one_per_step
+@one_fixture_per_step
 def my_fixture():
     """Simple function-scoped fixture that return a new instance each time"""
-    return MyFixture()
+    global usage_counter
+    usage_counter += 1
+    return usage_counter
 ```
 
-Each step will now use its own fixture instance:
-
-```
-(...)/test_example.py::test_suite_fix[step_a] <- <decorator-gen-3>
-created new fixture 60456520
-step a
-60456520 called for the 1-th time
-PASSED
-(...)/test_example.py::test_suite_fix[step_b] <- <decorator-gen-3>
-new fixture 60567792
-step b
-60567792 called for the 1-th time
-PASSED
-```
+Each step will now use its own fixture instance and the test will succeed (instance 2 will be available at step b).
 
 !!! note ""
-    When a fixture is decorated with `@one_per_step`, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using `get_underlying_fixture(my_fixture)`.
+    When a fixture is decorated with `@one_fixture_per_step`, the object that is injected in your test function is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get the "true" inner wrapped object, you can do so using `get_underlying_fixture(my_fixture)`.
     
 ## 2. Usage - "explicit" mode
 
@@ -371,7 +333,7 @@ Note: as shown above, you can perform some reasoning about the step at hand in `
 !!! note "Custom parameter name"
     You might want another name than `test_step` to receive the current step. The `test_step_argname` argument can be used to change that name.
 
-#### Variants: other types of steps
+#### Variants: other types
 
 This mechanism is actually nothing more than a pytest parameter so it has to requirement on the `test_step` type. It is therefore possible to use other types, for example to declare the test steps as strings instead of function:
 
@@ -462,17 +424,47 @@ In "explicit" mode it is possible to call your test functions outside of pytest 
 
 An exemple can be found [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_manual_call.py).
 
-### e- Compliance with the other pytest mechanisms
+### e- Compliance with pytest
 
 You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test suite function, it should work as expected: a **new** `steps_data` object will be created everytime a new parameter/fixture combination is created, and that object will be **shared** across steps with the same parameters and fixtures.
 
-!!! info
-    If you wish to share data between steps but you **also** wish to collect the whole dataset at the end of the tests, do not use `steps_data`. Instead, use `results_bag` from [pytest-patterns](https://smarie.github.io/pytest-patterns), it will work similarly but you will be able to collect it when pytest session ends.
+Concerning fixtures, 
 
+ - by default all function-scoped fixtures will be "one per step" in this mode (you do not even need to use the `@one_fixture_per_step` decorator - although it does not hurt).
+ - if you wish a fixture to be shared across several steps, decorate it with `@cross_steps_fixture`.
 
-## 3. Combining with `pytest-harvest`
+For example
 
-### a- Enhancing the raw results table
+```python
+from pytest_steps import cross_steps_fixture
+
+usage_counter = 0
+
+@pytest.fixture
+@cross_steps_fixture
+def my_cool_fixture():
+    """A fixture that returns a new integer every time it is used."""
+    global usage_counter
+    usage_counter += 1
+    print("created my_fixture %s" % usage_counter)
+    return usage_counter
+
+def step_a():
+    print('hello')
+
+def step_b():
+    print('world')
+
+@test_steps(step_a, step_b)
+def test_params_mode(test_step, my_cool_fixture):
+    # assert that whatever the step, the fixture is the same (shared across steps)
+    assert my_cool_fixture == 1
+    test_step()
+```
+
+## 3. Usage with `pytest-harvest`
+
+### a- Enhancing the results df
 
 You might already use [`pytest-harvest`](https://smarie.github.io/python-pytest-harvest/) to turn your tests into functional benchmarks. When you combine it with `pytest_steps` you end up with one row in the synthesis table **per step**. For example:
 
@@ -489,7 +481,7 @@ You might already use [`pytest-harvest`](https://smarie.github.io/python-pytest-
 
 You might wish to use the provided `handle_steps_in_results_df` utility method to replace the index with a 2-level multiindex (test id without step, step id).
 
-### b- Pivoting results table
+### b- Pivoting the results df
 
 If you prefer to see one row per test and the step details in columns, this package also provides *NEW* default `[module/session]_results_df_steps_pivoted` fixtures to directly get the pivoted version ; and a `pivot_steps_on_df` utility method to perform the pivot transform easily.
 

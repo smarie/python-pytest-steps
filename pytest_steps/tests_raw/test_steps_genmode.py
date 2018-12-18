@@ -1,5 +1,5 @@
 # META
-# {'passed': 13, 'skipped': 2, 'failed': 2}
+# {'passed': 15, 'skipped': 2, 'failed': 2}
 # END META
 import pytest
 
@@ -119,21 +119,47 @@ class MyFixture(object):
 
 @pytest.fixture
 @one_fixture_per_step
-def my_fixture():
+def my_fixture2():
     """Simple function-scoped fixture that return a new instance each time"""
     return MyFixture()
 
 
 @test_steps('step_a', 'step_b')
-def test_suite_fixture(my_fixture, request):
+def test_suite_one_fixture_per_step1(my_fixture2, request):
     # Step A
     print("step a")
     assert not False  # replace with your logic
-    my_fixture.call()
+    my_fixture2.call()
     yield
 
     # Step B
     print("step b")
     assert not False  # replace with your logic
-    my_fixture.call()
+    my_fixture2.call()
+    yield
+
+
+usage_counter = 0
+
+
+@pytest.fixture
+@one_fixture_per_step
+def my_fixture():
+    """Simple function-scoped fixture that return a new instance each time"""
+    global usage_counter
+    usage_counter += 1
+    print("created my_fixture %s" % usage_counter)
+    return usage_counter
+
+
+@test_steps('step_a', 'step_b')
+def test_suite_one_fixture_per_step2(my_fixture):
+    # Step A
+    print("step a")
+    assert my_fixture == 1
+    yield
+
+    # Step B
+    print("step b")
+    assert my_fixture == 2
     yield

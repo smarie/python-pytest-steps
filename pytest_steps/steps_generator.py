@@ -152,7 +152,8 @@ def get_underlying_fixture(rfw):
 
 def one_fixture_per_step(*args):
     """
-    A decorator for a function-scoped fixture so that it works well with generator-mode test functions.
+    A decorator for a function-scoped fixture so that it works well with generator-mode test functions. You do not have
+    to use it in parametrizer mode, although it does not hurt.
 
     By default if you do not use this decorator but use the fixture in a generator-mode test function, only the
     fixture created for the first step will be injected in your test function, and all subsequent steps will see that
@@ -171,12 +172,17 @@ def one_fixture_per_step(*args):
         return random()
     ```
 
+    Note: When a fixture is decorated with `@one_fixture_per_step`, the object that is injected in your test function
+    is a transparent proxy of the fixture, so it behaves exactly like the fixture. If for some reason you want to get
+    the "true" inner wrapped object, you can do so using `get_underlying_fixture(my_fixture)`.
     :return:
     """
     if len(args) == 1 and callable(args[0]):
         return one_fixture_per_step_decorate(args[0])
-    else:
+    elif len(args) == 0:
         return one_fixture_per_step_decorate
+    else:
+        raise ValueError("@one_fixture_per_step accepts no argument")
 
 
 one_per_step = one_fixture_per_step
