@@ -460,6 +460,8 @@ def step_b(steps_data):
 
 In "explicit" mode it is possible to call your test functions outside of pytest runners, exactly the same way [we saw in generator mode](#d-calling-decorated-functions-manually).
 
+An exemple can be found [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_manual_call.py).
+
 ### e- Compliance with the other pytest mechanisms
 
 You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test suite function, it should work as expected: a **new** `steps_data` object will be created everytime a new parameter/fixture combination is created, and that object will be **shared** across steps with the same parameters and fixtures.
