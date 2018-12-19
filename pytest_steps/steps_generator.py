@@ -23,7 +23,7 @@ except ImportError:
 
 import pytest
 
-from pytest_steps.steps_common import create_pytest_param_str_id, get_pytest_node_hash_id
+from pytest_steps.steps_common import create_pytest_param_str_id, get_pytest_node_hash_id, get_scope
 from pytest_steps.decorator_hack import my_decorate
 
 
@@ -192,26 +192,28 @@ one_per_step = one_fixture_per_step
 def one_fixture_per_step_decorate(fixture_fun):
     """ Implementation of the @one_fixture_per_step decorator, for manual decoration"""
 
-    if not isgeneratorfunction(fixture_fun):
-        def _steps_aware_wrapper(f, *args, **kwargs):
-            """
+    def _check_scope(request):
+        scope = get_scope(request)
+        if scope != 'function':
+            # session- or module-scope
+            raise Exception("The `@one_fixture_per_step` decorator is only useful for function-scope fixtures. `%s`"
+                            " seems to have scope='%s'. Consider removing `@one_fixture_per_step` or changing "
+                            "the scope to 'function'." % (fixture_fun, scope))
 
-            :return:
-            """
+    if not isgeneratorfunction(fixture_fun):
+        def _steps_aware_wrapper(f, request, *args, **kwargs):
+            _check_scope(request)
             res = f(*args, **kwargs)
             return _OnePerStepFixtureProxy(res)
     else:
-        def _steps_aware_wrapper(f, *args, **kwargs):
-            """
-
-            :return:
-            """
+        def _steps_aware_wrapper(f, request, *args, **kwargs):
+            _check_scope(request)
             gen = f(*args, **kwargs)
             res = next(gen)
             yield _OnePerStepFixtureProxy(res)
             next(gen)
 
-    _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper)
+    _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper, additional_args=('request', ))
     return _steps_aware_decorated_function
 
 

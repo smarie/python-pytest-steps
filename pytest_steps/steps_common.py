@@ -255,3 +255,17 @@ def get_fixture_or_param_value(request, fixture_or_param_name):
     except AttributeError:
         # Pytest 3-
         return request.getfuncargvalue(fixture_or_param_name)
+
+
+def get_scope(request):
+    """
+    Utility method to return the scope of a pytest request
+    :param request:
+    :return:
+    """
+    if request.node is request.session:
+        return 'session'
+    elif hasattr(request.node, 'function'):
+        return 'function'
+    else:
+        return 'module'

@@ -1,7 +1,7 @@
 from inspect import isgeneratorfunction
 
 from pytest_steps.decorator_hack import my_decorate
-from pytest_steps.steps_common import get_pytest_node_hash_id
+from pytest_steps.steps_common import get_pytest_node_hash_id, get_scope
 from pytest_steps.steps_generator import get_generator_decorator, GENERATOR_MODE_STEP_ARGNAME
 from pytest_steps.steps_parametrizer import get_parametrize_decorator
 
@@ -118,11 +118,28 @@ def cross_steps_fixture_decorate(fixture_fun,
     """
     ref_dct = dict()
 
-    if not isgeneratorfunction(fixture_fun):
-        def _steps_aware_wrapper(f, request, *args, **kwargs):
+    def _init_and_check(request):
+        """
+        Checks that the current request is not session but a specific node.
+        :param request:
+        :return:
+        """
+        scope = get_scope(request)
+        if scope == 'function':
+            # function-scope: ok
             id_without_steps = get_pytest_node_hash_id(request.node,
                                                        params_to_ignore=_get_step_param_names_or_default(
-                                                           step_param_names))
+                                                       step_param_names))
+            return id_without_steps
+        else:
+            # session- or module-scope
+            raise Exception("The `@cross_steps_fixture` decorator is only useful for function-scope fixtures. `%s`"
+                            " seems to have scope='%s'. Consider removing `@cross_steps_fixture` or changing "
+                            "the scope to 'function'." % (fixture_fun, scope))
+
+    if not isgeneratorfunction(fixture_fun):
+        def _steps_aware_wrapper(f, request, *args, **kwargs):
+            id_without_steps = _init_and_check(request)
             try:
                 # already available: this is a subsequent step.
                 return ref_dct[id_without_steps]
@@ -133,13 +150,7 @@ def cross_steps_fixture_decorate(fixture_fun,
                 return res
     else:
         def _steps_aware_wrapper(f, request, *args, **kwargs):
-            """
-
-            :return:
-            """
-            id_without_steps = get_pytest_node_hash_id(request.node,
-                                                       params_to_ignore=_get_step_param_names_or_default(
-                                                           step_param_names))
+            id_without_steps = _init_and_check(request)
             try:
                 # already available: this is a subsequent step.
                 yield ref_dct[id_without_steps]
