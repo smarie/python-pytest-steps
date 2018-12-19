@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.5.1 - Bug fix and exceptions improvement
+
+We now detect that `@cross_step_fixture` or `@one_fixture_per_step` is applied on a fixture with the wrong scope, and raise a much more readable exception. Fixes [#25](https://github.com/smarie/python-pytest-steps/issues/25).
+
+Improved `pivot_steps_on_df` so that we can use a filter on it, and so that only cross-step fixtures are used in the default cross-step columns. Fixes [#26](https://github.com/smarie/python-pytest-steps/issues/26)
+
 ### 1.5.0 - New `@cross_steps_fixture` decorator
 
 `@one_per_step` renamed `@one_fixture_per_step` for clarity. Old alias will remain across at least one minor version.
