@@ -6,7 +6,7 @@
 
 !!! success "New 'generator' style is there, [check it out](#1-usage-generator-mode) !"
 
-!!! success "New `pytest-harvest` compatibility fixtures, [check them out](#3-combining-with-pytest-harvest) !"
+!!! success "New `pytest-harvest` compatibility fixtures, [check them out](#3-usage-with-pytest-harvest) !"
 
 Did you ever want to organize your test is incremental steps, for example to improve readability in case of failure ? Or to have some optional steps, executing only conditionally to previous steps' results?
 
