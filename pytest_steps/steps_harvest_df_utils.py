@@ -1,5 +1,5 @@
 # import pandas as pd  not needed so do not import it
-
+from pytest_steps import CROSS_STEPS_MARK
 from pytest_steps.steps_harvest import _get_step_param_names_or_default, get_all_pytest_param_names_except_step_id, \
     remove_step_from_test_id
 from pytest_harvest import get_all_pytest_fixture_names
@@ -12,8 +12,9 @@ except ImportError:
 
 def pivot_steps_on_df(results_df,
                       pytest_session=None,
-                      cross_steps_columns=None,  # type: List[str]
-                      error_if_not_present=True  # type: bool
+                      pytest_session_filter=None,  # type: Any
+                      cross_steps_columns=None,    # type: List[str]
+                      error_if_not_present=True    # type: bool
                       ):
     """
     Pivots the dataframe so that there is one row per pytest_obj[params except step id] containing all steps info.
@@ -21,8 +22,11 @@ def pivot_steps_on_df(results_df,
     (`results_df.index.names` should be set). The test id should be independent on the step id.
 
     :param results_df: a synthesis dataframe created by `pytest-harvest`.
-    :param pytest_session: If this is provided, the cross_steps_columns will be infered from the pytest session
+    :param pytest_session: If this is provided, the cross_steps_columns will be inferred from the pytest session
         information. (only one of pytest_session of cross_steps_columns should be provided).
+    :param pytest_session_filter: if this is provided, the cross_steps_columns will be better inferred from the pytest
+        session information, by only using the filtered elements. This has the same behaviour than `pytest-harvest`
+        filters.
     :param cross_steps_columns: a list of columns in the dataframe that are stable across steps. Provide this only if
         the pytest session is not provided.
     :param error_if_not_present: a boolean (default True) indicating if the function should raise an error if a name
@@ -37,8 +41,8 @@ def pivot_steps_on_df(results_df,
     if pytest_session is not None:
         # Gather all names of columns that we know are cross-steps
         pytest_other_names = ['pytest_obj']
-        param_names = get_all_pytest_param_names_except_step_id(pytest_session)
-        fixture_names = get_all_pytest_fixture_names(pytest_session)
+        param_names = get_all_pytest_param_names_except_step_id(pytest_session, filter=pytest_session_filter)
+        fixture_names = get_all_cross_steps_fixture_names(pytest_session, filter=pytest_session_filter)
         cross_steps_columns = pytest_other_names + param_names + fixture_names
         error_if_not_present = False
 
@@ -242,3 +246,27 @@ def handle_steps_in_results_df(results_df,
     # return
     if not inplace:
         return results_df
+
+
+def get_all_cross_steps_fixture_names(pytest_session, filter=None):
+    """
+    Returns a list of all fixtures used in the session, filtered so as to only use
+    :param pytest_session:
+    :return:
+    """
+    fixture_names = get_all_pytest_fixture_names(pytest_session,
+                                                 filter=filter)
+    returned_set = set()
+    for name in fixture_names:
+        all_fixtures = pytest_session._fixturemanager._arg2fixturedefs[name]
+
+        for f in all_fixtures:
+            # get the fixture function
+            fixture_function = f.func
+
+            # if it is cross-steps, add its name
+            if hasattr(fixture_function, CROSS_STEPS_MARK):
+                returned_set.add(name)
+                break
+
+    return list(returned_set)

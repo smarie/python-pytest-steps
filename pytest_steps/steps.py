@@ -102,6 +102,9 @@ def cross_steps_fixture(step_param_names):
         return cross_steps_fixture_decorate
 
 
+CROSS_STEPS_MARK = 'pytest_steps__is_cross_steps'
+
+
 def cross_steps_fixture_decorate(fixture_fun,
                                  step_param_names=None):
     """
@@ -149,6 +152,8 @@ def cross_steps_fixture_decorate(fixture_fun,
                 next(gen)
 
     _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper, additional_args=('request',))
+    # Tag the function as being "cross-step" for future usage
+    setattr(_steps_aware_decorated_function, CROSS_STEPS_MARK, True)
     return _steps_aware_decorated_function
 
 
