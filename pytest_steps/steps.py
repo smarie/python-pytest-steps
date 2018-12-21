@@ -160,6 +160,7 @@ def cross_steps_fixture_decorate(fixture_fun,
                 res = next(gen)
                 ref_dct[id_without_steps] = res
                 yield res
+                # TODO this teardown hook should actually be executed after all steps...
                 next(gen)
 
     _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper, additional_args=('request',))
