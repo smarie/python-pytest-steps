@@ -1,8 +1,10 @@
-# import pandas as pd  not needed so do not import it
+# WARNING do not import pandas here: it should remain optional
+# WARNING do not import pytest-harvest here: it should remain optional
+import six
+
 from pytest_steps import CROSS_STEPS_MARK
 from pytest_steps.steps_harvest import _get_step_param_names_or_default, get_all_pytest_param_names_except_step_id, \
     remove_step_from_test_id
-from pytest_harvest import get_all_pytest_fixture_names
 
 try:  # type hints for python 3.5+
     from typing import List
@@ -254,19 +256,25 @@ def get_all_cross_steps_fixture_names(pytest_session, filter=None):
     :param pytest_session:
     :return:
     """
-    fixture_names = get_all_pytest_fixture_names(pytest_session,
-                                                 filter=filter)
-    returned_set = set()
-    for name in fixture_names:
-        all_fixtures = pytest_session._fixturemanager._arg2fixturedefs[name]
+    try:
+        from pytest_harvest import get_all_pytest_fixture_names
+        fixture_names = get_all_pytest_fixture_names(pytest_session,
+                                                     filter=filter)
+        returned_set = set()
+        for name in fixture_names:
+            all_fixtures = pytest_session._fixturemanager._arg2fixturedefs[name]
 
-        for f in all_fixtures:
-            # get the fixture function
-            fixture_function = f.func
+            for f in all_fixtures:
+                # get the fixture function
+                fixture_function = f.func
 
-            # if it is cross-steps, add its name
-            if hasattr(fixture_function, CROSS_STEPS_MARK):
-                returned_set.add(name)
-                break
+                # if it is cross-steps, add its name
+                if hasattr(fixture_function, CROSS_STEPS_MARK):
+                    returned_set.add(name)
+                    break
 
-    return list(returned_set)
+        return list(returned_set)
+
+    except ImportError as e:
+        six.raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
+                                   "`get_all_cross_steps_fixture_names`"), e)
