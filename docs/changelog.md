@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.5.2 - Bug fix
+
+`pytest_harvest` is not anymore required for install. Fixed [#28](https://github.com/smarie/python-pytest-steps/issues/28).
+
 ### 1.5.1 - Bug fix and exceptions improvement
 
 We now detect that `@cross_step_fixture` or `@one_fixture_per_step` is applied on a fixture with the wrong scope, and raise a much more readable exception. Fixes [#25](https://github.com/smarie/python-pytest-steps/issues/25).
