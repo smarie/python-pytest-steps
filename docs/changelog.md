@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.5.4 - Bug fix
+
+The test step list is now correctly taken into account when a decorated function is called manually. Fixed [#30](https://github.com/smarie/python-pytest-steps/issues/30).
+
 ### 1.5.3 - Bug fix
 
 Fixed plugin initialization error when `pytest_harvest` is not present. Fixed [#29](https://github.com/smarie/python-pytest-steps/issues/29).
