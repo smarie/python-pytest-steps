@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.5.3 - Bug fix
+
+Fixed plugin initialization error when `pytest_harvest` is not present. Fixed [#29](https://github.com/smarie/python-pytest-steps/issues/29).
+
 ### 1.5.2 - Bug fix
 
 `pytest_harvest` is not anymore required for install. Fixed [#28](https://github.com/smarie/python-pytest-steps/issues/28).
