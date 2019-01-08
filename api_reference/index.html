@@ -658,9 +658,24 @@
 <h3 id="cross_steps_fixture"><code>@cross_steps_fixture</code><a class="headerlink" href="#cross_steps_fixture" title="Permanent link">&para;</a></h3>
 <p>A decorator for a function-scoped fixture so that it is not called for each step, but only once for all steps.</p>
 <p>Decorating your fixture with <code>@cross_steps_fixture</code> tells <code>@test_steps</code> to detect when the fixture function is called for the first step, to cache that first step instance, and to reuse it instead of calling your fixture function for subsequent steps. This results in all steps (with the same other parameters) using the same fixture instance.</p>
-<p>It is recommended that you put this decorator as the second decorator, right after <code>@pytest.fixture</code>:</p>
+<p>Everything that is placed <strong>below</strong> this decorator will be called only once for all steps. For example if you use it in combination with <code>@saved_fixture</code> from <code>pytest-harvest</code> you will get the two possible behaviours below depending on the order of the decorators:</p>
+<ul>
+<li>Case A (recommended): <code>@saved_fixture</code> will be executed for <em>all</em> steps, and the saved object will be the same for all steps (since it will be cached by <code>@cross_steps_fixture</code>)</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nd">@pytest.fixture</span>
+<span class="nd">@saved_fixture</span>
+<span class="nd">@cross_steps_fixture</span>
+<span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">random</span><span class="p">()</span>
+</pre></div>
+
+
+<ul>
+<li>Case B: <code>@saved_fixture</code> will only be called for the first step. Indeed for subsequent steps, <code>@cross_steps_fixture</code> will directly return and prevent the underlying functions to be called. This is not a very interesting behaviour in this case, but with other decorators it might be interesting.</li>
+</ul>
 <div class="codehilite"><pre><span></span><span class="nd">@pytest.fixture</span>
 <span class="nd">@cross_steps_fixture</span>
+<span class="nd">@saved_fixture</span>
 <span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">random</span><span class="p">()</span>
 </pre></div>
