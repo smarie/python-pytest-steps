@@ -79,9 +79,10 @@ def cross_steps_fixture(step_param_names):
     instance.
 
     Everything that is placed **below** this decorator will be called only once for all steps. For example if you use
-    @saved_fixture from pytest-harvest you will get the two possible behaviours below:
+    it in combination with `@saved_fixture` from `pytest-harvest` you will get the two possible behaviours below
+    depending on the order of the decorators:
 
-    Case A (recommended):
+    Order A (recommended):
     --------------------
     ```python
     @pytest.fixture
@@ -91,11 +92,11 @@ def cross_steps_fixture(step_param_names):
         return random()
     ```
 
-    @saved_fixture will be executed for *all* steps, and the saved object will be the same for all steps (since it will
-    be cached by @cross_steps_fixture)
+    `@saved_fixture` will be executed for *all* steps, and the saved object will be the same for all steps (since it
+    will be cached by `@cross_steps_fixture`)
 
 
-    Case B:
+    Order B:
     -------
     ```python
     @pytest.fixture
@@ -105,7 +106,7 @@ def cross_steps_fixture(step_param_names):
         return random()
     ```
 
-    @saved_fixture will only be called for the first step. Indeed for subsequent steps, `@cross_steps_fixture`
+    `@saved_fixture` will only be called for the first step. Indeed for subsequent steps, `@cross_steps_fixture`
     will directly return and prevent the underlying functions to be called. This is not a very interesting behaviour in
     this case, but with other decorators it might be interesting.
 

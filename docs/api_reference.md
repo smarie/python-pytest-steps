@@ -35,15 +35,28 @@ A decorator for a function-scoped fixture so that it is not called for each step
 
 Decorating your fixture with `@cross_steps_fixture` tells `@test_steps` to detect when the fixture function is called for the first step, to cache that first step instance, and to reuse it instead of calling your fixture function for subsequent steps. This results in all steps (with the same other parameters) using the same fixture instance.
 
-It is recommended that you put this decorator as the second decorator, right after `@pytest.fixture`:
+Everything that is placed **below** this decorator will be called only once for all steps. For example if you use it in combination with `@saved_fixture` from `pytest-harvest` you will get the two possible behaviours below depending on the order of the decorators:
+
+ - Case A (recommended): `@saved_fixture` will be executed for *all* steps, and the saved object will be the same for all steps (since it will be cached by `@cross_steps_fixture`)
 
 ```python
 @pytest.fixture
+@saved_fixture
 @cross_steps_fixture
 def my_cool_fixture():
     return random()
 ```
 
+ - Case B: `@saved_fixture` will only be called for the first step. Indeed for subsequent steps, `@cross_steps_fixture` will directly return and prevent the underlying functions to be called. This is not a very interesting behaviour in this case, but with other decorators it might be interesting.
+
+```python
+@pytest.fixture
+@cross_steps_fixture
+@saved_fixture
+def my_cool_fixture():
+    return random()
+```
+    
 If you use custom test step parameter names and not the default, you will have to provide an exhaustive list in the `step_param_names` argument.
 
 
