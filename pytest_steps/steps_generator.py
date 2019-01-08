@@ -452,7 +452,7 @@ def get_generator_decorator(steps  # type: Iterable[Any]
                     if not isinstance(step_name, (list, tuple)):
                         step_names = [create_pytest_param_str_id(step_name)]
                     else:
-                        step_names = [create_pytest_param_str_id(f) for f in steps]
+                        step_names = [create_pytest_param_str_id(f) for f in step_name]
                 steps_monitor = StepsMonitor(step_ids, test_func, *args, **kwargs)
                 for i, (step_name, ref_step_name) in enumerate(zip(step_names, step_ids)):
                     if step_name != ref_step_name:
