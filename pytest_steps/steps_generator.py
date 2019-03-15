@@ -315,7 +315,7 @@ class StepsMonitor(object):
                 elif isinstance(res.exec_result, OptionalStepException):
                     # An exception happened in the optional step. We can now raise it safely
                     # (raising it sooner would break the generator)
-                    raise six.reraise(res.exec_result.exc_type, res.exec_result.exc_val, res.exec_result.tb)
+                    reraise(res.exec_result.exc_type, res.exec_result.exc_val, res.exec_result.tb)
 
                 elif isinstance(res.exec_result, _DependentTestsNotRunException):
                     # This exception has been put here to declare that the optional step did not run because a
