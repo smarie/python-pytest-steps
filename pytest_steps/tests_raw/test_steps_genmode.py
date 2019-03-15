@@ -56,7 +56,7 @@ def test_suite_exception_on_mandatory_step():
 
     # Step B
     print("step b")
-    assert False  # replace with your logic
+    pytest.fail("Failed intentionally - this is normal")  # replace with your logic
     yield 'step_b'
 
     # Step C
@@ -77,7 +77,7 @@ def test_suite_optional_and_dependent_steps():
     # Step B
     with optional_step('step_b') as step_b:
         print("step b")
-        assert False
+        pytest.fail("Failed intentionally - this is normal")
     yield step_b
 
     # Step C depends on step B

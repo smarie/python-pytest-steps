@@ -11,6 +11,16 @@ except ImportError:
     from funcsigs import signature
 
 
+def get_failed_type():
+    try:
+        pytest.fail("")
+    except BaseException as e:
+        return type(e)
+
+
+Failed = get_failed_type()
+
+
 def step_a():
     """ Step a of the test """
 
@@ -24,7 +34,7 @@ def step_b():
 
     # perform this step
     print("step b")
-    assert False
+    pytest.fail("Failed intentionally - this is normal")
 
 
 @depends_on(step_a, step_b, fail_instead_of_skip=False)
@@ -54,12 +64,12 @@ def test_manual_call():
 
     # Then fill request with blanks
     test_suite_no_results(None, step_a)
-    with pytest.raises(AssertionError):
+    with pytest.raises(Failed):
         test_suite_no_results(None, step_b)
     test_suite_no_results(None, step_c)
 
     # Whole suite
-    with pytest.raises(AssertionError):
+    with pytest.raises(Failed):
         test_suite_no_results(None, None)
 
 
