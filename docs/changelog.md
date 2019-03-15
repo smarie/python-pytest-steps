@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.6.0 - Minor dependencies update
+
+Improved docstring for `@cross_steps_fixture`.
+Replaced `decorator` dependency + internal hack with proper usage of `makefun`.
+
 ### 1.5.4 - Bug fix
 
 The test step list is now correctly taken into account when a decorated function is called manually. Fixed [#30](https://github.com/smarie/python-pytest-steps/issues/30).
@@ -40,7 +45,7 @@ Minor:
 When steps are present, we now offer `session_results_df_steps_pivoted` and `module_results_df_steps_pivoted` default fixtures, to align with `pytest-harvest` >= 1.1 default fixtures `session_results_df` and `module_results_df`. Fixes [#23](https://github.com/smarie/python-pytest-steps/issues/23).
 
 Improved API to manipulate `pytest-harvest` results objects in presence of steps:
- - Renamed `handle_steps_in_synthesis_dct` into `handle_steps_in_results_dct` (old alias is kept for this version). Renamed parameter `raise_if_no_step` to `raise_if_one_test_without_step_id`. Added a parameter `keep_orig_id`, by default (True) the original test id is kept for reference. Another parameter `no_steps_policy` allows users to make the method transparent if no steps are found.
+ - Renamed `handle_steps_in_synthesis_dct` into `handle_steps_in_results_dct` (old alias is kept for this version). Renamed parameter `raise_if_no_step` to `raise_if_one_test_without_step_id`. Added a parameter `keep_orig_id`, by default (True) the original test id is kept for reference. Another parameter `no_steps_policy` allows users to create_function the method transparent if no steps are found.
  - new method `handle_steps_in_results_df` to perform the same things than `handle_steps_in_results_dct` but directly on the synthesis dataframe. The parameters are almost the same.
  - New method `flatten_multilevel_columns` to diretly apply `get_flattened_multilevel_columns` on the columns of a dataframe
  - `pivot_steps_on_df` now has the ability to detect parameter and fixture names from the provided pytest session, so as not to pivot them (they should be stable across steps). It also provides an `error_if_not_present` parameter
