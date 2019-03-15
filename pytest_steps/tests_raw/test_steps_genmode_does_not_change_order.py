@@ -1,5 +1,5 @@
 # META
-# {'passed': 4, 'skipped': 0, 'failed': 0}
+# {'passed': 5, 'skipped': 0, 'failed': 0}
 # END META
 from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture, saved_fixture
 
@@ -35,9 +35,10 @@ def test_synthesis(request):
                                             durations_in_ms=True, test_id_format='function')
 
     # incomplete are not here so length should be 1
-    assert len(results_dct) == 1
-    it = results_dct.popitem()
-    assert it[1]['pytest_obj'] == test_basic_b
+    assert len(results_dct) == 2
+    it = list(results_dct.values())
+    assert it[0]['pytest_obj'] == test_basic_b
+    assert it[1]['pytest_obj'] == test_basic_gen_b
 
 
 @test_steps('unique')
