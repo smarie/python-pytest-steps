@@ -6,7 +6,6 @@ Create step-wise / incremental tests in `pytest`.
 
 [![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-pytest-steps/) [![PyPI](https://img.shields.io/pypi/v/pytest-steps.svg)](https://pypi.python.org/pypi/pytest-steps/) [![Downloads](https://pepy.tech/badge/pytest-steps)](https://pepy.tech/project/pytest-steps) [![Downloads per week](https://pepy.tech/badge/pytest-steps/week)](https://pepy.tech/project/pytest-steps) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-pytest-steps.svg)](https://github.com/smarie/python-pytest-steps/stargazers)
 
-
 **This is the readme for developers.** The documentation for users is available here: [https://smarie.github.io/python-pytest-steps/](https://smarie.github.io/python-pytest-steps/)
 
 ## Want to contribute ?
