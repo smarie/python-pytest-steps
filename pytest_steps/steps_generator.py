@@ -1,7 +1,7 @@
 from collections import Iterable as It
 
-import six
-from six import raise_from
+from makefun import add_signature_parameters, wraps
+from six import raise_from, reraise
 from wrapt import ObjectProxy
 
 # try:  # python 3.2+
@@ -10,9 +10,9 @@ from wrapt import ObjectProxy
 #     from functools32 import lru_cache
 
 try:  # python 3.3+
-    from inspect import signature
+    from inspect import signature, Parameter
 except ImportError:
-    from funcsigs import signature
+    from funcsigs import signature, Parameter
 
 from inspect import isgeneratorfunction
 
@@ -24,7 +24,6 @@ except ImportError:
 import pytest
 
 from pytest_steps.steps_common import create_pytest_param_str_id, get_pytest_node_hash_id, get_scope
-from pytest_steps.decorator_hack import my_decorate
 
 
 class ExceptionHook(object):
@@ -200,20 +199,31 @@ def one_fixture_per_step_decorate(fixture_fun):
                             " seems to have scope='%s'. Consider removing `@one_fixture_per_step` or changing "
                             "the scope to 'function'." % (fixture_fun, scope))
 
+    # We will expose a new signature with additional arguments
+    orig_sig = signature(fixture_fun)
+    func_needs_request = 'request' in orig_sig.parameters
+    if not func_needs_request:
+        new_sig = add_signature_parameters(orig_sig, first=Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD))
+    else:
+        new_sig = orig_sig
+
     if not isgeneratorfunction(fixture_fun):
-        def _steps_aware_wrapper(f, request, *args, **kwargs):
+        @wraps(fixture_fun, new_sig=new_sig)
+        def _steps_aware_decorated_function(*args, **kwargs):
+            request = kwargs['request'] if func_needs_request else kwargs.pop('request')
             _check_scope(request)
-            res = f(*args, **kwargs)
+            res = fixture_fun(*args, **kwargs)
             return _OnePerStepFixtureProxy(res)
     else:
-        def _steps_aware_wrapper(f, request, *args, **kwargs):
+        @wraps(fixture_fun, new_sig=new_sig)
+        def _steps_aware_decorated_function(*args, **kwargs):
+            request = kwargs['request'] if func_needs_request else kwargs.pop('request')
             _check_scope(request)
-            gen = f(*args, **kwargs)
+            gen = fixture_fun(*args, **kwargs)
             res = next(gen)
             yield _OnePerStepFixtureProxy(res)
             next(gen)
 
-    _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper, additional_args=('request', ))
     return _steps_aware_decorated_function
 
 
@@ -437,8 +447,18 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         all_monitors = StepMonitorsContainer(test_func, step_ids)
 
         # Create the function wrapper.
+        # We will expose a new signature with additional 'request' arguments if needed, and the test step
+        orig_sig = signature(test_func)
+        func_needs_request = 'request' in orig_sig.parameters
+        additional_params = ((Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD), ) if not func_needs_request
+                             else ()) + (Parameter(test_step_argname, kind=Parameter.POSITIONAL_OR_KEYWORD), )
+        new_sig = add_signature_parameters(orig_sig, first=additional_params)
+
         # -- first create the logic
-        def step_function_wrapper(f, request, step_name, *args, **kwargs):
+        @wraps(test_func, new_sig=new_sig)
+        def wrapped_test_function(*args, **kwargs):
+            step_name = kwargs.pop(test_step_argname)
+            request = kwargs['request'] if func_needs_request else kwargs.pop('request')
             if request is None:
                 # we are manually called outside of pytest. let's execute all steps at nce
                 if step_name is None:
@@ -467,16 +487,14 @@ def get_generator_decorator(steps  # type: Iterable[Any]
                 # print("DEBUG - executing step %s" % step_name)
                 steps_monitor.execute(step_name, *args, **kwargs)
 
-        # decorate it so that its signature is the same than test_func, with just an additional argument for test step
-        # and if needed an additional argument for request
-        wrapped_test_function = my_decorate(test_func, step_function_wrapper,
-                                            additional_args=('request', test_step_argname))
+        # With this hack we will be ordered correctly by pytest https://github.com/pytest-dev/pytest/issues/4429
+        wrapped_test_function.place_as = test_func
 
         # Parametrize the wrapper function with the test step ids
         parametrizer = pytest.mark.parametrize(test_step_argname, step_ids, ids=str)
-        parametrized_step_function_wrapper = parametrizer(wrapped_test_function)
 
-        # finally return the parametrized wrapper
+        # finally apply parametrizer
+        parametrized_step_function_wrapper = parametrizer(wrapped_test_function)
         return parametrized_step_function_wrapper
 
     return steps_decorator

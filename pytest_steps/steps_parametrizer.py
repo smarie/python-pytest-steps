@@ -6,15 +6,14 @@ except ImportError:
     from functools32 import lru_cache
 
 try:  # python 3.3+
-    from inspect import signature
+    from inspect import signature, Parameter
 except ImportError:
-    from funcsigs import signature
+    from funcsigs import signature, Parameter
 
 from inspect import getmodule
+from makefun import wraps, add_signature_parameters, with_signature
 
 import pytest
-
-from pytest_steps.decorator_hack import my_decorate
 from pytest_steps.steps_common import create_pytest_param_str_id, get_fixture_or_param_value, get_pytest_node_hash_id
 
 
@@ -106,25 +105,37 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
         # Parametrize the function with the test steps
         parametrizer = pytest.mark.parametrize(test_step_argname, steps, ids=step_ids)
 
+        # We will expose a new signature with additional 'request' arguments if needed
+        orig_sig = signature(test_func)
+        func_needs_request = 'request' in orig_sig.parameters
+        if not func_needs_request:
+            new_sig = add_signature_parameters(orig_sig, first=Parameter('request',
+                                                                         kind=Parameter.POSITIONAL_OR_KEYWORD))
+        else:
+            new_sig = orig_sig
+
         # Finally, if there are some steps that are marked as having a dependency,
         use_dependency = any(hasattr(step, DEPENDS_ON_FIELD) for step in steps)
         if not use_dependency:
             # no dependencies: no need to do complex things
             # Create a light function wrapper that will allow for manual execution
-            def our_wrapper(f, request, *args, **kwargs):
+            @wraps(test_func, new_sig=new_sig)
+            def wrapped_test_function(*args, **kwargs):
+                request = kwargs['request'] if func_needs_request else kwargs.pop('request')
                 if request is None:
                     # manual call (maybe for pre-loading?), ability to execute several steps
-                    _execute_manually(f, s, test_step_argname, step_ids, steps, args, kwargs)
+                    _execute_manually(test_func, s, test_step_argname, step_ids, steps, args, kwargs)
                 else:
-                    return f(*args, **kwargs)
+                    return test_func(*args, **kwargs)
         else:
             # Create a test function wrapper that will replace the test steps with monitored ones before injecting them
-            def our_wrapper(f, request, *args, **kwargs):
+            @wraps(test_func, new_sig=new_sig)
+            def wrapped_test_function(*args, **kwargs):
                 """Executes the current step only if its dependencies are correct, and registers its execution result"""
-
+                request = kwargs['request'] if func_needs_request else kwargs.pop('request')
                 if request is None:
                     # manual call (maybe for pre-loading?), no dependency management, ability to execute several steps
-                    _execute_manually(f, s, test_step_argname, step_ids, steps, args, kwargs)
+                    _execute_manually(test_func, s, test_step_argname, step_ids, steps, args, kwargs)
                 else:
                     # (a) retrieve the "current step" function
                     current_step_fun = get_fixture_or_param_value(request, test_step_argname)
@@ -165,9 +176,10 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
 
                     return res
 
-        # wrap the test function and add the 'request' argument if needed
-        wrapped_test_function = my_decorate(test_func, our_wrapper, additional_args=('request', ))
+        # With this hack we will be ordered correctly by pytest https://github.com/pytest-dev/pytest/issues/4429
+        wrapped_test_function.place_as = test_func
 
+        # finally apply parametrizer
         wrapped_parametrized_test_function = parametrizer(wrapped_test_function)
         return wrapped_parametrized_test_function
 

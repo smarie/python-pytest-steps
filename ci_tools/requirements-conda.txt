@@ -5,7 +5,6 @@ pandoc
 pypandoc
 
 # --- to install
-decorator
 wrapt
 
 # --- to run the tests

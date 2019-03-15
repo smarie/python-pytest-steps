@@ -1,7 +1,8 @@
 from inspect import isgeneratorfunction
 from sys import version_info
 
-from pytest_steps.decorator_hack import my_decorate
+from makefun import add_signature_parameters, wraps, with_signature
+
 from pytest_steps.steps_common import get_pytest_node_hash_id, get_scope
 from pytest_steps.steps_generator import get_generator_decorator, GENERATOR_MODE_STEP_ARGNAME
 from pytest_steps.steps_parametrizer import get_parametrize_decorator
@@ -169,6 +170,15 @@ def cross_steps_fixture_decorate(fixture_fun,
     """
     ref_dct = dict()
 
+    # Create the function wrapper.
+    # We will expose a new signature with additional 'request' arguments if needed, and the test step
+    orig_sig = signature(fixture_fun)
+    func_needs_request = 'request' in orig_sig.parameters
+    if not func_needs_request:
+        new_sig = add_signature_parameters(orig_sig, first=Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD))
+    else:
+        new_sig = orig_sig
+
     def _init_and_check(request):
         """
         Checks that the current request is not session but a specific node.
@@ -189,32 +199,35 @@ def cross_steps_fixture_decorate(fixture_fun,
                             "the scope to 'function'." % (fixture_fun, scope))
 
     if not isgeneratorfunction(fixture_fun):
-        def _steps_aware_wrapper(f, request, *args, **kwargs):
+        @wraps(fixture_fun, new_sig=new_sig)
+        def _steps_aware_decorated_function(*args, **kwargs):
+            request = kwargs['request'] if func_needs_request else kwargs.pop('request')
             id_without_steps = _init_and_check(request)
             try:
                 # already available: this is a subsequent step.
                 return ref_dct[id_without_steps]
             except KeyError:
                 # not yet cached, this is probably the first step
-                res = f(*args, **kwargs)
+                res = fixture_fun(*args, **kwargs)
                 ref_dct[id_without_steps] = res
                 return res
     else:
-        def _steps_aware_wrapper(f, request, *args, **kwargs):
+        @wraps(fixture_fun, new_sig=new_sig)
+        def _steps_aware_decorated_function(*args, **kwargs):
+            request = kwargs['request'] if func_needs_request else kwargs.pop('request')
             id_without_steps = _init_and_check(request)
             try:
                 # already available: this is a subsequent step.
                 yield ref_dct[id_without_steps]
             except KeyError:
                 # not yet cached, this is probably the first step
-                gen = f(*args, **kwargs)
+                gen = fixture_fun(*args, **kwargs)
                 res = next(gen)
                 ref_dct[id_without_steps] = res
                 yield res
                 # TODO this teardown hook should actually be executed after all steps...
                 next(gen)
 
-    _steps_aware_decorated_function = my_decorate(fixture_fun, _steps_aware_wrapper, additional_args=('request',))
     # Tag the function as being "cross-step" for future usage
     setattr(_steps_aware_decorated_function, CROSS_STEPS_MARK, True)
     return _steps_aware_decorated_function
