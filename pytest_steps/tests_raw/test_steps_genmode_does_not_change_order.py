@@ -1,5 +1,5 @@
 # META
-# {'passed': 3, 'skipped': 0, 'failed': 0}
+# {'passed': 4, 'skipped': 0, 'failed': 0}
 # END META
 from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture, saved_fixture
 
@@ -9,15 +9,24 @@ from pytest_harvest import get_session_synthesis_dct, create_results_bag_fixture
 from pytest_steps import test_steps
 
 
-@test_steps('unique')  # -> ne passe pas devant en mode parametrizer
+@test_steps('unique')
 def test_basic_b(test_step):
     """Another test, to show how it appears in the results"""
     return
 
 
+@test_steps('unique')
+def test_basic_gen_b():
+    """Another test, to show how it appears in the results"""
+    yield
+
+
 def test_synthesis(request):
     """
-    Tests that this test runs last and the two others are available in the synthesis
+    Tests that this test runs in the right order (second)
+
+    This tests that we use correctly the pytest hack "fun.place_as = func"
+    See https://github.com/pytest-dev/pytest/issues/4429
     """
     # Get session synthesis
     # - filtered on the test function of interest
@@ -31,13 +40,13 @@ def test_synthesis(request):
     assert it[1]['pytest_obj'] == test_basic_b
 
 
-@test_steps('unique')  # -> ne passe pas devant en mode parametrizer
+@test_steps('unique')
 def test_basic_a(test_step):
     """Another test, to show how it appears in the results"""
     return
 
 
-@test_steps('unique')  # -> passe devant en mode generator
-def test_basic_gen():
+@test_steps('unique')
+def test_basic_gen_a():
     """Another test, to show how it appears in the results"""
     yield
