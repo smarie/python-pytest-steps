@@ -235,14 +235,8 @@ _FAIL_INSTEAD_OF_SKIP_DEFAULT = False
 
 # Python 3+: load the 'more explicit api' for `test_steps`
 if version_info >= (3, 0):
-    depends_on_full_sig = """
-def _depends_on(*steps,
-                fail_instead_of_skip: bool = _FAIL_INSTEAD_OF_SKIP_DEFAULT):
-    pass
-"""
-    exec(depends_on_full_sig, globals(), locals())
-    _depends_on = locals()['_depends_on']
-    new_sig = signature(_depends_on)
+    new_sig = """(*steps,
+                  fail_instead_of_skip: bool = _FAIL_INSTEAD_OF_SKIP_DEFAULT)"""
 else:
     new_sig = None
 

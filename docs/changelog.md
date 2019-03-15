@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.6.1 - Minor code improvements
+
+Made the python 3 signature patch more readable... for those users who will enter in the code while debugging.
+
 ### 1.6.0 - Minor dependencies update
 
 Improved docstring for `@cross_steps_fixture`.
