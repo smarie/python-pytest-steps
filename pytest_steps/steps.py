@@ -1,9 +1,16 @@
 from inspect import isgeneratorfunction
+from sys import version_info
 
 from pytest_steps.decorator_hack import my_decorate
 from pytest_steps.steps_common import get_pytest_node_hash_id, get_scope
 from pytest_steps.steps_generator import get_generator_decorator, GENERATOR_MODE_STEP_ARGNAME
 from pytest_steps.steps_parametrizer import get_parametrize_decorator
+
+
+try:  # python 3.3+
+    from inspect import signature, Parameter
+except ImportError:
+    from funcsigs import signature, Parameter
 
 
 TEST_STEP_MODE_AUTO = 'auto'
@@ -13,6 +20,25 @@ TEST_STEP_ARGNAME_DEFAULT = 'test_step'
 STEPS_DATA_HOLDER_NAME_DEFAULT = 'steps_data'
 
 
+# Python 3+: load the 'more explicit api' for `test_steps`
+if version_info >= (3, 0):
+
+    test_steps_full_sig = """
+def _test_steps(*steps,
+                mode: str = TEST_STEP_MODE_AUTO,
+                test_step_argname: str = TEST_STEP_ARGNAME_DEFAULT,
+                steps_data_holder_name: str = STEPS_DATA_HOLDER_NAME_DEFAULT):
+    pass
+
+"""
+    exec(test_steps_full_sig, globals(), locals())
+    _test_steps = locals()['_test_steps']
+    new_sig = signature(_test_steps)
+else:
+    new_sig = None
+
+
+@with_signature(new_sig)
 def test_steps(*steps, **kwargs):
     """
     Decorates a test function so as to automatically parametrize it with all steps listed as arguments.

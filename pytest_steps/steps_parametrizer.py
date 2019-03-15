@@ -1,3 +1,5 @@
+from sys import version_info
+
 try:  # python 3.2+
     from functools import lru_cache
 except ImportError:
@@ -219,6 +221,21 @@ DEPENDS_ON_FIELD = '__depends_on__'
 _FAIL_INSTEAD_OF_SKIP_DEFAULT = False
 
 
+# Python 3+: load the 'more explicit api' for `test_steps`
+if version_info >= (3, 0):
+    depends_on_full_sig = """
+def _depends_on(*steps,
+                fail_instead_of_skip: bool = _FAIL_INSTEAD_OF_SKIP_DEFAULT):
+    pass
+"""
+    exec(depends_on_full_sig, globals(), locals())
+    _depends_on = locals()['_depends_on']
+    new_sig = signature(_depends_on)
+else:
+    new_sig = None
+
+
+@with_signature(new_sig)
 def depends_on(*steps, **kwargs):
     """
     Decorates a test step object so as to automatically mark it as skipped (default) or failed if the dependency

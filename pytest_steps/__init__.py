@@ -1,24 +1,20 @@
-from sys import version_info as vi
-if vi >= (3, 0):
-    # Python 3+: load all the symbols with 'more explicit api'
-    from pytest_steps.steps_py3_api import test_steps, depends_on
-else:
-    from pytest_steps.steps import test_steps
-    from pytest_steps.steps_parametrizer import depends_on
-
-from pytest_steps.steps import cross_steps_fixture, CROSS_STEPS_MARK
-from pytest_steps.steps_generator import optional_step, one_fixture_per_step, one_per_step
-from pytest_steps.steps_parametrizer import StepsDataHolder
+from pytest_steps.steps import test_steps, cross_steps_fixture, CROSS_STEPS_MARK
+from pytest_steps.steps_generator import optional_step, one_fixture_per_step
+from pytest_steps.steps_parametrizer import StepsDataHolder, depends_on
 
 __all__ = [
     # the submodules
-    'steps', 'decorator_hack', 'steps_common', 'steps_generator', 'steps_parametrizer', 'steps_harvest',
+    'steps', 'steps_generator', 'steps_parametrizer', 'steps_harvest',
     'steps_harvest_df_utils',
     # all symbols imported above
+    # -- for fixtures
     'cross_steps_fixture', 'CROSS_STEPS_MARK',
+    # -- for tests
     'test_steps',
+    # ---- specific to parametrizer mode
     'StepsDataHolder', 'depends_on',
-    'optional_step', 'one_fixture_per_step', 'one_per_step',
+    # ---- specific to generator mode
+    'optional_step', 'one_fixture_per_step'
     ]
 
 try:
