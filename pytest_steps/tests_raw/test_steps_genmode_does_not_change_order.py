@@ -10,7 +10,7 @@ from pytest_steps import test_steps
 
 
 @test_steps('unique')  # -> ne passe pas devant en mode parametrizer
-def test_basic_a(test_step):
+def test_basic_b(test_step):
     """Another test, to show how it appears in the results"""
     return
 
@@ -25,8 +25,16 @@ def test_synthesis(request):
     results_dct = get_session_synthesis_dct(request.session, filter=test_synthesis.__module__,
                                             durations_in_ms=True, test_id_format='function')
 
-    # incomplete are not here so length should be 2
+    # incomplete are not here so length should be 1
     assert len(results_dct) == 1
+    it = results_dct.popitem()
+    assert it[1]['pytest_obj'] == test_basic_b
+
+
+@test_steps('unique')  # -> ne passe pas devant en mode parametrizer
+def test_basic_a(test_step):
+    """Another test, to show how it appears in the results"""
+    return
 
 
 @test_steps('unique')  # -> passe devant en mode generator
