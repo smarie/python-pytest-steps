@@ -39,7 +39,10 @@ This new mode may seem more natural and readable to non-pytest experts. However 
 Start with you favorite test function. There are two things to do, to break it down into steps:
 
  - decorate it with `@test_steps` to declare what are the steps that will be performed, as strings. 
- - insert as many `yield` statements in your function body as there are steps. The function should end with a `yield` (not `return`!). Code written after the last yield with not be executed. 
+ - insert as many `yield` statements in your function body as there are steps. The function should end with a `yield` (not `return`!). 
+ 
+ !!! note
+   Code written after the last yield will not be executed. 
 
 For example we define three steps:
 
