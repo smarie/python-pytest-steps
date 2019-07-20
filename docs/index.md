@@ -10,7 +10,7 @@
 
 !!! success "New `pytest-harvest` compatibility fixtures, [check them out](#3-usage-with-pytest-harvest) !"
 
-Did you ever want to organize your test is incremental steps, for example to improve readability in case of failure ? Or to have some optional steps, executing only conditionally to previous steps' results?
+Did you ever want to organize your test in incremental steps, for example to improve readability in case of failure ? Or to have some optional steps, executing only conditionally to previous steps' results?
 
 `pytest-steps` leverages `pytest` and its great `@pytest.mark.parametrize` and `@pytest.fixture` decorators, so that you can **create incremental tests with steps** without having to think about the pytest fixture/parametrize pattern that has to be implemented for your particular case. 
 
