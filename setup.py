@@ -11,10 +11,10 @@ from setuptools import setup, find_packages
 here = path.abspath(path.dirname(__file__))
 
 # *************** Dependencies *********
-INSTALL_REQUIRES = ['makefun>=1.5', 'wrapt', 'functools32;python_version<"3.2"', 'funcsigs;python_version<"3.3"']
+INSTALL_REQUIRES = ['makefun>=1.5', 'wrapt', 'functools32;python_version<"3.2"', 'funcsigs;python_version<"3.3"', 'six']
 DEPENDENCY_LINKS = []
-SETUP_REQUIRES = ['pytest-runner', 'setuptools_scm', 'pypandoc', 'pandoc']
-TESTS_REQUIRE = ['pytest', 'pytest-logging', 'pytest-cov', 'pytest-harvest>=1.4.0']
+SETUP_REQUIRES = ['pytest-runner', 'setuptools_scm', 'pypandoc', 'pandoc', 'six']
+TESTS_REQUIRE = ['pytest', 'pytest-logging', 'pytest-cov', 'pytest-harvest>=1.4.0', 'pytest-cases']
 EXTRAS_REQUIRE = {}
 
 # simple check

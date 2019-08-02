@@ -1,8 +1,12 @@
 # --- to execute setup.py whatever the goal
+setuptools_scm
+six
 pytest-runner
+pypandoc
 
 # --- to install
 makefun>=1.5
+wrapt
 
 # --- to generate the reports (see scripts in ci_tools, called by .travis)
 pytest-html$PYTEST_HTML_VERSION
@@ -12,8 +16,10 @@ xunitparser
 pytest-faulthandler
 tabulate
 pytest-harvest>=1
+pytest-cases
 pytest$PYTEST_VERSION
 pytest-logging  # ==2015.11.4
+requests
 
 # --- to generate the reports (see scripts in ci_tools, called by .travis)
 pytest-cov==2.6.0  # after 2.6.1 it requires pytest 3.6

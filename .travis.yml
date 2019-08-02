@@ -56,6 +56,7 @@ before_install:
   - conda list
 
 install:
+  - pip install six setuptools_scm  # on python 2 this needs to be installed beforehand
   - python ci_tools/py_install.py conda ci_tools/requirements-conda.txt
   - python ci_tools/py_install.py pip ci_tools/requirements-pip.txt
   # travis-specific installs
