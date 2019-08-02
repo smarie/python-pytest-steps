@@ -27,7 +27,7 @@ if [ "${TRAVIS_PYTHON_VERSION}" = "3.5" ]; then
 
     # Then the meta (appended)
     echo -e "\n\n****** Running tests : 2/2 META******\n\n"
-    coverage run --source pytest_steps -m pytest --junitxml=reports/junit/junit.xml --html=reports/junit/report.html --append -v pytest_steps/tests/
+    coverage run --append --source pytest_steps -m pytest --junitxml=reports/junit/junit.xml --html=reports/junit/report.html -v pytest_steps/tests/
     # python -m pytest --junitxml=reports/junit/junit.xml --html=reports/junit/report.html --cov-report term-missing --cov=./pytest_steps --cov-append -v pytest_steps/tests/
 else
    # faster - skip coverage and html report
