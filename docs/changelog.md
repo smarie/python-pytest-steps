@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.6.2 - added `six` dependency
+
+It was missing from `setup.py`.
+
 ### 1.6.1 - Minor code improvements
 
 Made the python 3 signature patch more readable... for those users who will enter in the code while debugging.
