@@ -325,18 +325,18 @@ function filter_table(elem) {
     not_found_message.hidden = !all_rows_hidden;
 }
 </script>
-    <p>Report generated on 22-Jul-2019 at 07:59:34</p>
+    <p>Report generated on 02-Aug-2019 at 12:37:06</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
         <td>Platform</td>
-        <td>Linux-4.4.0-101-generic-x86_64-with-debian-jessie-sid</td></tr>
+        <td>Linux-4.15.0-1028-gcp-x86_64-with-debian-stretch-sid</td></tr>
       <tr>
         <td>Python</td>
         <td>3.5.6</td></tr></table>
     <h2>Summary</h2>
-    <p>84 tests ran in 1.70 seconds. </p>
-    <p>(Un)check the boxes to filter the results.</p><input checked="true" data-test-result="passed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">84 passed</span> <input checked="true" data-test-result="skipped" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span> <input checked="true" data-test-result="failed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span> <input checked="true" data-test-result="error" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span> <input checked="true" data-test-result="xfailed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span> <input checked="true" data-test-result="xpassed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span> <input checked="true" data-test-result="rerun" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span> 
+    <p>86 tests ran in 1.86 seconds. </p>
+    <p>(Un)check the boxes to filter the results.</p><input checked="true" data-test-result="passed" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">86 passed</span> <input checked="true" data-test-result="skipped" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span> <input checked="true" data-test-result="failed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span> <input checked="true" data-test-result="error" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span> <input checked="true" data-test-result="xfailed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span> <input checked="true" data-test-result="xpassed" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span> <input checked="true" data-test-result="rerun" disabled="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span> 
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -350,150 +350,57 @@ function filter_table(elem) {
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_wrapped_in_class.py]</td>
-          <td class="col-duration">0.03</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_wrapped_in_class.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 1, &apos;skipped&apos;: 0}
-============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests0, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
-collected 1 items
-
-test_run_all_tests.py .
-
-=========================== 1 passed in 0.01 seconds ===========================
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_with_results_complex.py]</td>
-          <td class="col-duration">0.06</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_with_results_complex.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 16, &apos;skipped&apos;: 0}
-============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests1, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
-collected 16 items
-
-test_run_all_tests.py ................
-
-========================== 16 passed in 0.03 seconds ===========================
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_dependencies.py]</td>
-          <td class="col-duration">0.11</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_dependencies.py results in {&apos;failed&apos;: 2, &apos;passed&apos;: 4, &apos;skipped&apos;: 1}
-============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests2, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
-collected 7 items
-
-test_run_all_tests.py .Fs..F.
-
-=================================== FAILURES ===================================
-________________________ test_suite_no_results[step_b] _________________________
-
-request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
-test_step = &lt;function step_b at 0x7ff6ccbf18c8&gt;
-
-&gt;   ???
-
-&lt;makefun-gen-26&gt;:2: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_parametrizer.py:172: in wrapped_test_function
-    res = test_func(*args, **kwargs)
-test_run_all_tests.py:54: in test_suite_no_results
-    test_step()
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-    def step_b():
-        &quot;&quot;&quot; Step a of the test &quot;&quot;&quot;
-    
-        # perform this step
-        print(&quot;step b&quot;)
-&gt;       pytest.fail(&quot;Failed intentionally - this is normal&quot;)
-E       Failed: Failed intentionally - this is normal
-
-test_run_all_tests.py:37: Failed
------------------------------ Captured stdout call -----------------------------
-step b
-_____________________________ test_suite_1[step_b] _____________________________
-
-request = &lt;FixtureRequest for &lt;Function &apos;test_suite_1[step_b]&apos;&gt;&gt;
-test_step = &apos;step_b&apos;
-
-&gt;   ???
-
-&lt;makefun-gen-27&gt;:2: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_parametrizer.py:129: in wrapped_test_function
-    return test_func(*args, **kwargs)
-test_run_all_tests.py:83: in test_suite_1
-    step_b()
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-    def step_b():
-        &quot;&quot;&quot; Step a of the test &quot;&quot;&quot;
-    
-        # perform this step
-        print(&quot;step b&quot;)
-&gt;       pytest.fail(&quot;Failed intentionally - this is normal&quot;)
-E       Failed: Failed intentionally - this is normal
-
-test_run_all_tests.py:37: Failed
------------------------------ Captured stdout call -----------------------------
-step b
-================ 2 failed, 4 passed, 1 skipped in 0.08 seconds =================
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_no_results.py]</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_stackoverflow.py]</td>
           <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_no_results.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_steps_parammode_stackoverflow.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 3, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests0, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
+collected 3 items
+
+test_run_all_tests.py ...
+
+=========================== 3 passed in 0.01 seconds ===========================
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_with_results_basic.py]</td>
+          <td class="col-duration">0.05</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_parammode_with_results_basic.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 4, &apos;failed&apos;: 0}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests1, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
 collected 4 items
 
 test_run_all_tests.py ....
 
-=========================== 4 passed in 0.01 seconds ===========================
+=========================== 4 passed in 0.02 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_genmode.py]</td>
-          <td class="col-duration">0.19</td>
+          <td class="col-duration">0.20</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_genmode.py results in {&apos;failed&apos;: 2, &apos;passed&apos;: 15, &apos;skipped&apos;: 2}
+Testing that running pytest on file test_steps_genmode.py results in {&apos;skipped&apos;: 2, &apos;passed&apos;: 15, &apos;failed&apos;: 2}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests4, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests2, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
 collected 19 items
 
 test_run_all_tests.py .....Fs.Fs.........
@@ -506,7 +413,7 @@ ________step_name_ = &apos;step_b&apos;
 
 &gt;   ???
 
-&lt;makefun-gen-31&gt;:2: 
+&lt;makefun-gen-35&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_generator.py:488: in wrapped_test_function
     steps_monitor.execute(step_name, *args, **kwargs)
@@ -538,7 +445,7 @@ ________step_name_ = &apos;step_b&apos;
 
 &gt;   ???
 
-&lt;makefun-gen-32&gt;:2: 
+&lt;makefun-gen-36&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_generator.py:488: in wrapped_test_function
     steps_monitor.execute(step_name, *args, **kwargs)
@@ -571,42 +478,42 @@ step b
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_stackoverflow2.py]</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_wrapped_in_class.py]</td>
           <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_stackoverflow2.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_wrapped_in_class.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 1, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
-collected 3 items
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests3, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
+collected 1 items
 
-test_run_all_tests.py ...
+test_run_all_tests.py .
 
-=========================== 3 passed in 0.01 seconds ===========================
+=========================== 1 passed in 0.01 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_with_results_basic.py]</td>
-          <td class="col-duration">0.04</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_pytest_parametrization_capabilities.py]</td>
+          <td class="col-duration">0.11</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_with_results_basic.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 4, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_pytest_parametrization_capabilities.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 16, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests6, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
-collected 4 items
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests4, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
+collected 16 items
 
-test_run_all_tests.py ....
+test_run_all_tests.py ................
 
-=========================== 4 passed in 0.02 seconds ===========================
+========================== 16 passed in 0.04 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -617,11 +524,11 @@ test_run_all_tests.py ....
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_genmode_does_not_change_order.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 5, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_steps_genmode_does_not_change_order.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 5, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests5, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
 collected 5 items
 
 test_run_all_tests.py .....
@@ -631,42 +538,22 @@ test_run_all_tests.py .....
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_stackoverflow.py]</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_no_results.py]</td>
           <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_parammode_stackoverflow.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 3, &apos;skipped&apos;: 0}
+Testing that running pytest on file test_steps_parammode_no_results.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 4, &apos;failed&apos;: 0}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
-collected 3 items
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests6, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
+collected 4 items
 
-test_run_all_tests.py ...
+test_run_all_tests.py ....
 
-=========================== 3 passed in 0.01 seconds ===========================
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_pytest_parametrization_capabilities.py]</td>
-          <td class="col-duration">0.06</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_pytest_parametrization_capabilities.py results in {&apos;failed&apos;: 0, &apos;passed&apos;: 16, &apos;skipped&apos;: 0}
-============================= test session starts ==============================
-platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests9, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
-collected 16 items
-
-test_run_all_tests.py ................
-
-========================== 16 passed in 0.03 seconds ===========================
+=========================== 4 passed in 0.01 seconds ===========================
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -677,25 +564,25 @@ test_run_all_tests.py ................
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
-Testing that running pytest on file test_steps_genmode_dependency_tree.py results in {&apos;failed&apos;: 1, &apos;passed&apos;: 8, &apos;skipped&apos;: 5}
+Testing that running pytest on file test_steps_genmode_dependency_tree.py results in {&apos;skipped&apos;: 5, &apos;passed&apos;: 8, &apos;failed&apos;: 1}
 ============================= test session starts ==============================
 platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
-rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests10, inifile: 
-plugins: steps-1.6.2.dev3+g5df4ff4, logging-2015.11.4, html-1.9.0, harvest-1.7.0, cov-2.6.0
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests7, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
 collected 14 items
 
-test_run_all_tests.py ....Fs....ssss
+test_run_all_tests.py ...F.s..ss..ss
 
 =================================== FAILURES ===================================
-_____________________________ test_3_4[p=b-step3] ______________________________
+_____________________________ test_3_4[step3-p=b] ______________________________
 
-request = &lt;FixtureRequest for &lt;Function &apos;test_3_4[p=b-step3]&apos;&gt;&gt;
+request = &lt;FixtureRequest for &lt;Function &apos;test_3_4[step3-p=b]&apos;&gt;&gt;
 ________step_name_ = &apos;step3&apos;, p = &apos;b&apos;
-results_dct = {&apos;step1&apos;: 1, &apos;step2&apos;: &apos;hello&apos;, &apos;step3&apos;: {&apos;a&apos;: &apos;bla&apos;, &apos;b&apos;: &apos;bla&apos;}, &apos;step4&apos;: {&apos;a&apos;: &apos;blabla&apos;}}
+results_dct = {&apos;step1&apos;: 1, &apos;step2&apos;: &apos;hello&apos;, &apos;step3&apos;: {&apos;a&apos;: &apos;bla&apos;, &apos;b&apos;: &apos;bla&apos;}}
 
 &gt;   ???
 
-&lt;makefun-gen-47&gt;:2: 
+&lt;makefun-gen-49&gt;:2: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 /home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_generator.py:488: in wrapped_test_function
     steps_monitor.execute(step_name, *args, **kwargs)
@@ -704,7 +591,7 @@ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
 p = &apos;b&apos;
-results_dct = {&apos;step1&apos;: 1, &apos;step2&apos;: &apos;hello&apos;, &apos;step3&apos;: {&apos;a&apos;: &apos;bla&apos;, &apos;b&apos;: &apos;bla&apos;}, &apos;step4&apos;: {&apos;a&apos;: &apos;blabla&apos;}}
+results_dct = {&apos;step1&apos;: 1, &apos;step2&apos;: &apos;hello&apos;, &apos;step3&apos;: {&apos;a&apos;: &apos;bla&apos;, &apos;b&apos;: &apos;bla&apos;}}
 
     @test_steps(&apos;step3&apos;, &apos;step4&apos;)
     @pytest.mark.parametrize(&apos;p&apos;, [&apos;a&apos;, &apos;b&apos;], ids=&quot;p={}&quot;.format)
@@ -723,7 +610,120 @@ test_run_all_tests.py:33: Failed
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_gen_mode[0-a]</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_dependencies.py]</td>
+          <td class="col-duration">0.08</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_parammode_dependencies.py results in {&apos;skipped&apos;: 1, &apos;passed&apos;: 4, &apos;failed&apos;: 2}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests8, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
+collected 7 items
+
+test_run_all_tests.py .Fs..F.
+
+=================================== FAILURES ===================================
+________________________ test_suite_no_results[step_b] _________________________
+
+request = &lt;FixtureRequest for &lt;Function &apos;test_suite_no_results[step_b]&apos;&gt;&gt;
+test_step = &lt;function step_b at 0x7f6555ec2bf8&gt;
+
+&gt;   ???
+
+&lt;makefun-gen-51&gt;:2: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_parametrizer.py:172: in wrapped_test_function
+    res = test_func(*args, **kwargs)
+test_run_all_tests.py:54: in test_suite_no_results
+    test_step()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def step_b():
+        &quot;&quot;&quot; Step a of the test &quot;&quot;&quot;
+    
+        # perform this step
+        print(&quot;step b&quot;)
+&gt;       pytest.fail(&quot;Failed intentionally - this is normal&quot;)
+E       Failed: Failed intentionally - this is normal
+
+test_run_all_tests.py:37: Failed
+----------------------------- Captured stdout call -----------------------------
+step b
+_____________________________ test_suite_1[step_b] _____________________________
+
+request = &lt;FixtureRequest for &lt;Function &apos;test_suite_1[step_b]&apos;&gt;&gt;
+test_step = &apos;step_b&apos;
+
+&gt;   ???
+
+&lt;makefun-gen-52&gt;:2: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/home/travis/build/smarie/python-pytest-steps/pytest_steps/steps_parametrizer.py:129: in wrapped_test_function
+    return test_func(*args, **kwargs)
+test_run_all_tests.py:83: in test_suite_1
+    step_b()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def step_b():
+        &quot;&quot;&quot; Step a of the test &quot;&quot;&quot;
+    
+        # perform this step
+        print(&quot;step b&quot;)
+&gt;       pytest.fail(&quot;Failed intentionally - this is normal&quot;)
+E       Failed: Failed intentionally - this is normal
+
+test_run_all_tests.py:37: Failed
+----------------------------- Captured stdout call -----------------------------
+step b
+================ 2 failed, 4 passed, 1 skipped in 0.05 seconds =================
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_stackoverflow2.py]</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_parammode_stackoverflow2.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 3, &apos;failed&apos;: 0}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests9, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
+collected 3 items
+
+test_run_all_tests.py ...
+
+=========================== 3 passed in 0.01 seconds ===========================
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_all.py::test_run_all_tests[test_steps_parammode_with_results_complex.py]</td>
+          <td class="col-duration">0.06</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>
+Testing that running pytest on file test_steps_parammode_with_results_complex.py results in {&apos;skipped&apos;: 0, &apos;passed&apos;: 16, &apos;failed&apos;: 0}
+============================= test session starts ==============================
+platform linux -- Python 3.5.6, pytest-2.9.2, py-1.8.0, pluggy-0.3.1
+rootdir: /tmp/pytest-of-travis/pytest-0/testdir/test_run_all_tests10, inifile: 
+plugins: steps-1.6.2, logging-2015.11.4, html-1.9.0, harvest-1.7.1, cov-2.6.0, cases-1.11.1
+collected 16 items
+
+test_run_all_tests.py ................
+
+========================== 16 passed in 0.03 seconds ===========================
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_gen_mode[a-0]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -733,7 +733,7 @@ test_run_all_tests.py:33: Failed
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_gen_mode[0-b]</td>
+          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_gen_mode[b-0]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -743,7 +743,7 @@ test_run_all_tests.py:33: Failed
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_params_mode[0-step_a]</td>
+          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_params_mode[step_a-0]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -753,7 +753,7 @@ test_run_all_tests.py:33: Failed
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_params_mode[0-step_b]</td>
+          <td class="col-name">pytest_steps/tests/test_cross_steps_fixture.py::test_params_mode[step_b-0]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -833,7 +833,7 @@ test_run_all_tests.py:33: Failed
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_docs_example_manual_call.py::test_manual_call[test_dummy_gen]</td>
-          <td class="col-duration">0.01</td>
+          <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
@@ -892,7 +892,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[A-1-train]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[train-1-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -901,7 +901,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[A-1-score]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[train-1-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -910,7 +910,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[A-2-train]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[train-1-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -919,7 +919,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[A-2-score]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[train-2-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -928,7 +928,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[B-1-train]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[train-2-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -937,7 +937,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[B-1-score]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[train-2-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -946,7 +946,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[B-2-train]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[score-1-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -955,7 +955,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[B-2-score]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[score-1-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -964,7 +964,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[C-1-train]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[score-1-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -973,7 +973,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[C-1-score]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[score-2-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -982,7 +982,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[C-2-train]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[score-2-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -991,7 +991,7 @@ world
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[C-2-score]</td>
+          <td class="col-name">pytest_steps/tests/test_docs_example_with_harvest.py::test_my_app_bench[score-2-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1012,60 +1012,60 @@ world
 
                                 status    ...     accuracy
 test_id                step_id            ...             
-test_my_app_bench[A-1] train    passed    ...     0.286826
-                       score    passed    ...          NaN
-test_my_app_bench[A-2] train    passed    ...     0.536246
-                       score    passed    ...          NaN
-test_my_app_bench[B-1] train    passed    ...     0.392556
-                       score    passed    ...          NaN
-test_my_app_bench[B-2] train    passed    ...     0.376065
-                       score    passed    ...          NaN
-test_my_app_bench[C-1] train    passed    ...     0.571834
-                       score    passed    ...          NaN
-test_my_app_bench[C-2] train    passed    ...     0.189936
-                       score    passed    ...          NaN
+test_my_app_bench[1-A] train    passed    ...     0.838029
+test_my_app_bench[1-B] train    passed    ...     0.581536
+test_my_app_bench[1-C] train    passed    ...     0.050987
+test_my_app_bench[2-A] train    passed    ...     0.736093
+test_my_app_bench[2-B] train    passed    ...     0.596024
+test_my_app_bench[2-C] train    passed    ...     0.648560
+test_my_app_bench[1-A] score    passed    ...          NaN
+test_my_app_bench[1-B] score    passed    ...          NaN
+test_my_app_bench[1-C] score    passed    ...          NaN
+test_my_app_bench[2-A] score    passed    ...          NaN
+test_my_app_bench[2-B] score    passed    ...          NaN
+test_my_app_bench[2-C] score    passed    ...          NaN
 
 [12 rows x 6 columns]
-                                     status      duration_ms    algo_param  dataset_param    dataset          accuracy
------------------------------------  --------  -------------  ------------  ---------------  -------------  ----------
-(&apos;test_my_app_bench[A-1]&apos;, &apos;train&apos;)  passed         0.27895              1  A                my dataset #A    0.286826
-(&apos;test_my_app_bench[A-1]&apos;, &apos;score&apos;)  passed         0.277281             1  A                my dataset #A  nan
-(&apos;test_my_app_bench[A-2]&apos;, &apos;train&apos;)  passed         0.310183             2  A                my dataset #A    0.536246
-(&apos;test_my_app_bench[A-2]&apos;, &apos;score&apos;)  passed         0.265121             2  A                my dataset #A  nan
-(&apos;test_my_app_bench[B-1]&apos;, &apos;train&apos;)  passed         0.26226              1  B                my dataset #B    0.392556
-(&apos;test_my_app_bench[B-1]&apos;, &apos;score&apos;)  passed         0.250101             1  B                my dataset #B  nan
-(&apos;test_my_app_bench[B-2]&apos;, &apos;train&apos;)  passed         0.282526             2  B                my dataset #B    0.376065
-(&apos;test_my_app_bench[B-2]&apos;, &apos;score&apos;)  passed         0.208616             2  B                my dataset #B  nan
-(&apos;test_my_app_bench[C-1]&apos;, &apos;train&apos;)  passed         0.248909             1  C                my dataset #C    0.571834
-(&apos;test_my_app_bench[C-1]&apos;, &apos;score&apos;)  passed         0.249386             1  C                my dataset #C  nan
-(&apos;test_my_app_bench[C-2]&apos;, &apos;train&apos;)  passed         0.267029             2  C                my dataset #C    0.189936
-(&apos;test_my_app_bench[C-2]&apos;, &apos;score&apos;)  passed         1.72973              2  C                my dataset #C  nan
+                                     status      duration_ms    algo_param  dataset_param    dataset           accuracy
+-----------------------------------  --------  -------------  ------------  ---------------  -------------  -----------
+(&apos;test_my_app_bench[1-A]&apos;, &apos;train&apos;)  passed         0.465155             1  A                my dataset #A    0.838029
+(&apos;test_my_app_bench[1-B]&apos;, &apos;train&apos;)  passed         0.451088             1  B                my dataset #B    0.581536
+(&apos;test_my_app_bench[1-C]&apos;, &apos;train&apos;)  passed         0.410318             1  C                my dataset #C    0.0509874
+(&apos;test_my_app_bench[2-A]&apos;, &apos;train&apos;)  passed         0.425339             2  A                my dataset #A    0.736093
+(&apos;test_my_app_bench[2-B]&apos;, &apos;train&apos;)  passed         0.483274             2  B                my dataset #B    0.596024
+(&apos;test_my_app_bench[2-C]&apos;, &apos;train&apos;)  passed         0.488043             2  C                my dataset #C    0.64856
+(&apos;test_my_app_bench[1-A]&apos;, &apos;score&apos;)  passed         0.487804             1  A                my dataset #A  nan
+(&apos;test_my_app_bench[1-B]&apos;, &apos;score&apos;)  passed         0.454903             1  B                my dataset #B  nan
+(&apos;test_my_app_bench[1-C]&apos;, &apos;score&apos;)  passed         0.408411             1  C                my dataset #C  nan
+(&apos;test_my_app_bench[2-A]&apos;, &apos;score&apos;)  passed         0.48852              2  A                my dataset #A  nan
+(&apos;test_my_app_bench[2-B]&apos;, &apos;score&apos;)  passed         1.05739              2  B                my dataset #B  nan
+(&apos;test_my_app_bench[2-C]&apos;, &apos;score&apos;)  passed         0.341177             2  C                my dataset #C  nan
 
    `module_results_df_steps_pivoted` dataframe:
 
                         algo_param      ...        score/dataset
 test_id                                 ...                     
-test_my_app_bench[A-1]           1      ...        my dataset #A
-test_my_app_bench[A-2]           2      ...        my dataset #A
-test_my_app_bench[B-1]           1      ...        my dataset #B
-test_my_app_bench[B-2]           2      ...        my dataset #B
-test_my_app_bench[C-1]           1      ...        my dataset #C
-test_my_app_bench[C-2]           2      ...        my dataset #C
+test_my_app_bench[1-A]           1      ...        my dataset #A
+test_my_app_bench[1-B]           1      ...        my dataset #B
+test_my_app_bench[1-C]           1      ...        my dataset #C
+test_my_app_bench[2-A]           2      ...        my dataset #A
+test_my_app_bench[2-B]           2      ...        my dataset #B
+test_my_app_bench[2-C]           2      ...        my dataset #C
 
 [6 rows x 9 columns]
 test_id                   algo_param  dataset_param    train/status      train/duration_ms  train/dataset      train/accuracy  score/status      score/duration_ms  score/dataset
 ----------------------  ------------  ---------------  --------------  -------------------  ---------------  ----------------  --------------  -------------------  ---------------
-test_my_app_bench[A-1]             1  A                passed                     0.27895   my dataset #A            0.286826  passed                     0.277281  my dataset #A
-test_my_app_bench[A-2]             2  A                passed                     0.310183  my dataset #A            0.536246  passed                     0.265121  my dataset #A
-test_my_app_bench[B-1]             1  B                passed                     0.26226   my dataset #B            0.392556  passed                     0.250101  my dataset #B
-test_my_app_bench[B-2]             2  B                passed                     0.282526  my dataset #B            0.376065  passed                     0.208616  my dataset #B
-test_my_app_bench[C-1]             1  C                passed                     0.248909  my dataset #C            0.571834  passed                     0.249386  my dataset #C
-test_my_app_bench[C-2]             2  C                passed                     0.267029  my dataset #C            0.189936  passed                     1.72973   my dataset #C
+test_my_app_bench[1-A]             1  A                passed                     0.465155  my dataset #A           0.838029   passed                     0.487804  my dataset #A
+test_my_app_bench[1-B]             1  B                passed                     0.451088  my dataset #B           0.581536   passed                     0.454903  my dataset #B
+test_my_app_bench[1-C]             1  C                passed                     0.410318  my dataset #C           0.0509874  passed                     0.408411  my dataset #C
+test_my_app_bench[2-A]             2  A                passed                     0.425339  my dataset #A           0.736093   passed                     0.48852   my dataset #A
+test_my_app_bench[2-B]             2  B                passed                     0.483274  my dataset #B           0.596024   passed                     1.05739   my dataset #B
+test_my_app_bench[2-C]             2  C                passed                     0.488043  my dataset #C           0.64856    passed                     0.341177  my dataset #C
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[p=a-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[a-p=a]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1074,7 +1074,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[p=a-b]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[a-p=b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1083,7 +1083,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[p=b-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[b-p=a]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1092,7 +1092,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[p=b-b]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params[b-p=b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1101,7 +1101,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_fixture[hello-b-foo-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_fixture[a-hello-b-foo]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1110,7 +1110,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_fixture[hello-b-foo-b]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_fixture[b-hello-b-foo]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1119,7 +1119,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=a-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[a-p=a-1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1129,7 +1129,17 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=a-b]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[a-p=b-1]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[b-p=a-1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1139,17 +1149,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=b-a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[1-p=b-b]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_approx_conflict_params_and_no_conflict_fixture[b-p=b-1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1174,7 +1174,7 @@ test_my_app_bench[C-2]             2  C                passed                   
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1184,7 +1184,7 @@ test_my_app_bench[C-2]             2  C                passed                   
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
 </div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
@@ -1199,7 +1199,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_exact_conflict_with_fixture[b-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_exact_conflict_with_fixture[a-b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1219,7 +1219,17 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-a-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_exact_conflict_with_param_and_fixture[a-a-b]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_exact_conflict_with_param_and_fixture[a-b-b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1239,16 +1249,6 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-b-a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_gen_mode_exact_conflict_with_param_and_fixture[b-b-b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
@@ -1259,7 +1259,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[p=a-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[a-p=a]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1269,17 +1269,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[p=a-b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[p=b-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[a-p=b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1289,7 +1279,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[p=b-b]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[b-p=a]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1299,7 +1289,17 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[1-p=a-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_parametrize_mode_approx_conflict[b-p=b]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[a-p=a-1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1309,17 +1309,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[1-p=a-b]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[1-p=b-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[a-p=b-1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1329,7 +1319,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[1-p=b-b]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[b-p=a-1]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1339,7 +1329,27 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized3[b-p=a-a]</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized2[b-p=b-1]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>b
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized3[a-p=a-b]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized3[a-p=b-b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1359,16 +1369,6 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized3[b-p=b-a]</td>
-          <td class="col-duration">0.00</td>
-          <td class="col-links"></td></tr>
-        <tr>
-          <td class="extra" colspan="5">
-            <div class="log">----------------------------- Captured stdout call -----------------------------<br/>a
-</div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_step_id_conflicts.py::test_step_id_conflicts_parametrized3[b-p=b-b]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
@@ -1379,7 +1379,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[A-1-train]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[train-1-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1388,7 +1388,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[A-1-score]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[train-1-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1397,7 +1397,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[A-2-train]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[train-1-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1406,7 +1406,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[A-2-score]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[train-2-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1415,7 +1415,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[B-1-train]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[train-2-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1424,7 +1424,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[B-1-score]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[train-2-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1433,7 +1433,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[B-2-train]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[score-1-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1442,7 +1442,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[B-2-score]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[score-1-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1451,7 +1451,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[C-1-train]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[score-1-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1460,7 +1460,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[C-1-score]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[score-2-A]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1469,7 +1469,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[C-2-train]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[score-2-B]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1478,7 +1478,7 @@ test_my_app_bench[C-2]             2  C                passed                   
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
-          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[C-2-score]</td>
+          <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_my_app_bench[score-2-C]</td>
           <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
@@ -1497,17 +1497,35 @@ test_my_app_bench[C-2]             2  C                passed                   
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-name">pytest_steps/tests/test_steps_harvest.py::test_synthesis</td>
-          <td class="col-duration">0.06</td>
+          <td class="col-duration">0.04</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="5">
             <div class="log">----------------------------- Captured stdout call -----------------------------<br/>test_id                   algo_param  dataset_param    train/status      train/duration_ms  train/dataset      train/accuracy  score/status      score/duration_ms  score/dataset    -/status      -/duration_ms
 ----------------------  ------------  ---------------  --------------  -------------------  ---------------  ----------------  --------------  -------------------  ---------------  ----------  ---------------
-test_my_app_bench[A-1]             1  A                passed                     0.320911  my dataset #A            0.821465  passed                     0.285864  my dataset #A    nan              nan
-test_my_app_bench[A-2]             2  A                passed                     0.338793  my dataset #A            0.409056  passed                     0.23675   my dataset #A    nan              nan
-test_my_app_bench[B-1]             1  B                passed                     0.230789  my dataset #B            0.231663  passed                     0.207186  my dataset #B    nan              nan
-test_my_app_bench[B-2]             2  B                passed                     1.35422   my dataset #B            0.340127  passed                     0.254154  my dataset #B    nan              nan
-test_my_app_bench[C-1]             1  C                passed                     0.262976  my dataset #C            0.663538  passed                     0.239849  my dataset #C    nan              nan
-test_my_app_bench[C-2]             2  C                passed                     0.284195  my dataset #C            0.283214  passed                     0.243425  my dataset #C    nan              nan
-test_basic                       nan  nan              nan                      nan         nan                    nan         nan                      nan         nan              passed             0.170946
-</div></td></tr></tbody></table></body></html>
+test_my_app_bench[1-A]             1  A                passed                     0.420332  my dataset #A            0.979345  passed                     0.358343  my dataset #A    nan              nan
+test_my_app_bench[1-B]             1  B                passed                     0.893831  my dataset #B            0.371873  passed                     0.385046  my dataset #B    nan              nan
+test_my_app_bench[1-C]             1  C                passed                     0.392914  my dataset #C            0.603022  passed                     0.472069  my dataset #C    nan              nan
+test_my_app_bench[2-A]             2  A                passed                     0.413418  my dataset #A            0.669829  passed                     0.345707  my dataset #A    nan              nan
+test_my_app_bench[2-B]             2  B                passed                     0.410795  my dataset #B            0.147821  passed                     0.443459  my dataset #B    nan              nan
+test_my_app_bench[2-C]             2  C                passed                     0.473499  my dataset #C            0.647267  passed                     0.464201  my dataset #C    nan              nan
+test_basic                       nan  nan              nan                      nan         nan                    nan         nan                      nan         nan              passed             0.335932
+</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_with_cases.py::test_basic_modeling[a-case_dummy]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="empty log">No log output captured.</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">pytest_steps/tests/test_with_cases.py::test_basic_modeling[b-case_dummy]</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="5">
+            <div class="empty log">No log output captured.</div></td></tr></tbody></table></body></html>
