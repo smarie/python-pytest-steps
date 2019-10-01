@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.6.3 - added `__version__` attribute
+
+Added `__version__` attribute at package level
+
 ### 1.6.2 - added `six` dependency
 
 It was missing from `setup.py`.
