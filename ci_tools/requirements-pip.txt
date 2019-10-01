@@ -2,7 +2,6 @@
 setuptools_scm
 six
 pytest-runner
-pypandoc
 
 # --- to install
 makefun>=1.5

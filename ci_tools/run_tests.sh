@@ -19,8 +19,8 @@ trap "cleanup" INT TERM EXIT
 #fi
 
 if [ "${TRAVIS_PYTHON_VERSION}" = "3.5" ]; then
-   # full
-   # First the raw for coverage
+    # full
+    # First the raw for coverage
     echo -e "\n\n****** Running tests : 1/2 RAW******\n\n"
     coverage run --source pytest_steps -m pytest -v pytest_steps/tests_raw/
     # python -m pytest --cov-report term-missing --cov=./pytest_steps -v pytest_steps/tests_raw/
