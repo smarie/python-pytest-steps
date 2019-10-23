@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.6.4 - python 2 bugfix
+
+Fixed issue happening with python 2 when `unicode_literals` are used in the parameters receiving string types. Fixed [#34](https://github.com/smarie/python-pytest-steps/issues/34)
+
 ### 1.6.3 - added `__version__` attribute
 
 Added `__version__` attribute at package level
