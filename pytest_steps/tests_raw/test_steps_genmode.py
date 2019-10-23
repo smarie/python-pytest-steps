@@ -1,6 +1,7 @@
 # META
 # {'passed': 15, 'skipped': 2, 'failed': 2}
 # END META
+from __future__ import unicode_literals  # python 2 strings are different from python 3 strings
 import pytest
 
 from pytest_steps import test_steps, optional_step, one_fixture_per_step

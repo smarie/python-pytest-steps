@@ -1,6 +1,6 @@
 # WARNING do not import pandas here: it should remain optional
 # WARNING do not import pytest-harvest here: it should remain optional
-import six
+from six import raise_from, string_types
 
 from pytest_steps import CROSS_STEPS_MARK
 from pytest_steps.steps_harvest import _get_step_param_names_or_default, get_all_pytest_param_names_except_step_id, \
@@ -120,7 +120,7 @@ def get_flattened_multilevel_columns(df,
     :return:
     """
     def flatten_multilevel_colname(col_level_names):
-        if isinstance(col_level_names, str):
+        if isinstance(col_level_names, string_types):
             return col_level_names
         else:
             try:
@@ -182,7 +182,10 @@ def handle_steps_in_results_df(results_df,
 
     # validate parameters
     step_param_names = _get_step_param_names_or_default(step_param_names)
-    if not isinstance(no_steps_policy, str) or no_steps_policy not in {'ignore', 'raise', 'skip'}:
+    if not isinstance(no_steps_policy, str):
+        # python 2 compatibility:  unicode literals
+        no_steps_policy = str(no_steps_policy)
+    if no_steps_policy not in {'ignore', 'raise', 'skip'}:
         raise ValueError("`no_steps_policy` should be one of {'ignore', 'raise', 'skip'}")
 
     if not inplace:
@@ -276,5 +279,5 @@ def get_all_cross_steps_fixture_names(pytest_session, filter=None):
         return list(returned_set)
 
     except ImportError as e:
-        six.raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
-                                   "`get_all_cross_steps_fixture_names`"), e)
+        raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
+                               "`get_all_cross_steps_fixture_names`"), e)

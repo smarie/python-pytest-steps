@@ -1,7 +1,7 @@
 from copy import copy
 
 # WARNING do not import pytest-harvest here: it should remain optional
-import six
+from six import raise_from
 
 from pytest_steps.steps import _get_step_param_names_or_default
 from pytest_steps.steps_common import remove_param_from_pytest_node_str_id
@@ -57,7 +57,10 @@ def handle_steps_in_results_dct(results_dct,
 
     # validate parameters
     step_param_names = _get_step_param_names_or_default(step_param_names)
-    if not isinstance(no_steps_policy, str) or no_steps_policy not in {'ignore', 'raise', 'skip'}:
+    if not isinstance(no_steps_policy, str):
+        # python 2 compatibility:  unicode literals
+        no_steps_policy = str(no_steps_policy)
+    if no_steps_policy not in {'ignore', 'raise', 'skip'}:
         raise ValueError("`no_steps_policy` should be one of {'ignore', 'raise', 'skip'}")
 
     # edge case of empty dict
@@ -193,5 +196,5 @@ def get_all_pytest_param_names_except_step_id(session,
                 if p not in step_param_names]
 
     except ImportError as e:
-        six.raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
-                                   "`get_all_pytest_param_names_except_step_id`"), e)
+        raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
+                               "`get_all_pytest_param_names_except_step_id`"), e)

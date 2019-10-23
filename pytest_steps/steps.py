@@ -1,5 +1,6 @@
 from inspect import isgeneratorfunction
 from sys import version_info
+from six import string_types
 
 from makefun import add_signature_parameters, wraps, with_signature
 
@@ -234,7 +235,7 @@ def _get_step_param_names_or_default(step_param_names):
     if step_param_names is None:
         # default: cover both generator and legacy mode default names
         step_param_names = [GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]
-    elif isinstance(step_param_names, str):
+    elif isinstance(step_param_names, string_types):
         # singleton
         step_param_names = [step_param_names]
     return step_param_names

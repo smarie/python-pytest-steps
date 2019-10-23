@@ -1,7 +1,7 @@
 from collections import Iterable as It
 
 from makefun import add_signature_parameters, wraps
-from six import raise_from, reraise
+from six import raise_from, reraise, string_types
 from wrapt import ObjectProxy
 
 # try:  # python 3.2+
@@ -303,7 +303,7 @@ class StepsMonitor(object):
                 # raise StepYieldError(step_name, None)
                 pass
 
-            elif isinstance(res, str):
+            elif isinstance(res, string_types):
                 if res != step_name:
                     raise StepYieldError(step_name, res)
 
