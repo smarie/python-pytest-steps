@@ -310,7 +310,8 @@ class StepsMonitor(object):
             elif isinstance(res, optional_step):
                 # optional step: check if the execution went well
                 if res.exec_result is None:
-                    raise ValueError("Internal error: this should not happen")
+                    raise ValueError("Internal error: this should not happen."
+                                     "Did you ``yield step_b`` inside the context manager instead of after it?")
 
                 elif isinstance(res.exec_result, OptionalStepException):
                     # An exception happened in the optional step. We can now raise it safely
