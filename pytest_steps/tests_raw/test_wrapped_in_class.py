@@ -1,5 +1,5 @@
 # META
-# {'passed': 3, 'skipped': 0, 'failed': 0}
+# {'passed': 6, 'skipped': 0, 'failed': 0}
 # END META
 from pytest_steps import test_steps
 
