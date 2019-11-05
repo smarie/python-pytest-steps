@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.7.0 - Support for test functions located inside test classes
+
+`@test_steps` can now be used on test functions located inside classes. Fixed [#16](https://github.com/smarie/python-pytest-steps/issues/16)
+
 ### 1.6.4 - python 2 bugfix
 
 Fixed issue happening with python 2 when `unicode_literals` are used in the parameters receiving string types. Fixed [#34](https://github.com/smarie/python-pytest-steps/issues/34)
