@@ -109,8 +109,9 @@ def get_parametrize_decorator(steps, steps_data_holder_name, test_step_argname):
         orig_sig = signature(test_func)
         func_needs_request = 'request' in orig_sig.parameters
         if not func_needs_request:
-            new_sig = add_signature_parameters(orig_sig, first=Parameter('request',
-                                                                         kind=Parameter.POSITIONAL_OR_KEYWORD))
+            # add request parameter last, as first may be 'self'
+            new_sig = add_signature_parameters(orig_sig, last=Parameter('request',
+                                                                        kind=Parameter.POSITIONAL_OR_KEYWORD))
         else:
             new_sig = orig_sig
 

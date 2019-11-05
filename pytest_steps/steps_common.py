@@ -165,7 +165,15 @@ def get_pytest_node_hash_id(pytest_node,
     # Hash a tuple containing the parameter names with a hash of their value
     params_dct = get_pytest_node_current_param_values(pytest_node)
     # first include the pytest object (the test function)
-    l = [pytest_node.obj]
+    # -- support for bound methods (typically test methods in a test class): "unbind" them
+    try:  # python 3
+        test_fun = pytest_node.obj.__func__
+    except AttributeError:
+        try:  # python 2
+            test_fun = pytest_node.obj.im_func
+        except AttributeError:
+            test_fun = pytest_node.obj
+    l = [test_fun]
     for p, v in params_dct.items():
         if p not in params_to_ignore:
             try:

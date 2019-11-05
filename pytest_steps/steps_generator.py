@@ -236,7 +236,7 @@ class StepsMonitor(object):
     An object responsible to _monitor execution of a test function with steps.
     The function should be a generator
     """
-    def __init__(self, step_names, test_function, *first_step_args, **first_step_kwargs):
+    def __init__(self, step_names, test_function, first_step_args, first_step_kwargs):
         """
         Constructor with declaration of all step names in advance,
         as well as the test function to execute and the first step args and kwargs
@@ -275,7 +275,7 @@ class StepsMonitor(object):
         """
         return len(self.exceptions) == 0
 
-    def execute(self, step_name, *args, **kwargs):
+    def execute(self, step_name, args, kwargs):
         """
         Executes one iteration of the monitored generator.
 
@@ -374,7 +374,7 @@ class StepMonitorsContainer(dict):
         self.step_ids = step_ids
         dict.__init__(self)
 
-    def get_execution_monitor(self, pytest_node, *args, **kwargs):
+    def get_execution_monitor(self, pytest_node, args, kwargs):
         """
         Returns the StepsMonitor in charge of monitoring execution of the provided pytest node. The same StepsMonitor
         will be used to execute all steps of the generator function.
@@ -397,7 +397,7 @@ class StepMonitorsContainer(dict):
             # print("DEBUG - creating StepsMonitor for %s" % id_without_steps)
 
             # create the monitor, in charge of managing the execution flow
-            self[id_without_steps] = StepsMonitor(self.step_ids, self.test_func, *args, **kwargs)
+            self[id_without_steps] = StepsMonitor(self.step_ids, self.test_func, args, kwargs)
 
         return self[id_without_steps]
 
@@ -452,7 +452,8 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         func_needs_request = 'request' in orig_sig.parameters
         additional_params = ((Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD), ) if not func_needs_request
                              else ()) + (Parameter(test_step_argname, kind=Parameter.POSITIONAL_OR_KEYWORD), )
-        new_sig = add_signature_parameters(orig_sig, first=additional_params)
+        # add request parameter last, as first may be 'self'
+        new_sig = add_signature_parameters(orig_sig, last=additional_params)
 
         # -- first create the logic
         @wraps(test_func, new_sig=new_sig)
@@ -473,19 +474,19 @@ def get_generator_decorator(steps  # type: Iterable[Any]
                         step_names = [create_pytest_param_str_id(step_name)]
                     else:
                         step_names = [create_pytest_param_str_id(f) for f in step_name]
-                steps_monitor = StepsMonitor(step_ids, test_func, *args, **kwargs)
+                steps_monitor = StepsMonitor(step_ids, test_func, args, kwargs)
                 for i, (step_name, ref_step_name) in enumerate(zip(step_names, step_ids)):
                     if step_name != ref_step_name:
                         raise ValueError("Incorrect sequence of steps provided for manual execution. Step #%s should"
                                          " be named '%s', found '%s'" % (i+1, ref_step_name, step_name))
-                    steps_monitor.execute(step_name, *args, **kwargs)
+                    steps_monitor.execute(step_name, args, kwargs)
             else:
                 # Retrieve or create the corresponding execution monitor
-                steps_monitor = all_monitors.get_execution_monitor(request.node, *args, **kwargs)
+                steps_monitor = all_monitors.get_execution_monitor(request.node, args, kwargs)
 
                 # execute the step
                 # print("DEBUG - executing step %s" % step_name)
-                steps_monitor.execute(step_name, *args, **kwargs)
+                steps_monitor.execute(step_name, args, kwargs)
 
         # With this hack we will be ordered correctly by pytest https://github.com/pytest-dev/pytest/issues/4429
         wrapped_test_function.place_as = test_func
