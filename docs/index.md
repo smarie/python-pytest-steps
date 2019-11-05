@@ -6,6 +6,8 @@
 
 [![Documentation](https://img.shields.io/badge/doc-latest-blue.svg)](https://smarie.github.io/python-pytest-steps/) [![PyPI](https://img.shields.io/pypi/v/pytest-steps.svg)](https://pypi.python.org/pypi/pytest-steps/) [![Downloads](https://pepy.tech/badge/pytest-steps)](https://pepy.tech/project/pytest-steps) [![Downloads per week](https://pepy.tech/badge/pytest-steps/week)](https://pepy.tech/project/pytest-steps) [![GitHub stars](https://img.shields.io/github/stars/smarie/python-pytest-steps.svg)](https://github.com/smarie/python-pytest-steps/stargazers)
 
+!!! warning "Manual execution of tests has slightly changed in `1.7.0`, see explanations [here](#d-calling-decorated-functions-manually)"
+
 !!! success "New 'generator' style is there, [check it out](#1-usage-generator-mode) !"
 
 !!! success "New `pytest-harvest` compatibility fixtures, [check them out](#3-usage-with-pytest-harvest) !"
@@ -180,15 +182,15 @@ print(help(test_dummy))
 yields
 
 ```
-test_dummy(request, ________step_name_) 
+test_dummy(________step_name_, request) 
 ```
 
-So we have to provide two arguments: `request` and `________step_name_`. Note: the same information can be obtained in a more formal way using `signature` from the `inspect` (latest python) or `funcsigs` (older) packages.
+So we have to provide two arguments: `________step_name_` and `request`. Note: the same information can be obtained in a more formal way using `signature` from the `inspect` (latest python) or `funcsigs` (older) packages.
 
 Once you know what arguments you have to provide, there are two rules to follow in order to execute the function manually:
 
- - replace the `request` argument with `None`, to indicate that you are executing outside of any pytest context.
  - replace the `step_name` argument with which steps you wish to execute: `None` to execute all steps in order, or a list of steps to execute some steps only. Note that in generator mode, "by design" (generator function) it is only possible to call the steps in correct order and starting from the first one, but you can provide a partial list:
+ - replace the `request` argument with `None`, to indicate that you are executing outside of any pytest context.
  
 ```python
 > test_dummy(None, None)
@@ -196,15 +198,17 @@ Once you know what arguments you have to provide, there are two rules to follow 
 hello
 world
 
-> test_dummy(None, 'first')
+> test_dummy('first', None)
 
 hello
 
-> test_dummy(None, 'second')
+> test_dummy('second', None)
 
 ValueError: Incorrect sequence of steps provided for manual execution. Step #1 should be named 'first', found 'second'
 ```
 
+!!! note "arguments order changed in `1.7.0`"
+    Unfortunately the order of arguments for manual execution changed in version `1.7.0`. This was the only way to [add support for class methods](https://github.com/smarie/python-pytest-steps/issues/16). Apologies !
 
 ### e- Compliance with pytest
 

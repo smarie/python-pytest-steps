@@ -4,6 +4,8 @@
 
 `@test_steps` can now be used on test functions located inside classes. Fixed [#16](https://github.com/smarie/python-pytest-steps/issues/16)
 
+**Warning**: as a consequence of the fix above, the order of arguments has changed. this has an impact for manual execution. See [here](https://smarie.github.io/python-pytest-steps/#d-calling-decorated-functions-manually) for details.
+
 ### 1.6.4 - python 2 bugfix
 
 Fixed issue happening with python 2 when `unicode_literals` are used in the parameters receiving string types. Fixed [#34](https://github.com/smarie/python-pytest-steps/issues/34)

@@ -450,8 +450,9 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         # We will expose a new signature with additional 'request' arguments if needed, and the test step
         orig_sig = signature(test_func)
         func_needs_request = 'request' in orig_sig.parameters
-        additional_params = ((Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD), ) if not func_needs_request
-                             else ()) + (Parameter(test_step_argname, kind=Parameter.POSITIONAL_OR_KEYWORD), )
+        additional_params = (Parameter(test_step_argname, kind=Parameter.POSITIONAL_OR_KEYWORD), ) \
+                            + ((Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD), )
+                               if not func_needs_request else ())
         # add request parameter last, as first may be 'self'
         new_sig = add_signature_parameters(orig_sig, last=additional_params)
 

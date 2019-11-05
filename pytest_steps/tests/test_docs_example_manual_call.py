@@ -40,14 +40,14 @@ def test_manual_call(test_dummy):
 
     test_dummy(None, None)
 
-    test_dummy(None, 'first')
+    test_dummy('first', None)
 
-    test_dummy(None, ['first', 'second'])
+    test_dummy(['first', 'second'], None)
 
     if test_dummy is test_dummy_gen:
         # in generator mode it is not allowed: all steps sequences have to start from the top
         with pytest.raises(ValueError):
-            test_dummy(None, 'second')
+            test_dummy('second', None)
     else:
         # in parametrizer mode it is allowed
-        test_dummy(None, 'second')
+        test_dummy('second', None)
