@@ -726,6 +726,9 @@
 <p><em>Create step-wise / incremental tests in <code>pytest</code>.</em></p>
 <p><a href="https://pypi.python.org/pypi/pytest-steps/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/pytest-steps.svg" /></a> <a href="https://travis-ci.org/smarie/python-pytest-steps"><img alt="Build Status" src="https://travis-ci.org/smarie/python-pytest-steps.svg?branch=master" /></a> <a href="https://smarie.github.io/python-pytest-steps/junit/report.html"><img alt="Tests Status" src="https://smarie.github.io/python-pytest-steps/junit/junit-badge.svg?dummy=8484744" /></a> <a href="https://codecov.io/gh/smarie/python-pytest-steps"><img alt="codecov" src="https://codecov.io/gh/smarie/python-pytest-steps/branch/master/graph/badge.svg" /></a></p>
 <p><a href="https://smarie.github.io/python-pytest-steps/"><img alt="Documentation" src="https://img.shields.io/badge/doc-latest-blue.svg" /></a> <a href="https://pypi.python.org/pypi/pytest-steps/"><img alt="PyPI" src="https://img.shields.io/pypi/v/pytest-steps.svg" /></a> <a href="https://pepy.tech/project/pytest-steps"><img alt="Downloads" src="https://pepy.tech/badge/pytest-steps" /></a> <a href="https://pepy.tech/project/pytest-steps"><img alt="Downloads per week" src="https://pepy.tech/badge/pytest-steps/week" /></a> <a href="https://github.com/smarie/python-pytest-steps/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/smarie/python-pytest-steps.svg" /></a></p>
+<div class="admonition warning">
+<p class="admonition-title">Manual execution of tests has slightly changed in <code>1.7.0</code>, see explanations <a href="#d-calling-decorated-functions-manually">here</a></p>
+</div>
 <div class="admonition success">
 <p class="admonition-title">New 'generator' style is there, <a href="#1-usage-generator-mode">check it out</a> !</p>
 </div>
@@ -883,31 +886,35 @@ _______________ test_suite_optional_and_dependent_steps[step_b] _______________
 
 
 <p>yields</p>
-<div class="codehilite"><pre><span></span>test_dummy(request, ________step_name_) 
+<div class="codehilite"><pre><span></span>test_dummy(________step_name_, request) 
 </pre></div>
 
 
-<p>So we have to provide two arguments: <code>request</code> and <code>________step_name_</code>. Note: the same information can be obtained in a more formal way using <code>signature</code> from the <code>inspect</code> (latest python) or <code>funcsigs</code> (older) packages.</p>
+<p>So we have to provide two arguments: <code>________step_name_</code> and <code>request</code>. Note: the same information can be obtained in a more formal way using <code>signature</code> from the <code>inspect</code> (latest python) or <code>funcsigs</code> (older) packages.</p>
 <p>Once you know what arguments you have to provide, there are two rules to follow in order to execute the function manually:</p>
 <ul>
-<li>replace the <code>request</code> argument with <code>None</code>, to indicate that you are executing outside of any pytest context.</li>
 <li>replace the <code>step_name</code> argument with which steps you wish to execute: <code>None</code> to execute all steps in order, or a list of steps to execute some steps only. Note that in generator mode, "by design" (generator function) it is only possible to call the steps in correct order and starting from the first one, but you can provide a partial list:</li>
+<li>replace the <code>request</code> argument with <code>None</code>, to indicate that you are executing outside of any pytest context.</li>
 </ul>
 <div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
 <span class="n">hello</span>
 <span class="n">world</span>
 
-<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
 <span class="n">hello</span>
 
-<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
 <span class="ne">ValueError</span><span class="p">:</span> <span class="n">Incorrect</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">steps</span> <span class="n">provided</span> <span class="k">for</span> <span class="n">manual</span> <span class="n">execution</span><span class="o">.</span> <span class="n">Step</span> <span class="c1">#1 should be named &#39;first&#39;, found &#39;second&#39;</span>
 </pre></div>
 
 
+<div class="admonition note">
+<p class="admonition-title">arguments order changed in <code>1.7.0</code></p>
+<p>Unfortunately the order of arguments for manual execution changed in version <code>1.7.0</code>. This was the only way to <a href="https://github.com/smarie/python-pytest-steps/issues/16">add support for class methods</a>. Apologies !</p>
+</div>
 <h3 id="e-compliance-with-pytest">e- Compliance with pytest<a class="headerlink" href="#e-compliance-with-pytest" title="Permanent link">&para;</a></h3>
 <h4 id="parameters"><em>parameters</em><a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h4>
 <p>Under the hood, the <code>@test_steps</code> decorator simply generates a wrapper function around your function and mark it with <code>@pytest.mark.parametrize</code>. The function wrapper is created using the excellent <a href="https://github.com/micheles/decorator"><code>decorator</code></a> library, so all marks that exist on it are kept in the process, as well as its name and signature. </p>
