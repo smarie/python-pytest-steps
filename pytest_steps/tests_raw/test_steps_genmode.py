@@ -40,7 +40,7 @@ def test_manual_call():
 
     # A good way to know which parameters to fill is to use inspect
     s = signature(test_suite_shared_results_no_yield_names)
-    assert list(s.parameters.keys()) == ['request', '________step_name_']
+    assert list(s.parameters.keys()) == ['________step_name_', 'request']
 
     # Then fill with blanks
     test_suite_shared_results_no_yield_names(None, None)
