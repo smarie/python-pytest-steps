@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.7.1 - `pyproject.toml`
+
+Added `pyproject.toml`.
+
 ### 1.7.0 - Support for test functions located inside test classes
 
 `@test_steps` can now be used on test functions located inside classes. Fixed [#16](https://github.com/smarie/python-pytest-steps/issues/16)
