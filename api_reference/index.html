@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -50,7 +50,7 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -644,7 +644,7 @@
 <ul>
 <li>Case A (recommended): <code>@saved_fixture</code> will be executed for <em>all</em> steps, and the saved object will be the same for all steps (since it will be cached by <code>@cross_steps_fixture</code>)</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nd">@pytest.fixture</span>
+<div class="codehilite"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="nd">@saved_fixture</span>
 <span class="nd">@cross_steps_fixture</span>
 <span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
@@ -655,7 +655,7 @@
 <ul>
 <li>Case B: <code>@saved_fixture</code> will only be called for the first step. Indeed for subsequent steps, <code>@cross_steps_fixture</code> will directly return and prevent the underlying functions to be called. This is not a very interesting behaviour in this case, but with other decorators it might be interesting.</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nd">@pytest.fixture</span>
+<div class="codehilite"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="nd">@cross_steps_fixture</span>
 <span class="nd">@saved_fixture</span>
 <span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
@@ -669,7 +669,7 @@
 <p>By default if you do not use this decorator but use the fixture in a generator-mode test function, only the fixture created for the first step will be injected in your test function, and all subsequent steps will see that same instance.</p>
 <p>Decorating your fixture with <code>@one_fixture_per_step</code> tells <code>@test_steps</code> to transparently replace the fixture object instance by the one created for each step, before each step executes in your test function. This results in all steps using different fixture instances, as expected.</p>
 <p>It is recommended that you put this decorator as the second decorator, right after <code>@pytest.fixture</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nd">@pytest.fixture</span>
+<div class="codehilite"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="nd">@one_fixture_per_step</span>
 <span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">random</span><span class="p">()</span>
@@ -682,7 +682,7 @@
 <h2 id="generator-mode">Generator mode<a class="headerlink" href="#generator-mode" title="Permanent link">&para;</a></h2>
 <h3 id="with-optional_step"><code>with optional_step</code><a class="headerlink" href="#with-optional_step" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="k">with</span> <span class="n">optional_step</span><span class="p">(</span><span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
-                   <span class="n">depends_on</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">optional_step</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">optional_step</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+                   <span class="n">depends_on</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">optional_step</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">optional_step</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 
 
@@ -695,7 +695,7 @@
 <h2 id="explicitparametrizer-mode">Explicit/parametrizer mode<a class="headerlink" href="#explicitparametrizer-mode" title="Permanent link">&para;</a></h2>
 <h3 id="depends_on"><code>@depends_on</code><a class="headerlink" href="#depends_on" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nd">@depends_on</span><span class="p">(</span><span class="o">*</span><span class="n">steps</span><span class="p">,</span> 
-            <span class="n">fail_instead_of_skip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+            <span class="n">fail_instead_of_skip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 
@@ -708,11 +708,11 @@
 <h2 id="pytest-harvest-utility-methods"><code>pytest-harvest</code> utility methods<a class="headerlink" href="#pytest-harvest-utility-methods" title="Permanent link">&para;</a></h2>
 <h3 id="handle_steps_in_results_dct"><code>handle_steps_in_results_dct</code><a class="headerlink" href="#handle_steps_in_results_dct" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_steps_in_results_dct</span><span class="p">(</span><span class="n">results_dct</span><span class="p">,</span>
-                                <span class="n">is_flat</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-                                <span class="n">raise_if_one_test_without_step_id</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                <span class="n">is_flat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">raise_if_one_test_without_step_id</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">no_step_id</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
-                                <span class="n">step_param_names</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                                <span class="n">keep_orig_id</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                <span class="n">step_param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">keep_orig_id</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">no_steps_policy</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span>
                                 <span class="p">)</span>
 </pre></div>
@@ -729,12 +729,12 @@
 <p>If <code>keep_orig_id</code> is set to True (default), the original id is added to each entry.</p>
 <h3 id="handle_steps_in_results_df"><code>handle_steps_in_results_df</code><a class="headerlink" href="#handle_steps_in_results_df" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_steps_in_results_df</span><span class="p">(</span><span class="n">results_df</span><span class="p">,</span>
-                               <span class="n">raise_if_one_test_without_step_id</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>  <span class="c1"># type: bool</span>
+                               <span class="n">raise_if_one_test_without_step_id</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: bool</span>
                                <span class="n">no_step_id</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>  <span class="c1"># type: str</span>
-                               <span class="n">step_param_names</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># type: Union[str, Iterable[str]]</span>
-                               <span class="n">keep_orig_id</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c1"># type: bool</span>
+                               <span class="n">step_param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Union[str, Iterable[str]]</span>
+                               <span class="n">keep_orig_id</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># type: bool</span>
                                <span class="n">no_steps_policy</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span><span class="p">,</span>  <span class="c1"># type: str</span>
-                               <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span>
+                               <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span>
                                <span class="p">):</span>
 </pre></div>
 
@@ -751,9 +751,9 @@
 <p>If <code>inplace</code> is <code>False</code> (default), a new dataframe will be returned. Otherwise the input dataframe will be modified inplace and nothing will be returned.</p>
 <h3 id="pivot_steps_on_df"><code>pivot_steps_on_df</code><a class="headerlink" href="#pivot_steps_on_df" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">pivot_steps_on_df</span><span class="p">(</span><span class="n">results_df</span><span class="p">,</span>
-                      <span class="n">pytest_session</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                      <span class="n">cross_steps_columns</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># type: List[str]</span>
-                      <span class="n">error_if_not_present</span><span class="o">=</span><span class="bp">True</span>  <span class="c1"># type: bool</span>
+                      <span class="n">pytest_session</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                      <span class="n">cross_steps_columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: List[str]</span>
+                      <span class="n">error_if_not_present</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># type: bool</span>
                       <span class="p">):</span>
 </pre></div>
 
@@ -775,6 +775,7 @@
 <h4 id="get_flattened_multilevel_columns"><code>get_flattened_multilevel_columns</code><a class="headerlink" href="#get_flattened_multilevel_columns" title="Permanent link">&para;</a></h4>
                 
                   
+                
                 
               
               
@@ -842,7 +843,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.a8b5e56f.js"></script>
+      <script src="../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

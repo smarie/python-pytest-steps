@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -50,7 +50,7 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -768,20 +768,20 @@
 <span class="nd">@test_steps</span><span class="p">(</span><span class="s1">&#39;step_a&#39;</span><span class="p">,</span> <span class="s1">&#39;step_b&#39;</span><span class="p">,</span> <span class="s1">&#39;step_c&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_suite</span><span class="p">():</span>
     <span class="c1"># Step A</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>  <span class="c1"># replace with your logic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>  <span class="c1"># replace with your logic</span>
     <span class="n">intermediate_a</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
     <span class="k">yield</span>
 
     <span class="c1"># Step B</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>  <span class="c1"># replace with your logic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>  <span class="c1"># replace with your logic</span>
     <span class="k">yield</span>
 
     <span class="c1"># Step C</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step c&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step c&quot;</span><span class="p">)</span>
     <span class="n">new_text</span> <span class="o">=</span> <span class="n">intermediate_a</span> <span class="o">+</span> <span class="s2">&quot; ... augmented&quot;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">56</span>
     <span class="k">yield</span>
 </pre></div>
@@ -815,8 +815,8 @@ collected 3 items
 <p>For example:</p>
 <div class="codehilite"><pre><span></span>    <span class="c1"># Step B</span>
     <span class="k">with</span> <span class="n">optional_step</span><span class="p">(</span><span class="s1">&#39;step_b&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_b</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="bp">False</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="kc">False</span>
     <span class="k">yield</span> <span class="n">step_b</span>
 </pre></div>
 
@@ -832,22 +832,22 @@ collected 3 items
 <span class="nd">@test_steps</span><span class="p">(</span><span class="s1">&#39;step_a&#39;</span><span class="p">,</span> <span class="s1">&#39;step_b&#39;</span><span class="p">,</span> <span class="s1">&#39;step_c&#39;</span><span class="p">,</span> <span class="s1">&#39;step_d&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_suite_opt</span><span class="p">():</span>
     <span class="c1"># Step A</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>
     <span class="k">yield</span>
 
     <span class="c1"># Step B</span>
     <span class="k">with</span> <span class="n">optional_step</span><span class="p">(</span><span class="s1">&#39;step_b&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_b</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="bp">False</span>
+        <span class="k">assert</span> <span class="kc">False</span>
     <span class="k">yield</span> <span class="n">step_b</span>
 
     <span class="c1"># Step C depends on step B</span>
     <span class="k">with</span> <span class="n">optional_step</span><span class="p">(</span><span class="s1">&#39;step_c&#39;</span><span class="p">,</span> <span class="n">depends_on</span><span class="o">=</span><span class="n">step_b</span><span class="p">)</span> <span class="k">as</span> <span class="n">step_c</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">step_c</span><span class="o">.</span><span class="n">should_run</span><span class="p">():</span>
-            <span class="k">assert</span> <span class="bp">True</span>
+            <span class="k">assert</span> <span class="kc">True</span>
     <span class="k">yield</span> <span class="n">step_c</span>
 
     <span class="c1"># Step D</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>
     <span class="k">yield</span>
 </pre></div>
 
@@ -876,12 +876,12 @@ _______________ test_suite_optional_and_dependent_steps[step_b] _______________
 
 <span class="nd">@test_steps</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_dummy</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
     <span class="k">yield</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
     <span class="k">yield</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">help</span><span class="p">(</span><span class="n">test_dummy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">help</span><span class="p">(</span><span class="n">test_dummy</span><span class="p">))</span>
 </pre></div>
 
 
@@ -896,16 +896,16 @@ _______________ test_suite_optional_and_dependent_steps[step_b] _______________
 <li>replace the <code>step_name</code> argument with which steps you wish to execute: <code>None</code> to execute all steps in order, or a list of steps to execute some steps only. Note that in generator mode, "by design" (generator function) it is only possible to call the steps in correct order and starting from the first one, but you can provide a partial list:</li>
 <li>replace the <code>request</code> argument with <code>None</code>, to indicate that you are executing outside of any pytest context.</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="n">hello</span>
 <span class="n">world</span>
 
-<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="n">hello</span>
 
-<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="n">test_dummy</span><span class="p">(</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="ne">ValueError</span><span class="p">:</span> <span class="n">Incorrect</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">steps</span> <span class="n">provided</span> <span class="k">for</span> <span class="n">manual</span> <span class="n">execution</span><span class="o">.</span> <span class="n">Step</span> <span class="c1">#1 should be named &#39;first&#39;, found &#39;second&#39;</span>
 </pre></div>
@@ -920,16 +920,16 @@ _______________ test_suite_optional_and_dependent_steps[step_b] _______________
 <p>Under the hood, the <code>@test_steps</code> decorator simply generates a wrapper function around your function and mark it with <code>@pytest.mark.parametrize</code>. The function wrapper is created using the excellent <a href="https://github.com/micheles/decorator"><code>decorator</code></a> library, so all marks that exist on it are kept in the process, as well as its name and signature. </p>
 <p>Therefore <code>@test_steps</code> <strong>should be compliant with all native pytest mechanisms.</strong> For exemple you can use decorators such as <code>@pytest.mark.parametrize</code> before or after it in the function decoration order (depending on your desired resulting test order):</p>
 <div class="codehilite"><pre><span></span><span class="nd">@test_steps</span><span class="p">(</span><span class="s1">&#39;step_a&#39;</span><span class="p">,</span> <span class="s1">&#39;step_b&#39;</span><span class="p">)</span>
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ids</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="s2">&quot;i=</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ids</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="s2">&quot;i=</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_suite_p</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
     <span class="c1"># Step A</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step a, i=</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>  <span class="c1"># replace with your logic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step a, i=</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>  <span class="c1"># replace with your logic</span>
     <span class="k">yield</span>
 
     <span class="c1"># Step B</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b, i=</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>  <span class="c1"># replace with your logic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step b, i=</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>  <span class="c1"># replace with your logic</span>
     <span class="k">yield</span>
 </pre></div>
 
@@ -951,23 +951,23 @@ collected 4 items
 <p>You can also use fixtures as usual, but <strong>special care has to be taken about function-scope fixtures</strong>. Let's consider the following example:</p>
 <div class="codehilite"><pre><span></span><span class="n">usage_counter</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="k">def</span> <span class="nf">my_fixture</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Simple function-scoped fixture that return a new instance each time&quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">usage_counter</span>
     <span class="n">usage_counter</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;created my_fixture </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">usage_counter</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;created my_fixture </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">usage_counter</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">usage_counter</span>
 
 <span class="nd">@test_steps</span><span class="p">(</span><span class="s1">&#39;step_a&#39;</span><span class="p">,</span> <span class="s1">&#39;step_b&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_suite_one_fixture_per_step</span><span class="p">(</span><span class="n">my_fixture</span><span class="p">):</span>
     <span class="c1"># Step A</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">my_fixture</span> <span class="o">==</span> <span class="mi">1</span>
     <span class="k">yield</span>
 
     <span class="c1"># Step B</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">my_fixture</span> <span class="o">==</span> <span class="mi">2</span>  <span class="c1"># &gt;&gt; raises an AssertionError because my_fixture = 1 !</span>
     <span class="k">yield</span>
 </pre></div>
@@ -986,7 +986,7 @@ collected 4 items
 <p>For example</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">pytest_steps</span> <span class="kn">import</span> <span class="n">one_fixture_per_step</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="nd">@one_fixture_per_step</span>
 <span class="k">def</span> <span class="nf">my_fixture</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Simple function-scoped fixture that return a new instance each time&quot;&quot;&quot;</span>
@@ -1009,19 +1009,19 @@ collected 4 items
 
 <span class="k">def</span> <span class="nf">step_a</span><span class="p">():</span>
     <span class="c1"># perform this step ...</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>  <span class="c1"># replace with your logic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>  <span class="c1"># replace with your logic</span>
 
 <span class="k">def</span> <span class="nf">step_b</span><span class="p">():</span>
     <span class="c1"># perform this step</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>  <span class="c1"># replace with your logic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>  <span class="c1"># replace with your logic</span>
 
 <span class="nd">@test_steps</span><span class="p">(</span><span class="n">step_a</span><span class="p">,</span> <span class="n">step_b</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_suite_1</span><span class="p">(</span><span class="n">test_step</span><span class="p">):</span>
     <span class="c1"># Optional: perform step-specific reasoning, for example to select arguments</span>
     <span class="k">if</span> <span class="n">test_step</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;step_a&quot;</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;calling step a&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calling step a&quot;</span><span class="p">)</span>
 
     <span class="c1"># Execute the step by calling the test step function</span>
     <span class="n">test_step</span><span class="p">()</span>
@@ -1087,15 +1087,15 @@ collected 4 items
 
 <span class="k">def</span> <span class="nf">step_a</span><span class="p">(</span><span class="n">steps_data</span><span class="p">):</span>
     <span class="c1"># perform this step ...</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="bp">False</span>  <span class="c1"># replace with your logic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step a&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="kc">False</span>  <span class="c1"># replace with your logic</span>
 
     <span class="c1"># intermediate results can be stored in steps_data</span>
     <span class="n">steps_data</span><span class="o">.</span><span class="n">intermediate_a</span> <span class="o">=</span> <span class="s1">&#39;hello&#39;</span>
 
 <span class="k">def</span> <span class="nf">step_b</span><span class="p">(</span><span class="n">steps_data</span><span class="p">):</span>
     <span class="c1"># perform this step, leveraging the previous step&#39;s results</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step b&quot;</span><span class="p">)</span>
 
     <span class="c1"># you can leverage the results from previous steps... </span>
     <span class="c1"># ... or pytest.skip if not relevant</span>
@@ -1103,7 +1103,7 @@ collected 4 items
         <span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;Step b should only be executed if the text is long enough&quot;</span><span class="p">)</span>
 
     <span class="n">new_text</span> <span class="o">=</span> <span class="n">steps_data</span><span class="o">.</span><span class="n">intermediate_a</span> <span class="o">+</span> <span class="s2">&quot; ... augmented&quot;</span>  
-    <span class="k">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">56</span>
 </pre></div>
 
@@ -1123,20 +1123,20 @@ collected 4 items
 
 <span class="n">usage_counter</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="nd">@pytest.fixture</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
 <span class="nd">@cross_steps_fixture</span>
 <span class="k">def</span> <span class="nf">my_cool_fixture</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;A fixture that returns a new integer every time it is used.&quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">usage_counter</span>
     <span class="n">usage_counter</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;created my_fixture </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">usage_counter</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;created my_fixture </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">usage_counter</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">usage_counter</span>
 
 <span class="k">def</span> <span class="nf">step_a</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">step_b</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">)</span>
 
 <span class="nd">@test_steps</span><span class="p">(</span><span class="n">step_a</span><span class="p">,</span> <span class="n">step_b</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_params_mode</span><span class="p">(</span><span class="n">test_step</span><span class="p">,</span> <span class="n">my_cool_fixture</span><span class="p">):</span>
@@ -1322,6 +1322,7 @@ collected 4 items
                 
                   
                 
+                
               
               
                 
@@ -1374,7 +1375,7 @@ collected 4 items
       
     </div>
     
-      <script src="assets/javascripts/application.a8b5e56f.js"></script>
+      <script src="assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
       
