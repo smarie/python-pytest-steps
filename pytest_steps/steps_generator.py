@@ -1,4 +1,7 @@
-from collections import Iterable as It
+try:
+    from collections.abc import Iterable as It
+except ImportError:
+    from collections import Iterable as It
 
 from makefun import add_signature_parameters, wraps
 from six import raise_from, reraise, string_types
