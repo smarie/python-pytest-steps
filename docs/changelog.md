@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.7.2 - warning removed
+
+Removed import warning. Fixed [#37](https://github.com/smarie/python-pytest-steps/issues/37)
+
 ### 1.7.1 - `pyproject.toml`
 
 Added `pyproject.toml`.
