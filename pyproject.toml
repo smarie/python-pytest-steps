@@ -3,5 +3,11 @@ requires = [
     "setuptools",
     "setuptools_scm",
     "six",
+    "pytest-runner",
+    "pytest-harvest",
+    "wheel",
+    "wrapt",
+    "pandas",
+    "tabulate",
 ]
 build-backend = "setuptools.build_meta"
