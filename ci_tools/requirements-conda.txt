@@ -1,5 +1,6 @@
 # --- to execute setup.py whatever the goal
 # pytest-runner
+pip>=18  # otherwise pyproject.toml does not work with travis python 3.5 env see https://github.com/gevent/gevent/issues/1180
 
 # --- to install
 # wrapt
