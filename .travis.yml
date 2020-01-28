@@ -67,7 +67,8 @@ install:
 
 script:
 #  - coverage run tests.py
-  - if [ "${TRAVIS_PYTHON_VERSION}" = "3.5" ]; then
+  - |
+    if [ "${TRAVIS_PYTHON_VERSION}" = "3.5" ]; then
       pip install . --no-build-isolation  # see https://github.com/gevent/gevent/issues/1180
     else
       pip install .
