@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.7.3 - packaging improvements
+
+ - packaging improvements: set the "universal wheel" flag to 1, and cleaned up the `setup.py`. In particular removed dependency to `six` for setup and added `py.typed` file, as well as set the `zip_safe` flag to False. Removed tests folder from package. Fixes [#39](https://github.com/smarie/python-pytest-steps/issues/39)
+
 ### 1.7.2 - warning removed
 
 Removed import warning. Fixed [#37](https://github.com/smarie/python-pytest-steps/issues/37)
