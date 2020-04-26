@@ -58,6 +58,8 @@ install:
   - pip install six setuptools_scm  # on python 2 this needs to be installed beforehand
   - python ci_tools/py_install.py conda ci_tools/requirements-conda.txt
   - python ci_tools/py_install.py pip ci_tools/requirements-pip.txt
+  # this does not work anymore on python 2 so lets only do it when needed
+  - if [ "${TRAVIS_PYTHON_VERSION}" = "3.5" ]; then pip install mkdocs-material mkdocs; fi;
   # travis-specific installs
   - pip install PyGithub  # for ci_tools/github_release.py
   - pip install codecov  # See https://github.com/codecov/example-python.
@@ -99,11 +101,11 @@ after_success:
     if [ -s "ci_tools/github_travis_rsa" ]; then
       chmod 600 ci_tools/github_travis_rsa
       eval `ssh-agent -s`  # launch the authentication agent
-      ssh-add ci_tools/github_travis_rsa  # register the key
+      ssh-add ci_tools/github_travis_rsa  # register the decrypted key
       git config user.name "Automatic Publish"
       git config user.email "sylvain.marie@schneider-electric.com"
       git remote add gh-remote "${GH_REF}";
-      git fetch gh-remote && git fetch gh-remote gh-pages:gh-pages;
+      git fetch gh-remote && git fetch gh-remote gh-pages:gh-pages;  # make sure we have the latest gh-remote
       # push but only if this is not a build triggered by a pull request
       # note: do not use the --dirty flag as it breaks client-side search
       if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_PYTHON_VERSION}" = "3.5" ] && [ "${PYTEST_VERSION}" = "<3" ]; then echo "Pushing to github"; PYTHONPATH=pytest_steps/ mkdocs gh-deploy -v -f docs/mkdocs.yml --remote-name gh-remote; git push gh-remote gh-pages; fi;
