@@ -247,7 +247,7 @@ collected 4 items
 ========================== 4 passed in 0.07 seconds ===========================
 ```
 
-#### *fixtures*
+#### <a id="fixtures"></a> *fixtures*
 
 You can also use fixtures as usual, but **special care has to be taken about function-scope fixtures**. Let's consider the following example:
 
@@ -503,13 +503,20 @@ You will for example obtain this kind of pivoted table:
 | test_my_app_bench[B-1] |            1 | my dataset #B | passed         |             0       |        0.870705  | passed         |            0        |
 | test_my_app_bench[B-2] |            2 | my dataset #B | passed         |             0       |        0.764746  | passed         |            1.0004   |
 
-### c- Examples
+### c- step_bag fixture
 
-Two examples are available that should be quite straightforward for those familiar with pytest-harvest:
+As explained [above](#fixtures), the behavior of function level fixtures 
+can be unexpected when combined with steps. The `step_bag` fixture is a
+version of the pytest-harvest `results_bag` fixture, but decorated with 
+`@one_fixture_per_step` if that matches your desired behavior.
+
+### d- Examples
+
+Three examples are available that should be quite straightforward for those familiar with pytest-harvest:
 
  - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py) an example relying on default fixtures, to show how simple it is to satisfy the most common use cases.
  - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest.py) an advanced example where the custom synthesis is created manually from the dictionary provided by pytest-harvest, thanks to helper methods.
-
+ - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest_step_bag.py) which demonstrates the different behavior of the `results_bag` versus `step_bag` fixtures.
 
 ## Main features / benefits
 
