@@ -25,7 +25,7 @@ pytest -v pytest_steps/tests/
 You may need to install requirements for setup beforehand, using 
 
 ```bash
-pip install -r ci_tools/requirements-test.txt
+pip install -e .[test]
 ```
 
 ## Packaging
@@ -53,7 +53,7 @@ mkdocs build -f docs/mkdocs.yml
 You may need to install requirements for doc beforehand, using 
 
 ```bash
-pip install -r ci_tools/requirements-doc.txt
+pip install -e .[doc]
 ```
 
 ## Generating the test reports

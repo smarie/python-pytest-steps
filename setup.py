@@ -16,8 +16,9 @@ from setuptools_scm import get_version  # noqa: E402
 INSTALL_REQUIRES = ['makefun>=1.5', 'wrapt', 'functools32;python_version<"3.2"', 'funcsigs;python_version<"3.3"', 'six']
 DEPENDENCY_LINKS = []
 SETUP_REQUIRES = ['pytest-runner', 'setuptools_scm']
-TESTS_REQUIRE = ['pytest', 'pytest-logging', 'pytest-harvest>=1.4.0', 'pytest-cases']
-EXTRAS_REQUIRE = {}
+TESTS_REQUIRE = ['pytest', 'pytest-logging', 'pytest-harvest>=1.4.0', 'pytest-cases', 'tabulate', 'pandas', ]
+DOCS_REQUIRE = [ 'mkdocs', 'mkdocs-material' ] 
+EXTRAS_REQUIRE = {'test': TESTS_REQUIRE, 'doc': DOCS_REQUIRE }
 
 # ************** ID card *****************
 DISTNAME = 'pytest-steps'
@@ -109,7 +110,7 @@ setup(
 
     # test
     # test_suite='nose.collector',
-    tests_require=TESTS_REQUIRE,
+    # tests_require=TESTS_REQUIRE,
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
