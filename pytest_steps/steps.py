@@ -1,12 +1,16 @@
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
 from inspect import isgeneratorfunction
 from sys import version_info
-from six import string_types
 
 from makefun import add_signature_parameters, wraps, with_signature
 
-from pytest_steps.steps_common import get_pytest_node_hash_id, get_scope
-from pytest_steps.steps_generator import get_generator_decorator, GENERATOR_MODE_STEP_ARGNAME
-from pytest_steps.steps_parametrizer import get_parametrize_decorator
+from .common_mini_six import string_types
+from .steps_common import get_pytest_node_hash_id, get_scope
+from .steps_generator import get_generator_decorator, GENERATOR_MODE_STEP_ARGNAME
+from .steps_parametrizer import get_parametrize_decorator
 
 
 try:  # python 3.3+

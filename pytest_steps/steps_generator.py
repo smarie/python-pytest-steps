@@ -1,10 +1,13 @@
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
 try:
     from collections.abc import Iterable as It
 except ImportError:
     from collections import Iterable as It
 
 from makefun import add_signature_parameters, wraps
-from six import raise_from, reraise, string_types
 from wrapt import ObjectProxy
 
 # try:  # python 3.2+
@@ -26,7 +29,8 @@ except ImportError:
 
 import pytest
 
-from pytest_steps.steps_common import create_pytest_param_str_id, get_pytest_node_hash_id, get_scope
+from .common_mini_six import string_types, reraise
+from .steps_common import create_pytest_param_str_id, get_pytest_node_hash_id, get_scope
 
 
 class ExceptionHook(object):
@@ -297,8 +301,8 @@ class StepsMonitor(object):
             with self._monitor(step_name):
                 try:
                     res = next(self.gen)
-                except StopIteration as e:
-                    raise_from(StepExecutionError(step_name), e)
+                except StopIteration:
+                    raise StepExecutionError(step_name)
 
             # Manage exceptions in optional steps
             if res is None:

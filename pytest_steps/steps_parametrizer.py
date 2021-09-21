@@ -1,3 +1,8 @@
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
+
 from sys import version_info
 
 try:  # python 3.2+
@@ -14,7 +19,7 @@ from inspect import getmodule
 from makefun import wraps, add_signature_parameters, with_signature
 
 import pytest
-from pytest_steps.steps_common import create_pytest_param_str_id, get_fixture_or_param_value, get_pytest_node_hash_id
+from .steps_common import create_pytest_param_str_id, get_fixture_or_param_value, get_pytest_node_hash_id
 
 
 class StepsDataHolder:
