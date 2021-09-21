@@ -13,14 +13,15 @@ else:
     string_types = basestring,  # noqa
 
 
+# reraise see https://stackoverflow.com/a/34463112/7262247
 if PY3:
     def reraise(tp, value, tb=None):
         try:
             if value is None:
                 value = tp()
-            else:
-                # HACK to fix bug
-                value = tp(*value)
+            # else:
+            #     # HACK to fix bug
+            #     value = tp(*value)
             if value.__traceback__ is not tb:
                 raise value.with_traceback(tb)
             raise value

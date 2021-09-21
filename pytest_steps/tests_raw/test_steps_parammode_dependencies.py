@@ -1,5 +1,5 @@
 # META
-# {'passed': 4, 'skipped': 1, 'failed': 2}
+# {'passed': 4, 'skipped': 1, 'xfailed': 2}
 # END META
 import pytest
 
@@ -34,7 +34,7 @@ def step_b():
 
     # perform this step
     print("step b")
-    pytest.fail("Failed intentionally - this is normal")
+    pytest.xfail("Failed intentionally - this is normal")
 
 
 @depends_on(step_a, step_b, fail_instead_of_skip=False)

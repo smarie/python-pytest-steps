@@ -1,5 +1,5 @@
 # META
-# {'passed': 15, 'skipped': 2, 'failed': 2}
+# {'passed': 15, 'skipped': 2, 'xfailed': 2}
 # END META
 from __future__ import unicode_literals  # python 2 strings are different from python 3 strings
 import pytest
@@ -57,7 +57,7 @@ def test_suite_exception_on_mandatory_step():
 
     # Step B
     print("step b")
-    pytest.fail("Failed intentionally - this is normal")  # replace with your logic
+    pytest.xfail("Failed intentionally - this is normal")  # replace with your logic
     yield 'step_b'
 
     # Step C
@@ -78,7 +78,7 @@ def test_suite_optional_and_dependent_steps():
     # Step B
     with optional_step('step_b') as step_b:
         print("step b")
-        pytest.fail("Failed intentionally - this is normal")
+        pytest.xfail("Failed intentionally - this is normal")
     yield step_b
 
     # Step C depends on step B
