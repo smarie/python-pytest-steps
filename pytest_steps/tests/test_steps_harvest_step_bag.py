@@ -27,7 +27,8 @@ def fruit_counter(some_bag):
 @test_steps("apples", "bananas")
 def test_fruit_step_bag(step_bag):
     # This test will have a new bag per step
-    yield from fruit_counter(step_bag)
+    for f in fruit_counter(step_bag):
+        yield f
 
 
 @test_steps("apples", "bananas")
