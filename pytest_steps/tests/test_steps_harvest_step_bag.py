@@ -34,7 +34,8 @@ def test_fruit_step_bag(step_bag):
 @test_steps("apples", "bananas")
 def test_fruit_results_bag(results_bag):
     # This test will have a shared bag over both steps
-    yield from fruit_counter(results_bag)
+    for f in fruit_counter(step_bag):
+        yield f
 
 
 @test_steps("apples", "bananas")
