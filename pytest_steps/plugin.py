@@ -40,7 +40,6 @@ else:
         Provides a separate pytest-harvest "results_bag" per step
         """
         return results_bag
-<<<<<<< HEAD
 
     @pytest.fixture
     @cross_steps_fixture
@@ -49,5 +48,3 @@ else:
         Provides a cross-step pytest-harvest "results_bag" for explicit mode
         """
         return results_bag
-=======
->>>>>>> f587c2846339a6beda9c12f0837d66fe495a603b
