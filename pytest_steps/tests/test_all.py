@@ -1,6 +1,7 @@
 import ast
 import os
 import re
+from distutils.version import LooseVersion
 from os.path import join, dirname, pardir
 
 import pytest
@@ -53,7 +54,19 @@ def test_run_all_tests(test_to_run, testdir):
 
         # Here we check that everything is ok
         try:
-            result.assert_outcomes(**asserts_dct)
+            if LooseVersion(pytest.__version__) < "3.0.0":
+                assert_outcomes_legacy(result, **asserts_dct)
+            else:
+                result.assert_outcomes(**asserts_dct)
         except Exception:
             print("Error while asserting that %s results in %s" % (test_to_run, str(asserts_dct)))
             raise
+
+
+def assert_outcomes_legacy(result, passed=0, skipped=0, failed=0, xfailed=0):
+    """in old versions of the pytester plugin, the xfailed kwarg was not present."""
+    d = result.parseoutcomes()
+    assert passed == d.get("passed", 0)
+    assert skipped == d.get("skipped", 0)
+    assert failed == d.get("failed", 0)
+    assert xfailed == d.get("xfailed", 0)
