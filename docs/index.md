@@ -210,9 +210,7 @@ ValueError: Incorrect sequence of steps provided for manual execution. Step #1 s
 !!! note "arguments order changed in `1.7.0`"
     Unfortunately the order of arguments for manual execution changed in version `1.7.0`. This was the only way to [add support for class methods](https://github.com/smarie/python-pytest-steps/issues/16). Apologies !
 
-### e- Compliance with pytest
-
-#### *parameters*
+### e- Using pytest parameters in generator mode
 
 Under the hood, the `@test_steps` decorator simply generates a wrapper function around your function and mark it with `@pytest.mark.parametrize`. The function wrapper is created using the excellent [`decorator`](https://github.com/micheles/decorator) library, so all marks that exist on it are kept in the process, as well as its name and signature. 
 
@@ -247,7 +245,7 @@ collected 4 items
 ========================== 4 passed in 0.07 seconds ===========================
 ```
 
-#### <a id="fixtures"></a> *fixtures*
+### f- Using pytest fixtures in generator mode
 
 You can also use fixtures as usual, but **special care has to be taken about function-scope fixtures**. Let's consider the following example:
 
@@ -433,11 +431,11 @@ In "explicit" mode it is possible to call your test functions outside of pytest 
 
 An exemple can be found [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_manual_call.py).
 
-### e- Compliance with pytest
+### e- Using pytest parameters in explicit mode
 
 You can add as many `@pytest.mark.parametrize` and pytest fixtures in your test suite function, it should work as expected: a **new** `steps_data` object will be created everytime a new parameter/fixture combination is created, and that object will be **shared** across steps with the same parameters and fixtures.
 
-Concerning fixtures, 
+### f- Using pytest fixtures in explicit mode
 
  - by default all function-scoped fixtures will be "one per step" in this mode (you do not even need to use the `@one_fixture_per_step` decorator - although it does not hurt).
  - if you wish a fixture to be shared across several steps, decorate it with `@cross_steps_fixture`.
@@ -471,6 +469,7 @@ def test_params_mode(test_step, my_cool_fixture):
     test_step()
 ```
 
+
 ## 3. Usage with `pytest-harvest`
 
 ### a- Enhancing the results df
@@ -503,20 +502,31 @@ You will for example obtain this kind of pivoted table:
 | test_my_app_bench[B-1] |            1 | my dataset #B | passed         |             0       |        0.870705  | passed         |            0        |
 | test_my_app_bench[B-2] |            2 | my dataset #B | passed         |             0       |        0.764746  | passed         |            1.0004   |
 
-### c- step_bag fixture
+### c- `step_bag` and `cross_bag` fixtures
 
-As explained [above](#fixtures), the behavior of function level fixtures 
-can be unexpected when combined with steps. The `step_bag` fixture is a
-version of the pytest-harvest `results_bag` fixture, but decorated with 
-`@one_fixture_per_step` if that matches your desired behavior.
+As explained in the sections on [fixtures in generator mode](#f-using-pytest-fixtures-in-generator-mode)
+and [fixtures in explicit mode](#f-using-pytest-fixtures-in-explicit-mode), 
+a function level fixture will behave differently in a generator-style test than in a test with explicit-style steps.
+If a pytest-steps test is generator-style, the pytest-harvest 
+[`results_bag`](https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts)
+will behave like a cross-step fixture.  If the test is explict-style, it will 
+behave like a per-step fixture.
+
+For generator-style test steps, the `step_bag` fixture is a version of the pytest-harvest 
+[`results_bag`](https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts)
+fixture, but decorated with [`@one_fixture_per_step`](/api_reference/#one_fixture_per_step) 
+if you wish to have the opposite of the default behavior.
+Similarly, for explict-style test steps, the `cross_bag` fixture provides the `results_bag`
+as decorated with [`@cross_step_fixture](/api_reference/#cross_step_fixture).
 
 ### d- Examples
 
-Three examples are available that should be quite straightforward for those familiar with pytest-harvest:
+Four examples are available that should be quite straightforward for those familiar with pytest-harvest:
 
  - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py) an example relying on default fixtures, to show how simple it is to satisfy the most common use cases.
  - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest.py) an advanced example where the custom synthesis is created manually from the dictionary provided by pytest-harvest, thanks to helper methods.
- - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest_step_bag.py) which demonstrates the different behavior of the `results_bag` versus `step_bag` fixtures.
+ - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest_step_bag.py) which demonstrates the different behavior of the `results_bag` versus `step_bag` fixtures in a generator mode test.
+ - [here](https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest_cross_bag.py) which demonstrates the different behavior of the `results_bag` versus `cross_bag` fixtures in an explicit mode test.
 
 ## Main features / benefits
 

@@ -113,6 +113,17 @@ Decorates a test step object/function so as to automatically mark it as skipped 
  - `steps`: a list of test steps that this step depends on. They can be anything, but typically they are non-test (not prefixed with 'test') functions.
  - `fail_instead_of_skip`: if set to True, the test will be marked as failed instead of skipped when the dependencies have not succeeded.
 
+## `pytest-harvest` fixtures
+
+`step_bag` forces the pytest-harvest `results_bag` fixture to have `@one_fixture_per_step` behavior. This is intended for generator mode, where the
+results bag is by default a cross-step fixture, but it does not hurt to use it 
+in explicit mode.
+
+Conversely, `cross_bag` forces the pytest-harvest `results_bag` fixture to have `@cross_step_fixture` behavior. This is intended for use in explicit mode, where the results_bag is by
+default one-per-step, but it does not hurt to use it in generator mode.
+
+As with any fixture, you simply declare you want one of these as an argument to your test 
+function, and pytest takes over from there.
 
 ## `pytest-harvest` utility methods
 

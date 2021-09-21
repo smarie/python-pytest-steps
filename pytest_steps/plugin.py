@@ -1,4 +1,5 @@
 import pytest
+from pytest_steps.steps import cross_steps_fixture
 from pytest_steps.steps_generator import one_fixture_per_step
 
 try:
@@ -37,5 +38,13 @@ else:
     def step_bag(results_bag):
         """
         Provides a separate pytest-harvest "results_bag" per step
+        """
+        return results_bag
+
+    @pytest.fixture
+    @cross_steps_fixture
+    def cross_bag(results_bag):
+        """
+        Provides a cross-step pytest-harvest "results_bag" for explicit mode
         """
         return results_bag
