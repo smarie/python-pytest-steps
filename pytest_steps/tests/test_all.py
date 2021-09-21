@@ -4,7 +4,6 @@ import re
 from os.path import join, dirname, pardir
 
 import pytest
-import six
 
 # Make the list of all tests that we will have to execute (each in an independent pytest runner)
 THIS_DIR = dirname(__file__)
@@ -55,6 +54,6 @@ def test_run_all_tests(test_to_run, testdir):
         # Here we check that everything is ok
         try:
             result.assert_outcomes(**asserts_dct)
-        except Exception as e:
+        except Exception:
             print("Error while asserting that %s results in %s" % (test_to_run, str(asserts_dct)))
-            six.raise_from(e, e)
+            raise

@@ -1,10 +1,12 @@
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
 from copy import copy
 
 # WARNING do not import pytest-harvest here: it should remain optional
-from six import raise_from
-
-from pytest_steps.steps import _get_step_param_names_or_default
-from pytest_steps.steps_common import remove_param_from_pytest_node_str_id
+from .steps import _get_step_param_names_or_default
+from .steps_common import remove_param_from_pytest_node_str_id
 
 try: # python 3.5+
     from typing import Union, Iterable, Mapping, Any
@@ -195,6 +197,6 @@ def get_all_pytest_param_names_except_step_id(session,
         return [p for p in get_all_pytest_param_names(session, filter=filter, filter_incomplete=filter_incomplete)
                 if p not in step_param_names]
 
-    except ImportError as e:
-        raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
-                               "`get_all_pytest_param_names_except_step_id`"), e)
+    except ImportError:
+        raise ImportError("pytest-harvest>=1.0.0 is required to use "
+                          "`get_all_pytest_param_names_except_step_id`")

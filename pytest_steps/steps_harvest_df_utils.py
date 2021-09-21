@@ -1,9 +1,14 @@
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
+
 # WARNING do not import pandas here: it should remain optional
 # WARNING do not import pytest-harvest here: it should remain optional
-from six import raise_from, string_types
 
-from pytest_steps import CROSS_STEPS_MARK
-from pytest_steps.steps_harvest import _get_step_param_names_or_default, get_all_pytest_param_names_except_step_id, \
+from .common_mini_six import string_types
+from .steps import CROSS_STEPS_MARK
+from .steps_harvest import _get_step_param_names_or_default, get_all_pytest_param_names_except_step_id, \
     remove_step_from_test_id
 
 try:  # type hints for python 3.5+
@@ -278,6 +283,6 @@ def get_all_cross_steps_fixture_names(pytest_session, filter=None):
 
         return list(returned_set)
 
-    except ImportError as e:
-        raise_from(ImportError("pytest-harvest>=1.0.0 is required to use "
-                               "`get_all_cross_steps_fixture_names`"), e)
+    except ImportError:
+        raise ImportError("pytest-harvest>=1.0.0 is required to use "
+                          "`get_all_cross_steps_fixture_names`")
