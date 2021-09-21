@@ -111,8 +111,8 @@
     <p id="t56" class="pln"><span class="n"><a href="#t56">56</a></span><span class="t"><span class="str">        use the 'parametrizer' (explicit) mode.</span>&nbsp;</span><span class="r"></span></p>
     <p id="t57" class="pln"><span class="n"><a href="#t57">57</a></span><span class="t"><span class="str">    :param test_step_argname: the optional name of the function argument that will receive the test step object.</span>&nbsp;</span><span class="r"></span></p>
     <p id="t58" class="pln"><span class="n"><a href="#t58">58</a></span><span class="t"><span class="str">        Default is 'test_step'.</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t59" class="pln"><span class="n"><a href="#t59">59</a></span><span class="t"><span class="str">    :param steps_data_holder_name: the optional name of the function argument that will receive the shared `StepsDataHolder`</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t60" class="pln"><span class="n"><a href="#t60">60</a></span><span class="t"><span class="str">        object if present. Default is 'results'.</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t59" class="pln"><span class="n"><a href="#t59">59</a></span><span class="t"><span class="str">    :param steps_data_holder_name: the optional name of the function argument that will receive the shared</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t60" class="pln"><span class="n"><a href="#t60">60</a></span><span class="t"><span class="str">        `StepsDataHolder` object if present. Default is 'results'.</span>&nbsp;</span><span class="r"></span></p>
     <p id="t61" class="pln"><span class="n"><a href="#t61">61</a></span><span class="t"><span class="str">    :return:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t62" class="pln"><span class="n"><a href="#t62">62</a></span><span class="t"><span class="str">    """</span>&nbsp;</span><span class="r"></span></p>
     <p id="t63" class="pln"><span class="n"><a href="#t63">63</a></span><span class="t">    <span class="com"># python 2 compatibility: no keyword arguments can follow a *args.</span>&nbsp;</span><span class="r"></span></p>
@@ -240,9 +240,9 @@
     <p id="t185" class="run"><span class="n"><a href="#t185">185</a></span><span class="t">        <span class="nam">scope</span> <span class="op">=</span> <span class="nam">get_scope</span><span class="op">(</span><span class="nam">request</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t186" class="par run show_par"><span class="n"><a href="#t186">186</a></span><span class="t">        <span class="key">if</span> <span class="nam">scope</span> <span class="op">==</span> <span class="str">'function'</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">186&#x202F;&#x219B;&#x202F;194</span><span class="annotate long">line 186 didn't jump to line 194, because the condition on line 186 was never false</span></span></p>
     <p id="t187" class="pln"><span class="n"><a href="#t187">187</a></span><span class="t">            <span class="com"># function-scope: ok</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t188" class="run"><span class="n"><a href="#t188">188</a></span><span class="t">            <span class="nam">id_without_steps</span> <span class="op">=</span> <span class="nam">get_pytest_node_hash_id</span><span class="op">(</span><span class="nam">request</span><span class="op">.</span><span class="nam">node</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t189" class="pln"><span class="n"><a href="#t189">189</a></span><span class="t">                                                       <span class="nam">params_to_ignore</span><span class="op">=</span><span class="nam">_get_step_param_names_or_default</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t190" class="pln"><span class="n"><a href="#t190">190</a></span><span class="t">                                                       <span class="nam">step_param_names</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t188" class="run"><span class="n"><a href="#t188">188</a></span><span class="t">            <span class="nam">id_without_steps</span> <span class="op">=</span> <span class="nam">get_pytest_node_hash_id</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t189" class="pln"><span class="n"><a href="#t189">189</a></span><span class="t">                <span class="nam">request</span><span class="op">.</span><span class="nam">node</span><span class="op">,</span> <span class="nam">params_to_ignore</span><span class="op">=</span><span class="nam">_get_step_param_names_or_default</span><span class="op">(</span><span class="nam">step_param_names</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t190" class="pln"><span class="n"><a href="#t190">190</a></span><span class="t">            <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t191" class="run"><span class="n"><a href="#t191">191</a></span><span class="t">            <span class="key">return</span> <span class="nam">id_without_steps</span>&nbsp;</span><span class="r"></span></p>
     <p id="t192" class="pln"><span class="n"><a href="#t192">192</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t193" class="pln"><span class="n"><a href="#t193">193</a></span><span class="t">            <span class="com"># session- or module-scope</span>&nbsp;</span><span class="r"></span></p>
@@ -303,7 +303,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
-            created at 2021-09-21 10:57 +0000
+            created at 2021-09-21 12:03 +0000
         </p>
     </div>
 </div>

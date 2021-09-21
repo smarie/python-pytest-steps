@@ -57,9 +57,9 @@
     <p id="t2" class="pln"><span class="n"><a href="#t2">2</a></span><span class="t"><span class="com">#          + All contributors to &lt;https://github.com/smarie/python-pytest-steps></span>&nbsp;</span><span class="r"></span></p>
     <p id="t3" class="pln"><span class="n"><a href="#t3">3</a></span><span class="t"><span class="com">#</span>&nbsp;</span><span class="r"></span></p>
     <p id="t4" class="pln"><span class="n"><a href="#t4">4</a></span><span class="t"><span class="com"># License: 3-clause BSD, &lt;https://github.com/smarie/python-pytest-steps/blob/master/LICENSE></span>&nbsp;</span><span class="r"></span></p>
-    <p id="t5" class="run"><span class="n"><a href="#t5">5</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">steps</span> <span class="key">import</span> <span class="nam">test_steps</span><span class="op">,</span> <span class="nam">cross_steps_fixture</span><span class="op">,</span> <span class="nam">CROSS_STEPS_MARK</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t6" class="run"><span class="n"><a href="#t6">6</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">steps_generator</span> <span class="key">import</span> <span class="nam">optional_step</span><span class="op">,</span> <span class="nam">one_fixture_per_step</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t7" class="run"><span class="n"><a href="#t7">7</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">steps_parametrizer</span> <span class="key">import</span> <span class="nam">StepsDataHolder</span><span class="op">,</span> <span class="nam">depends_on</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t5" class="run"><span class="n"><a href="#t5">5</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">steps</span> <span class="key">import</span> <span class="nam">test_steps</span><span class="op">,</span> <span class="nam">cross_steps_fixture</span><span class="op">,</span> <span class="nam">CROSS_STEPS_MARK</span>  <span class="com"># noqa</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t6" class="run"><span class="n"><a href="#t6">6</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">steps_generator</span> <span class="key">import</span> <span class="nam">optional_step</span><span class="op">,</span> <span class="nam">one_fixture_per_step</span>  <span class="com"># noqa</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t7" class="run"><span class="n"><a href="#t7">7</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">steps_parametrizer</span> <span class="key">import</span> <span class="nam">StepsDataHolder</span><span class="op">,</span> <span class="nam">depends_on</span>  <span class="com"># noqa</span>&nbsp;</span><span class="r"></span></p>
     <p id="t8" class="pln"><span class="n"><a href="#t8">8</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t9" class="run"><span class="n"><a href="#t9">9</a></span><span class="t"><span class="key">try</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t10" class="pln"><span class="n"><a href="#t10">10</a></span><span class="t">    <span class="com"># -- Distribution mode --</span>&nbsp;</span><span class="r"></span></p>
@@ -95,7 +95,7 @@
     <p id="t40" class="pln"><span class="n"><a href="#t40">40</a></span><span class="t">    <span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p id="t41" class="pln"><span class="n"><a href="#t41">41</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t42" class="run"><span class="n"><a href="#t42">42</a></span><span class="t"><span class="key">try</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t43" class="run"><span class="n"><a href="#t43">43</a></span><span class="t">    <span class="key">from</span> <span class="nam">pytest_harvest</span> <span class="key">import</span> <span class="nam">get_all_pytest_fixture_names</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t43" class="run"><span class="n"><a href="#t43">43</a></span><span class="t">    <span class="key">from</span> <span class="nam">pytest_harvest</span> <span class="key">import</span> <span class="nam">get_all_pytest_fixture_names</span> <span class="key">as</span> <span class="nam">_</span>  <span class="com"># noqa</span>&nbsp;</span><span class="r"></span></p>
     <p id="t44" class="exc show_exc"><span class="n"><a href="#t44">44</a></span><span class="t"><span class="key">except</span> <span class="nam">ImportError</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t45" class="pln"><span class="n"><a href="#t45">45</a></span><span class="t">    <span class="com"># pytest-harvest is not installed</span>&nbsp;</span><span class="r"></span></p>
     <p id="t46" class="exc show_exc"><span class="n"><a href="#t46">46</a></span><span class="t">    <span class="key">pass</span>&nbsp;</span><span class="r"></span></p>
@@ -116,7 +116,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.5</a>,
-            created at 2021-09-21 10:57 +0000
+            created at 2021-09-21 12:03 +0000
         </p>
     </div>
 </div>
