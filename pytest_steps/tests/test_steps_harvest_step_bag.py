@@ -41,7 +41,8 @@ def test_fruit_results_bag(results_bag):
 @test_steps("apples", "bananas")
 def test_fruit_cross_bag(cross_bag):
     # The cross_bag will be the same as results_bag
-    yield from fruit_counter(cross_bag)
+    for f in fruit_counter(cross_bag):
+        yield f
 
 
 # check the test results
