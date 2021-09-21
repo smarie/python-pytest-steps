@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: pytest_steps/__init__.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="pytest_steps.__init__.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               pytest_steps/__init__.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  8
+               </span>
+               <strong>F401:</strong> '.steps.test_steps' imported but unused
+               
+                  (and 7 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>'.steps.CROSS_STEPS_MARK' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l5">
+                  <tt><i>5</i> <span class="kn">from</span> <span class="nn">.steps</span> <span class="kn">import</span> <span class="n">test_steps</span><span class="p">,</span> <span class="n">cross_steps_fixture</span><span class="p">,</span> <span class="n">CROSS_STEPS_MARK</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'.steps.cross_steps_fixture' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l5">
+                  <tt><i>5</i> <span class="kn">from</span> <span class="nn">.steps</span> <span class="kn">import</span> <span class="n">test_steps</span><span class="p">,</span> <span class="n">cross_steps_fixture</span><span class="p">,</span> <span class="n">CROSS_STEPS_MARK</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'.steps.test_steps' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l5">
+                  <tt><i>5</i> <span class="kn">from</span> <span class="nn">.steps</span> <span class="kn">import</span> <span class="n">test_steps</span><span class="p">,</span> <span class="n">cross_steps_fixture</span><span class="p">,</span> <span class="n">CROSS_STEPS_MARK</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'.steps_generator.one_fixture_per_step' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l6">
+                  <tt><i>6</i> <span class="kn">from</span> <span class="nn">.steps_generator</span> <span class="kn">import</span> <span class="n">optional_step</span><span class="p">,</span> <span class="n">one_fixture_per_step</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'.steps_generator.optional_step' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l6">
+                  <tt><i>6</i> <span class="kn">from</span> <span class="nn">.steps_generator</span> <span class="kn">import</span> <span class="n">optional_step</span><span class="p">,</span> <span class="n">one_fixture_per_step</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'.steps_parametrizer.StepsDataHolder' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l7">
+                  <tt><i>7</i> <span class="kn">from</span> <span class="nn">.steps_parametrizer</span> <span class="kn">import</span> <span class="n">StepsDataHolder</span><span class="p">,</span> <span class="n">depends_on</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'.steps_parametrizer.depends_on' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l7">
+                  <tt><i>7</i> <span class="kn">from</span> <span class="nn">.steps_parametrizer</span> <span class="kn">import</span> <span class="n">StepsDataHolder</span><span class="p">,</span> <span class="n">depends_on</span></tt>
+               </a>
+            </li><li>
+               
+               <p>'pytest_harvest.get_all_pytest_fixture_names' imported but unused:</p>
+               
+               <a href="pytest_steps.__init__.source.html#l43">
+                  <tt><i>43</i>     <span class="kn">from</span> <span class="nn">pytest_harvest</span> <span class="kn">import</span> <span class="n">get_all_pytest_fixture_names</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

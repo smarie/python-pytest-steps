@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>pytest_steps/steps_harvest.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <h1>
+            <a href="pytest_steps.steps_harvest.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               pytest_steps/steps_harvest.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev- "><tt><i>1</i> <span class="c1"># Authors: Sylvain MARIE &lt;sylvain.marie@se.com&gt;</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> <span class="c1">#          + All contributors to &lt;https://github.com/smarie/python-pytest-steps&gt;</span></tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="c1">#</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev- "><tt><i>4</i> <span class="c1"># License: 3-clause BSD, &lt;https://github.com/smarie/python-pytest-steps/blob/master/LICENSE&gt;</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev- "><tt><i>5</i> <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev- "><tt><i>6</i> &nbsp;</tt>
+            </div>
+            <div id="l7"
+               class="code sev- "><tt><i>7</i> <span class="c1"># WARNING do not import pytest-harvest here: it should remain optional</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev- "><tt><i>8</i> <span class="kn">from</span> <span class="nn">.steps</span> <span class="kn">import</span> <span class="n">_get_step_param_names_or_default</span></tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> <span class="kn">from</span> <span class="nn">.steps_common</span> <span class="kn">import</span> <span class="n">remove_param_from_pytest_node_str_id</span></tt>
+            </div>
+            <div id="l10"
+               class="code sev- "><tt><i>10</i> &nbsp;</tt>
+            </div>
+            <div id="l11"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E261
+                     </span>
+                     At least two spaces before inline comment</li>
+               
+               </ul><tt><i>11</i> <span class="k">try</span><span class="p">:</span> <span class="c1"># python 3.5+</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F401
+                     </span>
+                     'typing.Mapping' imported but unused</li>
+               
+               </ul><tt><i>12</i>     <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Any</span></tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i> <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i>     <span class="k">pass</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i> &nbsp;</tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i> &nbsp;</tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i> <span class="k">def</span> <span class="nf">handle_steps_in_results_dct</span><span class="p">(</span><span class="n">results_dct</span><span class="p">,</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev- "><tt><i>18</i>                                 <span class="n">is_flat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: bool</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i>                                 <span class="n">raise_if_one_test_without_step_id</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: bool</span></tt>
+            </div>
+            <div id="l20"
+               class="code sev- "><tt><i>20</i>                                 <span class="n">no_step_id</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>  <span class="c1"># type: str</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i>                                 <span class="n">step_param_names</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># type: Union[str, Iterable[str]]</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i>                                 <span class="n">keep_orig_id</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span></tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i>                                 <span class="n">no_steps_policy</span><span class="o">=</span><span class="s1">&#39;raise&#39;</span>  <span class="c1"># type str</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i>                                 <span class="p">):</span></tt>
+            </div>
+            <div id="l25"
+               class="code sev- "><tt><i>25</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i> <span class="sd">    Improves the synthesis dictionary so that</span></tt>
+            </div>
+            <div id="l27"
+               class="code sev- "><tt><i>27</i> <span class="sd">     - the keys are replaced with a tuple (new_test_id, step_id) where new_test_id is a step-independent test id</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i> <span class="sd">     - the &#39;step_id&#39; parameter is removed from the contents</span></tt>
+            </div>
+            <div id="l29"
+               class="code sev- "><tt><i>29</i> &nbsp;</tt>
+            </div>
+            <div id="l30"
+               class="code sev- "><tt><i>30</i> <span class="sd">    `is_flat` should be set to `True` if the dictionary has been flattened by `pytest-harvest`.</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev- "><tt><i>31</i> &nbsp;</tt>
+            </div>
+            <div id="l32"
+               class="code sev- "><tt><i>32</i> <span class="sd">    The step id is identified by looking at the pytest parameters, and finding one with a name included in the</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i> <span class="sd">    `step_param_names` list (`None` uses the default names). If no step id is found on an entry, it is replaced with</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i> <span class="sd">    the value of `no_step_id` except if `raise_if_one_test_without_step_id=True` - in which case an error is raised.</span></tt>
+            </div>
+            <div id="l35"
+               class="code sev- "><tt><i>35</i> &nbsp;</tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i> <span class="sd">    If all step ids are missing, for all entries in the dictionary, `no_steps_policy` determines what happens: it can</span></tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i> <span class="sd">    either skip the whole function and return a copy of the input (&#39;skip&#39;, or behave as usual (&#39;ignore&#39;), or raise an</span></tt>
+            </div>
+            <div id="l38"
+               class="code sev- "><tt><i>38</i> <span class="sd">    error (&#39;raise&#39;).</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i> &nbsp;</tt>
+            </div>
+            <div id="l40"
+               class="code sev- "><tt><i>40</i> <span class="sd">    If `keep_orig_id` is set to True (default), the original id is added to each entry.</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev- "><tt><i>41</i> &nbsp;</tt>
+            </div>
+            <div id="l42"
+               class="code sev- "><tt><i>42</i> <span class="sd">    :param results_dct: a synthesis dictionary created by `pytest-harvest`.</span></tt>
+            </div>
+            <div id="l43"
+               class="code sev- "><tt><i>43</i> <span class="sd">    :param is_flat: to declare that synth_dct was flatten or not (if it was generated using `get_session_synthesis_dct`</span></tt>
+            </div>
+            <div id="l44"
+               class="code sev- "><tt><i>44</i> <span class="sd">        with `flatten=True` or `False`).</span></tt>
+            </div>
+            <div id="l45"
+               class="code sev- "><tt><i>45</i> <span class="sd">    :param raise_if_one_test_without_step_id: if this is set to `True` and at least one step id can not be found in the</span></tt>
+            </div>
+            <div id="l46"
+               class="code sev- "><tt><i>46</i> <span class="sd">        tests, an error will be raised. By default this is set to `False`: in that case, when the step id is not found</span></tt>
+            </div>
+            <div id="l47"
+               class="code sev- "><tt><i>47</i> <span class="sd">        it is replaced with value of the `no_step_id` parameter.</span></tt>
+            </div>
+            <div id="l48"
+               class="code sev- "><tt><i>48</i> <span class="sd">    :param no_step_id: the identifier to use when the step id is not found (if `raise_if_no_step_id` is `False`)</span></tt>
+            </div>
+            <div id="l49"
+               class="code sev- "><tt><i>49</i> <span class="sd">    :param step_param_names: a singleton or iterable containing the names of the test step parameters used in the</span></tt>
+            </div>
+            <div id="l50"
+               class="code sev- "><tt><i>50</i> <span class="sd">        tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both</span></tt>
+            </div>
+            <div id="l51"
+               class="code sev- "><tt><i>51</i> <span class="sd">        generator-mode and legacy manual mode.</span></tt>
+            </div>
+            <div id="l52"
+               class="code sev- "><tt><i>52</i> <span class="sd">    :param keep_orig_id: if True (default) the original test id will appear in the dict entries under &#39;pytest_id&#39;</span></tt>
+            </div>
+            <div id="l53"
+               class="code sev- "><tt><i>53</i> <span class="sd">    :param no_steps_policy: if `&#39;ignore` the returned dictionary keys will be tuples (test id, step id) in all</span></tt>
+            </div>
+            <div id="l54"
+               class="code sev- "><tt><i>54</i> <span class="sd">        cases, even if no step is present. If &#39;skip&#39; and no step is present, the method will return a copy of the input</span></tt>
+            </div>
+            <div id="l55"
+               class="code sev- "><tt><i>55</i> <span class="sd">        and will not modify anything. If &#39;raise&#39; (default) and no step is present, an error is raised.</span></tt>
+            </div>
+            <div id="l56"
+               class="code sev- "><tt><i>56</i> <span class="sd">    :return: a dictionary where the keys are tuples of (new_test_id, step_id), and the values are copies of the initial</span></tt>
+            </div>
+            <div id="l57"
+               class="code sev- "><tt><i>57</i> <span class="sd">        dictionarie&#39;s ones, except that the step id parameter is not present anymore</span></tt>
+            </div>
+            <div id="l58"
+               class="code sev- "><tt><i>58</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l59"
+               class="code sev- "><tt><i>59</i> &nbsp;</tt>
+            </div>
+            <div id="l60"
+               class="code sev- "><tt><i>60</i>     <span class="c1"># validate parameters</span></tt>
+            </div>
+            <div id="l61"
+               class="code sev- "><tt><i>61</i>     <span class="n">step_param_names</span> <span class="o">=</span> <span class="n">_get_step_param_names_or_default</span><span class="p">(</span><span class="n">step_param_names</span><span class="p">)</span></tt>
+            </div>
+            <div id="l62"
+               class="code sev- "><tt><i>62</i>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">no_steps_policy</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span></tt>
+            </div>
+            <div id="l63"
+               class="code sev- "><tt><i>63</i>         <span class="c1"># python 2 compatibility:  unicode literals</span></tt>
+            </div>
+            <div id="l64"
+               class="code sev- "><tt><i>64</i>         <span class="n">no_steps_policy</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">no_steps_policy</span><span class="p">)</span></tt>
+            </div>
+            <div id="l65"
+               class="code sev- "><tt><i>65</i>     <span class="k">if</span> <span class="n">no_steps_policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="s1">&#39;raise&#39;</span><span class="p">,</span> <span class="s1">&#39;skip&#39;</span><span class="p">}:</span></tt>
+            </div>
+            <div id="l66"
+               class="code sev- "><tt><i>66</i>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`no_steps_policy` should be one of {&#39;ignore&#39;, &#39;raise&#39;, &#39;skip&#39;}&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l67"
+               class="code sev- "><tt><i>67</i> &nbsp;</tt>
+            </div>
+            <div id="l68"
+               class="code sev- "><tt><i>68</i>     <span class="c1"># edge case of empty dict</span></tt>
+            </div>
+            <div id="l69"
+               class="code sev- "><tt><i>69</i>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results_dct</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></tt>
+            </div>
+            <div id="l70"
+               class="code sev- "><tt><i>70</i>         <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">results_dct</span><span class="p">)</span></tt>
+            </div>
+            <div id="l71"
+               class="code sev- "><tt><i>71</i> &nbsp;</tt>
+            </div>
+            <div id="l72"
+               class="code sev- "><tt><i>72</i>     <span class="c1"># create an object of the same container type</span></tt>
+            </div>
+            <div id="l73"
+               class="code sev- "><tt><i>73</i>     <span class="n">res_dct</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">results_dct</span><span class="p">)()</span></tt>
+            </div>
+            <div id="l74"
+               class="code sev- "><tt><i>74</i> &nbsp;</tt>
+            </div>
+            <div id="l75"
+               class="code sev- "><tt><i>75</i>     <span class="c1"># fill it</span></tt>
+            </div>
+            <div id="l76"
+               class="code sev- "><tt><i>76</i>     <span class="n">one_step_id_was_present</span> <span class="o">=</span> <span class="kc">False</span></tt>
+            </div>
+            <div id="l77"
+               class="code sev- "><tt><i>77</i>     <span class="k">for</span> <span class="n">test_id</span><span class="p">,</span> <span class="n">test_info</span> <span class="ow">in</span> <span class="n">results_dct</span><span class="o">.</span><span class="n">items</span><span class="p">():</span></tt>
+            </div>
+            <div id="l78"
+               class="code sev- "><tt><i>78</i>         <span class="c1"># copy the first level (no deepcopy because we do not want to perform copies of entries in the dict)</span></tt>
+            </div>
+            <div id="l79"
+               class="code sev- "><tt><i>79</i>         <span class="n">new_info</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">test_info</span><span class="p">)</span></tt>
+            </div>
+            <div id="l80"
+               class="code sev- "><tt><i>80</i>         <span class="k">if</span> <span class="ow">not</span> <span class="n">is_flat</span><span class="p">:</span></tt>
+            </div>
+            <div id="l81"
+               class="code sev- "><tt><i>81</i>             <span class="c1"># non-flattened: all parameters should be in a nested dict entry</span></tt>
+            </div>
+            <div id="l82"
+               class="code sev- "><tt><i>82</i>             <span class="k">if</span> <span class="s2">&quot;params&quot;</span> <span class="ow">in</span> <span class="n">new_info</span><span class="p">:</span></tt>
+            </div>
+            <div id="l83"
+               class="code sev- "><tt><i>83</i>                 <span class="n">where_params_dct</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">new_info</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">])</span></tt>
+            </div>
+            <div id="l84"
+               class="code sev- "><tt><i>84</i>             <span class="k">elif</span> <span class="s2">&quot;pytest_params&quot;</span> <span class="ow">in</span> <span class="n">new_info</span><span class="p">:</span></tt>
+            </div>
+            <div id="l85"
+               class="code sev- "><tt><i>85</i>                 <span class="n">where_params_dct</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">new_info</span><span class="p">[</span><span class="s2">&quot;pytest_params&quot;</span><span class="p">])</span></tt>
+            </div>
+            <div id="l86"
+               class="code sev- "><tt><i>86</i>             <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l87"
+               class="code sev- "><tt><i>87</i>                 <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;Could not find information related to parameters in provided dict. Maybe it was &quot;</span></tt>
+            </div>
+            <div id="l88"
+               class="code sev- "><tt><i>88</i>                                <span class="s2">&quot;created with flatten=True? In this case please set flatten=True here too&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l89"
+               class="code sev- "><tt><i>89</i> &nbsp;</tt>
+            </div>
+            <div id="l90"
+               class="code sev- "><tt><i>90</i>             <span class="c1"># if there is a &#39;fixtures&#39; entry, replace it with a copy ?</span></tt>
+            </div>
+            <div id="l91"
+               class="code sev- "><tt><i>91</i>             <span class="c1"># not needed a priori</span></tt>
+            </div>
+            <div id="l92"
+               class="code sev- "><tt><i>92</i>             <span class="c1"># if &#39;fixtures&#39; in new_info:</span></tt>
+            </div>
+            <div id="l93"
+               class="code sev- "><tt><i>93</i>             <span class="c1">#     new_info[&#39;fixtures&#39;] = copy(new_info[&#39;fixtures&#39;])</span></tt>
+            </div>
+            <div id="l94"
+               class="code sev- "><tt><i>94</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l95"
+               class="code sev- "><tt><i>95</i>             <span class="c1"># flattened: all parameters should be in dedicated entries at the root level</span></tt>
+            </div>
+            <div id="l96"
+               class="code sev- "><tt><i>96</i>             <span class="n">where_params_dct</span> <span class="o">=</span> <span class="n">new_info</span></tt>
+            </div>
+            <div id="l97"
+               class="code sev- "><tt><i>97</i> &nbsp;</tt>
+            </div>
+            <div id="l98"
+               class="code sev- "><tt><i>98</i>         <span class="n">step_name_params</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">step_param_names</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">where_params_dct</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span></tt>
+            </div>
+            <div id="l99"
+               class="code sev- "><tt><i>99</i>         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">step_name_params</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span></tt>
+            </div>
+            <div id="l100"
+               class="code sev- "><tt><i>100</i>             <span class="c1"># remember that there was at least one</span></tt>
+            </div>
+            <div id="l101"
+               class="code sev- "><tt><i>101</i>             <span class="n">one_step_id_was_present</span> <span class="o">=</span> <span class="kc">True</span></tt>
+            </div>
+            <div id="l102"
+               class="code sev- "><tt><i>102</i> &nbsp;</tt>
+            </div>
+            <div id="l103"
+               class="code sev- "><tt><i>103</i>             <span class="c1"># use the key to retrieve step id value and remove it from where it was</span></tt>
+            </div>
+            <div id="l104"
+               class="code sev- "><tt><i>104</i>             <span class="n">step_id_key</span> <span class="o">=</span> <span class="n">step_name_params</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span></tt>
+            </div>
+            <div id="l105"
+               class="code sev- "><tt><i>105</i>             <span class="n">step_id</span> <span class="o">=</span> <span class="n">where_params_dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">step_id_key</span><span class="p">)</span></tt>
+            </div>
+            <div id="l106"
+               class="code sev- "><tt><i>106</i> &nbsp;</tt>
+            </div>
+            <div id="l107"
+               class="code sev- "><tt><i>107</i>         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">step_name_params</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span></tt>
+            </div>
+            <div id="l108"
+               class="code sev- "><tt><i>108</i>             <span class="k">if</span> <span class="n">raise_if_one_test_without_step_id</span><span class="p">:</span></tt>
+            </div>
+            <div id="l109"
+               class="code sev- "><tt><i>109</i>                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The synthesis dictionary provided does not seem to contain step name parameters for &quot;</span></tt>
+            </div>
+            <div id="l110"
+               class="code sev- "><tt><i>110</i>                                  <span class="s2">&quot;test node &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">test_id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l111"
+               class="code sev- "><tt><i>111</i>             <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l112"
+               class="code sev- "><tt><i>112</i>                 <span class="c1"># use the default id for &quot;no step&quot;</span></tt>
+            </div>
+            <div id="l113"
+               class="code sev- "><tt><i>113</i>                 <span class="n">step_id</span> <span class="o">=</span> <span class="n">no_step_id</span></tt>
+            </div>
+            <div id="l114"
+               class="code sev- "><tt><i>114</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l115"
+               class="code sev- "><tt><i>115</i>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The synthesis dictionary provided contains several step name parameters for test node &quot;</span></tt>
+            </div>
+            <div id="l116"
+               class="code sev- "><tt><i>116</i>                              <span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39;: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">step_name_params</span><span class="p">))</span></tt>
+            </div>
+            <div id="l117"
+               class="code sev- "><tt><i>117</i> &nbsp;</tt>
+            </div>
+            <div id="l118"
+               class="code sev- "><tt><i>118</i>         <span class="c1"># finally create the new id by replacing in the existing id (whatever its position in the parameters order)</span></tt>
+            </div>
+            <div id="l119"
+               class="code sev- "><tt><i>119</i>         <span class="n">new_id</span> <span class="o">=</span> <span class="n">remove_step_from_test_id</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">step_id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l120"
+               class="code sev- "><tt><i>120</i> &nbsp;</tt>
+            </div>
+            <div id="l121"
+               class="code sev- "><tt><i>121</i>         <span class="c1"># remember the old id</span></tt>
+            </div>
+            <div id="l122"
+               class="code sev- "><tt><i>122</i>         <span class="k">if</span> <span class="n">keep_orig_id</span><span class="p">:</span></tt>
+            </div>
+            <div id="l123"
+               class="code sev- "><tt><i>123</i>             <span class="n">new_info</span><span class="p">[</span><span class="s1">&#39;pytest_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_id</span></tt>
+            </div>
+            <div id="l124"
+               class="code sev- "><tt><i>124</i>             <span class="c1"># move it to the beginning of the dict</span></tt>
+            </div>
+            <div id="l125"
+               class="code sev- "><tt><i>125</i>             <span class="n">new_info</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;pytest_id&#39;</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></tt>
+            </div>
+            <div id="l126"
+               class="code sev- "><tt><i>126</i> &nbsp;</tt>
+            </div>
+            <div id="l127"
+               class="code sev- "><tt><i>127</i>         <span class="c1"># store the element</span></tt>
+            </div>
+            <div id="l128"
+               class="code sev- "><tt><i>128</i>         <span class="n">res_dct</span><span class="p">[(</span><span class="n">new_id</span><span class="p">,</span> <span class="n">step_id</span><span class="p">)]</span> <span class="o">=</span> <span class="n">new_info</span></tt>
+            </div>
+            <div id="l129"
+               class="code sev- "><tt><i>129</i> &nbsp;</tt>
+            </div>
+            <div id="l130"
+               class="code sev- "><tt><i>130</i>     <span class="k">if</span> <span class="ow">not</span> <span class="n">one_step_id_was_present</span><span class="p">:</span></tt>
+            </div>
+            <div id="l131"
+               class="code sev- "><tt><i>131</i>         <span class="k">if</span> <span class="n">no_steps_policy</span> <span class="o">==</span> <span class="s1">&#39;skip&#39;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l132"
+               class="code sev- "><tt><i>132</i>             <span class="c1"># do not return the modified one, and return the initial dictionary (a copy)</span></tt>
+            </div>
+            <div id="l133"
+               class="code sev- "><tt><i>133</i>             <span class="k">return</span> <span class="n">copy</span><span class="p">(</span><span class="n">results_dct</span><span class="p">)</span></tt>
+            </div>
+            <div id="l134"
+               class="code sev- "><tt><i>134</i>         <span class="k">elif</span> <span class="n">no_steps_policy</span> <span class="o">==</span> <span class="s1">&#39;raise&#39;</span><span class="p">:</span></tt>
+            </div>
+            <div id="l135"
+               class="code sev- "><tt><i>135</i>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No step ids can be found in provided dictionary. You can ignore this error by switching &quot;</span></tt>
+            </div>
+            <div id="l136"
+               class="code sev- "><tt><i>136</i>                              <span class="s2">&quot;to `no_steps_policy`=&#39;ignore&#39;&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l137"
+               class="code sev- "><tt><i>137</i>         <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l138"
+               class="code sev- "><tt><i>138</i>             <span class="c1"># &#39;ignore&quot;: same</span></tt>
+            </div>
+            <div id="l139"
+               class="code sev- "><tt><i>139</i>             <span class="k">return</span> <span class="n">res_dct</span></tt>
+            </div>
+            <div id="l140"
+               class="code sev- "><tt><i>140</i> &nbsp;</tt>
+            </div>
+            <div id="l141"
+               class="code sev- "><tt><i>141</i>     <span class="k">return</span> <span class="n">res_dct</span></tt>
+            </div>
+            <div id="l142"
+               class="code sev- "><tt><i>142</i> &nbsp;</tt>
+            </div>
+            <div id="l143"
+               class="code sev- "><tt><i>143</i> &nbsp;</tt>
+            </div>
+            <div id="l144"
+               class="code sev- "><tt><i>144</i> <span class="n">handle_steps_in_synthesis_dct</span> <span class="o">=</span> <span class="n">handle_steps_in_results_dct</span></tt>
+            </div>
+            <div id="l145"
+               class="code sev- "><tt><i>145</i> <span class="sd">&quot;&quot;&quot;deprecated alias - to remove&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l146"
+               class="code sev- "><tt><i>146</i> &nbsp;</tt>
+            </div>
+            <div id="l147"
+               class="code sev- "><tt><i>147</i> &nbsp;</tt>
+            </div>
+            <div id="l148"
+               class="code sev- "><tt><i>148</i> <span class="k">def</span> <span class="nf">remove_step_from_test_id</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">step_id</span><span class="p">):</span></tt>
+            </div>
+            <div id="l149"
+               class="code sev- "><tt><i>149</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l150"
+               class="code sev- "><tt><i>150</i> <span class="sd">    Returns a new test id where the step parameter is not present anymore.</span></tt>
+            </div>
+            <div id="l151"
+               class="code sev- "><tt><i>151</i> &nbsp;</tt>
+            </div>
+            <div id="l152"
+               class="code sev- "><tt><i>152</i> <span class="sd">    :param step_id:</span></tt>
+            </div>
+            <div id="l153"
+               class="code sev- "><tt><i>153</i> <span class="sd">    :param test_id:</span></tt>
+            </div>
+            <div id="l154"
+               class="code sev- "><tt><i>154</i> <span class="sd">    :return:</span></tt>
+            </div>
+            <div id="l155"
+               class="code sev- "><tt><i>155</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l156"
+               class="code sev- "><tt><i>156</i>     <span class="c1"># from math import isnan</span></tt>
+            </div>
+            <div id="l157"
+               class="code sev- "><tt><i>157</i>     <span class="c1"># if isnan(step_id):</span></tt>
+            </div>
+            <div id="l158"
+               class="code sev- "><tt><i>158</i>     <span class="c1">#     return test_id</span></tt>
+            </div>
+            <div id="l159"
+               class="code sev- "><tt><i>159</i>     <span class="k">return</span> <span class="n">remove_param_from_pytest_node_str_id</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">step_id</span><span class="p">)</span></tt>
+            </div>
+            <div id="l160"
+               class="code sev- "><tt><i>160</i> &nbsp;</tt>
+            </div>
+            <div id="l161"
+               class="code sev- "><tt><i>161</i> &nbsp;</tt>
+            </div>
+            <div id="l162"
+               class="code sev- "><tt><i>162</i> <span class="k">def</span> <span class="nf">get_all_pytest_param_names_except_step_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span></tt>
+            </div>
+            <div id="l163"
+               class="code sev- "><tt><i>163</i>                                               <span class="nb">filter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>              <span class="c1"># type: Any</span></tt>
+            </div>
+            <div id="l164"
+               class="code sev- "><tt><i>164</i>                                               <span class="n">filter_incomplete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># type: bool</span></tt>
+            </div>
+            <div id="l165"
+               class="code sev- "><tt><i>165</i>                                               <span class="n">step_param_names</span><span class="o">=</span><span class="kc">None</span>     <span class="c1"># type: Union[str, Iterable[str]]</span></tt>
+            </div>
+            <div id="l166"
+               class="code sev- "><tt><i>166</i>                                               <span class="p">):</span></tt>
+            </div>
+            <div id="l167"
+               class="code sev- "><tt><i>167</i>     <span class="sd">&quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l168"
+               class="code sev- "><tt><i>168</i> <span class="sd">    Like pytest-harvest&#39;s `get_all_pytest_param_names` this function returns the list of all unique parameter names</span></tt>
+            </div>
+            <div id="l169"
+               class="code sev- "><tt><i>169</i> <span class="sd">    used in all items in the provided session, with given filter. However &quot;step id&quot; parameters are removed</span></tt>
+            </div>
+            <div id="l170"
+               class="code sev- "><tt><i>170</i> <span class="sd">    automatically.</span></tt>
+            </div>
+            <div id="l171"
+               class="code sev- "><tt><i>171</i> &nbsp;</tt>
+            </div>
+            <div id="l172"
+               class="code sev- "><tt><i>172</i> <span class="sd">    An optional `filter` can be provided, that can be a singleton or iterable of pytest objects (typically test</span></tt>
+            </div>
+            <div id="l173"
+               class="code sev- "><tt><i>173</i> <span class="sd">    functions) and/or module names.</span></tt>
+            </div>
+            <div id="l174"
+               class="code sev- "><tt><i>174</i> &nbsp;</tt>
+            </div>
+            <div id="l175"
+               class="code sev- "><tt><i>175</i> <span class="sd">    If this method is called before the end of the pytest session, some nodes might be incomplete, i.e. they will not</span></tt>
+            </div>
+            <div id="l176"
+               class="code sev- "><tt><i>176</i> <span class="sd">    have data for the three stages (setup/call/teardown). By default these nodes are filtered out but you can set</span></tt>
+            </div>
+            <div id="l177"
+               class="code sev- "><tt><i>177</i> <span class="sd">    `filter_incomplete=False` to make them appear. They will have a special &#39;pending&#39; synthesis status.</span></tt>
+            </div>
+            <div id="l178"
+               class="code sev- "><tt><i>178</i> &nbsp;</tt>
+            </div>
+            <div id="l179"
+               class="code sev- "><tt><i>179</i> <span class="sd">    :param session: a pytest session object.</span></tt>
+            </div>
+            <div id="l180"
+               class="code sev- "><tt><i>180</i> <span class="sd">    :param filter: a singleton or iterable of pytest objects on which to filter the returned dict on (the returned</span></tt>
+            </div>
+            <div id="l181"
+               class="code sev- "><tt><i>181</i> <span class="sd">        items will only by pytest nodes for which the pytest object is one of the ones provided). One can also use</span></tt>
+            </div>
+            <div id="l182"
+               class="code sev- "><tt><i>182</i> <span class="sd">        modules or the special `THIS MODULE` item.</span></tt>
+            </div>
+            <div id="l183"
+               class="code sev- "><tt><i>183</i> <span class="sd">    :param filter_incomplete: a boolean indicating if incomplete nodes (without the three stages setup/call/teardown)</span></tt>
+            </div>
+            <div id="l184"
+               class="code sev- "><tt><i>184</i> <span class="sd">        should appear in the results (False) or not (True). Note: by default incomplete nodes DO APPEAR (this is</span></tt>
+            </div>
+            <div id="l185"
+               class="code sev- "><tt><i>185</i> <span class="sd">        different from get_session_synthesis_dct behaviour)</span></tt>
+            </div>
+            <div id="l186"
+               class="code sev- "><tt><i>186</i> <span class="sd">    :param step_param_names: a singleton or iterable containing the names of the test step parameters used in the</span></tt>
+            </div>
+            <div id="l187"
+               class="code sev- "><tt><i>187</i> <span class="sd">        tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both</span></tt>
+            </div>
+            <div id="l188"
+               class="code sev- "><tt><i>188</i> <span class="sd">        generator-mode and legacy manual mode.</span></tt>
+            </div>
+            <div id="l189"
+               class="code sev- "><tt><i>189</i> <span class="sd">    :return:</span></tt>
+            </div>
+            <div id="l190"
+               class="code sev- "><tt><i>190</i> <span class="sd">    &quot;&quot;&quot;</span></tt>
+            </div>
+            <div id="l191"
+               class="code sev- "><tt><i>191</i>     <span class="k">try</span><span class="p">:</span></tt>
+            </div>
+            <div id="l192"
+               class="code sev- "><tt><i>192</i>         <span class="kn">from</span> <span class="nn">pytest_harvest</span> <span class="kn">import</span> <span class="n">get_all_pytest_param_names</span></tt>
+            </div>
+            <div id="l193"
+               class="code sev- "><tt><i>193</i> &nbsp;</tt>
+            </div>
+            <div id="l194"
+               class="code sev- "><tt><i>194</i>         <span class="c1"># test_step_param_names</span></tt>
+            </div>
+            <div id="l195"
+               class="code sev- "><tt><i>195</i>         <span class="n">step_param_names</span> <span class="o">=</span> <span class="n">_get_step_param_names_or_default</span><span class="p">(</span><span class="n">step_param_names</span><span class="p">)</span></tt>
+            </div>
+            <div id="l196"
+               class="code sev- "><tt><i>196</i> &nbsp;</tt>
+            </div>
+            <div id="l197"
+               class="code sev- "><tt><i>197</i>         <span class="k">return</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">get_all_pytest_param_names</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">,</span> <span class="n">filter_incomplete</span><span class="o">=</span><span class="n">filter_incomplete</span><span class="p">)</span></tt>
+            </div>
+            <div id="l198"
+               class="code sev- "><tt><i>198</i>                 <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">step_param_names</span><span class="p">]</span></tt>
+            </div>
+            <div id="l199"
+               class="code sev- "><tt><i>199</i> &nbsp;</tt>
+            </div>
+            <div id="l200"
+               class="code sev- "><tt><i>200</i>     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span></tt>
+            </div>
+            <div id="l201"
+               class="code sev- "><tt><i>201</i>         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;pytest-harvest&gt;=1.0.0 is required to use &quot;</span></tt>
+            </div>
+            <div id="l202"
+               class="code sev- "><tt><i>202</i>                           <span class="s2">&quot;`get_all_pytest_param_names_except_step_id`&quot;</span><span class="p">)</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>
