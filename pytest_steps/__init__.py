@@ -2,9 +2,9 @@
 #          + All contributors to <https://github.com/smarie/python-pytest-steps>
 #
 # License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
-from .steps import test_steps, cross_steps_fixture, CROSS_STEPS_MARK
-from .steps_generator import optional_step, one_fixture_per_step
-from .steps_parametrizer import StepsDataHolder, depends_on
+from .steps import test_steps, cross_steps_fixture, CROSS_STEPS_MARK  # noqa
+from .steps_generator import optional_step, one_fixture_per_step  # noqa
+from .steps_parametrizer import StepsDataHolder, depends_on  # noqa
 
 try:
     # -- Distribution mode --
@@ -40,7 +40,7 @@ __all__ = [
     ]
 
 try:
-    from pytest_harvest import get_all_pytest_fixture_names
+    from pytest_harvest import get_all_pytest_fixture_names as _  # noqa
 except ImportError:
     # pytest-harvest is not installed
     pass

@@ -22,7 +22,6 @@ else:
         # Pivot
         return pivot_steps_on_df(session_results_df, pytest_session=request.session)
 
-
     @pytest.fixture(scope='function')
     def module_results_df_steps_pivoted(request, module_results_df):
         """

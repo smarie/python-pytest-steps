@@ -12,7 +12,7 @@ from .steps_harvest import _get_step_param_names_or_default, get_all_pytest_para
     remove_step_from_test_id
 
 try:  # type hints for python 3.5+
-    from typing import List
+    from typing import List, Any, Iterable, Union
 except ImportError:
     pass
 
@@ -69,9 +69,10 @@ def pivot_steps_on_df(results_df,
 
     # split the df in two parts: the columns that do not depend on steps and the ones that have one value per step
     # --these do not depend on steps
-    remaining_df = results_df[cross_steps_cols_list] \
-                             .reset_index().set_index(test_id_name) \
-                             .drop(step_id_name, axis=1)
+    remaining_df = (results_df[cross_steps_cols_list]
+                    .reset_index()
+                    .set_index(test_id_name)
+                    .drop(step_id_name, axis=1))
     remaining_df.drop_duplicates(inplace=True)
 
     if remaining_df.index.has_duplicates:
@@ -168,9 +169,9 @@ def handle_steps_in_results_df(results_df,
     be modified inplace and nothing will be returned.
 
     :param results_df:
-    :param raise_if_one_test_without_step_id: if this is set to `True` and at least one step id can not be found in the tests, an
-        error will be raised. By default this is set to `False`: in that case, when the step id is not found it is
-        replaced with value of the `no_step_id` parameter.
+    :param raise_if_one_test_without_step_id: if this is set to `True` and at least one step id can not be found in the
+        tests, an error will be raised. By default this is set to `False`: in that case, when the step id is not found
+        it is replaced with value of the `no_step_id` parameter.
     :param no_step_id: the identifier to use when the step id is not found (if `raise_if_no_step_id` is `False`)
     :param step_param_names: a singleton or iterable containing the names of the test step parameters used in the
         tests. By default the list is `[GENERATOR_MODE_STEP_ARGNAME, TEST_STEP_ARGNAME_DEFAULT]` to cover both

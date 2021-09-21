@@ -56,8 +56,8 @@ def test_steps(*steps, **kwargs):
         use the 'parametrizer' (explicit) mode.
     :param test_step_argname: the optional name of the function argument that will receive the test step object.
         Default is 'test_step'.
-    :param steps_data_holder_name: the optional name of the function argument that will receive the shared `StepsDataHolder`
-        object if present. Default is 'results'.
+    :param steps_data_holder_name: the optional name of the function argument that will receive the shared
+        `StepsDataHolder` object if present. Default is 'results'.
     :return:
     """
     # python 2 compatibility: no keyword arguments can follow a *args.
@@ -185,9 +185,9 @@ def cross_steps_fixture_decorate(fixture_fun,
         scope = get_scope(request)
         if scope == 'function':
             # function-scope: ok
-            id_without_steps = get_pytest_node_hash_id(request.node,
-                                                       params_to_ignore=_get_step_param_names_or_default(
-                                                       step_param_names))
+            id_without_steps = get_pytest_node_hash_id(
+                request.node, params_to_ignore=_get_step_param_names_or_default(step_param_names)
+            )
             return id_without_steps
         else:
             # session- or module-scope

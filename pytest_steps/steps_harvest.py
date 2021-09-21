@@ -8,8 +8,8 @@ from copy import copy
 from .steps import _get_step_param_names_or_default
 from .steps_common import remove_param_from_pytest_node_str_id
 
-try: # python 3.5+
-    from typing import Union, Iterable, Mapping, Any
+try:  # python 3.5+
+    from typing import Union, Iterable, Any
 except ImportError:
     pass
 
