@@ -1,6 +1,10 @@
-from pytest_steps.steps import test_steps, cross_steps_fixture, CROSS_STEPS_MARK
-from pytest_steps.steps_generator import optional_step, one_fixture_per_step
-from pytest_steps.steps_parametrizer import StepsDataHolder, depends_on
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
+from .steps import test_steps, cross_steps_fixture, CROSS_STEPS_MARK  # noqa
+from .steps_generator import optional_step, one_fixture_per_step  # noqa
+from .steps_parametrizer import StepsDataHolder, depends_on  # noqa
 
 try:
     # -- Distribution mode --
@@ -16,28 +20,34 @@ except ImportError:
 __all__ = [
     '__version__',
     # the submodules
-    'steps', 'steps_generator', 'steps_parametrizer', 'steps_harvest',
+    'steps',
+    'steps_generator',
+    'steps_parametrizer',
+    'steps_harvest',
     'steps_harvest_df_utils',
     # all symbols imported above
     # -- for fixtures
-    'cross_steps_fixture', 'CROSS_STEPS_MARK',
+    'cross_steps_fixture',
+    'CROSS_STEPS_MARK',
     # -- for tests
     'test_steps',
     # ---- specific to parametrizer mode
-    'StepsDataHolder', 'depends_on',
+    'StepsDataHolder',
+    'depends_on',
     # ---- specific to generator mode
-    'optional_step', 'one_fixture_per_step'
+    'optional_step',
+    'one_fixture_per_step'
     ]
 
 try:
-    from pytest_harvest import get_all_pytest_fixture_names
+    from pytest_harvest import get_all_pytest_fixture_names as _  # noqa
 except ImportError:
     # pytest-harvest is not installed
     pass
 else:
-    from pytest_steps.steps_harvest import handle_steps_in_results_dct, remove_step_from_test_id, \
+    from .steps_harvest import handle_steps_in_results_dct, remove_step_from_test_id, \
         get_all_pytest_param_names_except_step_id
-    from pytest_steps.steps_harvest_df_utils import pivot_steps_on_df, get_flattened_multilevel_columns, \
+    from .steps_harvest_df_utils import pivot_steps_on_df, get_flattened_multilevel_columns, \
         flatten_multilevel_columns, handle_steps_in_results_df
 
     __all__ = __all__ + [

@@ -1,8 +1,7 @@
-try:  # python 3+
-    from typing import Tuple
-except ImportError:
-    pass
-
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
 
 def create_pytest_param_str_id(f):
     # type: (...) -> str
@@ -39,8 +38,8 @@ def create_pytest_param_str_id(f):
 #     if len(remove_params) == 0:
 #         return pytest_node.id
 #     else:
-#         # Unfortunately there seem to be no possibility in the pytest api to eliminate a named parameter from a node id,
-#         # because the node ids are generated at collection time and the link between ids and parameter names are
+#         # Unfortunately there seem to be no possibility in the pytest api to eliminate a named parameter from a node
+#         # id, because the node ids are generated at collection time and the link between ids and parameter names are
 #         # forgotten.
 #         #
 #         # The best we can do seems to be:
@@ -173,7 +172,7 @@ def get_pytest_node_hash_id(pytest_node,
             test_fun = pytest_node.obj.im_func
         except AttributeError:
             test_fun = pytest_node.obj
-    l = [test_fun]
+    l_for_hash = [test_fun]
     for p, v in params_dct.items():
         if p not in params_to_ignore:
             try:
@@ -185,10 +184,10 @@ def get_pytest_node_hash_id(pytest_node,
                 except AttributeError:
                     raise TypeError("Unable to hash test parameter '%s'. Hashable parameters are required to use steps "
                                     "reliably." % v)
-            l.append((p, hash_o_v))
+            l_for_hash.append((p, hash_o_v))
 
     # Hash
-    return hash(tuple(l))
+    return hash(tuple(l_for_hash))
 
 
 # def get_pytest_node_current_param_indices(pytest_node):

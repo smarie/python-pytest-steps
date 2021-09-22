@@ -1,10 +1,13 @@
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
 try:
     from collections.abc import Iterable as It
 except ImportError:
     from collections import Iterable as It
 
 from makefun import add_signature_parameters, wraps
-from six import raise_from, reraise, string_types
 from wrapt import ObjectProxy
 
 # try:  # python 3.2+
@@ -26,7 +29,8 @@ except ImportError:
 
 import pytest
 
-from pytest_steps.steps_common import create_pytest_param_str_id, get_pytest_node_hash_id, get_scope
+from .common_mini_six import string_types, reraise
+from .steps_common import create_pytest_param_str_id, get_pytest_node_hash_id, get_scope
 
 
 class ExceptionHook(object):
@@ -72,8 +76,8 @@ class StepExecutionError(Exception):
         Exception.__init__(self)
 
     def __str__(self):
-        return "Error executing step '%s': could not reach the next `yield` statement (received `StopIteration`). This " \
-               "may be caused by use of a `return` statement instead of a `yield`, or by a missing `yield`" \
+        return "Error executing step '%s': could not reach the next `yield` statement (received `StopIteration`). " \
+               "This may be caused by use of a `return` statement instead of a `yield`, or by a missing `yield`" \
                "" % self.step_name
 
 
@@ -111,11 +115,12 @@ class _OnePerStepFixtureProxy(ObjectProxy):
 
 def is_replacable_fixture_wrapper(obj):
     """
-    Returns True when the object results from a function-scoped fixture that has been decorated with @one_fixture_per_step.
+    Returns True when the object results from a function-scoped fixture that has been decorated with
+    @one_fixture_per_step.
 
-    In that case the fixture value of the first step is wrapped in a `_OnePerStepFixtureProxy`, so that we can inject the
-    other fixture values in it later. Indeed otherwise the fixture values for the other steps will never be injected in
-    the generator test function (because its args are provided only once at the first step).
+    In that case the fixture value of the first step is wrapped in a `_OnePerStepFixtureProxy`, so that we can inject
+    the other fixture values in it later. Indeed otherwise the fixture values for the other steps will never be injected
+    in the generator test function (because its args are provided only once at the first step).
 
     :param obj:
     :return:
@@ -297,8 +302,8 @@ class StepsMonitor(object):
             with self._monitor(step_name):
                 try:
                     res = next(self.gen)
-                except StopIteration as e:
-                    raise_from(StepExecutionError(step_name), e)
+                except StopIteration:
+                    raise StepExecutionError(step_name)
 
             # Manage exceptions in optional steps
             if res is None:
@@ -421,7 +426,8 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         """
         The test function decorator. When a function is decorated it
          - checks that the function is a generator
-         - checks that the function signature does not contain our private name `GENERATOR_MODE_STEP_ARGNAME` "by chance"
+         - checks that the function signature does not contain our private name `GENERATOR_MODE_STEP_ARGNAME` "by
+           chance"
          - wraps the function
         :param test_func:
         :return:
@@ -453,9 +459,10 @@ def get_generator_decorator(steps  # type: Iterable[Any]
         # We will expose a new signature with additional 'request' arguments if needed, and the test step
         orig_sig = signature(test_func)
         func_needs_request = 'request' in orig_sig.parameters
-        additional_params = (Parameter(test_step_argname, kind=Parameter.POSITIONAL_OR_KEYWORD), ) \
-                            + ((Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD), )
-                               if not func_needs_request else ())
+        additional_params = (
+                (Parameter(test_step_argname, kind=Parameter.POSITIONAL_OR_KEYWORD), )
+                + ((Parameter('request', kind=Parameter.POSITIONAL_OR_KEYWORD), ) if not func_needs_request else ())
+        )
         # add request parameter last, as first may be 'self'
         new_sig = add_signature_parameters(orig_sig, last=additional_params)
 
@@ -472,7 +479,8 @@ def get_generator_decorator(steps  # type: Iterable[Any]
                     step_names = step_ids
                 else:
                     # print("@test_steps - decorated function '%s' is being called manually. The `%s` parameter is set "
-                    #       "to %s so only these steps will be executed in order. Note that the order should be feasible"
+                    #       "to %s so only these steps will be executed in order. Note that the order should be
+                    #       feasible"
                     #       "" % (f, test_step_argname, step_name))
                     if not isinstance(step_name, (list, tuple)):
                         step_names = [create_pytest_param_str_id(step_name)]

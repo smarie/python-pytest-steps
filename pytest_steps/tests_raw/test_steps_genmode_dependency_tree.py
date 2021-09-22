@@ -1,5 +1,5 @@
 # META
-# {'passed': 8, 'skipped': 5, 'failed': 1}
+# {'passed': 8, 'skipped': 5, 'xfailed': 1}
 # END META
 
 # This is the example in https://github.com/smarie/python-pytest-steps/issues/17
@@ -30,7 +30,7 @@ def test_3_4(p, results_dct):
     # step 3
     results_dct.setdefault('step3', dict())[p] = 'bla'
     if p == 'b':
-        pytest.fail("Failed intentionally - this is normal")
+        pytest.xfail("Failed intentionally - this is normal")
     yield
     # step 4
     results_dct.setdefault('step4', dict())[p] = 'blabla'

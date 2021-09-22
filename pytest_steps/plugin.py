@@ -1,3 +1,7 @@
+# Authors: Sylvain MARIE <sylvain.marie@se.com>
+#          + All contributors to <https://github.com/smarie/python-pytest-steps>
+#
+# License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
 import pytest
 from pytest_steps.steps import cross_steps_fixture
 from pytest_steps.steps_generator import one_fixture_per_step
@@ -19,7 +23,6 @@ else:
 
         # Pivot
         return pivot_steps_on_df(session_results_df, pytest_session=request.session)
-
 
     @pytest.fixture(scope='function')
     def module_results_df_steps_pivoted(request, module_results_df):
