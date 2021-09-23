@@ -3,6 +3,8 @@
 #
 # License: 3-clause BSD, <https://github.com/smarie/python-pytest-steps/blob/master/LICENSE>
 import pytest
+from pytest_steps.steps import cross_steps_fixture
+from pytest_steps.steps_generator import one_fixture_per_step
 
 try:
     from pytest_steps import pivot_steps_on_df, handle_steps_in_results_df
@@ -33,3 +35,19 @@ else:
 
         # Pivot
         return pivot_steps_on_df(module_results_df, pytest_session=request.session)
+
+    @pytest.fixture
+    @one_fixture_per_step
+    def step_bag(results_bag):
+        """
+        Provides a separate pytest-harvest "results_bag" per step
+        """
+        return results_bag
+
+    @pytest.fixture
+    @cross_steps_fixture
+    def cross_bag(results_bag):
+        """
+        Provides a cross-step pytest-harvest "results_bag" for explicit mode
+        """
+        return results_bag
