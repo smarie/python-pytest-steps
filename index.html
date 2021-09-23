@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.8">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.92558b1b.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.8b42a75e.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
@@ -70,7 +70,9 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="pytest_steps" class="md-header__button md-logo" aria-label="pytest_steps" data-md-component="logo">
       
@@ -149,11 +151,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -277,29 +282,16 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#e-compliance-with-pytest" class="md-nav__link">
-    e- Compliance with pytest
-  </a>
-  
-    <nav class="md-nav" aria-label="e- Compliance with pytest">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    parameters
+  <a href="#e-using-pytest-parameters-in-generator-mode" class="md-nav__link">
+    e- Using pytest parameters in generator mode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixtures" class="md-nav__link">
-    fixtures
+  <a href="#f-using-pytest-fixtures-in-generator-mode" class="md-nav__link">
+    f- Using pytest fixtures in generator mode
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -358,8 +350,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#e-compliance-with-pytest_1" class="md-nav__link">
-    e- Compliance with pytest
+  <a href="#e-using-pytest-parameters-in-explicit-mode" class="md-nav__link">
+    e- Using pytest parameters in explicit mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-using-pytest-fixtures-in-explicit-mode" class="md-nav__link">
+    f- Using pytest fixtures in explicit mode
   </a>
   
 </li>
@@ -392,8 +391,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c-examples" class="md-nav__link">
-    c- Examples
+  <a href="#c-step_bag-and-cross_bag-fixtures" class="md-nav__link">
+    c- step_bag and cross_bag fixtures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-examples" class="md-nav__link">
+    d- Examples
   </a>
   
 </li>
@@ -544,29 +550,16 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#e-compliance-with-pytest" class="md-nav__link">
-    e- Compliance with pytest
-  </a>
-  
-    <nav class="md-nav" aria-label="e- Compliance with pytest">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    parameters
+  <a href="#e-using-pytest-parameters-in-generator-mode" class="md-nav__link">
+    e- Using pytest parameters in generator mode
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#fixtures" class="md-nav__link">
-    fixtures
+  <a href="#f-using-pytest-fixtures-in-generator-mode" class="md-nav__link">
+    f- Using pytest fixtures in generator mode
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -625,8 +618,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#e-compliance-with-pytest_1" class="md-nav__link">
-    e- Compliance with pytest
+  <a href="#e-using-pytest-parameters-in-explicit-mode" class="md-nav__link">
+    e- Using pytest parameters in explicit mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f-using-pytest-fixtures-in-explicit-mode" class="md-nav__link">
+    f- Using pytest fixtures in explicit mode
   </a>
   
 </li>
@@ -659,8 +659,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c-examples" class="md-nav__link">
-    c- Examples
+  <a href="#c-step_bag-and-cross_bag-fixtures" class="md-nav__link">
+    c- step_bag and cross_bag fixtures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-examples" class="md-nav__link">
+    d- Examples
   </a>
   
 </li>
@@ -896,8 +903,7 @@ _______________ test_suite_optional_and_dependent_steps[step_b] _______________
 <p class="admonition-title">arguments order changed in <code>1.7.0</code></p>
 <p>Unfortunately the order of arguments for manual execution changed in version <code>1.7.0</code>. This was the only way to <a href="https://github.com/smarie/python-pytest-steps/issues/16">add support for class methods</a>. Apologies !</p>
 </div>
-<h3 id="e-compliance-with-pytest">e- Compliance with pytest<a class="headerlink" href="#e-compliance-with-pytest" title="Permanent link">&para;</a></h3>
-<h4 id="parameters"><em>parameters</em><a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h4>
+<h3 id="e-using-pytest-parameters-in-generator-mode">e- Using pytest parameters in generator mode<a class="headerlink" href="#e-using-pytest-parameters-in-generator-mode" title="Permanent link">&para;</a></h3>
 <p>Under the hood, the <code>@test_steps</code> decorator simply generates a wrapper function around your function and mark it with <code>@pytest.mark.parametrize</code>. The function wrapper is created using the excellent <a href="https://github.com/micheles/decorator"><code>decorator</code></a> library, so all marks that exist on it are kept in the process, as well as its name and signature. </p>
 <p>Therefore <code>@test_steps</code> <strong>should be compliant with all native pytest mechanisms.</strong> For exemple you can use decorators such as <code>@pytest.mark.parametrize</code> before or after it in the function decoration order (depending on your desired resulting test order):</p>
 <div class="highlight"><pre><span></span><code><span class="nd">@test_steps</span><span class="p">(</span><span class="s1">&#39;step_a&#39;</span><span class="p">,</span> <span class="s1">&#39;step_b&#39;</span><span class="p">)</span>
@@ -924,7 +930,7 @@ collected 4 items
 (...)/test_example.py::test_suite_p[i=1-step_b] &lt;- &lt;decorator-gen-3&gt; PASSED [100%]
 ========================== 4 passed in 0.07 seconds ===========================
 </code></pre></div>
-<h4 id="fixtures"><em>fixtures</em><a class="headerlink" href="#fixtures" title="Permanent link">&para;</a></h4>
+<h3 id="f-using-pytest-fixtures-in-generator-mode">f- Using pytest fixtures in generator mode<a class="headerlink" href="#f-using-pytest-fixtures-in-generator-mode" title="Permanent link">&para;</a></h3>
 <p>You can also use fixtures as usual, but <strong>special care has to be taken about function-scope fixtures</strong>. Let's consider the following example:</p>
 <div class="highlight"><pre><span></span><code><span class="n">usage_counter</span> <span class="o">=</span> <span class="mi">0</span>
 
@@ -1076,9 +1082,9 @@ collected 4 items
 <h3 id="d-calling-decorated-functions-manually_1">d- Calling decorated functions manually<a class="headerlink" href="#d-calling-decorated-functions-manually_1" title="Permanent link">&para;</a></h3>
 <p>In "explicit" mode it is possible to call your test functions outside of pytest runners, exactly the same way <a href="#d-calling-decorated-functions-manually">we saw in generator mode</a>.</p>
 <p>An exemple can be found <a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_manual_call.py">here</a>.</p>
-<h3 id="e-compliance-with-pytest_1">e- Compliance with pytest<a class="headerlink" href="#e-compliance-with-pytest_1" title="Permanent link">&para;</a></h3>
+<h3 id="e-using-pytest-parameters-in-explicit-mode">e- Using pytest parameters in explicit mode<a class="headerlink" href="#e-using-pytest-parameters-in-explicit-mode" title="Permanent link">&para;</a></h3>
 <p>You can add as many <code>@pytest.mark.parametrize</code> and pytest fixtures in your test suite function, it should work as expected: a <strong>new</strong> <code>steps_data</code> object will be created everytime a new parameter/fixture combination is created, and that object will be <strong>shared</strong> across steps with the same parameters and fixtures.</p>
-<p>Concerning fixtures, </p>
+<h3 id="f-using-pytest-fixtures-in-explicit-mode">f- Using pytest fixtures in explicit mode<a class="headerlink" href="#f-using-pytest-fixtures-in-explicit-mode" title="Permanent link">&para;</a></h3>
 <ul>
 <li>by default all function-scoped fixtures will be "one per step" in this mode (you do not even need to use the <code>@one_fixture_per_step</code> decorator - although it does not hurt).</li>
 <li>if you wish a fixture to be shared across several steps, decorate it with <code>@cross_steps_fixture</code>.</li>
@@ -1259,11 +1265,27 @@ collected 4 items
 </tr>
 </tbody>
 </table>
-<h3 id="c-examples">c- Examples<a class="headerlink" href="#c-examples" title="Permanent link">&para;</a></h3>
-<p>Two examples are available that should be quite straightforward for those familiar with pytest-harvest:</p>
+<h3 id="c-step_bag-and-cross_bag-fixtures">c- <code>step_bag</code> and <code>cross_bag</code> fixtures<a class="headerlink" href="#c-step_bag-and-cross_bag-fixtures" title="Permanent link">&para;</a></h3>
+<p>As explained in the sections on <a href="#f-using-pytest-fixtures-in-generator-mode">fixtures in generator mode</a>
+and <a href="#f-using-pytest-fixtures-in-explicit-mode">fixtures in explicit mode</a>, 
+a function level fixture will behave differently in a generator-style test than in a test with explicit-style steps.
+If a pytest-steps test is generator-style, the pytest-harvest 
+<a href="https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts"><code>results_bag</code></a>
+will behave like a cross-step fixture.  If the test is explict-style, it will 
+behave like a per-step fixture.</p>
+<p>For generator-style test steps, the <code>step_bag</code> fixture is a version of the pytest-harvest 
+<a href="https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts"><code>results_bag</code></a>
+fixture, but decorated with <a href="/api_reference/#one_fixture_per_step"><code>@one_fixture_per_step</code></a> 
+if you wish to have the opposite of the default behavior.
+Similarly, for explict-style test steps, the <code>cross_bag</code> fixture provides the <code>results_bag</code>
+as decorated with <a href="/api_reference/#cross_step_fixture">`@cross_step_fixture</a>.</p>
+<h3 id="d-examples">d- Examples<a class="headerlink" href="#d-examples" title="Permanent link">&para;</a></h3>
+<p>Four examples are available that should be quite straightforward for those familiar with pytest-harvest:</p>
 <ul>
 <li><a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_docs_example_with_harvest.py">here</a> an example relying on default fixtures, to show how simple it is to satisfy the most common use cases.</li>
 <li><a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest.py">here</a> an advanced example where the custom synthesis is created manually from the dictionary provided by pytest-harvest, thanks to helper methods.</li>
+<li><a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest_step_bag.py">here</a> which demonstrates the different behavior of the <code>results_bag</code> versus <code>step_bag</code> fixtures in a generator mode test.</li>
+<li><a href="https://github.com/smarie/python-pytest-steps/blob/master/pytest_steps/tests/test_steps_harvest_cross_bag.py">here</a> which demonstrates the different behavior of the <code>results_bag</code> versus <code>cross_bag</code> fixtures in an explicit mode test.</li>
 </ul>
 <h2 id="main-features-benefits">Main features / benefits<a class="headerlink" href="#main-features-benefits" title="Permanent link">&para;</a></h2>
 <ul>
@@ -1322,10 +1344,12 @@ collected 4 items
     <div class="md-footer-meta__inner md-grid">
       <div class="md-footer-copyright">
         
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
         
       </div>
       
@@ -1337,10 +1361,10 @@ collected 4 items
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.94ec81fe.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.48dfec6c.min.js"></script>
+      <script src="assets/javascripts/bundle.4fc53ad4.min.js"></script>
       
     
   </body>

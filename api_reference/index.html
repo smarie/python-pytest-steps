@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.8">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
     
     
       
@@ -18,7 +18,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.92558b1b.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -70,7 +70,9 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="pytest_steps" class="md-header__button md-logo" aria-label="pytest_steps" data-md-component="logo">
       
@@ -149,11 +151,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -319,6 +324,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pytest-harvest-fixtures" class="md-nav__link">
+    pytest-harvest fixtures
+  </a>
   
 </li>
       
@@ -520,6 +532,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#pytest-harvest-fixtures" class="md-nav__link">
+    pytest-harvest fixtures
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pytest-harvest-utility-methods" class="md-nav__link">
     pytest-harvest utility methods
   </a>
@@ -692,6 +711,14 @@
 <li><code>steps</code>: a list of test steps that this step depends on. They can be anything, but typically they are non-test (not prefixed with 'test') functions.</li>
 <li><code>fail_instead_of_skip</code>: if set to True, the test will be marked as failed instead of skipped when the dependencies have not succeeded.</li>
 </ul>
+<h2 id="pytest-harvest-fixtures"><code>pytest-harvest</code> fixtures<a class="headerlink" href="#pytest-harvest-fixtures" title="Permanent link">&para;</a></h2>
+<p><code>step_bag</code> forces the pytest-harvest <code>results_bag</code> fixture to have <code>@one_fixture_per_step</code> behavior. This is intended for generator mode, where the
+results bag is by default a cross-step fixture, but it does not hurt to use it 
+in explicit mode.</p>
+<p>Conversely, <code>cross_bag</code> forces the pytest-harvest <code>results_bag</code> fixture to have <code>@cross_step_fixture</code> behavior. This is intended for use in explicit mode, where the results_bag is by
+default one-per-step, but it does not hurt to use it in generator mode.</p>
+<p>As with any fixture, you simply declare you want one of these as an argument to your test 
+function, and pytest takes over from there.</p>
 <h2 id="pytest-harvest-utility-methods"><code>pytest-harvest</code> utility methods<a class="headerlink" href="#pytest-harvest-utility-methods" title="Permanent link">&para;</a></h2>
 <h3 id="handle_steps_in_results_dct"><code>handle_steps_in_results_dct</code><a class="headerlink" href="#handle_steps_in_results_dct" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">handle_steps_in_results_dct</span><span class="p">(</span><span class="n">results_dct</span><span class="p">,</span>
@@ -807,10 +834,12 @@
     <div class="md-footer-meta__inner md-grid">
       <div class="md-footer-copyright">
         
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
         
       </div>
       
@@ -822,10 +851,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.94ec81fe.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.48dfec6c.min.js"></script>
+      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
       
     
   </body>
