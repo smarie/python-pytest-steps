@@ -506,18 +506,23 @@ You will for example obtain this kind of pivoted table:
 
 As explained in the sections on [fixtures in generator mode](#f-using-pytest-fixtures-in-generator-mode)
 and [fixtures in explicit mode](#f-using-pytest-fixtures-in-explicit-mode), 
-a function level fixture will behave differently in a generator-style test than in a test with explicit-style steps.
-If a pytest-steps test is generator-style, the pytest-harvest 
-[`results_bag`](https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts)
-will behave like a cross-step fixture.  If the test is explict-style, it will 
-behave like a per-step fixture.
+a function-scoped fixture will behave differently in a generator-style test than in a test with explicit-style steps.
 
-For generator-style test steps, the `step_bag` fixture is a version of the pytest-harvest 
-[`results_bag`](https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts)
-fixture, but decorated with [`@one_fixture_per_step`](/api_reference/#one_fixture_per_step) 
-if you wish to have the opposite of the default behavior.
-Similarly, for explict-style test steps, the `cross_bag` fixture provides the `results_bag`
-as decorated with [`@cross_step_fixture](/api_reference/#cross_step_fixture).
+This impacts the pytest-harvest 
+[`results_bag`](https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts) fixture:
+
+ - If a pytest-steps test is generator-style, `results_bag` will behave like a 
+   cross-step fixture.
+   
+ - If the test is explict-style, `results_bag` will behave like a per-step fixture.
+
+This is not very intuitive and it is easy to get lost. Besides you may wish to have an opposite behaviour than the above. For all these reasons, you should rather use the following built-in two fixtures:
+
+ - `step_bag` is a version of `results_bag`, decorated with [`@one_fixture_per_step`](/api_reference/#one_fixture_per_step)
+
+ - `cross_bag` is a version of `results_bag`, decorated with  [`@cross_step_fixture`](/api_reference/#cross_step_fixture).
+
+See also [API reference](api_reference/#pytest-harvest-fixtures).
 
 ### d- Examples
 
