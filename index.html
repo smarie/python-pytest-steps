@@ -1268,17 +1268,28 @@ collected 4 items
 <h3 id="c-step_bag-and-cross_bag-fixtures">c- <code>step_bag</code> and <code>cross_bag</code> fixtures<a class="headerlink" href="#c-step_bag-and-cross_bag-fixtures" title="Permanent link">&para;</a></h3>
 <p>As explained in the sections on <a href="#f-using-pytest-fixtures-in-generator-mode">fixtures in generator mode</a>
 and <a href="#f-using-pytest-fixtures-in-explicit-mode">fixtures in explicit mode</a>, 
-a function level fixture will behave differently in a generator-style test than in a test with explicit-style steps.
-If a pytest-steps test is generator-style, the pytest-harvest 
-<a href="https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts"><code>results_bag</code></a>
-will behave like a cross-step fixture.  If the test is explict-style, it will 
-behave like a per-step fixture.</p>
-<p>For generator-style test steps, the <code>step_bag</code> fixture is a version of the pytest-harvest 
-<a href="https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts"><code>results_bag</code></a>
-fixture, but decorated with <a href="/api_reference/#one_fixture_per_step"><code>@one_fixture_per_step</code></a> 
-if you wish to have the opposite of the default behavior.
-Similarly, for explict-style test steps, the <code>cross_bag</code> fixture provides the <code>results_bag</code>
-as decorated with <a href="/api_reference/#cross_step_fixture">`@cross_step_fixture</a>.</p>
+a function-scoped fixture will behave differently in a generator-style test than in a test with explicit-style steps.</p>
+<p>This impacts the pytest-harvest 
+<a href="https://smarie.github.io/python-pytest-harvest/#b-collecting-test-artifacts"><code>results_bag</code></a> fixture:</p>
+<ul>
+<li>
+<p>If a pytest-steps test is generator-style, <code>results_bag</code> will behave like a 
+   cross-step fixture.</p>
+</li>
+<li>
+<p>If the test is explict-style, <code>results_bag</code> will behave like a per-step fixture.</p>
+</li>
+</ul>
+<p>This is not very intuitive and it is easy to get lost. Besides you may wish to have an opposite behaviour than the above. For all these reasons, you should rather use the following built-in two fixtures:</p>
+<ul>
+<li>
+<p><code>step_bag</code> is a version of <code>results_bag</code>, decorated with <a href="/api_reference/#one_fixture_per_step"><code>@one_fixture_per_step</code></a></p>
+</li>
+<li>
+<p><code>cross_bag</code> is a version of <code>results_bag</code>, decorated with  <a href="/api_reference/#cross_step_fixture"><code>@cross_step_fixture</code></a>.</p>
+</li>
+</ul>
+<p>See also <a href="api_reference/#pytest-harvest-fixtures">API reference</a>.</p>
 <h3 id="d-examples">d- Examples<a class="headerlink" href="#d-examples" title="Permanent link">&para;</a></h3>
 <p>Four examples are available that should be quite straightforward for those familiar with pytest-harvest:</p>
 <ul>
