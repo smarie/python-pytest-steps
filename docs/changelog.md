@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.8.0 - New fixtures for `pytest-harvest`
+
+ - New fixtures `step_bag` and `cross_bag`, that may be used when `pytest-harvest` is installed. These fixtures are versions of `pytest-harvest`'s `results_bag` fixture that can be used with steps. Fixes [#49](https://github.com/smarie/python-pytest-steps/issues/49). PR [#46](https://github.com/smarie/python-pytest-steps/pull/46) by [`j-carson`](https://github.com/j-carson).
+
 ### 1.7.3 - packaging improvements
 
  - packaging improvements: set the "universal wheel" flag to 1, and cleaned up the `setup.py`. In particular removed dependency to `six` for setup and added `py.typed` file, as well as set the `zip_safe` flag to False. Removed tests folder from package. Fixes [#39](https://github.com/smarie/python-pytest-steps/issues/39)
