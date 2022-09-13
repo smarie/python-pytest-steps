@@ -44,6 +44,7 @@ Start with you favorite test function. There are two things to do, to break it d
  - insert as many `yield` statements in your function body as there are steps. The function should end with a `yield` (not `return`!). 
  
  !!! note
+ 
    Code written after the last yield will not be executed. 
 
 For example we define three steps:
